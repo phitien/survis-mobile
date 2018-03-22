@@ -169,12 +169,12 @@ export default {
 
   // Icon
   iconFamily: "Ionicons",
-  iconFontSize: platform === "ios" ? 30 : 28,
+  iconFontSize: 28,
   iconMargin: 7,
   iconHeaderSize: platform === "ios" ? 33 : 24,
 
   // InputGroup
-  inputFontSize: 13,
+  inputFontSize: 12,
   inputBorderColor: PRIMARY,
   inputSuccessBorderColor: ERROR,
   inputErrorBorderColor: GREY,

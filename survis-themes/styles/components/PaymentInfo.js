@@ -11,6 +11,7 @@ export default {
     backgroundColor: GREY,
     padding: 10,
   },
+  card_icon: {marginRight: 10},
   info: {
     padding: 10,
   },
@@ -26,10 +27,19 @@ export default {
   checkbox: {
     marginRight: 5
   },
-  iconedit: {
+  edit_icon: {
+    color: PRIMARY,
     position: 'absolute',
     right: 10,
     top: 10,
-    padding: 20
+    padding: 10
+  },
+  shipping: {
+    paddingLeft: 10, paddingRight: 10, paddingBottom: 20,
+    marginTop: 10,
+    backgroundColor: GREY,
+  },
+  actions: {
+    marginTop: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%'
   }
 }

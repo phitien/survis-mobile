@@ -5,15 +5,19 @@ import InfiniteScroll from 'react-native-infinite-scroll'
 
 import {HomeScreen as style} from '../../survis-themes/styles/screens'
 
-import {getUser, requestHeader} from '../utils'
+import {getUser, getPaymentInfo, requestHeader} from '../utils'
 import {Header, Footer, Categories, Promotions, NewShops, HighRatingShops} from '../containers'
 import {Component as Screen, NewShop, Shop} from '../components'
 
 export class HomeScreen extends Screen {
   async componentDidMount() {
-    const user = JSON.parse(await getUser()) || {token: ''}
-    requestHeader('token', user.token)
-    this.actions.User_Load(user)
+    const User = JSON.parse(await getUser()) || {token: ''}
+    requestHeader('token', User.token)
+    this.actions.User_Load(User)
+
+    const PaymentInfo = JSON.parse(await getPaymentInfo())
+    this.actions.PaymentInfo_Load(PaymentInfo)
+
     this.locationUpdate(this.actions.Shops_Get)
     if (this.logged) {
       this.actions.Notifications_Get()

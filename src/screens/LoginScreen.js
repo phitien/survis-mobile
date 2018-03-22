@@ -40,8 +40,9 @@ export class LoginScreen extends Screen {
   async componentDidUpdate() {
     if (this.logged) {
       await setUser(this.props.User)
-      this.Actions.pop()
+      // this.Actions.pop()
       if (this.props.Screen.redirect) this.Actions[this.props.Screen.redirect](this.props.Screen.params)
+      else this.Actions.HomeScreen()
     }
   }
 

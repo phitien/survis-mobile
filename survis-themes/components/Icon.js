@@ -11,6 +11,9 @@ export default (variables = variable) => {
     '.big':{
       fontSize: 30
     },
+    '.theme': {
+      color: variables.toolbarDefaultBg,
+    },
     '.new-shop': {
       fontSize: 16,
       color: variables.toolbarDefaultBg,

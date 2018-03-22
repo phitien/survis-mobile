@@ -1,31 +1,23 @@
 import React, {Component} from 'react'
-import {Container, View, Content, Button, Text, Tabs, Tab, Icon} from 'native-base'
+import {Container, View, Content, Text, Tabs, Tab, Icon} from 'native-base'
 
 import {UserScreen as style} from '../../survis-themes/styles/screens'
 
 import {CONFIG, PERSON_IMG} from '../constants'
+import {setUser, setPaymentInfo, requestHeader} from '../utils'
 import {Header, Footer, History, Loyalty, PaymentInfo, User} from '../containers'
-import {Image} from '../components'
+import {Image, Button} from '../components'
 import {Component as Screen} from '../components'
-
-const {tabsProps, tabProps} = style
 
 export class UserScreen extends Screen {
   state = {
     User: Object.assign({}, this.User),
-    PaymentInfo: Object.assign({}, this.PaymentInfo)
   }
 
-  async omponentWillMount() {
+  async componentWillMount() {
     this.actions.Histories_Get()
     this.actions.Loyalties_Get()
     this.actions.PaymentInfo_Get()
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      User: Object.assign(this.state.User, nextProps.User)
-    })
   }
 
   renderHistories() {
@@ -46,19 +38,23 @@ export class UserScreen extends Screen {
     this.actions.User_Update(this.state.User)
   }
 
-  onSavePaymentInfo() {
-    this.actions.PaymentInfo_Update(Object.keys(this.state.PaymentInfo).reduce((rs,k) => {
-      rs[`ucc_${k}`] = this.state.PaymentInfo[k]
-      return rs
-    }, {}))
+  async onSavePaymentInfo(info) {
+    await this.actions.PaymentInfo_Load(info)
+    await setPaymentInfo(info)
   }
-
+  async onLogout() {
+    await this.actions.User_Logout()
+    await setUser(this.props.User.default)
+    await setPaymentInfo(this.props.PaymentInfo.default)
+    requestHeader('token', '')
+    this.Actions.HomeScreen()
+  }
   onSavePassword() {
     //TODO
   }
 
   renderPaymentInfo() {
-    return <PaymentInfo item={this.state.PaymentInfo} onSave={this.onSavePaymentInfo.bind(this)}/>
+    return <PaymentInfo item={this.props.PaymentInfo} onSave={this.onSavePaymentInfo.bind(this)}/>
   }
 
   renderPersonalInfo() {
@@ -77,24 +73,26 @@ export class UserScreen extends Screen {
     return <Container>
       <Header back='back'/>
       <Content>
-        <View horizontal center>
-          <Image source={source} style={style.avatar}/>
-          <Text>{name}</Text>
-          <Button transparent='transparent' onPress={e => this.actions.User_Logout()} style={style.logoutIcon}>
-            <Icon name='ios-log-out'/>
+        <View horizontal start space-between>
+          <View horizontal center>
+            <View style={style.avatar_container}><Image source={source} style={style.avatar}/></View>
+            <Text>{name}</Text>
+          </View>
+          <Button transparent theme onPress={this.onLogout.bind(this)}>
+            {this.props.User.loading ? this.renderLoading() : <Icon theme name='ios-log-out'/>}
           </Button>
         </View>
-        <Tabs {...tabsProps}>
-          <Tab {...tabProps} heading='Histories'>
+        <Tabs {...style.tabsProps}>
+          <Tab {...style.tabProps} heading='Histories'>
             {this.renderHistories()}
           </Tab>
-          <Tab {...tabProps} heading='Loyality'>
+          <Tab {...style.tabProps} heading='Loyality'>
             {this.renderLoyalties()}
           </Tab>
-          <Tab {...tabProps} heading='Payment'>
+          <Tab {...style.tabProps} heading='Payment'>
             {this.renderPaymentInfo()}
           </Tab>
-          <Tab {...tabProps} heading='Me'>
+          <Tab {...style.tabProps} heading='Me'>
             {this.renderPersonalInfo()}
           </Tab>
         </Tabs>

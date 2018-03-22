@@ -1,11 +1,13 @@
 import React from 'react'
-import {View, Item, Input, Button, Text, Icon} from 'native-base'
+import {View, Item, Input, Text, Icon} from 'native-base'
+import {TouchableOpacity as Touch} from 'react-native'
 import RadioForm from 'react-native-simple-radio-button'
 
 import {PaymentInfo as style} from '../../survis-themes/styles/components'
 
-import {itemHelper, substr, cardnum, last4} from '../utils'
+import {itemHelper, substr, cardnum, cardexpire} from '../utils'
 
+import {Button} from './Button'
 import {Image} from './Image'
 import {Rating} from './Rating'
 
@@ -13,81 +15,131 @@ import {Component} from './Component'
 
 export class PaymentInfo extends Component {
   state = {
-    num: this.props.item.num,
-    name: this.props.item.name,
-    expire: this.props.item.expire,
-    type: this.props.item.type,
-    cvc: this.props.item.cvc,
-    shipping_address: this.props.item.shipping_address,
+    ucc_num: this.props.item.ucc_num,
+    ucc_name: this.props.item.ucc_name,
+    ucc_expire: this.props.item.ucc_expire,
+    ucc_type: this.props.item.ucc_type,
+    ucc_cvc: this.props.item.ucc_cvc,
+    bill_address: this.props.item.bill_address,
+    error: false,
+    showInfo: false,
     showAddress: false,
+  }
+  onClearCreditCard() {
+    this.state.ucc_num = this.state.ucc_name = this.state.ucc_expire = this.state.ucc_type = this.state.cvv = ''
+    this.onSave({
+      ucc_num: this.state.ucc_name,
+      ucc_name: this.state.ucc_num,
+      ucc_expire: this.state.ucc_expire,
+      ucc_type: this.state.ucc_type,
+      ucc_cvc: this.state.ucc_cvc
+    })
+    this.setState({showInfo: true, error: false})
   }
   onChange(k, v) {
     this.setState({[k]: v})
   }
-  onSwitch(v) {
-    this.setState({showAddress: v})
+  validate() {
+    if (this.state.ucc_name || this.state.ucc_num || this.state.ucc_expire || this.state.ucc_cvc) {
+      if (!this.state.ucc_name) return this.setState({error: 'Credit card name is empty'})
+      if (cardnum(this.state.ucc_num).length != 16) return this.setState({error: 'Credit card number is invalid'})
+      if (!this.state.ucc_expire || cardexpire(this.state.ucc_expire).length != 5) return this.setState({error: 'Credit card expire is invalid'})
+      if (!this.state.ucc_cvc || this.state.ucc_cvc.length != 3) return this.setState({error: 'Credit card CVC is invalid'})
+    }
+    this.setState({error: false, showInfo: false, showAddress: false})
+  }
+  onSave(info) {
+    this.validate()
+    if (!this.state.error) this.props.onSave(info)
+  }
+
+  renderInfo() {
+    const {ucc_num, ucc_name, ucc_expire, ucc_type, ucc_cvc} = this.state
+    return <View style={style.info}>
+      <Text style={style.heading}>Card holder Name</Text>
+      <Item login>
+        <Input style={style.input} value={ucc_name} placeholder='Your card name'
+          onChangeText={e => this.onChange('ucc_name', e)}/>
+      </Item>
+      <Text style={style.heading}>Card Number</Text>
+      <Item login>
+        <Input style={style.input} value={cardnum(ucc_num, false)} placeholder='****-****-****-****'
+          onChangeText={e => this.onChange('ucc_num', e)}/>
+      </Item>
+      <RadioForm style={style.checkbox} radio_props={this.props.PaymentMethods.list}
+        initial={0} formHorizontal={true} labelHorizontal={true} buttonSize={6}
+        onPress={e => this.onChange('ucc_type', e)}/>
+      <View horizontal style={style.heading}>
+          <View flex1>
+            <Text style={style.heading}>Expire</Text>
+            <Item login>
+              <Input style={style.input} value={cardexpire(ucc_expire)} placeholder='MM/YY'
+                onChangeText={e => this.onChange('ucc_expire', e)}/>
+            </Item>
+          </View>
+          <View flex1>
+            <Text style={style.heading}>Cvc</Text>
+            <Item login>
+              <Input style={style.input} value={ucc_cvc} placeholder='123'
+                onChangeText={e => this.onChange('ucc_cvc', e.replace(/\D/g, '').substr(0, 3))}/>
+            </Item>
+          </View>
+      </View>
+      <View horizontal center style={style.actions}>
+        <Button full small mr onPress={e => this.onSave({
+          ucc_num: this.state.ucc_name,
+          ucc_name: this.state.ucc_num,
+          ucc_expire: this.state.ucc_expire,
+          ucc_type: this.state.ucc_type,
+          ucc_cvc: this.state.ucc_cvc
+        })}><Text bold>Save</Text></Button>
+        <Button full small ml onPress={e => this.setState({showInfo: false})}><Text bold >Cancel</Text></Button>
+      </View>
+    </View>
+  }
+  renderAddress() {
+    const {bill_address} = this.state
+    return <View>
+      <Item login>
+        <Input white value={bill_address} placeholder='Address'
+          onChangeText={e => this.onChange('bill_address', e)}/>
+      </Item>
+      <View horizontal center style={style.actions}>
+        <Button full small mr onPress={e => this.onSave({bill_address: this.state.bill_address})}><Text bold>Save</Text></Button>
+        <Button full small ml onPress={e => this.setState({bill_address: '', showAddress: false})}><Text bold >Clear</Text></Button>
+      </View>
+    </View>
+  }
+  renderError() {
+    return this.state.error ? <View center><Text red small center>{this.state.error}</Text></View> : null
   }
   render() {
-    const {num, name, expire, type, cvc, shipping_address, showAddress} = this.state
-    const onSave = this.props.onSave
+    const {ucc_num} = this.state
     return <View style={style.container}>
+      {this.renderError()}
       <View horizontal center space-between style={style.cardnum}>
         <View horizontal center>
-          <Icon name='card'/>
-          <Text bold fs14>{num ? last4(cardnum(num)) : 'Not set'}</Text>
+          <Icon theme name='card' style={style.card_icon}/>
+          <Text bold fs14>{ucc_num ? cardnum(ucc_num) : 'Not set'}</Text>
         </View>
-        <Icon name='ios-trash'/>
-      </View>
-      <View style={style.info}>
-        <Text style={style.heading}>Card holder Name</Text>
-        <Item login>
-          <Input style={style.input} value={name} placeholder='Your card name'
-            onChangeText={e => this.onChange('name', e)}/>
-        </Item>
-        <Text style={style.heading}>Card Number</Text>
-        <Item login>
-          <Input style={style.input} value={cardnum(num)} placeholder='**** **** **** ****'
-            onChangeText={e => this.onChange('num', e)}/>
-        </Item>
-        <Text bold fs12 m-b-10>Type of card</Text>
-        <RadioForm style={style.checkbox} radio_props={this.props.PaymentMethods.list}
-          initial={0} formHorizontal={true} labelHorizontal={true} buttonColor={'#000'} buttonSize={6}
-          onPress={e => this.onChange('type', e)}/>
-        <Text style={style.heading}>Expire</Text>
-        <Item login>
-          <Input style={style.input} value={expire} placeholder='Expire date'
-            onChangeText={e => this.onChange('expire', e)}/>
-        </Item>
-        <Text style={style.heading}>Cvc</Text>
-        <Item login>
-          <Input style={[style.input, {width: 40}]} value={cvc} placeholder='CVC'
-            onChangeText={e => this.onChange('cvc', e)}/>
-        </Item>
-        <Button onPress={onSave} full small loading={this.props.loading}>
-          <Text bold>Update</Text>
-        </Button>
-      </View>
-      <View p-25 m-10 grey>
-        <Button transparent='transparent' onPress={e => this.onSwitch(true)} style={style.iconedit}>
-          <Icon new-shop='new-shop' name='md-create'/>
-        </Button>
-        <Text bold fs14>Shipping bill</Text>
-        {showAddress ? <View>
-          <Item login>
-            <Input style={style.input} value={shipping_address} placeorder='Enter shipping address'
-              onChangeText={e => this.onChange('shipping_address', e)}/>
-          </Item>
-          <View horizontal style={{marginTop: 20}}>
-            <Button onPress={e => onSave(this.state)} full small>
-              <Text bold>Save</Text>
-            </Button>
-            <Text></Text>
-            <Button onPress={e => this.onSwitch(false)} full small>
-              <Text bold>Cancel</Text>
-            </Button>
-          </View>
+        <View horizontal center>
+          {!this.state.showInfo ? <Button iconRight transparent primary onPress={e => this.setState({showInfo: true})}>
+            <Icon theme name='md-create'/>
+          </Button> : null}
+          {ucc_num ? <Button iconRight transparent primary onPress={e => this.onClearCreditCard()}>
+            <Icon theme name='ios-trash'/>
+          </Button> : null}
         </View>
-        : <Text fs12>Not set</Text>}
+      </View>
+      {this.state.showInfo ? this.renderInfo() : null}
+      <View style={style.shipping}>
+        <View horizontal center space-between>
+          <Text style={style.heading}>Shipping bill</Text>
+          {!this.state.showAddress ? <Button iconRight transparent primary onPress={e => this.setState({showAddress: true})}>
+            <Icon theme name='md-create'/>
+          </Button> : null}
+        </View>
+        {this.state.showAddress ? this.renderAddress() : <Text fs12>{this.state.bill_address || 'Not set'}</Text>}
       </View>
     </View>
   }

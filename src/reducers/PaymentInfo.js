@@ -4,11 +4,14 @@ const {PaymentInfo} = CONFIG
 
 export default function(state = PaymentInfo, action) {
   switch (action.type) {
+    case 'PaymentInfo_Load': {
+      return {...state, ...action.payload, loading: false}
+    }
     case 'PaymentInfo_Get_Pending': {
       return {...state, loading: true}
     }
     case 'PaymentInfo_Get_Success': {
-      return {...state, loading: false, ...action.payload}
+      return {...state, ...action.payload, loading: false}
     }
     case 'PaymentInfo_Get_Failure': {
       return {...state, loading: false}

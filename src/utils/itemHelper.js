@@ -37,10 +37,26 @@ export const itemHelper = (item) => {
   }
 }
 export const last4 = (s) => {
-  return `${Array.from({length: s.length - 4}, i => '*')} ${s.substr(-4)}`
+  return (s || '').substr(-4)
 }
-export const cardnum = (s) => {
-  return `**** **** **** ${(s || '****').substr(-4)}`
+export const cardnum = (s, hide = true) => {
+  s = (s || '').replace(/\D/g, '')
+  if (!s) return ''
+  return Array.from({length: s.length}, (o,i) => {
+    if (i >= 16) return ''
+    let r = i >= 12 ? s[i] : '*'
+    if (i < 15 && i%4 == 3) return hide ? r : `${s[i]} `
+    return hide ? r : s[i]
+  }).join('')
+}
+export const cardexpire = (s, hide = true) => {
+  s = (s || '').replace(/\D/g, '')
+  if (!s) return ''
+  return Array.from({length: s.length}, (o,i) => {
+    if (i >= 4) return ''
+    if (i < 3 && i%2 == 1) return `${s[i]}/`
+    return s[i]
+  }).join('')
 }
 export const substr = (s, max) => {
   s = `${s || ''}`
