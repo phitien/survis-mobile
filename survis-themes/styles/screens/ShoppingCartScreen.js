@@ -49,7 +49,6 @@ export default {
   control_icon: {
     borderWidth: 1,
     borderColor: GREY,
-    fontSize: 24,
     width: boxW, height: boxW,
     alignItems: 'center',
     justifyContent: 'center',

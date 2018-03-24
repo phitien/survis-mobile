@@ -66,7 +66,7 @@ export class LoginScreen extends Screen {
         <Input value={this.state.usr_email}
           ref={e => this.logEmailInput = e}
           onChangeText={e => this.setState({usr_email: e, typing: true, next: this.logPwdInput})}
-          autoCapitalize={false} autoCorrect={false} placeholder='Email'
+          autoCapitalize='none' autoCorrect={false} placeholder='Email'
           onSubmitEditing={e => this.isEmailValid}
           returnKeyType='next'/>
       </Item>
@@ -75,7 +75,7 @@ export class LoginScreen extends Screen {
         <Input value={this.state.usr_password}
           onChangeText={e => this.setState({usr_password: e, typing: true, next: null})}
           ref={e => this.logPwdInput = e}
-          autoCapitalize={false} secureTextEntry={true} placeholder='Password'
+          autoCapitalize='none' secureTextEntry={true} placeholder='Password'
           onSubmitEditing={this.onLogin.bind(this)}
           returnKeyType='go'/>
       </Item>

@@ -41,11 +41,11 @@ export class UserScreen extends Screen {
   }
 
   renderHistories() {
-    return <View>{this.props.Histories.list.map(item => <History item={item}/>)}</View>
+    return <View>{this.props.Histories.list.map(item => <History key={item.id} item={item}/>)}</View>
   }
 
   renderLoyalties() {
-    return <View>{this.props.Loyalties.list.map(item => <Loyalty item={item}/>)}</View>
+    return <View>{this.props.Loyalties.list.map(item => <Loyalty key={item.id} item={item}/>)}</View>
   }
 
   renderPaymentInfo() {

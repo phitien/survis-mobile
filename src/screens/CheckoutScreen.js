@@ -69,7 +69,7 @@ export class CheckoutScreen extends Screen {
             </View>
             {this.props.ShoppingCart.list.map((item, i) => {
               const {id, image, name, qty, price} = itemHelper(item)
-              return <View horizontal style={{...style.row, backgroundColor: i % 2 == 0 ? style.evenBgColor : style.oddBgColor}}>
+              return <View key={id} horizontal style={{...style.row, backgroundColor: i % 2 == 0 ? style.evenBgColor : style.oddBgColor}}>
                 <Text fs12 style={{flex: 4}}>{name}</Text>
                 <Text fs12 style={{flex: 1, textAlign: 'center'}}>{qty}</Text>
                 <Text theme fs12 style={{flex: 2, textAlign: 'right'}}>${(qty*price).toFixed(2)}</Text>

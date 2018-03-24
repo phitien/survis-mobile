@@ -61,7 +61,7 @@ export class Header extends Component {
         placeholder='Search'
         returnKeyType='search'
         autoCorrect={false}
-        autoCapitalize={false}
+        autoCapitalize='none'
         value={this.state.q}
         onChangeText={this.onChangeText.bind(this)}
         onSubmitEditing={this.onSearchOk.bind(this)}/>
