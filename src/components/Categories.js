@@ -14,12 +14,11 @@ export class Categories extends Component {
   }
 
   onPress(item) {
+    this.actions.Search_Reset()
+    this.actions.Categories_Search({catid: item.id})
+    this.actions.Search_Search({catid: item.id})
     let currentScene = this.Actions.currentScene.toString()
     if (currentScene !== 'SearchScreen') this.Actions.SearchScreen()
-    this.actions.Categories_Search({catid: item.id})
-    this.actions.Categories_Get({catid: item.id})
-    this.actions.Shops_Search({catid: item.id})
-    this.actions.Shops_Get()
   }
 
   render() {
@@ -38,7 +37,9 @@ export class Categories extends Component {
       {blocks.map((b, i) => <View key={i} horizontal style={style.block}>
         {b.map((item, j) => <TouchableOpacity key={j} onPress={this.onPress.bind(this, item)}>
           <View center style={style.item}>
-            <Image key={item.id} source={{uri: item.image}} style={style.icon}/>
+            <View style={style.icon_container}>
+              <Image key={item.id} source={{uri: item.image}} style={style.icon}/>
+            </View>
             <Text bold fs12>{substr(item.name, 7)}</Text>
           </View>
         </TouchableOpacity>)}

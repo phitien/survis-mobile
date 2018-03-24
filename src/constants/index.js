@@ -65,11 +65,11 @@ export const CONFIG = {
     list: [], filter: {catid: '', page: 0, pagesize: 20}, count: 0, loading: false,
     actions: {
       Loadmore: 'Loadmore',
+      Search: 'Search',
       Reset: 'Reset',
-      Search: 'Search'
     },
     apiActions: {
-      Get: `get|false|body|${BASEURL}?type=category`
+      Get: `get|true|body|${BASEURL}?type=category`,
     }
   },
   Shops: {
@@ -86,6 +86,17 @@ export const CONFIG = {
       Detail: `get|true|body|${BASEURL}?type=shopdetail`,
       Items: `get|true|body|${BASEURL}?type=items`,
       ItemDetail: `get|true|body|${BASEURL}?type=itemdetail`,
+    }
+  },
+  Search: {
+    list: [], filter: {q: '', catid: '', page: 0, pagesize: 20}, count: 0, loading: false,
+    actions: {
+      Reset: 'Reset',
+      Loadmore: 'Loadmore',
+      Search: 'Search'
+    },
+    apiActions: {
+      Get: `get|true|body|${BASEURL}?type=nearbyshops`,
     }
   },
   Promotions: {

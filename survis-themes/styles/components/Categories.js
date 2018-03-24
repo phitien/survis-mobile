@@ -1,4 +1,5 @@
 import {Platform, Dimensions, PixelRatio} from 'react-native'
+import {PRIMARY, GREY} from '../../../src/constants'
 
 const blockNumItem = 5
 const width = Dimensions.get('window').width
@@ -15,7 +16,10 @@ export default {
 	item: {
 		width: blockWidth, height: blockHeight
 	},
+	icon_container: {
+		width: iconSize, height: iconSize, backgroundColor: GREY, borderRadius: iconSize/2, overflow: 'hidden'
+	},
 	icon: {
-		width: iconSize, height: iconSize, marginBottom: 4
+		width: iconSize, height: iconSize
 	}
 }

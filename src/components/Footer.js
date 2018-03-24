@@ -26,7 +26,9 @@ export class Footer extends Component {
     }
   }
   openScreen(screen) {
-    this.actions.Shops_Reset()
+    this.actions.Search_Reset()
+    this.actions.Categories_Reset()
+    this.actions.Categories_Get()
     this.Actions.reset(screen)
   }
 

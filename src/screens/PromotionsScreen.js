@@ -13,7 +13,7 @@ export class PromotionsScreen extends Screen {
     this.locationUpdate(this.actions.Promotions_Get)
   }
   loadmore() {
-    this.actions.Promotions_Loadmore()
+    if (!this.props.Promotions.loading) this.actions.Promotions_Loadmore()
     this.locationUpdate(this.actions.Promotions_Get)
   }
 

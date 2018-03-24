@@ -24,7 +24,7 @@ export class HomeScreen extends Screen {
     }
   }
   loadmore() {
-    this.actions.Shops_Loadmore()
+    if (!this.props.Shops.loading) this.actions.Shops_Loadmore()
     this.locationUpdate(this.actions.Shops_Get)
   }
 

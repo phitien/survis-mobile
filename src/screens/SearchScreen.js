@@ -9,18 +9,18 @@ import {Component as Screen, NewShop, Shop} from '../components'
 
 export class SearchScreen extends Screen {
   async componentDidMount() {
-    this.locationUpdate(this.actions.Shops_Get)
+    this.locationUpdate(this.actions.Search_Get)
   }
   loadmore() {
-    this.actions.Shops_Loadmore()
-    this.locationUpdate(this.actions.Shops_Get)
+    if (!this.props.Search.loading) this.actions.Search_Loadmore()
+    this.locationUpdate(this.actions.Search_Get)
   }
 
   renderShop(item) {
     return <Shop key={item.id} item={item}/>
   }
   renderShops() {
-    return <List renderRow={item => this.renderShop(item)} dataArray={this.props.Shops.list} canLoadMore={true}/>
+    return <List renderRow={item => this.renderShop(item)} dataArray={this.props.Search.list} canLoadMore={true}/>
   }
   render() {
     return <Container>

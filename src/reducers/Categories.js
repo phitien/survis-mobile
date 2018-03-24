@@ -12,11 +12,12 @@ export default function(state = Categories, action) {
       if (page < MAX_PAGE) page = page + 1
       return {...state, loading: true, filter: {...state.filter, ...action.payload, page}}
     }
-    case 'Categories_Reset': {
-      return {...state, loading: true, list: [], filter: {...state.filter, ...action.payload, page: 0}}
-    }
-    case 'Categories_Get_Pending': {
+    case 'Categories_Reset_Pending': {
       return {...state, loading: true}
+    }
+    case 'Categories_Reset': {
+      const list = [].concat(action.payload).filter(o => o)
+      return {...state, loading: false, list: [], filter: {catid: '', page: 0, pagesize: 20}}
     }
     case 'Categories_Get_Success': {
       const list = [].concat(action.payload).filter(o => o)

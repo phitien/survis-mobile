@@ -6,6 +6,12 @@ import {Header as style} from '../../survis-themes/styles/components'
 import {Component} from './Component'
 
 export class Header extends Component {
+  state = {q: this.props.Search.filter.q}
+
+  async componentDidMount() {
+    this.state.q = this.props.Search.filter.q
+  }
+
   onPressScan() {
     if (this.logged) this.Actions.QrScanScreen()
     else {
@@ -21,16 +27,19 @@ export class Header extends Component {
     }
   }
   onPressBack() {
-    this.actions.Shops_Reset()
+    this.setState({q: ''})
+    this.actions.Search_Reset()
+    this.actions.Categories_Reset()
+    this.actions.Categories_Get()
     this.Actions.pop()
   }
-  onPressSearch() {
+  onSearchOk() {
+    this.actions.Search_Search({q: this.state.q})
     let currentScene = this.Actions.currentScene.toString()
     if (currentScene !== 'search') this.Actions.SearchScreen()
-    this.actions.Shops_Get()
   }
   onChangeText(q) {
-    this.actions.Shops_Search({q})
+    this.setState({q})
   }
 
   renderBack() {
@@ -53,9 +62,9 @@ export class Header extends Component {
         returnKeyType='search'
         autoCorrect={false}
         autoCapitalize={false}
-        value={this.props.Shops.filter.q}
+        value={this.state.q}
         onChangeText={this.onChangeText.bind(this)}
-        onSubmitEditing={this.onPressSearch.bind(this)}/>
+        onSubmitEditing={this.onSearchOk.bind(this)}/>
     </Item>
   }
   renderCart() {
