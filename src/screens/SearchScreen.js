@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Container, View, Text, List} from 'native-base'
 import InfiniteScroll from 'react-native-infinite-scroll'
+import {TouchableOpacity as Touch} from 'react-native'
 
 import {SearchScreen as style} from '../../survis-themes/styles/screens'
 
@@ -17,7 +18,9 @@ export class SearchScreen extends Screen {
   }
 
   renderShop(item) {
-    return <Shop key={item.id} item={item}/>
+    return <Touch key={item.id} onPress={e => this.Actions.ShopScreen({item})}>
+      <Shop item={item}/>
+    </Touch>
   }
   renderShops() {
     return <List renderRow={item => this.renderShop(item)} dataArray={this.props.Search.list} canLoadMore={true}/>

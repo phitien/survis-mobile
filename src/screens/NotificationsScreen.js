@@ -24,7 +24,7 @@ export class NotificationsScreen extends Screen {
           <Text bold fs16>Notifications</Text>
         </View>
         <ScrollView>
-          {this.props.Notifications.list.map(item => <Notification item={item}/>)}
+          {this.props.Notifications.list.map((item,i) => <Notification key={i} index={i} item={item}/>)}
         </ScrollView>
       </Content>
       <Footer/>

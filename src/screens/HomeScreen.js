@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Container, View, Text, List} from 'native-base'
-import {TouchableOpacity} from 'react-native'
+import {TouchableOpacity as Touch} from 'react-native'
 import InfiniteScroll from 'react-native-infinite-scroll'
 
 import {HomeScreen as style} from '../../survis-themes/styles/screens'
@@ -32,9 +32,9 @@ export class HomeScreen extends Screen {
   }
 
   renderShop(item) {
-    return <TouchableOpacity key={item.id} onPress={e => this.Actions.ShopScreen({item})}>
+    return <Touch key={item.id} onPress={e => this.Actions.ShopScreen({item})}>
       <Shop item={item}/>
-    </TouchableOpacity>
+    </Touch>
   }
   renderShops() {
     return <List renderRow={item => this.renderShop(item)} dataArray={this.props.Shops.list} canLoadMore={true}/>
