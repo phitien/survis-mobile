@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {AsyncStorage} from 'react-native'
 import {Provider} from 'react-redux'
 import {View, StyleProvider, Spinner} from 'native-base'
-// import OneSignal from 'react-native-onesignal'
+import OneSignal from 'react-native-onesignal'
 
 import getTheme from './survis-themes/components'
 import AppStyle from './survis-themes/styles/App'
@@ -33,7 +33,7 @@ export default class App extends Component {
           MaterialIcons: require('@expo/vector-icons/fonts/MaterialIcons.ttf')
         })
     }
-    // await OneSignal.addEventListener('received', this.onOneSignalNotiReceived)
+    await OneSignal.addEventListener('received', this.onOneSignalNotiReceived)
     this.state.store = appstore()
     let deviceId = -1
     try {

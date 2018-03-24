@@ -143,6 +143,7 @@ export const CONFIG = {
     apiActions: {
       Get: `get|true|body|${BASEURL}?type=prize`,
       Submit: `post|true|form|${BASEURL}?type=prizepick`,
+      Scan: `post|true|form|${BASEURL}?type=scan`,
     }
   },
   Histories: {
