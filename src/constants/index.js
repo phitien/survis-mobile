@@ -215,6 +215,7 @@ export const CONFIG = {
       Clear: 'Clear',
       Increase: 'Increase',
       Decrease: 'Decrease',
+      Load: 'Load',
     },
     apiActions: {
       Checkout: `post|true|body|${BASEURL}?type=placeorder`,

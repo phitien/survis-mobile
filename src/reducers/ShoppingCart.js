@@ -4,6 +4,9 @@ const {ShoppingCart} = CONFIG
 
 export default function(state = ShoppingCart, action) {
   switch (action.type) {
+    case 'ShoppingCart_Load': {
+      return {...state, ...action.payload, loading: false}
+    }
     case 'ShoppingCart_Add': {
       if (!state.list.find(item => item.id == action.payload.id)) state.list.push(action.payload)
       return state

@@ -7,7 +7,7 @@ import {Header, Footer, ShopSummary, Review} from '../containers'
 import {ShopItemScreen as style} from '../../survis-themes/styles/screens'
 
 import {Image, Rating} from '../components'
-import {itemHelper, substr} from '../utils'
+import {itemHelper, substr, setShoppingCart} from '../utils'
 import {Component as Screen} from '../components'
 
 export class ShopItemScreen extends Screen {
@@ -16,7 +16,9 @@ export class ShopItemScreen extends Screen {
     this.actions.Reviews_Reset()
     this.actions.Reviews_Get({itemid: this.props.item.id})
   }
-  addToCart() {
+
+  async addToCart() {
+    setShoppingCart(this.props.ShoppingCart)
     this.actions.ShoppingCart_Add({...this.props.item, shop: this.props.shop})
     this.Actions.pop()
   }
@@ -25,7 +27,7 @@ export class ShopItemScreen extends Screen {
     const item = this.props.Shops.itemdetail
     const shop = this.props.shop
     const {
-      id, image, name, price, totalrate, totalreviews, description
+      id, image, name, priceS, totalrate, totalreviews, description
     } = itemHelper(item)
     return <Container>
       <Header back='back'/>
@@ -36,7 +38,7 @@ export class ShopItemScreen extends Screen {
               <Image resizeMode='stretch' style={style.image} source={{uri: image}}/>
               <View style={style.info}>
                 <Text bold>{name}</Text>
-                <Text bold fs16 theme>{price}</Text>
+                <Text bold fs16 theme>{priceS}</Text>
               </View>
             </View>
             <View horizontal style={style.statistic}>
@@ -60,7 +62,7 @@ export class ShopItemScreen extends Screen {
       </Content>
       <Footer>
         <View m-l-10 center-h>
-          <Text theme fs18>{price}</Text>
+          <Text theme fs18>{priceS}</Text>
         </View>
         <View m-r-10 center center-h>
           <Button small onPress={this.addToCart.bind(this)}>

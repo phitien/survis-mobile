@@ -1,5 +1,6 @@
 export {getDistance} from './getDistance'
 export {getPaymentInfo} from './getPaymentInfo'
+export {getShoppingCart} from './getShoppingCart'
 export {getUser} from './getUser'
 export {
   itemHelper, cardnum, cardexpire, substr, last4
@@ -17,6 +18,7 @@ export {
   apicall
 } from './apiCall'
 export {setPaymentInfo} from './setPaymentInfo'
+export {setShoppingCart} from './setShoppingCart'
 export {setUser} from './setUser'
 export {
   query,

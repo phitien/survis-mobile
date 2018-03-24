@@ -6,9 +6,8 @@ export const itemHelper = (item) => {
     name: item.name || '',
     highlight: item.highlight || '',
     description: item.description || '',
-    price: parseFloat(item.price)
-      ? `$${parseFloat(item.price)}`
-      : '',
+    priceS: parseFloat(item.price) ? `$${parseFloat(item.price)}` : '',
+    price: parseFloat(item.price),
     image: item.image || '',
     totalrate: parseFloat(item.totalrate) || 0,
     totalreviews: parseInt(item.totalreviews) || 0,
@@ -21,19 +20,15 @@ export const itemHelper = (item) => {
     bigtitle: item.bigtitle || '',
     smalltitle: item.smalltitle || '',
     address: item.address || '',
-    items: []
-      .concat(item.items)
-      .filter(o => o),
-    images: []
-      .concat(item.images)
-      .filter(o => o),
+    items: [].concat(item.items).filter(o => o),
+    images: [].concat(item.images).filter(o => o),
     orderdate: item.orderdate || '',
     isfeatured: parseInt(item.isfeatured) && parseInt(item.isfeatured) > 0,
     promotion_image: item.promotion_image || '',
     distance: `${(parseFloat(item.distance) || 0).toFixed(2)}km`,
-    // distance: getDistance(latitude, longitude, props.Location.latitude, props.Location.longitude)
     cardnum: item.num || '',
     shop_info: item.shop_info || {},
+    qty: parseInt(item.qty) || 1,
   }
 }
 export const last4 = (s) => {

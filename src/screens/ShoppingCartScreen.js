@@ -1,42 +1,58 @@
 import React, {Component} from 'react'
-import {Container, View, Content, Spinner, Button, Text, Icon} from 'native-base'
+import {Container, View, Content, Spinner, Text, Icon} from 'native-base'
+import {TouchableOpacity as Touch} from 'react-native'
 import {ScrollView} from 'react-native'
 
 import {ShoppingCartScreen as style} from '../../survis-themes/styles/screens'
 
+import {itemHelper} from '../utils'
 import {Header, Footer} from '../containers'
-import {Image} from '../components'
+import {Button, Image} from '../components'
 import {Component as Screen} from '../components'
+
+const {col0W, col1W} = style
 
 export class ShoppingCartScreen extends Screen {
   get total() {return this.props.ShoppingCart.list.reduce((rs, item) => {
-    rs += (item.price || 0) * item.qty
+    const {qty, price} = itemHelper(item)
+    rs += qty*price
     return rs
   }, 0)}
 
   renderHeader() {
-    return <View horizontal p-16>
-      <Text bold fs14 style={{flex: 4}}>ITEM</Text>
-      <Text bold fs14 style={{flex: 2}}>QTY</Text>
-      <Text bold fs14 style={{flex: 2}}>PRICE</Text>
+    return <View horizontal style={style.row}>
+      <View horizontal style={style.col0}><Text bold fs14>ITEM</Text></View>
+      <View horizontal style={style.col1}><Text bold fs14>QTY</Text></View>
+      <View horizontal style={style.col2}><Text bold fs14>PRICE</Text></View>
     </View>
   }
   renderList() {
     return this.props.ShoppingCart.list.map((item, i) => {
-      return <View horizontal center m-t-5 style={{...style.container, backgroundColor: i % 2 == 0 ? style.evenBgColor : style.oddBgColor}}>
-        <Image resizeMode='stretch' style={style.image} source={{uri: item.image}}/>
-        <Text fs12 style={{flex: 2}}>{item.name}</Text>
-        <View center-h style={{flex: 2}}>
-          <View horizontal light-border center space-between
-            p-l-10 p-r-10 m-r-10 style={{alignSelf: 'stretch'}}>
-            <Icon onPress={e => this.actions.ShoppingCart_Decrease(item)} name='ios-remove'/>
-            <Text>{item.qty}</Text>
-            <Icon onPress={e => this.actions.ShoppingCart_Increase(item)} name='ios-add'/>
+      const {id, image, name, qty, price} = itemHelper(item)
+      return <View key={id} horizontal style={{...style.row, backgroundColor: i % 2 == 0 ? style.evenBgColor : style.oddBgColor}}>
+        <View horizontal style={style.col0}>
+          <View horizontal style={style.image_container}>
+            <Image style={style.image} source={{uri: image}}/>
+          </View>
+          <View flex1>
+            <Text fs12>{name}</Text>
           </View>
         </View>
-        <Text fs14 style={{flex: 1}}>{((item.price || 0) * item.qty).toFixed(2)}</Text>
-        <Icon onPress={e => this.actions.ShoppingCart_Remove(item)} name='ios-trash'/>
-        <Text></Text>
+        <View horizontal center-h style={style.col1}>
+          <View style={style.control} horizontal>
+            <Touch onPress={e => this.actions.ShoppingCart_Decrease(item)}>
+              <View center style={style.control_icon}><Text fs14>-</Text></View>
+            </Touch>
+            <View center style={style.control_text}><Text fs14>{qty}</Text></View>
+            <Touch onPress={e => this.actions.ShoppingCart_Increase(item)}>
+              <View center style={style.control_icon}><Text fs14>+</Text></View>
+            </Touch>
+          </View>
+        </View>
+        <View horizontal center-h style={style.col2}>
+          <Text theme style={style.price}>${(qty*price).toFixed(2)}</Text>
+          <Icon theme onPress={e => this.actions.ShoppingCart_Remove(item)} name='ios-trash'/>
+        </View>
       </View>
     })
   }

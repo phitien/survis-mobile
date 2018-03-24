@@ -1,6 +1,6 @@
 import React from 'react'
 import {Text, Icon, View} from 'native-base'
-import {TouchableOpacity} from 'react-native'
+import {TouchableOpacity as Touch} from 'react-native'
 import Swiper from 'react-native-swiper'
 
 import {Categories as style} from '../../survis-themes/styles/components'
@@ -35,14 +35,14 @@ export class Categories extends Component {
     }
     return <Swiper showsPagination={false} loop>
       {blocks.map((b, i) => <View key={i} horizontal style={style.block}>
-        {b.map((item, j) => <TouchableOpacity key={j} onPress={this.onPress.bind(this, item)}>
+        {b.map((item, j) => <Touch key={j} onPress={this.onPress.bind(this, item)}>
           <View center style={style.item}>
             <View style={style.icon_container}>
               <Image key={item.id} source={{uri: item.image}} style={style.icon}/>
             </View>
             <Text bold fs12>{substr(item.name, 7)}</Text>
           </View>
-        </TouchableOpacity>)}
+        </Touch>)}
       </View>)}
     </Swiper>
   }
