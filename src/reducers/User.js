@@ -10,11 +10,23 @@ export default function(state = User, action) {
     case 'User_Error': {
       return {...state, error: action.payload, loading: false}
     }
-    case 'User_EditUser': {
-      return {...state, editingUser: action.payload, loading: false}
+		case 'User_ChangePassword_Pending': {
+      return {...state, loading: true}
     }
-    case 'User_EditPassword': {
-      return {...state, editingPassword: action.payload, loading: false}
+    case 'User_ChangePassword_Success': {
+      return {...state, error: false, loading: false}
+    }
+    case 'User_ChangePassword_Failure': {
+      return {...state, ...action.payload, loading: false}
+    }
+		case 'User_Update_Pending': {
+      return {...state, loading: true}
+    }
+    case 'User_Update_Success': {
+      return {...state, error: false, ...action.payload, loading: false}
+    }
+    case 'User_Update_Failure': {
+      return {...state, ...action.payload, loading: false}
     }
     case 'User_Resgister_Pending': {
       return {...state, loading: true}
@@ -47,7 +59,7 @@ export default function(state = User, action) {
       return {...state, loading: true}
     }
     case 'User_Get_Success': {
-      return {...state, ...action.payload || {}, loading: false}
+      return {...state, ...action.payload || {}, error: false, loading: false}
     }
     case 'User_Get_Failure': {
       return {...state, loading: false}

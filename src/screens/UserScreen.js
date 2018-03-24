@@ -10,14 +10,34 @@ import {Image, Button} from '../components'
 import {Component as Screen} from '../components'
 
 export class UserScreen extends Screen {
-  state = {
-    User: Object.assign({}, this.User),
-  }
 
   async componentWillMount() {
     this.actions.Histories_Get()
     this.actions.Loyalties_Get()
-    this.actions.PaymentInfo_Get()
+		this.actions.User_Get()
+  }
+  async onSaveMe(user) {
+		await setUser({...this.props.User, ...user})
+		await this.actions.User_Load(user)
+    await this.actions.User_Update(user)
+  }
+	async onSavePassword(password) {
+    await this.actions.User_ChangePassword({usr_password: password})
+  }
+  async onSavePaymentInfo(info) {
+		await setPaymentInfo({...this.props.PaymentInfo, ...info})
+    await this.actions.PaymentInfo_Load(info)
+  }
+  async onLogout() {
+    await this.actions.User_Logout()
+    await setUser(this.props.User.default)
+    await setPaymentInfo(this.props.PaymentInfo.default)
+    requestHeader('token', '')
+    this.Actions.HomeScreen()
+  }
+
+  get account() {
+    return [this.props.User.usr_fname, this.props.User.usr_lname].join(' ') || this.props.User.usr_email
   }
 
   renderHistories() {
@@ -28,55 +48,26 @@ export class UserScreen extends Screen {
     return <View>{this.props.Loyalties.list.map(item => <Loyalty item={item}/>)}</View>
   }
 
-  changeUser(attribute, value) {
-    const User = this.state.User
-    User[attribute] = value
-    this.setState({User, typing: true})
-  }
-  onSaveUser() {
-    this.setState({savingUser: true})
-    this.actions.User_Update(this.state.User)
-  }
-
-  async onSavePaymentInfo(info) {
-    await this.actions.PaymentInfo_Load(info)
-    await setPaymentInfo(info)
-  }
-  async onLogout() {
-    await this.actions.User_Logout()
-    await setUser(this.props.User.default)
-    await setPaymentInfo(this.props.PaymentInfo.default)
-    requestHeader('token', '')
-    this.Actions.HomeScreen()
-  }
-  onSavePassword() {
-    //TODO
-  }
-
   renderPaymentInfo() {
-    return <PaymentInfo item={this.props.PaymentInfo} onSave={this.onSavePaymentInfo.bind(this)}/>
+    return <PaymentInfo PaymentInfo={this.props.PaymentInfo} onSave={this.onSavePaymentInfo.bind(this)}/>
   }
 
-  renderPersonalInfo() {
-    return <User item={this.state.User}
-      editingUser={this.props.User.editingUser}
-      editingPassword={this.props.User.editingPassword}
-      onSave={this.onSavePaymentInfo.bind(this)}
-      onSwitch={this.actions.PaymentInfo_EditShippingAddress}
-      onSwitchPassword={this.actions.PaymentInfo_EditShippingAddress}/>
+  renderMe() {
+    return <User User={this.props.User}
+			onSave={this.onSaveMe.bind(this)}
+			onSavePassword={this.onSavePassword.bind(this)}/>
   }
 
   render() {
-    let User = this.state.User
-    let name = User.fname || User.email || 'Not set'
-    let source = User.avatar ? {uri: User.avatar} : PERSON_IMG
+    const user = this.props.User
+    let source = user.avatar ? {uri: user.avatar} : PERSON_IMG
     return <Container>
       <Header back='back'/>
       <Content>
         <View horizontal start space-between>
           <View horizontal center>
             <View style={style.avatar_container}><Image source={source} style={style.avatar}/></View>
-            <Text>{name}</Text>
+            <Text>{this.account}</Text>
           </View>
           <Button transparent theme onPress={this.onLogout.bind(this)}>
             {this.props.User.loading ? this.renderLoading() : <Icon theme name='ios-log-out'/>}
@@ -93,7 +84,7 @@ export class UserScreen extends Screen {
             {this.renderPaymentInfo()}
           </Tab>
           <Tab {...style.tabProps} heading='Me'>
-            {this.renderPersonalInfo()}
+            {this.renderMe()}
           </Tab>
         </Tabs>
       </Content>

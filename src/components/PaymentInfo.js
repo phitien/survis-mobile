@@ -1,6 +1,5 @@
 import React from 'react'
 import {View, Item, Input, Text, Icon} from 'native-base'
-import {TouchableOpacity as Touch} from 'react-native'
 import RadioForm from 'react-native-simple-radio-button'
 
 import {PaymentInfo as style} from '../../survis-themes/styles/components'
@@ -15,25 +14,19 @@ import {Component} from './Component'
 
 export class PaymentInfo extends Component {
   state = {
-    ucc_num: this.props.item.ucc_num,
-    ucc_name: this.props.item.ucc_name,
-    ucc_expire: this.props.item.ucc_expire,
-    ucc_type: this.props.item.ucc_type,
-    ucc_cvc: this.props.item.ucc_cvc,
-    bill_address: this.props.item.bill_address,
+    ucc_num: this.props.PaymentInfo.ucc_num,
+    ucc_name: this.props.PaymentInfo.ucc_name,
+    ucc_expire: this.props.PaymentInfo.ucc_expire,
+    ucc_type: this.props.PaymentInfo.ucc_type || 'master',
+    ucc_cvc: this.props.PaymentInfo.ucc_cvc,
+    bill_address: this.props.PaymentInfo.bill_address,
     error: false,
     showInfo: false,
     showAddress: false,
   }
   onClearCreditCard() {
-    this.state.ucc_num = this.state.ucc_name = this.state.ucc_expire = this.state.ucc_type = this.state.cvv = ''
-    this.onSave({
-      ucc_num: this.state.ucc_name,
-      ucc_name: this.state.ucc_num,
-      ucc_expire: this.state.ucc_expire,
-      ucc_type: this.state.ucc_type,
-      ucc_cvc: this.state.ucc_cvc
-    })
+		Object.assign(this.state, this.props.PaymentInfo.default)
+    this.onSave(this.props.PaymentInfo.default)
     this.setState({showInfo: true, error: false})
   }
   onChange(k, v) {
@@ -87,8 +80,8 @@ export class PaymentInfo extends Component {
       </View>
       <View horizontal center style={style.actions}>
         <Button full small mr onPress={e => this.onSave({
-          ucc_num: this.state.ucc_name,
-          ucc_name: this.state.ucc_num,
+          ucc_num: this.state.ucc_num,
+          ucc_name: this.state.ucc_name,
           ucc_expire: this.state.ucc_expire,
           ucc_type: this.state.ucc_type,
           ucc_cvc: this.state.ucc_cvc
@@ -123,7 +116,7 @@ export class PaymentInfo extends Component {
           <Text bold fs14>{ucc_num ? cardnum(ucc_num) : 'Not set'}</Text>
         </View>
         <View horizontal center>
-          {!this.state.showInfo ? <Button iconRight transparent primary onPress={e => this.setState({showInfo: true})}>
+          {!this.state.showInfo ? <Button iconRight transparent primary onPress={e => this.setState({showInfo: true, showAddress: false})}>
             <Icon theme name='md-create'/>
           </Button> : null}
           {ucc_num ? <Button iconRight transparent primary onPress={e => this.onClearCreditCard()}>
@@ -135,7 +128,7 @@ export class PaymentInfo extends Component {
       <View style={style.shipping}>
         <View horizontal center space-between>
           <Text style={style.heading}>Shipping bill</Text>
-          {!this.state.showAddress ? <Button iconRight transparent primary onPress={e => this.setState({showAddress: true})}>
+          {!this.state.showAddress ? <Button iconRight transparent primary onPress={e => this.setState({showInfo: false, showAddress: true})}>
             <Icon theme name='md-create'/>
           </Button> : null}
         </View>

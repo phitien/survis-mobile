@@ -21,10 +21,14 @@ apiCall
   .interceptors
   .response
   .use((res, req) => {
-    console.log(res.request.responseURL)
+    console.log(res.request._method, res.request.responseURL)
     return res
   }, error => {
-    const {data, status} = error.response
+		const res = error.response
+		console.log(res.request._method, res.request.responseURL)
+		console.log(error)
+		console.log(res.data)
+    const {data, status} = res
     const {code, message} = data
     if (status === 401 || status === 403) {
       requestHeader('token', '')

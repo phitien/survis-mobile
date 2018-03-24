@@ -52,13 +52,13 @@ export const CONFIG = {
       EditPassword: 'EditPassword',
     },
     apiActions: {
-      Get: `get|true|body|${BASEURL}?type=paymentinfo&cmd=get`,
-      Update: `post|true|body|${BASEURL}?type=profile&cmd=set`,
+      Get: `get|true|body|${BASEURL}?type=profile&cmd=get`,
+      Update: `post|true|form|${BASEURL}?type=profile&cmd=set`,
       Login: `post|true|form|${BASEURL}?type=login`,
       Logout: `post|true|form|${BASEURL}?type=logout`,
       Register: `post|true|form|${BASEURL}?type=register`,
       ForgetPassword: `post|true|form|${BASEURL}?type=forgetpwd`,
-      ChangePassword: `post|true|form|${BASEURL}?type=profile&cmd=set`,
+      ChangePassword: `post|true|form|${BASEURL}?type=password`,
     }
   },
   Categories: {
