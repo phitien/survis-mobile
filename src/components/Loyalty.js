@@ -2,28 +2,21 @@ import React from 'react'
 import {Text, Spinner, Icon, View} from 'native-base'
 
 import {Loyalty as style} from '../../survis-themes/styles/components'
-
+import {itemHelper, substr} from '../utils'
 import {Image} from './Image'
 
 const Loyalty = props => {
-  const item = props.item
+  const {
+    id, image, name, address, numberoforders, latestorderdate, spentamount
+  } = itemHelper(props.item)
   return <View horizontal style={style.container}>
-    <Image resizeMode='stretch' style={style.image} source={{uri: item.image}}/>
-    <View p-l-10>
-      <View horizontal m-t-5>
-        <Text fs14 bold>{item.name}</Text>
-      </View>
-      <View horizontal>
-        <Text fs12>{item.address}</Text>
-      </View>
-      <View horizontal>
-        <Icon new-shop name='ios-send'/>
-        <Text fs12>{item.numberoforders}</Text>
-      </View>
-      <Text fs14 bold theme>${item.spentamount}</Text>
-      <View m-t-5>
-        <Text fs12>{item.latestorderdate}</Text>
-      </View>
+    <View m-r-10><Image style={style.image} source={{uri: image}}/></View>
+    <View flex1>
+      <View full><Text fs14 bold>{name}</Text></View>
+      <View full><Text fs12><Icon small name='ios-send'/> {address}</Text></View>
+      <View full><Text fs12>Visits: {numberoforders}</Text></View>
+      <View full><Text fs14 bold theme>Total: {spentamount}</Text></View>
+      <View full><Text fs12>Last order: {latestorderdate}</Text></View>
     </View>
   </View>
 }

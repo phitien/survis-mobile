@@ -4,6 +4,7 @@ export const PRIMARY = '#f9ae18'
 export const ERROR = '#ed2f2f'
 export const GREY = 'rgba(0,0,0,.1)'
 export const MAX_PAGE = 30
+export const PRIZE_ITEM_HEIGHT = 240
 
 export const SET_PUSH_TOKEN = 'SET_PUSH_TOKEN'
 export const SET_PUSH_TOKEN_FAIL = 'SET_PUSH_TOKEN_FAIL'
@@ -133,13 +134,15 @@ export const CONFIG = {
   },
   Prizes: {
     list: [], filter: {page: 0, pagesize: 10}, count: 0, loading: false,
+    error: false,
     actions: {
       Loadmore: 'Loadmore',
-      Reset: 'Reset'
+      Reset: 'Reset',
+      Pick: 'Pick',
     },
     apiActions: {
       Get: `get|true|body|${BASEURL}?type=prize`,
-      Pick: `post|true|body|${BASEURL}?type=prizepick`,
+      Submit: `post|true|form|${BASEURL}?type=prizepick`,
     }
   },
   Histories: {
@@ -218,7 +221,7 @@ export const CONFIG = {
       Load: 'Load',
     },
     apiActions: {
-      Checkout: `post|true|body|${BASEURL}?type=placeorder`,
+      Place: `post|true|body|${BASEURL}?type=placeorder`,
     }
   },
   Location: {

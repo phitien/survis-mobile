@@ -31,7 +31,7 @@ export class UserScreen extends Screen {
   async onLogout() {
     await this.actions.User_Logout()
     await setUser(this.props.User.default)
-    await setPaymentInfo(this.props.PaymentInfo.default)
+    // await setPaymentInfo(this.props.PaymentInfo.default)
     requestHeader('token', '')
     this.Actions.HomeScreen()
   }

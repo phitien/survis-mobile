@@ -4,9 +4,7 @@ import {Scene, Router, Overlay, Stack, Lightbox} from 'react-native-router-flux'
 import RoutesStyle from '../../survis-themes/styles/Routes'
 
 import {
-  CheckoutConfirmScreen,
-  CheckoutPaymentScreen,
-  CheckoutShippingScreen,
+  CheckoutScreen,
   HomeScreen,
   LoginScreen,
   NotificationsScreen,
@@ -27,28 +25,20 @@ const Routes = (props) => {
   return (<Router>
     <Overlay>
       <Stack>
-        <Scene key='root'>
-          {renderScene('HomeScreen', HomeScreen, {
-            initial: 'initial',
-            title: 'Dashboard',
-            titleStyle: RoutesStyle.sceneHeaderStyle
-          })}
-          {renderScene('LoginScreen', LoginScreen)}
-        </Scene>
+        {renderScene('HomeScreen', HomeScreen, {initial: true})}
+        {renderScene('LoginScreen', LoginScreen)}
         {renderScene('UserScreen', UserScreen)}
         {renderScene('QrScanScreen', QrScanScreen)}
         {renderScene('PromotionScreen', PromotionScreen)}
         {renderScene('ShopScreen', ShopScreen)}
         {renderScene('ShopItemScreen', ShopItemScreen)}
         {renderScene('ShoppingCartScreen', ShoppingCartScreen)}
-        {renderScene('CheckoutShippingScreen', CheckoutShippingScreen)}
-        {renderScene('CheckoutPaymentScreen', CheckoutPaymentScreen)}
-        {renderScene('CheckoutConfirmScreen', CheckoutConfirmScreen)}
+        {renderScene('CheckoutScreen', CheckoutScreen)}
         {renderScene('PromotionsScreen', PromotionsScreen)}
         {renderScene('NotificationsScreen', NotificationsScreen)}
         {renderScene('PrizesScreen', PrizesScreen)}
         {renderScene('SearchScreen', SearchScreen, {
-          onExit: e => store.dispatch({type: 'Search_Upate', payload: {q: '', catid: null}})
+          onExit: e => store.dispatch({type: 'Search_Upate', payload: {q: '', catid: ''}})
         })}
       </Stack>
     </Overlay>

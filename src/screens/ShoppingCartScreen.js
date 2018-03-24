@@ -5,7 +5,7 @@ import {ScrollView} from 'react-native'
 
 import {ShoppingCartScreen as style} from '../../survis-themes/styles/screens'
 
-import {itemHelper} from '../utils'
+import {itemHelper, setShoppingCart} from '../utils'
 import {Header, Footer} from '../containers'
 import {Button, Image} from '../components'
 import {Component as Screen} from '../components'
@@ -18,6 +18,19 @@ export class ShoppingCartScreen extends Screen {
     rs += qty*price
     return rs
   }, 0)}
+
+  async increase(item) {
+    this.actions.ShoppingCart_Increase(item)
+    await setShoppingCart(this.props.ShoppingCart)
+  }
+  async decrease(item) {
+    this.actions.ShoppingCart_Decrease(item)
+    await setShoppingCart(this.props.ShoppingCart)
+  }
+  async remove(item) {
+    this.actions.ShoppingCart_Remove(item)
+    await setShoppingCart(this.props.ShoppingCart)
+  }
 
   renderHeader() {
     return <View horizontal style={style.row}>
@@ -40,18 +53,18 @@ export class ShoppingCartScreen extends Screen {
         </View>
         <View horizontal center-h style={style.col1}>
           <View style={style.control} horizontal>
-            <Touch onPress={e => this.actions.ShoppingCart_Decrease(item)}>
+            <Touch onPress={this.decrease.bind(this, item)}>
               <View center style={style.control_icon}><Text fs14>-</Text></View>
             </Touch>
             <View center style={style.control_text}><Text fs14>{qty}</Text></View>
-            <Touch onPress={e => this.actions.ShoppingCart_Increase(item)}>
+            <Touch onPress={this.increase.bind(this, item)}>
               <View center style={style.control_icon}><Text fs14>+</Text></View>
             </Touch>
           </View>
         </View>
         <View horizontal center-h style={style.col2}>
           <Text theme style={style.price}>${(qty*price).toFixed(2)}</Text>
-          <Icon theme onPress={e => this.actions.ShoppingCart_Remove(item)} name='ios-trash'/>
+          <Icon theme onPress={this.remove.bind(this, item)} name='ios-trash'/>
         </View>
       </View>
     })
@@ -72,7 +85,7 @@ export class ShoppingCartScreen extends Screen {
           <Text theme fs18>${this.total.toFixed(2)}</Text>
         </View>
         <View m-r-10 center center-h>
-          <Button small onPress={this.Actions.checkout_shipping} disabled={this.props.ShoppingCart.list.length && this.total}>
+          <Button small onPress={this.Actions.CheckoutScreen} disabled={!this.props.ShoppingCart.list.length || !this.total}>
             <Text>CHECK OUT</Text>
           </Button>
         </View>

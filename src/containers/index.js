@@ -4,9 +4,7 @@ import {connect} from 'react-redux'
 import {mapStateToProps, mapDispatchToProps} from '../utils'
 
 /**SCREENS**/
-import {CheckoutConfirmScreen as CMPCheckoutConfirmScreen} from '../screens'
-import {CheckoutPaymentScreen as CMPCheckoutPaymentScreen} from '../screens'
-import {CheckoutShippingScreen as CMPCheckoutShippingScreen} from '../screens'
+import {CheckoutScreen as CMPCheckoutScreen} from '../screens'
 import {HomeScreen as CMPHomeScreen} from '../screens'
 import {LoginScreen as CMPLoginScreen} from '../screens'
 import {NotificationsScreen as CMPNotificationsScreen} from '../screens'
@@ -20,9 +18,7 @@ import {ShoppingCartScreen as CMPShoppingCartScreen} from '../screens'
 import {ShopScreen as CMPShopScreen} from '../screens'
 import {UserScreen as CMPUserScreen} from '../screens'
 
-export const CheckoutConfirmScreen = connect(mapStateToProps, mapDispatchToProps)(CMPCheckoutConfirmScreen)
-export const CheckoutPaymentScreen = connect(mapStateToProps, mapDispatchToProps)(CMPCheckoutPaymentScreen)
-export const CheckoutShippingScreen = connect(mapStateToProps, mapDispatchToProps)(CMPCheckoutShippingScreen)
+export const CheckoutScreen = connect(mapStateToProps, mapDispatchToProps)(CMPCheckoutScreen)
 export const HomeScreen = connect(mapStateToProps, mapDispatchToProps)(CMPHomeScreen)
 export const LoginScreen = connect(mapStateToProps, mapDispatchToProps)(CMPLoginScreen)
 export const NotificationsScreen = connect(mapStateToProps, mapDispatchToProps)(CMPNotificationsScreen)

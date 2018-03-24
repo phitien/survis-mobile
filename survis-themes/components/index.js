@@ -39,6 +39,7 @@ import spinnerTheme from "./Spinner";
 import cardItemTheme from "./CardItem";
 import listItemTheme from "./ListItem";
 import formTheme from "./Form";
+import scrollViewTheme from "./ScrollView";
 import separatorTheme from "./Separator";
 import variable from "./../variables/platform";
 
@@ -208,6 +209,9 @@ export default (variables = variable) => {
     },
     "NativeBase.Thumbnail": {
       ...thumbnailTheme(variables)
+    },
+    "ScrollView": {
+      ...scrollViewTheme(variables)
     }
   };
 

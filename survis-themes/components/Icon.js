@@ -2,7 +2,7 @@ import variable from "./../variables/platform";
 
 export default (variables = variable) => {
   const iconTheme = {
-    fontSize: variables.iconFontSize,
+    fontSize: 20,
     backgroundColor: 'transparent',
     color: "#000",
     '.white':{
@@ -10,6 +10,9 @@ export default (variables = variable) => {
     },
     '.big':{
       fontSize: 30
+    },
+    '.small':{
+      fontSize: 16
     },
     '.theme': {
       color: variables.toolbarDefaultBg,

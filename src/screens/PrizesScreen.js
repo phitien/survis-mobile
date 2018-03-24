@@ -1,56 +1,60 @@
 import React, {Component} from 'react'
-import {Container, View, Content, Button, Text} from 'native-base'
-import Dash from 'react-native-dash'
+import {Container, View, Content, Text} from 'native-base'
+import {ScrollView} from 'react-native'
+import {TouchableOpacity as Touch} from 'react-native'
 
 import {PrizesScreen as style} from '../../survis-themes/styles/screens'
 
 import {Header, Footer, Prize} from '../containers'
+import {Button} from '../components'
 import {Component as Screen} from '../components'
 
 export class PrizesScreen extends Screen {
-  get items() {return this.props.Prizes.list}
+  get error() {return this.state.error || this.props.Prizes.error}
 
   async componentDidMount() {
-    if (this.picked) {
-      this.state.prz_id = null
-      this.Actions.replace('HomeScreen', {message: 'You have been picked a prize successfully.'})
-    }
+    this.actions.Prizes_Get()
   }
 
-  state = {
-    prz_id: null
+  onPressSubmit() {
+    this.actions.Prizes_Submit({prz_id: this.props.Prizes.list.find(o => o.selected).id})
+    .then(res => {
+      if (!this.props.Prizes.error) this.Actions.HomeScreen()
+    })
   }
 
-  submitPrize() {
-    this.actions.Prizes_Pick({prz_id: this.state.prz_id})
+  renderRow(row, i) {
+    return <View key={i} horizontal full style={style.row}>
+      {row.map((item,i) => <Touch onPress={e => this.actions.Prizes_Pick(item)}><Prize item={item}/></Touch>)}
+    </View>
   }
-
+  renderPrizes() {
+    const rows = Array.from({length: parseInt(this.props.Prizes.list.length/2)}, (o, i) => this.props.Prizes.list.slice(2*i, 2*i + 2))
+    return <View flex1 horizotal full>{rows.map((row, i) => this.renderRow(row,i))}</View>
+  }
   render() {
-    const grid = [];
-    const items = this.items
-    const prz_id = this.state.prz_id
-    for (let i = 0; i < items.length; i = i + 2) {
-      grid.push(<View horizontal>
-        <Prize selected={prz_id == items[i].id} onPress={e => this.setState({prz_id: items[i].id})} item={items[i]}/>
-        <Prize selected={prz_id == items[i + 1].id} onPress={e => this.setState({prz_id: items[i + 1].id})} item={items[i + 1]}/>
-      </View>)
-    }
     return <Container>
       <Header/>
       <Content>
-        <View horizontal grey p-16>
-          <Text bold fs12>Lucky Draw</Text>
-        </View>
-        <View p-16>
-          <Text fs12>
-            Gourmet cooking is a style of food preparation that deals with the finest and freshest lorem ipsum dolos possible ingredients.
-          </Text>
-        </View>
-        <Dash/> {grid.map(item => item)}
+        <ScrollView>
+          {this.renderError()}
+          <View horizotal style={style.heading}>
+            <Text bold fs16>Lucky Draw</Text>
+          </View>
+          <View m>
+            <Text bold fs14>Congratulation!!</Text>
+            <Text fs12>You have won a chance to win Lucky Draw. Please pick a prize.</Text>
+            <Text fs12>Good luck!!</Text>
+          </View>
+          {this.renderPrizes()}
+        </ScrollView>
       </Content>
       <Footer>
-        <View m-r-10 center-h>
-          <Button small onPress={this.submitPrize.bind(this)} disabled={!this.state.prz_id}>
+        <View flex1></View>
+        <View m-r-10 center center-h>
+          <Button small loading={this.props.Prizes.loading}
+            onPress={this.onPressSubmit.bind(this)}
+            disabled={!this.props.Prizes.list.find(o => o.selected)}>
             <Text>Submit</Text>
           </Button>
         </View>

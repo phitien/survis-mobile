@@ -1,6 +1,4 @@
-export {CheckoutConfirmScreen} from './CheckoutConfirmScreen'
-export {CheckoutPaymentScreen} from './CheckoutPaymentScreen'
-export {CheckoutShippingScreen} from './CheckoutShippingScreen'
+export {CheckoutScreen} from './CheckoutScreen'
 export {HomeScreen} from './HomeScreen'
 export {LoginScreen} from './LoginScreen'
 export {NotificationsScreen} from './NotificationsScreen'

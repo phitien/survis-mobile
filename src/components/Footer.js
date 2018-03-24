@@ -18,7 +18,7 @@ export class Footer extends Component {
   }
   onPressNotification() {
     if (this.logged) {
-      this.Actions.NotificationsScreen()
+      this.Actions.reset('NotificationsScreen')
     }
     else {
       this.actions.Screen_Set({redirect: 'NotificationsScreen'})
@@ -28,7 +28,6 @@ export class Footer extends Component {
   openScreen(screen) {
     this.actions.Search_Reset()
     this.actions.Categories_Reset()
-    this.actions.Categories_Get()
     this.Actions.reset(screen)
   }
 
@@ -47,7 +46,7 @@ export class Footer extends Component {
   }
   renderDefault() {
     return [
-      this.renderTab('root', 'home', 'Home', false),
+      this.renderTab('HomeScreen', 'home', 'Home', false),
       this.renderTab('PromotionsScreen', 'flower', 'Hot', false),
       this.renderTab('SearchScreen', 'ios-pin-outline', 'Nearby', false),
       this.renderTab('NotificationsScreen', 'ios-notifications', 'Msg', this.logged && this.props.Notifications.list.length, this.onPressNotification.bind(this)),

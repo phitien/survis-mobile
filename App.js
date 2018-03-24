@@ -8,6 +8,7 @@ import getTheme from './survis-themes/components'
 import AppStyle from './survis-themes/styles/App'
 import {Routes} from './src/routes'
 import {getUser, setUser, requestHeader} from './src/utils'
+import {PRIMARY} from './src/constants'
 import {appstore} from './src/store'
 
 export default class App extends Component {
@@ -53,7 +54,7 @@ export default class App extends Component {
 
   render() {
     return <StyleProvider style={getTheme()}>
-      {!this.state.store ? <View style={AppStyle.container}><Spinner style={AppStyle.spinner}/></View> :
+      {!this.state.store ? <View style={AppStyle.container}><Spinner color={PRIMARY} style={AppStyle.spinner}/></View> :
       <Provider store={this.state.store}>
         <Routes store={this.state.store}/>
       </Provider>}

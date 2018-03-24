@@ -116,9 +116,6 @@ export class User extends Component {
       </View>
     </View>
   }
-  renderError() {
-    return this.error ? <View center><Text red small center>{this.error}</Text></View> : null
-  }
   render() {
     const {usr_email, usr_mobile, usr_birthday} = this.state
     return <View style={style.container}>

@@ -1,6 +1,6 @@
 import React, {Component as RAComponent} from 'react'
 import {Actions} from 'react-native-router-flux'
-import {View, Spinner} from 'native-base'
+import {View, Spinner, Text} from 'native-base'
 import {StyleSheet} from 'react-native'
 
 import {PRIMARY} from '../constants'
@@ -18,12 +18,15 @@ const SpinnerStyle = StyleSheet.create({
 })
 
 export class Component extends RAComponent {
+  state = {error: false, message: false}
+
   get api() {return api}
   get Actions() {return Actions}
   get actions() {return this.props.actions}
   get PaymentInfo() {return [].concat(this.props.PaymentInfo.list)[0] || {}}
   get User() {return this.props.User || {}}
   get logged() {return this.User.token}
+  get error() {return this.state.error}
 
   locationUpdate(ok, ko) {
     navigator
@@ -43,6 +46,9 @@ export class Component extends RAComponent {
       })
   }
 
+  renderError() {
+    return this.error ? <View center><Text red small center>{this.error}</Text></View> : null
+  }
   renderLoading() {
     return <View center style={SpinnerStyle.container}>
       <Spinner color={PRIMARY} style={SpinnerStyle.spinner}/>

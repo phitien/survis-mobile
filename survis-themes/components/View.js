@@ -1,29 +1,30 @@
-import variable from "./../variables/platform";
+import variable from './../variables/platform';
 
 export default (variables = variable) => {
   const viewTheme = {
-    ".padder": {
-      padding: variables.contentPadding
-    },
-    ".horizontal":{
-      flexDirection: 'row'
-    },
-    ".flex1": {
-      flex: 1
-    },
-    ".flex2": {
-      flex: 2
-    },
-    ".flex3": {
-      flex: 3
-    },
-    ".flex4": {
-      flex: 4
-    },
-    ".flex5": {
-      flex: 5
-    },
-    ".withBorder": {
+    '.padder': {padding: variables.contentPadding},
+    '.p': {padding: 10},
+    '.pt': {paddingTop: 10},
+    '.pr': {paddingRight: 10},
+    '.pb': {paddingBottom: 10},
+    '.pl': {paddingLeft: 10},
+    '.m': {margin: 10},
+    '.mt': {marginTop: 10},
+    '.mr': {marginRight: 10},
+    '.mb': {marginBottom: 10},
+    '.ml': {marginLeft: 10},
+    '.horizontal':{flexDirection: 'row'},
+    '.center':{alignItems: 'center'},
+    '.middle': {justifyContent: 'center'},
+    '.center-h': {justifyContent: 'center'},
+    '.full': {width: '100%'},
+    '.flex1': {flex: 1},
+    '.flex2': {flex: 2},
+    '.flex3': {flex: 3},
+    '.flex4': {flex: 4},
+    '.flex5': {flex: 5},
+    '.flex6': {flex: 6},
+    '.withBorder': {
       borderRadius: 10,
       borderWidth: 1,
       borderColor: '#4740c7'
@@ -52,12 +53,6 @@ export default (variables = variable) => {
       justifyContent: 'flex-end',
       alignItems: 'flex-end'
     },
-    '.center':{
-      alignItems: 'center'
-    },
-    '.center-h': {
-      justifyContent: 'center'
-    },
     '.with-shadow': {
       shadowOffset: {
         width: 0,
@@ -68,7 +63,6 @@ export default (variables = variable) => {
       shadowColor: '#000'
     },
     '.login': {
-
 			marginLeft: 30,
 			marginRight: 30,
 			marginBottom: 15,
@@ -86,7 +80,7 @@ export default (variables = variable) => {
       paddingBottom:10,
       borderColor: '#7e7e7e'
     },
-    ".light-border": {
+    '.light-border': {
       borderRadius: 0,
       borderWidth: 1,
       borderColor: 'grey'

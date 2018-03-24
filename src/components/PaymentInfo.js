@@ -103,9 +103,6 @@ export class PaymentInfo extends Component {
       </View>
     </View>
   }
-  renderError() {
-    return this.state.error ? <View center><Text red small center>{this.state.error}</Text></View> : null
-  }
   render() {
     const {ucc_num} = this.state
     return <View style={style.container}>

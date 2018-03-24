@@ -31,19 +31,18 @@ export default {
   },
   tabsProps: {
     tabBarUnderlineStyle: {
-      backgroundColor: "rgb(249,174,24)"
+      backgroundColor: PRIMARY
     }
   },
   tabProps: {
     tabStyle: {
-      backgroundColor: 'transparent'
+      backgroundColor: 'white'
     },
     activeTabStyle: {
-      backgroundColor: PRIMARY,
       color: 'white'
     },
     activeTextStyle: {
-      // color: '#fff'
+      color: PRIMARY
     }
   },
 }

@@ -9,6 +9,14 @@ export default function(state = Prizes, action) {
       if (page < MAX_PAGE) page = page + 1
       return {...state, loading: true, filter: {...state.filter, ...action.payload, page}}
     }
+    case 'Prizes_Pick': {
+      const item = state.list.find(o => {
+        o.selected = false
+        return o.id == action.payload.id
+      })
+      if (item) item.selected = true
+      return {...state, error: false, loading: false}
+    }
     case 'Prizes_Reset': {
       return {...state, loading: true, list: [], filter: {...state.filter, ...action.payload, page: 0}}
     }
@@ -17,19 +25,19 @@ export default function(state = Prizes, action) {
     }
     case 'Prizes_Get_Success': {
       const list = [].concat(state.list, action.payload).filter(o => o)
-      return {...state, loading: false, list, count: list.length}
+      return {...state, error: false, loading: false, list, count: list.length}
     }
     case 'Prizes_Get_Failure': {
       return {...state, loading: false}
     }
-    case 'Prizes_Pick_Pending': {
-      return {...state, loading: true, picked: undefined}
+    case 'Prizes_Submit_Pending': {
+      return {...state, loading: true}
     }
-    case 'Prizes_Pick_Success': {
-      return {...state, loading: false, picked: true}
+    case 'Prizes_Submit_Success': {
+      return {...state, error: false, loading: false}
     }
-    case 'Prizes_Pick_Failure': {
-      return {...state, loading: false, picked: false}
+    case 'Prizes_Submit_Failure': {
+      return {...state, loading: false, error: action.payload.error}
     }
     default: {
       return state

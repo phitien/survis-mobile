@@ -2,13 +2,14 @@ import {Platform, Dimensions, PixelRatio} from 'react-native'
 import {PRIMARY, GREY} from '../../../src/constants'
 
 const width = Dimensions.get('window').width
-const evenBgColor = 'rgb(247, 247,247)'
+const evenBgColor = GREY
 const oddBgColor = 'white'
 const size = 80
 const col0W = 180, boxW = 28, col1W = boxW*3 + 10
 
 export default {
-  evenBgColor, oddBgColor, size,
+  evenBgColor, oddBgColor,
+  size,
   col0W, col1W,
   row: {
     padding: 10,

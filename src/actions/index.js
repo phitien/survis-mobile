@@ -5,6 +5,9 @@ function actionGenerator(n) {
   return function(payload) {
     return dispatch => {
       dispatch({type: n, payload})
+      return new Promise((resolve, reject) => {
+        resolve({type: n, payload})
+      })
     }
   }
 }
@@ -14,12 +17,18 @@ function apiActionGenerator(name, action, uri, method, filter, type) {
       dispatch({type: `${name}_${action}_Pending`})
       let api = apis[`${name}_${action}`],
         apicall = method == 'post' ? api(payload, params, ...args) : api(params, payload, ...args)
-      apicall
-        .then(response => dispatch({type: `${name}_${action}_Success`, payload: response.data.results, response}))
-        .catch(error => dispatch({
-          type: `${name}_${action}_Failure`, error,
-          payload: error.response.data.results || error.response.data
-        }))
+      return apicall
+        .then(res => {
+          dispatch({type: `${name}_${action}_Success`, payload: res.data.results, response: res})
+          return res
+        })
+        .catch(e => {
+          dispatch({
+            type: `${name}_${action}_Failure`, error: e,
+            payload: e.response.data.results || e.response.data
+          })
+          return e.response
+        })
     }
   }
 }

@@ -59,9 +59,6 @@ export class LoginScreen extends Screen {
     }
   }
 
-  renderError() {
-    return this.error ? <Text style={style.error}>{this.error}</Text> : null
-  }
   renderLogin() {
     return <View style={style.form}>
       <Text style={style.heading}>Email</Text>

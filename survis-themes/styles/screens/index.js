@@ -1,6 +1,4 @@
-export {default as CheckoutConfirmScreen} from './CheckoutConfirmScreen'
-export {default as CheckoutPaymentScreen} from './CheckoutPaymentScreen'
-export {default as CheckoutShippingScreen} from './CheckoutShippingScreen'
+export {default as CheckoutScreen} from './CheckoutScreen'
 export {default as HomeScreen} from './HomeScreen'
 export {default as LoginScreen} from './LoginScreen'
 export {default as NotificationsScreen} from './NotificationsScreen'

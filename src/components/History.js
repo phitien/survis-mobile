@@ -8,31 +8,18 @@ import {itemHelper, substr} from '../utils'
 import {Image} from './Image'
 
 const History = props => {
-  const item = props.item
   const {
-    id, name, description, price, image, totalrate, totalreviews, latitude, longitude,
-    toptext_color, toptext_fontsize, toptext, toptext_bgcolor, bigtitle, smalltitle,
-    address, isfeatured, promotion_image, highlight, distance, shop_info, items
-  } = itemHelper(item)
-  return (
-    <View horizontal style={style.container}>
-		<Image resizeMode='stretch' style={style.image} source={{uri: image}}/>
-		<View p-l-10 style={style.info}>
-			<View m-t-5 horizontal>
-				<Text fs14 bold>{substr(name, 40)}</Text>
-			</View>
-			<View horizontal>
-				<Text fs12>{substr(description, 150)}</Text>
-			</View>
-			<View horizontal>
-				<Text fs14 bold theme>{price}</Text>
-			</View>
-			<View horizontal>
-				<Text fs12>{orderdate}</Text>
-			</View>
-		</View>
+    id, image, name, description, priceS, orderdate
+  } = itemHelper(props.item)
+  return <View horizontal style={style.container}>
+    <View m-r-10><Image style={style.image} source={{uri: image}}/></View>
+    <View style={style.info}>
+      <View><Text fs14 bold>{name}</Text></View>
+      <View><Text fs12>{description}</Text></View>
+      <View><Text fs14 bold theme>{priceS}</Text></View>
+      <View><Text fs12>{orderdate}</Text></View>
     </View>
-  )
+  </View>
 }
 
 export {

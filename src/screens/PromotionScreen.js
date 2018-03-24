@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {Container, View, Content, Spinner, Text} from 'native-base'
 
 import {Header, Footer, ShopSummary, ShopItem} from '../containers'
-import {ScrollView, TouchableOpacity} from 'react-native'
+import {ScrollView, TouchableOpacity as Touch} from 'react-native'
 
 import {PromotionScreen as style} from '../../survis-themes/styles/screens'
 
@@ -24,9 +24,9 @@ export class PromotionScreen extends Screen {
       <View style={style.description}>
         <Text fs12>{item.description}</Text>
       </View>
-      {items.map(sitem => <TouchableOpacity key={sitem.id} onPress={e => this.Actions.ShopItemScreen({item: sitem, shop: item})}>
+      {items.map(sitem => <Touch key={sitem.id} onPress={e => this.Actions.ShopItemScreen({item: sitem, shop: item})}>
         <ShopItem item={sitem}/>
-      </TouchableOpacity>)}
+      </Touch>)}
     </ScrollView>
   }
   render() {

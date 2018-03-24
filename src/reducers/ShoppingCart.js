@@ -8,7 +8,7 @@ export default function(state = ShoppingCart, action) {
       return {...state, ...action.payload, loading: false}
     }
     case 'ShoppingCart_Add': {
-      if (!state.list.find(item => item.id == action.payload.id)) state.list.push(action.payload)
+      if (!state.list.find(item => item.id == action.payload.id)) state.list.push({...action.payload, qty: 1})
       return state
     }
     case 'ShoppingCart_Remove': {
@@ -18,31 +18,31 @@ export default function(state = ShoppingCart, action) {
     }
     case 'ShoppingCart_Decrease': {
       const item = state.list.find(item => item.id == action.payload.id)
-      if (item && item.qty > 0) item.qty -= 1
-      return state
+      if (item) {
+        item.qty = parseInt(item.qty) ? parseInt(item.qty) : 1
+        if (item.qty > 0) item.qty -= 1
+      }
+      return {...state, loading: false}
     }
     case 'ShoppingCart_Increase': {
       const item = state.list.find(item => item.id == action.payload.id)
-      if (item) item.qty += 1
-      return state
+      if (item) {
+        item.qty = parseInt(item.qty) ? parseInt(item.qty) : 1
+        item.qty += 1
+      }
+      return {...state, loading: false}
     }
     case 'ShoppingCart_Clear': {
-      return {...state, list: [], count: 0, loading: false, checked: undefined}
+      return {...state, message: null, error: false, list: [], count: 0, loading: false, checked: undefined}
     }
-    case 'ShoppingCart_Checkout_Pending': {
-      return {...state, loading: true, checked: undefined}
+    case 'ShoppingCart_Place_Pending': {
+      return {...state, loading: true}
     }
-    case 'ShoppingCart_Checkout_Success': {
-      if (!action.payload.result) return {...state, loading: false, checked: false}
-      return {
-        ...state, loading: false,
-        list: action.payload, count: [].concat(action.payload).length,
-        gotprize: action.payload.prizecheck,
-        checked: true,
-      }
+    case 'ShoppingCart_Place_Success': {
+      return {...state, ...action.payload, error: false, list: [], loading: false}
     }
-    case 'ShoppingCart_Checkout_Failure': {
-      return {...state, loading: false, checked: false}
+    case 'ShoppingCart_Place_Failure': {
+      return {...state, message: false, loading: false}
     }
     default: {
       return {...state, loading: false, checked: undefined}
