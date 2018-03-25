@@ -21,33 +21,10 @@ export default class App extends Component {
   }
 
   async componentDidMount() {
-    if (typeof Expo !== 'undefined') {
-      await Expo
-        .Font
-        .loadAsync({
-          Roboto: require('native-base/Fonts/Roboto.ttf'),
-          Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
-          Ionicons: require('@expo/vector-icons/fonts/Ionicons.ttf'),
-          FontAwesome: require('@expo/vector-icons/fonts/FontAwesome.ttf'),
-          MaterialCommunityIcons: require('@expo/vector-icons/fonts/MaterialCommunityIcons.ttf'),
-          MaterialIcons: require('@expo/vector-icons/fonts/MaterialIcons.ttf')
-        })
-    }
     await OneSignal.addEventListener('received', this.onOneSignalNotiReceived)
     this.state.store = appstore()
-    let deviceId = -1
-    try {
-      if(Expo.Constants.appOwnership == 'expo') {
-          deviceId = Expo.Constants.deviceId
-      }
-      else {
-        var DeviceInfo = require('react-native-device-info')
-        const deviceId = await DeviceInfo.getDeviceId()
-      }
-    }
-    catch(e) {
-      console.log(e)
-    }
+    const DeviceInfo = require('react-native-device-info')
+    const deviceId = await DeviceInfo.getDeviceId()
     requestHeader('deviceId', deviceId)
     this.setState({loading: false})
   }

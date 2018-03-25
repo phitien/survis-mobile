@@ -1,7 +1,21 @@
 import variable from './../variables/platform'
+import {PRIMARY, GREY} from '../../src/constants'
 
 export default (variables = variable) => {
   const textTheme = {
+    '.p': {padding: 10},
+    '.pt': {paddingTop: 10},
+    '.pr': {paddingRight: 10},
+    '.pb': {paddingBottom: 10},
+    '.pl': {paddingLeft: 10},
+    '.m': {margin: 10},
+    '.mt': {marginTop: 10},
+    '.mr': {marginRight: 10},
+    '.mb': {marginBottom: 10},
+    '.ml': {marginLeft: 10},
+    '.grey': {color: GREY},
+    '.theme': {color: PRIMARY},
+    '.white': {color: 'white'},    
     fontSize: variables.DefaultFontSize - 1,
     fontFamily: variables.fontFamily,
     color: variables.textColor,
@@ -125,9 +139,6 @@ export default (variables = variable) => {
       textDecorationStyle: 'solid',
       textDecorationColor: '#557ffb',
       color: '#557ffb'
-    },
-    '.theme' : {
-      color: variables.toolbarDefaultBg
     },
   	'.footer' : {
   	  fontSize: 7

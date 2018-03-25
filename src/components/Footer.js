@@ -8,27 +8,36 @@ import {Component} from './Component'
 
 export class Footer extends Component {
   onPressUser() {
-    if (this.logged) {
-      this.Actions.UserScreen()
-    }
-    else {
-      this.actions.Screen_Set({redirect: 'UserScreen'})
-      this.Actions.LoginScreen()
+    let currentScene = this.Actions.currentScene.toString()
+    if (currentScene !== 'UserScreen') {
+      if (this.logged) {
+        this.Actions.UserScreen()
+      }
+      else {
+        this.actions.Screen_Set({redirect: 'UserScreen'})
+        this.Actions.LoginScreen()
+      }
     }
   }
   onPressNotification() {
-    if (this.logged) {
-      this.Actions.reset('NotificationsScreen')
-    }
-    else {
-      this.actions.Screen_Set({redirect: 'NotificationsScreen'})
-      this.Actions.LoginScreen()
+    let currentScene = this.Actions.currentScene.toString()
+    if (currentScene !== 'NotificationsScreen') {
+      if (this.logged) {
+        this.Actions.reset('NotificationsScreen')
+      }
+      else {
+        this.actions.Screen_Set({redirect: 'NotificationsScreen'})
+        this.Actions.LoginScreen()
+      }
     }
   }
   openScreen(screen) {
-    this.actions.Search_Reset()
-    this.actions.Categories_Reset()
-    this.Actions.reset(screen)
+    let currentScene = this.Actions.currentScene.toString()
+    if (currentScene !== screen) {
+      this.actions.Search_Reset()
+      this.actions.Categories_Reset()
+      this.Actions.reset(screen)
+    }
   }
 
   getIconStyle = (n) => ({color: this.Actions.currentScene.toString() === n && iconColorActive || iconColor})

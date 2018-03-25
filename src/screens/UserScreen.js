@@ -74,7 +74,7 @@ export class UserScreen extends Screen {
           </Button>
         </View>
         <Tabs {...style.tabsProps}>
-          <Tab {...style.tabProps} heading='Histories'>
+          <Tab {...style.tabProps} heading='History'>
             {this.renderHistories()}
           </Tab>
           <Tab {...style.tabProps} heading='Loyality'>

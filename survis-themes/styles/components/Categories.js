@@ -3,9 +3,10 @@ import {PRIMARY, GREY} from '../../../src/constants'
 
 const blockNumItem = 5
 const width = Dimensions.get('window').width
-const blockWidth = width/blockNumItem, blockHeight = 52, iconSize = 36
+const blockWidth = width/blockNumItem, blockHeight = 52, size = 40
 
 export default {
+	size,
 	blockNumItem,
 	container: {
 		width: width, height: blockHeight, marginTop: 12, marginBottom: 12
@@ -16,10 +17,10 @@ export default {
 	item: {
 		width: blockWidth, height: blockHeight
 	},
-	icon_container: {
-		width: iconSize, height: iconSize, backgroundColor: GREY, borderRadius: iconSize/2, overflow: 'hidden'
+	image_container: {
+		width: size, height: size, borderRadius: size/2
 	},
-	icon: {
-		width: iconSize, height: iconSize
+	image: {
+		width: size, height: size,
 	}
 }

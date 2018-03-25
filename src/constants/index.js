@@ -11,7 +11,7 @@ export const SET_PUSH_TOKEN_FAIL = 'SET_PUSH_TOKEN_FAIL'
 export const SEND_PUSH_TOKEN = 'SEND_PUSH_TOKEN'
 export const UPDATE_PUSH_TOKEN = 'UPDATE_PUSH_TOKEN'
 
-export const BLANK_IMG = require('../../assets/blank.jpg')
+export const BLANK_IMG = require('../../assets/blank.png')
 export const PERSON_IMG = require('../../assets/person.jpg')
 
 export const AUTOPLAY_TIMEOUT = 15

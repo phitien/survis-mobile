@@ -1,8 +1,8 @@
 import variable from './../variables/platform';
+import {PRIMARY, GREY} from '../../src/constants'
 
 export default (variables = variable) => {
   const viewTheme = {
-    '.padder': {padding: variables.contentPadding},
     '.p': {padding: 10},
     '.pt': {paddingTop: 10},
     '.pr': {paddingRight: 10},
@@ -13,17 +13,26 @@ export default (variables = variable) => {
     '.mr': {marginRight: 10},
     '.mb': {marginBottom: 10},
     '.ml': {marginLeft: 10},
+    '.grey': {backgroundColor: GREY},
+    '.theme': {backgroundColor: PRIMARY},
+    '.white': {backgroundColor: 'white'},
     '.horizontal':{flexDirection: 'row'},
     '.center':{alignItems: 'center'},
     '.middle': {justifyContent: 'center'},
     '.center-h': {justifyContent: 'center'},
     '.full': {width: '100%'},
+    '.fullh': {height: '100%'},
+    '.space-between':{justifyContent: 'space-between'},
+    '.space-around':{justifyContent: 'space-around'},
+    '.border':{borderWidth: 1, borderColor: GREY},
+    '.trim': {overflow: 'hidden'},
     '.flex1': {flex: 1},
     '.flex2': {flex: 2},
     '.flex3': {flex: 3},
     '.flex4': {flex: 4},
     '.flex5': {flex: 5},
     '.flex6': {flex: 6},
+    '.padder': {padding: variables.contentPadding},
     '.withBorder': {
       borderRadius: 10,
       borderWidth: 1,
@@ -67,9 +76,6 @@ export default (variables = variable) => {
 			marginRight: 30,
 			marginBottom: 15,
     },
-    '.space-between':{
-      justifyContent: 'space-between',
-    },
     '.border-bottom':{
       borderBottomWidth:1,
       marginLeft: 20,
@@ -84,9 +90,6 @@ export default (variables = variable) => {
       borderRadius: 0,
       borderWidth: 1,
       borderColor: 'grey'
-    },
-    '.grey': {
-      backgroundColor: 'rgb(247,247,247)'
     },
     '.m-10': {
       margin: 10

@@ -3,7 +3,7 @@ import {Text, Spinner, Icon, View} from 'native-base'
 
 import {HighRatingShop as style} from '../../survis-themes/styles/components'
 
-import {itemHelper, substr} from '../utils'
+import {itemHelper, substr, openOnMap} from '../utils'
 
 import {Image} from './Image'
 import {Rating} from './Rating'

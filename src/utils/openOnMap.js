@@ -1,3 +1,4 @@
+import {Alert, Linking, Platform} from 'react-native'
 import {openExternal} from './openExternal'
 
 export function openOnMap(lat, lng) {

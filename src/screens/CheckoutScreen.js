@@ -35,7 +35,7 @@ export class CheckoutScreen extends Screen {
   }
   onPressPaynow() {
     if (!this.logged) return this.Actions.LoginScreen()
-    this.actions.ShoppingCart_Place({items: this.props.ShoppingCart.list.map(item => ({
+    if (!this.props.Prizes.loading) this.actions.ShoppingCart_Place({items: this.props.ShoppingCart.list.map(item => ({
       itemid: item.id,
       shopid: item.shop_id,
       qty: item.qty

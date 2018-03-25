@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location service required</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera permission required</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -25,7 +29,7 @@
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
-		<string>b683698b6de7e2b236765cb2d9cb1c92256b8bef</string>
+		<string>d063f573d9b9a9e7c6dd97e5fa8f9b0c4d0b5b8c</string>
 		<key>Kits</key>
 		<array>
 			<dict>
@@ -49,8 +53,6 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>

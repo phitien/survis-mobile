@@ -16,29 +16,34 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading" translatesAutoresizingMaskIntoConstraints="NO" id="A0I-v1-q8i">
-                    <rect key="frame" x="190" y="190" width="100" height="100"/>
+                    <rect key="frame" x="190" y="150" width="100" height="100"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="d88-Lt-UQb"/>
                         <constraint firstAttribute="height" constant="100" id="hmi-11-Faj"/>
                     </constraints>
                 </imageView>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Serve you right" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8kD-I4-Otw">
-                    <rect key="frame" x="186" y="298" width="108" height="34"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="108" id="AnN-HA-wDh"/>
-                        <constraint firstAttribute="height" constant="34" id="a2b-nq-9nL"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                </textView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SURVIS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vnv-cg-fp3">
+                    <rect key="frame" x="186" y="250" width="109.5" height="38.5"/>
+                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                    <color key="textColor" red="0.97647058819999999" green="0.68235294120000001" blue="0.094117647060000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Serve you right" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oh0-ol-R4x">
+                    <rect key="frame" x="182" y="298.5" width="116" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="A0I-v1-q8i" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="aDq-DH-dXl"/>
-                <constraint firstItem="A0I-v1-q8i" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="bWC-BE-ljS"/>
-                <constraint firstItem="8kD-I4-Otw" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="nEQ-UV-Tex"/>
-                <constraint firstItem="8kD-I4-Otw" firstAttribute="top" secondItem="A0I-v1-q8i" secondAttribute="bottom" constant="8" symbolic="YES" id="trU-Ze-OAt"/>
+                <constraint firstItem="oh0-ol-R4x" firstAttribute="centerX" secondItem="Vnv-cg-fp3" secondAttribute="centerX" id="Byz-68-AJy"/>
+                <constraint firstItem="A0I-v1-q8i" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="QAg-m2-s84"/>
+                <constraint firstItem="oh0-ol-R4x" firstAttribute="top" secondItem="Vnv-cg-fp3" secondAttribute="bottom" constant="10" id="Unx-IJ-Yxk"/>
+                <constraint firstItem="Vnv-cg-fp3" firstAttribute="top" secondItem="A0I-v1-q8i" secondAttribute="bottom" id="VpY-mN-wPq"/>
+                <constraint firstItem="Vnv-cg-fp3" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="hMa-ET-kzb"/>
+                <constraint firstItem="A0I-v1-q8i" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="150" id="ydH-A2-BiA"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
