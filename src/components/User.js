@@ -3,7 +3,7 @@ import {View, Item, Input, Text, Icon} from 'native-base'
 import RadioForm from 'react-native-simple-radio-button'
 import DatePicker from 'react-native-datepicker'
 
-import {User as style} from '../../survis-themes/styles/components'
+import {User as style} from '../theme/styles/components'
 
 import {itemHelper, substr, cardnum, cardexpire} from '../utils'
 
@@ -15,12 +15,12 @@ import {Component} from './Component'
 
 export class User extends Component {
   state = {
-    usr_mobile: this.props.User.usr_mobile || '',
-    usr_fname: this.props.User.usr_fname || '',
-    usr_lname: this.props.User.usr_lname || '',
-    usr_birthday: this.props.User.usr_birthday || '',
-    usr_email: this.props.User.usr_email || '',
-		fullname: [(this.props.User.usr_fname||  '').trim(), (this.props.User.usr_lname || '').trim()].filter(o => o).join(' '),
+    usr_mobile: this.User.usr_mobile || '',
+    usr_fname: this.User.usr_fname || '',
+    usr_lname: this.User.usr_lname || '',
+    usr_birthday: this.User.usr_birthday || '',
+    usr_email: this.User.usr_email || '',
+		fullname: [(this.User.usr_fname||  '').trim(), (this.User.usr_lname || '').trim()].filter(o => o).join(' '),
     usr_password: '',
     error: false,
     showInfo: false,
@@ -62,10 +62,10 @@ export class User extends Component {
     const {usr_password} = this.state
     return <View>
       <Item login>
-        <Input style={style.input} secureTextEntry={true} placeholder='Password (> 6 charecters)'
+        <Input secureTextEntry={true} placeholder='Password (> 6 charecters)'
           onChangeText={e => this.onChange('usr_password', e)}/>
       </Item>
-      <View horizontal center style={style.actions}>
+      <View actions mt style={style.actions}>
         <Button full small mr loading={this.props.User.loading} onPress={e => this.onSavePassword(this.state.usr_password)}><Text bold>Save</Text></Button>
         <Button full small ml onPress={e => this.setState({usr_password: '', showPassword: false})}><Text bold >Cancel</Text></Button>
       </View>
@@ -73,31 +73,31 @@ export class User extends Component {
   }
   renderInfo() {
     const {usr_mobile, usr_birthday, usr_email} = this.state
-    return <View style={style.info}>
-      <Text style={style.heading}>Name</Text>
+    return <View p style={style.info}>
+      <Text label>Name</Text>
       <Item login error={false}>
-        <Input style={style.input} value={this.state.fullname} placeholder='Fullname'
+        <Input value={this.state.fullname} placeholder='Fullname'
            onChangeText={e => this.onChangeName(e)}
 					 returnKeyType='ok'/>
       </Item>
 			<View horizontal>
 				<View flex1>
-					<Text style={style.heading}>Phone</Text>
+					<Text label>Phone</Text>
 		      <Item login error={false}>
-		        <Input style={style.input} value={usr_mobile} placeholder='Mobile'
+		        <Input value={usr_mobile} placeholder='Mobile'
 		          onChangeText={e => this.onChange('usr_mobile', e)}
 							returnKeyType='ok'/>
 		      </Item>
 				</View>
 				<View flex1>
-					<Text style={style.heading}>Date of birth</Text>
+					<Text label>Date of birth</Text>
 		      <DatePicker customStyles={style.datepicker} date={usr_birthday} mode='date' placeholder='Birthday'
 		        format='YYYY-MM-DD' minDate='1900-01-01'
 		        confirmBtnText='Ok' cancelBtnText='Cancel'
 		        onDateChange={e => this.onChange('usr_birthday', e)}/>
 				</View>
 			</View>
-      <View horizontal center style={style.actions}>
+      <View actions mt style={style.actions}>
         <Button full small mr loading={this.props.User.loading} onPress={e => this.onSave({
           usr_mobile: this.state.usr_mobile,
           usr_fname: this.usr_fname,
@@ -106,11 +106,11 @@ export class User extends Component {
           usr_email: this.state.usr_email,
         })}><Text bold>Save</Text></Button>
         <Button full small ml onPress={e => this.setState({
-          usr_mobile: this.props.User.usr_mobile,
-          usr_fname: this.props.User.usr_fname,
-          usr_lname: this.props.User.usr_lname,
-          usr_birthday: this.props.User.usr_birthday,
-          usr_email: this.props.User.usr_email,
+          usr_mobile: this.User.usr_mobile,
+          usr_fname: this.User.usr_fname,
+          usr_lname: this.User.usr_lname,
+          usr_birthday: this.User.usr_birthday,
+          usr_email: this.User.usr_email,
           showInfo: false
         })}><Text bold >Cancel</Text></Button>
       </View>
@@ -118,30 +118,30 @@ export class User extends Component {
   }
   render() {
     const {usr_email, usr_mobile, usr_birthday} = this.state
-    return <View style={style.container}>
+    return <View p style={style.container}>
       {this.renderError()}
-      <View horizontal center space-between style={style.user_info}>
+      <View horizontal center space-between p grey style={style.user_info}>
         <View>
-          {this.state.fullname ? <Text bold fs12>{this.state.fullname}</Text> : null}
-					<Text fs12>{usr_email}</Text>
-          {usr_mobile ? <Text fs12>{usr_mobile}</Text> : null}
-          {usr_birthday ? <Text fs12>{usr_birthday}</Text> : null}
+          {this.state.fullname ? <Text bold>{this.state.fullname}</Text> : null}
+					<Text small>{usr_email}</Text>
+          {usr_mobile ? <Text small>{usr_mobile}</Text> : null}
+          {usr_birthday ? <Text small>{usr_birthday}</Text> : null}
         </View>
-        <View horizontal center>
-          {!this.state.showInfo ? <Button iconRight transparent primary onPress={e => this.setState({showInfo: true, showPassword: false})}>
-            <Icon theme name='md-create'/>
+        <View horizontal center middle>
+          {!this.state.showInfo ? <Button iconRight transparent theme onPress={e => this.setState({showInfo: true, showPassword: false})}>
+            <Icon name='md-create'/>
           </Button> : null}
         </View>
       </View>
       {this.state.showInfo ? this.renderInfo() : null}
-      <View style={style.password}>
+      <View pb pl pr mt grey style={style.password}>
         <View horizontal center space-between>
-          <Text style={style.heading}>Change password</Text>
-          {!this.state.showPassword ? <Button iconRight transparent primary onPress={e => this.setState({showInfo: false, showPassword: true})}>
-            <Icon theme name='md-create'/>
+          <Text label>Change password</Text>
+          {!this.state.showPassword ? <Button iconRight transparent theme onPress={e => this.setState({showInfo: false, showPassword: true})}>
+            <Icon name='md-create'/>
           </Button> : null}
         </View>
-        {this.state.showPassword ? this.renderPassword() : <Text fs12>******</Text>}
+        {this.state.showPassword ? this.renderPassword() : <Text small>******</Text>}
       </View>
     </View>
   }

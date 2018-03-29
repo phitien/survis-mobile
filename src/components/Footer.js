@@ -1,7 +1,7 @@
 import React from 'react'
 import {Container, Header, Footer as NBFooter, FooterTab, Button, Text, View, Icon, Badge} from 'native-base'
 
-import {Footer as style} from '../../survis-themes/styles/components'
+import {Footer as style} from '../theme/styles/components'
 const {iconSize, iconColorActive, iconColor} = style
 
 import {Component} from './Component'
@@ -14,7 +14,7 @@ export class Footer extends Component {
         this.Actions.UserScreen()
       }
       else {
-        this.actions.Screen_Set({redirect: 'UserScreen'})
+        this.actions.Screen_Load({id: 'UserScreen'})
         this.Actions.LoginScreen()
       }
     }
@@ -26,7 +26,7 @@ export class Footer extends Component {
         this.Actions.reset('NotificationsScreen')
       }
       else {
-        this.actions.Screen_Set({redirect: 'NotificationsScreen'})
+        this.actions.Screen_Load({id: 'NotificationsScreen'})
         this.Actions.LoginScreen()
       }
     }
@@ -34,8 +34,8 @@ export class Footer extends Component {
   openScreen(screen) {
     let currentScene = this.Actions.currentScene.toString()
     if (currentScene !== screen) {
-      this.actions.Search_Reset()
-      this.actions.Categories_Reset()
+      this.actions.Category_Reset()
+      this.actions.Shop_SearchShops_Reset()
       this.Actions.reset(screen)
     }
   }
@@ -58,7 +58,7 @@ export class Footer extends Component {
       this.renderTab('HomeScreen', 'home', 'Home', false),
       this.renderTab('PromotionsScreen', 'flower', 'Hot', false),
       this.renderTab('SearchScreen', 'ios-pin-outline', 'Nearby', false),
-      this.renderTab('NotificationsScreen', 'ios-notifications', 'Msg', this.logged && this.props.Notifications.list.length, this.onPressNotification.bind(this)),
+      this.renderTab('NotificationsScreen', 'ios-notifications', 'Msg', this.logged && this.props.Notification.Notifications.list.length, this.onPressNotification.bind(this)),
       this.renderTab('UserScreen', 'md-person', 'Me', false, this.onPressUser.bind(this))
     ]
   }

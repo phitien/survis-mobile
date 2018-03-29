@@ -2,20 +2,20 @@ import React, {Component} from 'react'
 import {Container, View, Content, Spinner} from 'native-base'
 import {RNCamera} from 'react-native-camera'
 
-import {QrScanScreen as style} from '../../survis-themes/styles/screens'
+import {QrScanScreen as style} from '../theme/styles/screens'
 
 import {Header, Footer} from '../containers'
 import {Component as Screen} from '../components'
 
 export class QrScanScreen extends Screen {
-  get error() {return this.state.error || this.props.Prizes.error}
+  get error() {return this.state.error || this.props.Prize.error}
 
   async componentWillMount() {
   }
   onBarCodeRead(data) {
-    if (!this.props.Prizes.loading) this.actions.Prizes_Scan({qrcode: data})
+    if (!this.props.Prize.loading) this.actions.Prizes_Scan({qrcode: data})
     .then(res => {
-      if (!this.props.Prizes.error) this.Actions.PrizesScreen()
+      if (!this.props.Prize.error) this.Actions.PrizesScreen()
     })
   }
 
@@ -29,13 +29,13 @@ export class QrScanScreen extends Screen {
         permissionDialogMessage={'We need your permission to use your camera phone'}/>
   }
   render() {
-    return (<Container>
+    return <Container>
       <Header/>
-      <Content center contentContainerStyle={style.container}>
+      <Content center middle>
         {this.renderError()}
         {this.renderScanner()}
       </Content>
       <Footer/>
-    </Container>)
+    </Container>
   }
 }

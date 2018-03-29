@@ -1,7 +1,7 @@
 import React from 'react'
 import {Text, Spinner, Icon, View} from 'native-base'
 
-import {History as style} from '../../survis-themes/styles/components'
+import {History as style} from '../theme/styles/components'
 
 import {itemHelper, substr} from '../utils'
 
@@ -11,13 +11,13 @@ const History = props => {
   const {
     id, image, name, description, priceS, orderdate
   } = itemHelper(props.item)
-  return <View horizontal style={style.container}>
-    <View m-r-10><Image style={style.image} source={{uri: image}}/></View>
-    <View style={style.info}>
-      <View><Text fs14 bold>{name}</Text></View>
-      <View><Text fs12>{description}</Text></View>
-      <View><Text fs14 bold theme>{priceS}</Text></View>
-      <View><Text fs12>{orderdate}</Text></View>
+  return <View horizontal mt mr ml white>
+    <View mr style={style.image_container}><Image style={style.image} source={{uri: image}}/></View>
+    <View flex1 style={style.info}>
+      <View><Text bold>{name}</Text></View>
+      <View><Text small>{description}</Text></View>
+      <View><Text bold theme>{priceS}</Text></View>
+      <View><Text small>{orderdate}</Text></View>
     </View>
   </View>
 }

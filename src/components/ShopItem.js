@@ -1,7 +1,7 @@
 import React from 'react'
 import {Text, Spinner, Icon, View} from 'native-base'
 
-import {ShopItem as style} from '../../survis-themes/styles/components'
+import {ShopItem as style} from '../theme/styles/components'
 
 import {itemHelper, substr} from '../utils'
 
@@ -14,12 +14,12 @@ const ShopItem = props => {
     image, name, description, priceS
   } = itemHelper(item)
   return (
-    <View horizontal style={{...style.container, backgroundColor: odd ? style.oddBgColor : style.evenBgColor}}>
-      <Image resizeMode='stretch' style={style.image} source={{uri: image}}/>
+    <View horizontal mt ml mb white style={[style.container, odd ? style.odd : style.even]}>
+      <View mr style={style.image_container}><Image style={style.image} source={{uri: image}}/></View>
       <View>
-        <Text style={style.name}>{name}</Text>
-        <Text style={style.description}>{description}</Text>
-        <Text style={style.price}>{priceS}</Text>
+        <Text bold>{name}</Text>
+        <Text small smt>{description}</Text>
+        <Text smt theme>{priceS}</Text>
       </View>
     </View>
   )

@@ -33,7 +33,7 @@ export const ShopScreen = connect(mapStateToProps, mapDispatchToProps)(CMPShopSc
 export const UserScreen = connect(mapStateToProps, mapDispatchToProps)(CMPUserScreen)
 
 /**COMPONENTS**/
-import {Categories as CMPCategories} from '../components'
+import {Categorys as CMPCategorys} from '../components'
 import {Footer as CMPFooter} from '../components'
 import {Header as CMPHeader} from '../components'
 import {HighRatingShop as CMPHighRatingShop} from '../components'
@@ -53,7 +53,7 @@ import {ShopItem as CMPShopItem} from '../components'
 import {ShopSummary as CMPShopSummary} from '../components'
 import {User as CMPUser} from '../components'
 
-export const Categories = connect(mapStateToProps, mapDispatchToProps)(CMPCategories)
+export const Categorys = connect(mapStateToProps, mapDispatchToProps)(CMPCategorys)
 export const Footer = connect(mapStateToProps, mapDispatchToProps)(CMPFooter)
 export const Header = connect(mapStateToProps, mapDispatchToProps)(CMPHeader)
 export const HighRatingShop = connect(mapStateToProps, mapDispatchToProps)(CMPHighRatingShop)

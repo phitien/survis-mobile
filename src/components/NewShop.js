@@ -1,8 +1,8 @@
 import React from 'react'
 import {Text, Spinner, Icon, View} from 'native-base'
-import {TouchableOpacity} from 'react-native'
+import {TouchableOpacity as Touch} from 'react-native'
 
-import {NewShop as style} from '../../survis-themes/styles/components'
+import {NewShop as style} from '../theme/styles/components'
 
 import {itemHelper, substr, openOnMap} from '../utils'
 
@@ -16,21 +16,21 @@ export class NewShop extends Component {
     const {
       image, address, name, latitude, longitude, distance,
     } = itemHelper(item)
-    return <View style={style.container}>
-      <Image style={style.image} source={{uri: image}}/>
-      <View style={style.address}>
-        <Text fs12 white>{address}</Text>
-      </View>
-      <View style={style.info}>
-        <View horizontal m-t-5>
-          <Text fs12 bold>{name}</Text>
+    return <View ml mb style={style.container}>
+      <View style={style.image_container}><Image style={style.image} source={{uri: image}}/></View>
+      <View bottom full>
+        <View full opacity sp style={style.address}>
+          <Text small white>{address}</Text>
         </View>
-        <TouchableOpacity onPress={e => openOnMap(latitude, longitude)}>
-          <View horizontal>
-            <Icon new-shop name='ios-pin'/>
-            <Text fs12>{distance}</Text>
-          </View>
-        </TouchableOpacity>
+        <View full white sp>
+          <Text center small bold>{name}</Text>
+          <Touch onPress={e => openOnMap(latitude, longitude)}>
+            <View horizontal center middle smt>
+              <Icon theme small name='ios-pin'/>
+              <Text small sml>{distance}</Text>
+            </View>
+          </Touch>
+        </View>
       </View>
     </View>
   }

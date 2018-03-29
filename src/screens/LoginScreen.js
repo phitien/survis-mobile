@@ -2,9 +2,9 @@ import React, {Component} from 'react'
 import {Tabs, Tab, Item, Input, Text, View, Icon, CheckBox} from 'native-base'
 import {StyleSheet} from 'react-native'
 
-import {LoginScreen as style} from '../../survis-themes/styles/screens'
+import {LoginScreen as style} from '../theme/styles/screens'
 
-import {validateEmail, setUser} from '../utils'
+import {validateEmail, persitUser} from '../utils'
 import {LightBox, Button} from '../components'
 import {Component as Screen} from '../components'
 
@@ -39,29 +39,30 @@ export class LoginScreen extends Screen {
 
   async componentDidUpdate() {
     if (this.logged) {
-      await setUser(this.props.User)
       if (this.props.Screen.redirect) this.Actions[this.props.Screen.redirect](this.props.Screen.params)
       else this.Actions.HomeScreen()
     }
   }
 
-  onLogin() {
+  onPressLogin() {
     if (this.isEmailValid && this.isPasswordValid) {
       const {usr_email, usr_password} = this.state
       this.actions.User_Login({usr_email, usr_password})
     }
   }
-
-  onRegister() {
+  onPressRegister() {
     if (this.isEmailValid && this.isPasswordValid) {
       const {usr_email, usr_password} = this.state
       this.actions.User_Register({usr_email, usr_password})
     }
   }
+  onPressForgetPassword() {
+    //TODO
+  }
 
   renderLogin() {
-    return <View style={style.form}>
-      <Text style={style.heading}>Email</Text>
+    return <View>
+      <Text label>Email</Text>
       <Item login error={this.error}>
         <Input value={this.state.usr_email}
           ref={e => this.logEmailInput = e}
@@ -70,29 +71,29 @@ export class LoginScreen extends Screen {
           onSubmitEditing={e => this.isEmailValid}
           returnKeyType='next'/>
       </Item>
-      <Text style={style.heading}>Password</Text>
+      <Text label>Password</Text>
       <Item login error={this.error}>
         <Input value={this.state.usr_password}
-          onChangeText={e => this.setState({usr_password: e, typing: true, next: null})}
           ref={e => this.logPwdInput = e}
+          onChangeText={e => this.setState({usr_password: e, typing: true, next: null})}
           autoCapitalize='none' secureTextEntry={true} placeholder='Password'
-          onSubmitEditing={this.onLogin.bind(this)}
+          onSubmitEditing={this.onPressLogin.bind(this)}
           returnKeyType='go'/>
       </Item>
       {this.renderError()}
-      <Button loading={this.props.User.loading} onPress={this.onLogin.bind(this)} full small style={style.button}>
+      <Button loading={this.props.User.loading} onPress={this.onPressLogin.bind(this)} full small style={style.button}>
         <Text bold>LOG IN</Text>
       </Button>
       <View horizontal style={style.forget_password}>
-        <Text onPress={this.Actions.pop} small style={style.forget_password_text}>Forgot Password</Text>
+        <Text onPress={this.onPressForgetPassword.bind(this)} small style={style.forget_password_text}>Forgot Password</Text>
       </View>
     </View>
   }
 
   renderRegister() {
-    return <View style={style.form}>
+    return <View>
       {this.renderError()}
-      <Text style={style.heading}>Email</Text>
+      <Text label>Email</Text>
       <Item login error={this.error}>
         <Input value={this.state.usr_email}
           ref={e => this.regEmailInput = e}
@@ -101,13 +102,13 @@ export class LoginScreen extends Screen {
           onSubmitEditing={e => this.isEmailValid}
           returnKeyType='next'/>
       </Item>
-      <Text style={style.heading}>Password</Text>
+      <Text label>Password</Text>
       <Item login error={this.error}>
         <Input value={this.state.usr_password}
-          onChangeText={e => this.setState({usr_password: e, typing: true, next: null})}
           ref={e => this.regPwdInput = e}
+          onChangeText={e => this.setState({usr_password: e, typing: true, next: null})}
           autoCapitalize='none' secureTextEntry={true} placeholder='Password'
-          onSubmitEditing={this.onRegister.bind(this)}
+          onSubmitEditing={this.onPressRegister.bind(this)}
           returnKeyType='go'/>
       </Item>
       <View horizontal style={style.agree}>
@@ -115,7 +116,7 @@ export class LoginScreen extends Screen {
         <Text small>I agree with terms and conditions</Text>
       </View>
       {this.renderError()}
-      <Button loading={this.props.User.loading} onPress={this.onRegister.bind(this)} full small style={style.button}>
+      <Button loading={this.props.User.loading} onPress={this.onPressRegister.bind(this)} full small style={style.button}>
         <Text bold>REGISTER</Text>
       </Button>
     </View>
@@ -123,7 +124,7 @@ export class LoginScreen extends Screen {
 
   render() {
     return <LightBox>
-      <View style={style.container}>
+      <View flex1 bml bmr>
         <Tabs tabBarUnderlineStyle={style.tabBarUnderlineStyle} activeTextColor={style.activeTextColor}>
           <Tab heading='Login'>
             {this.renderLogin()}

@@ -1,20 +1,18 @@
 import React from 'react'
 import {Text, Spinner, Icon, View} from 'native-base'
-import {TouchableOpacity} from 'react-native'
+import {TouchableOpacity as Touch} from 'react-native'
 
-import {Review as style} from '../../survis-themes/styles/components'
+import {Review as style} from '../theme/styles/components'
 
 const Review = props => {
-  const item = props.item
-  if (!item) return null
-  return <TouchableOpacity onPress={props.onPress}>
-    <View horizontal style={style.container}>
-      <Text fs12> {item.comment} </Text>
+  const item = props.item || {}
+  const {comment, created_date} = item
+  return <Touch onPress={props.onPress}>
+    <View horizontal center middle transparent style={style.container}>
+      <Text small>{comment}</Text>
+      <Text small>{created_date}</Text>
     </View>
-    <View m-t-5>
-      <Text fs12>{item.created_date}</Text>
-    </View>
-  </TouchableOpacity>
+  </Touch>
 }
 
 export {

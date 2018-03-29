@@ -1,24 +1,19 @@
 import React from 'react'
 import {Text, Spinner, Icon, View} from 'native-base'
 
-import {Notification as style} from '../../survis-themes/styles/components'
+import {Notification as style} from '../theme/styles/components'
 
 import {Image} from './Image'
 
 const Notification = props => {
   const item = props.item, index = props.index
-  return <View m-b-5 horizontal style={[style.container, index%2 == 1 ? style.even : style.odd]}>
-    <Image resizeMode='stretch' style={style.image} source={{uri: item.image}}/>
-    <View p-5>
-      <View horizontal m-t-5>
-        <Text fs14 bold>{item.title}</Text>
-      </View>
-      <View horizontal>
-        <Text fs12>{item.message}</Text>
-      </View>
-      <View m-t-5>
-        <Text fs12>{item.date}</Text>
-      </View>
+  const {id, image, title, message, date} = item || {}
+  return <View flex1 mt ml mr horizontal style={[style.container, index%2 == 1 ? style.even : style.odd]}>
+    <View style={style.image_container}><Image style={style.image} source={{uri: image}}/></View>
+    <View p>
+      <View><Text bold>{title}</Text></View>
+      <View smt><Text small>{message}</Text></View>
+      <View smt><Text small>{date}</Text></View>
     </View>
   </View>
 }

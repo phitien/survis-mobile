@@ -1,8 +1,8 @@
 import React from 'react'
 import {Text, Spinner, Icon, View} from 'native-base'
-import {TouchableOpacity} from 'react-native'
+import {TouchableOpacity as Touch} from 'react-native'
 
-import {ShopSummary as style} from '../../survis-themes/styles/components'
+import {ShopSummary as style} from '../theme/styles/components'
 
 import {itemHelper, substr, openOnMap} from '../utils'
 
@@ -14,21 +14,21 @@ const ShopSummary = props => {
   const {
     id, image, name, address, totalrate, totalreviews, latitude, longitude
   } = itemHelper(item)
-  return <View style={style.container}>
+  return <View p grey style={style.container}>
   	<View horizontal>
-      <Image resizeMode='stretch' style={style.image} source={{uri: image}}/>
-  	  <View style={style.info}>
-  		  <Text bold m-b-10>{name}</Text>
+      <View mb mr style={style.image_container}><Image resizeMode='stretch' style={style.image} source={{uri: image}}/></View>
+  	  <View flex1 style={style.info}>
+  		  <Text bold mb>{name}</Text>
   	    <Text small>{address}</Text>
   	  </View>
   	</View>
-  	<View horizontal style={style.statistic}>
+  	<View horizontal space-between style={style.statistic}>
   	  <Rating totalrate={totalrate} shopid={id}/>
-  	  <Text theme fs12 onPress={props.openReview}>({totalreviews}) Reviews</Text>
-  	  <TouchableOpacity onPress={e => openOnMap(latitude, longitude)}><View horizontal>
-  		  <Icon new-shop name='ios-send'/>
-  	    <Text theme fs12 theme>Get direction</Text>
-  	  </View></TouchableOpacity>
+  	  <Text theme small onPress={props.openReview}>({totalreviews}) Reviews</Text>
+  	  <Touch onPress={e => openOnMap(latitude, longitude)}><View horizontal>
+  		  <Icon theme small name='ios-send'/>
+  	    <Text theme small>Get direction</Text>
+  	  </View></Touch>
   	</View>
   </View>
 }

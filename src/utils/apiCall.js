@@ -3,6 +3,8 @@ import {Actions} from 'react-native-router-flux'
 import {MessageBarManager} from 'react-native-message-bar'
 import {AsyncStorage} from 'react-native'
 
+import {log} from './log'
+
 const apiCall = axios.create({
   timeout: 60000,
   maxRedirects: 10,
@@ -21,15 +23,15 @@ apiCall
   .interceptors
   .response
   .use((res, req) => {
-    console.log(res.request._method, res.request.responseURL)
+    log('api', res.request._method, res.request.responseURL)
     return res
   }, error => {
-		const res = error.response
-		console.log(res.request._method, res.request.responseURL)
-		console.log(error)
-		console.log(res.data)
-    const {data, status} = res
-    const {code, message} = data
+		const res = error.response || {}
+		log('api-error', res.request._method, res.request.responseURL)
+		log('api-error', error)
+		log('api-error', res.data)
+    const {data, status} = res || {}
+    const {code, message} = data || {}
     if (status === 401 || status === 403) {
       requestHeader('token', '')
       AsyncStorage.clear()

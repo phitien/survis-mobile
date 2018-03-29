@@ -1,10 +1,11 @@
 export {getDistance} from './getDistance'
 export {getPaymentInfo} from './getPaymentInfo'
-export {getShoppingCart} from './getShoppingCart'
+export {getShoppingCartItems} from './getShoppingCartItems'
 export {getUser} from './getUser'
 export {
   itemHelper, cardnum, cardexpire, substr, last4
 } from './itemHelper'
+export {log} from './log'
 export {openExternal} from './openExternal'
 export {openOnMap} from './openOnMap'
 export {
@@ -17,9 +18,6 @@ export {
   requestHeaders,
   apicall
 } from './apiCall'
-export {setPaymentInfo} from './setPaymentInfo'
-export {setShoppingCart} from './setShoppingCart'
-export {setUser} from './setUser'
 export {
   query,
   url

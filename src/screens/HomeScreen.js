@@ -2,33 +2,34 @@ import React, {Component} from 'react'
 import {Container, View, Text, List} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
 import InfiniteScroll from 'react-native-infinite-scroll'
+import DeviceInfo from 'react-native-device-info'
 
-import {HomeScreen as style} from '../../survis-themes/styles/screens'
+import {HomeScreen as style} from '../theme/styles/screens'
 
-import {getUser, getPaymentInfo, getShoppingCart, requestHeader} from '../utils'
-import {Header, Footer, Categories, Promotions, NewShops, HighRatingShops} from '../containers'
+import {getUser, getPaymentInfo, getShoppingCartItems, requestHeader} from '../utils'
+import {Header, Footer, Categorys, Promotions, NewShops, HighRatingShops} from '../containers'
 import {Component as Screen, NewShop, Shop} from '../components'
 
 export class HomeScreen extends Screen {
   async componentDidMount() {
+
+    const deviceId = await DeviceInfo.getDeviceId()
+    requestHeader('deviceId', deviceId)
+    this.actions.Device_Load({id: deviceId})
+
     const User = JSON.parse(await getUser()) || {token: ''}
     requestHeader('token', User.token)
     this.actions.User_Load(User)
-
-    const PaymentInfo = JSON.parse(await getPaymentInfo())
-    this.actions.PaymentInfo_Load(PaymentInfo)
-
-    const ShoppingCart = JSON.parse(await getShoppingCart())
-    this.actions.ShoppingCart_Load(ShoppingCart)
-
-    this.locationUpdate(this.actions.Shops_Get)
-    if (this.logged) {
-      this.actions.Notifications_Get()
-    }
+    this.actions.PaymentInfo_Load(JSON.parse(await getPaymentInfo()))
+    this.actions.ShoppingCartItem_LoadAll(JSON.parse(await getShoppingCartItems()))
+    this.locationUpdate(this.actions.Shop_Shops)
+    if (this.logged) this.actions.Notification_Notifications()
   }
   loadmore() {
-    if (!this.props.Shops.loading) this.actions.Shops_Loadmore()
-    this.locationUpdate(this.actions.Shops_Get)
+    if (!this.props.Shop.loading) {
+      this.actions.Shop_Loadmore()
+      this.locationUpdate(this.actions.Shop_Shops)
+    }
   }
 
   renderShop(item) {
@@ -37,18 +38,15 @@ export class HomeScreen extends Screen {
     </Touch>
   }
   renderShops() {
-    return <List renderRow={item => this.renderShop(item)} dataArray={this.props.Shops.list} canLoadMore={true}/>
+    return <List renderRow={item => this.renderShop(item)} dataArray={this.props.Shop.Shops.list} canLoadMore={true}/>
   }
   render() {
     return <Container>
       <Header/>
       <InfiniteScroll horizontal={false} distanceFromEnd={10} onLoadMoreAsync={this.loadmore.bind(this)}>
-        <Categories/>
+        <Categorys/>
         <Promotions/>
-        <View style={style.newshops}>
-          <Text style={style.newshops_text}>New Shops</Text>
-          <NewShops/>
-        </View>
+        <NewShops/>
         <HighRatingShops/>
         {this.renderShops()}
       </InfiniteScroll>

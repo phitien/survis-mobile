@@ -1,6 +1,6 @@
 export {Component} from './Component'
 export {Button} from './Button'
-export {Categories} from './Categories'
+export {Categorys} from './Categorys'
 export {Footer} from './Footer'
 export {Header} from './Header'
 export {HighRatingShop} from './HighRatingShop'

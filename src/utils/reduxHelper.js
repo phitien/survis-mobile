@@ -1,9 +1,9 @@
 import {bindActionCreators} from 'redux'
 import {actions} from '../actions'
-import {CONFIG} from '../constants'
+import * as models from '../models'
 
 export function mapStateToProps(state) {
-  return Object.keys(CONFIG).reduce((rs, k) => {
+  return Object.keys(models).reduce((rs, k) => {
     rs[k] = state[k]
     return rs
   }, {})

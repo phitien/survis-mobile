@@ -1,11 +1,11 @@
-import {CONFIG} from '../constants'
+import * as models from '../models'
 import {apiCall} from '../utils'
 import {query, url} from '../utils'
 import {appstore} from '../store'
 import axios from 'axios'
 import querystring from 'querystring'
 
-function apiGetGenerator(name, action, uri, method, filter, type) {
+function apiGetGenerator(name, act, uri, method, filter, type) {
   return function(queryParams, postParams, headers) {
     const store = appstore()
     if (filter && !queryParams) queryParams = store.getState()[name].filter
@@ -21,16 +21,15 @@ function apiGetGenerator(name, action, uri, method, filter, type) {
 }
 
 const apis = {}
-Object.keys(CONFIG).map(name => {
-  if (typeof CONFIG[name] == 'object') {
-    if (CONFIG[name].apiActions) {
-      Object.keys(CONFIG[name].apiActions).map(action => {
-        const str = CONFIG[name].apiActions[action]
-        const [method, filter, type, uri] = str.split('|')
-        apis[`${name}_${action}`] = apiGetGenerator(name, action, uri, method, filter == 'true', type)
-      })
+Object.keys(models).map(name => {
+  const model = models[name] || {}, acts = model.acts || {}
+  Object.keys(acts).map(act => {
+    const value = acts[act]
+    if (value.indexOf('api') == 0) {
+      const [api, method, filter, type, uri] = value.split('|')
+      apis[`${name}_${act}`] = apiGetGenerator(name, act, uri, method, filter == 'true', type)
     }
-  }
+  })
 })
 
 export {

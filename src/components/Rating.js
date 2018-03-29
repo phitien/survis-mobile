@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import StarRating from 'react-native-star-rating'
 import {connect} from 'react-redux'
 
-import {Rating as style} from '../../survis-themes/styles/components'
+import {Rating as style} from '../theme/styles/components'
 import {apis} from '../apis'
 
 class CMPRating extends Component {

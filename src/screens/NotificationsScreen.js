@@ -2,29 +2,29 @@ import React, {Component} from 'react'
 import {Container, View, Content, Text} from 'native-base'
 import {ScrollView} from 'react-native'
 
-import {NotificationsScreen as style} from '../../survis-themes/styles/screens'
+import {NotificationsScreen as style} from '../theme/styles/screens'
 
 import {Header, Footer, Notification} from '../containers'
 import {Component as Screen} from '../components'
 
 export class NotificationsScreen extends Screen {
   async componentDidMount() {
-    this.actions.Notifications_Get()
+    this.actions.Notification_Notifications()
   }
   loadmore() {
-    this.actions.Notifications_Loadmore()
-    this.actions.Notifications_Get()
+    if (!this.props.Notification.loading) {
+      this.actions.Notification_Loadmore()
+      .then(e => this.actions.Notification_Notifications())
+    }
   }
 
   render() {
     return <Container>
       <Header/>
       <Content>
-        <View horizotal style={style.heading}>
-          <Text bold fs16>Notifications</Text>
-        </View>
+        <View heading><Text>Notifications</Text></View>
         <ScrollView>
-          {this.props.Notifications.list.map((item,i) => <Notification key={i} index={i} item={item}/>)}
+          {this.props.Notification.Notifications.list.map((item,i) => <Notification key={i} index={i} item={item}/>)}
         </ScrollView>
       </Content>
       <Footer/>

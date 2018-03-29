@@ -5,7 +5,7 @@ import {Actions } from 'react-native-router-flux'
 
 const AnimatedView = Animated.View
 
-import {LightBox as style} from '../../survis-themes/styles/components'
+import {LightBox as style} from '../theme/styles/components'
 
 export class LightBox extends Component {
   state = {

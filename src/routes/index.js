@@ -1,7 +1,7 @@
 import React from 'react'
 import {Scene, Router, Overlay, Stack, Lightbox} from 'react-native-router-flux'
 
-import RoutesStyle from '../../survis-themes/styles/Routes'
+import RoutesStyle from '../theme/styles/Routes'
 
 import {
   CheckoutScreen,

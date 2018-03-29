@@ -4,10 +4,9 @@ import {Provider} from 'react-redux'
 import {View, StyleProvider, Spinner} from 'native-base'
 import OneSignal from 'react-native-onesignal'
 
-import getTheme from './survis-themes/components'
-import AppStyle from './survis-themes/styles/App'
+import {getTheme} from './src/theme'
+import AppStyle from './src/theme/styles/App'
 import {Routes} from './src/routes'
-import {getUser, setUser, requestHeader} from './src/utils'
 import {PRIMARY} from './src/constants'
 import {appstore} from './src/store'
 
@@ -23,9 +22,6 @@ export default class App extends Component {
   async componentDidMount() {
     await OneSignal.addEventListener('received', this.onOneSignalNotiReceived)
     this.state.store = appstore()
-    const DeviceInfo = require('react-native-device-info')
-    const deviceId = await DeviceInfo.getDeviceId()
-    requestHeader('deviceId', deviceId)
     this.setState({loading: false})
   }
 

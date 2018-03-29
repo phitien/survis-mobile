@@ -5,7 +5,7 @@ import {StyleSheet} from 'react-native'
 
 import {PRIMARY} from '../constants'
 import {apis} from '../apis'
-import {requestHeaders} from '../utils'
+import {requestHeaders, log} from '../utils'
 
 const SpinnerStyle = StyleSheet.create({
   container: {
@@ -23,22 +23,22 @@ export class Component extends RAComponent {
   get api() {return api}
   get Actions() {return Actions}
   get actions() {return this.props.actions}
-  get PaymentInfo() {return [].concat(this.props.PaymentInfo.list)[0] || {}}
-  get User() {return this.props.User || {}}
+  get User() {return this.props.User && this.props.User.User || {}}
   get logged() {return this.User.token}
   get error() {return this.state.error}
+  get log() {return log}
 
   locationUpdate(ok, ko) {
     navigator
       .geolocation
       .getCurrentPosition(position => {
         const {latitude, longitude} = position.coords || {}
-        this.actions.Location_Update({latitude, longitude})
         requestHeaders({latitude, longitude})
-        if (ok) ok()
+        this.actions.Location_Load({latitude, longitude})
+        if (ok) {try{ok()}catch(e){this.log('locationUpdate', e)}}
       }, (error) => {
         this.setState({error: error.message})
-        if (ko) ko()
+        if (ko) {try{ko()}catch(e){this.log('locationUpdate', e)}}
       }, {
         enableHighAccuracy: true,
         timeout: 20000,

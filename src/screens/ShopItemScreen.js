@@ -4,27 +4,27 @@ import {ScrollView} from 'react-native'
 
 import {Header, Footer, ShopSummary, Review} from '../containers'
 
-import {ShopItemScreen as style} from '../../survis-themes/styles/screens'
+import {ShopItemScreen as style} from '../theme/styles/screens'
 
 import {Image, Rating} from '../components'
-import {itemHelper, substr, setShoppingCart} from '../utils'
+import {itemHelper, substr} from '../utils'
 import {Component as Screen} from '../components'
 
 export class ShopItemScreen extends Screen {
   async componentWillMount() {
-    this.actions.Shops_ItemDetail({itemid: this.props.item.id})
-    this.actions.Reviews_Reset()
-    this.actions.Reviews_Get({itemid: this.props.item.id})
+    this.actions.ShopsItem_ShopsItem({itemid: this.props.item.id})
+    this.actions.Review_Reset()
+    this.actions.Review_Search({itemid: this.props.item.id})
+    this.actions.Review_Reviews()
   }
 
   async addToCart() {
-    setShoppingCart(this.props.ShoppingCart)
-    this.actions.ShoppingCart_Add({...this.props.item, shop: this.props.shop})
+    this.actions.ShoppingCartItem_Add({...this.props.item, shop: this.props.shop})
     this.Actions.pop()
   }
 
   render() {
-    const item = this.props.Shops.itemdetail
+    const item = this.props.ShopItem.ShopItem
     const shop = this.props.shop
     const {
       id, image, name, priceS, totalrate, totalreviews, description
@@ -35,36 +35,36 @@ export class ShopItemScreen extends Screen {
         <ScrollView>
           <View style={style.container}>
             <View horizontal>
-              <Image resizeMode='stretch' style={style.image} source={{uri: image}}/>
-              <View style={style.info}>
+              <View mb mr style={style.image_container}><Image style={style.image} source={{uri: image}}/></View>
+              <View flex1 style={style.info}>
                 <Text bold>{name}</Text>
-                <Text bold fs16 theme>{priceS}</Text>
+                <Text bold big theme>{priceS}</Text>
               </View>
             </View>
-            <View horizontal style={style.statistic}>
+            <View horizontal flex1 space-between style={style.statistic}>
               <Rating rating={totalrate} itemid={id}/>
-              <Text theme fs12>({totalreviews}) Reviews</Text>
+              <Text theme small>({totalreviews}) Reviews</Text>
             </View>
           </View>
           <ShopSummary item={shop}/>
-          <View style={style.voucher}>
-            <Text style={style.heading}>Voucher details</Text>
-            <Text style={style.description}>{description}</Text>
+          <View p style={style.voucher}>
+            <Text bold big bmb>Voucher details</Text>
+            <Text small>{description}</Text>
           </View>
           <View style={style.reviews}>
             <View horizontal space-between>
-              <Text style={style.heading}>Reviews</Text>
+              <Text bold big bmb>Reviews</Text>
               <Text theme>SEE ALL</Text>
-              {this.props.Reviews.list.map(ritem => <Review key={ritem.id} item={ritem}/>)}
+              {this.props.Review.Reviews.list.map(ritem => <Review key={ritem.id} item={ritem}/>)}
             </View>
           </View>
         </ScrollView>
       </Content>
       <Footer>
-        <View m-l-10 center-h>
-          <Text theme fs18>{priceS}</Text>
+        <View ml middle>
+          <Text theme big>{priceS}</Text>
         </View>
-        <View m-r-10 center center-h>
+        <View mr center middle>
           <Button small onPress={this.addToCart.bind(this)}>
             <Text>ADD TO CART</Text>
           </Button>
