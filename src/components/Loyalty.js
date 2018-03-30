@@ -10,7 +10,7 @@ const Loyalty = props => {
     id, image, name, address, numberoforders, latestorderdate, spentamount
   } = itemHelper(props.item)
   return <View horizontal mt mr ml white>
-    <View mr style={style.image_container}><Image style={style.image} source={{uri: image}}/></View>
+    <View normal-size-square mr><Image source={{uri: image}}/></View>
     <View flex1>
       <View full><Text bold>{name}</Text></View>
       <View full><Text small><Icon theme small name='ios-send'/> {address}</Text></View>

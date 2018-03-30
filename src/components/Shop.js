@@ -19,20 +19,20 @@ export class Shop extends Component {
       latitude, longitude, totalrate, totalreviews
     } = itemHelper(item)
   	if (isfeatured) {
-  		return <View horizontal mt ml mr white>
-        <View style={style.featured_image_container}><Image style={style.featured_image} source={{uri: promotion_image}}/></View>
+  		return <View mt ml mr white>
+        <View normal-size><Image source={{uri: promotion_image}}/></View>
         <View bottom opacity sp full>
-          <Text white bold>{name}</Text>
-          <Text small white>{address}</Text>
+          <View full><Text white bold>{name}</Text></View>
+          <View full><Text small white>{address}</Text></View>
         </View>
       </View>
   	}
-    return <View horizontal mt ml mr white style={style.container}>
-      <View style={style.image_container}><Image style={style.image} source={{uri: image}}/></View>
-      <View pl smt style={style.info}>
-        <View><Text bold>{name}</Text></View>
-        <View><Text small>{address}</Text></View>
-        <View smt smb><Text theme>{highlight}</Text></View>
+    return <View horizontal mt ml mr white>
+      <View normal-size-square><Image source={{uri: image}}/></View>
+      <View flex1 smt pl pr spb>
+        <View full><Text bold>{name}</Text></View>
+        <View full><Text small>{address}</Text></View>
+        <View full><Text theme>{highlight}</Text></View>
         <Touch onPress={e => openOnMap(latitude, longitude)}><View horizontal space-between full>
           <Text small>{distance}</Text>
           <View horizontal>

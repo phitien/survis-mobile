@@ -1,8 +1,6 @@
 export default (variables) => {
-  const platformStyle = variables.platformStyle
-  const platform = variables.platform
-
-  const footerTheme = {
+  const {platformStyle, platform} = variables
+  return {
     'NativeBase.Left': {
       'NativeBase.Button': {
         '.transparent': {
@@ -80,17 +78,9 @@ export default (variables) => {
     backgroundColor: 'white',
     flexDirection: 'row',
     justifyContent: 'center',
-    borderTopWidth: platform === 'ios' && platformStyle !== 'material'
-      ? variables.borderWidth
-      : undefined,
-    borderColor: platform === 'ios' && platformStyle !== 'material'
-      ? '#cbcbcb'
-      : undefined,
     height: variables.footerHeight,
     elevation: 3,
     left: 0,
     right: 0
   }
-
-  return footerTheme
 }

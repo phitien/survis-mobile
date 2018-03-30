@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {Container, View, Content, Text} from 'native-base'
-import {ScrollView} from 'react-native'
 
 import {NotificationsScreen as style} from '../theme/styles/screens'
 
@@ -23,9 +22,7 @@ export class NotificationsScreen extends Screen {
       <Header/>
       <Content>
         <View heading><Text>Notifications</Text></View>
-        <ScrollView>
-          {this.props.Notification.Notifications.list.map((item,i) => <Notification key={i} index={i} item={item}/>)}
-        </ScrollView>
+        {this.props.Notification.Notifications.list.map((item,i) => <Notification key={i} index={i} item={item}/>)}
       </Content>
       <Footer/>
     </Container>

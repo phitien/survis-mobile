@@ -15,8 +15,8 @@ export class HighRatingShop extends Component {
     const {
       id, image, name, totalrate, totalreviews, latitude, longitude
     } = itemHelper(item)
-  	return <View full>
-      <View style={style.image_container}><Image style={style.image} source={{uri: image}}/></View>
+  	return <View big-size>
+      <View big-size><Image source={{uri: image}}/></View>
       <View bottom opacity sp full>
         <View full smb>
           <Text white big>{name}</Text>

@@ -8,12 +8,12 @@ import {Image} from './Image'
 const Notification = props => {
   const item = props.item, index = props.index
   const {id, image, title, message, date} = item || {}
-  return <View flex1 mt ml mr horizontal style={[style.container, index%2 == 1 ? style.even : style.odd]}>
-    <View style={style.image_container}><Image style={style.image} source={{uri: image}}/></View>
-    <View p>
-      <View><Text bold>{title}</Text></View>
-      <View smt><Text small>{message}</Text></View>
-      <View smt><Text small>{date}</Text></View>
+  return <View mt ml mr horizontal style={index%2==1?style.even:style.odd}>
+    <View small-size-square><Image source={{uri: image}}/></View>
+    <View p flex1>
+      <View full><Text bold>{title}</Text></View>
+      <View full smt><Text small>{message}</Text></View>
+      <View full smt><Text small>{date}</Text></View>
     </View>
   </View>
 }

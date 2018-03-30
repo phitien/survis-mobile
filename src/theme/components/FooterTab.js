@@ -1,7 +1,5 @@
-import { Platform } from 'react-native'
 export default (variables) => {
-  const platform = variables.platform
-
+  const {platform} = variables
   const footerTabTheme = {
     'NativeBase.Button': {
       '.active': {
@@ -34,7 +32,6 @@ export default (variables) => {
         'NativeBase.Badge': {
           'NativeBase.Text': {
             fontSize: 11,
-            fontWeight: platform === 'ios' ? '600' : undefined,
             lineHeight: 14
           },
           top: -3,
@@ -61,9 +58,6 @@ export default (variables) => {
         lineHeight: 16
       }
     },
-    backgroundColor: Platform.OS === 'android'
-      ? variables.tabActiveBgColor
-      : undefined,
     flexDirection: 'row',
     justifyContent: 'space-between',
     flex: 1,

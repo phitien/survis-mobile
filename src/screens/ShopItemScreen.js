@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Container, View, Content, Button, Text} from 'native-base'
-import {ScrollView} from 'react-native'
+import {TouchableOpacity as Touch} from 'react-native'
 
 import {Header, Footer, ShopSummary, Review} from '../containers'
 
@@ -11,61 +11,77 @@ import {itemHelper, substr} from '../utils'
 import {Component as Screen} from '../components'
 
 export class ShopItemScreen extends Screen {
+  get itemid() {return this.props.item.id}
+  get item() {return this.props.ShopItem.ShopItem || this.props.item || {}}
+  get shop() {return this.props.shop || {}}
+  get reviews() {
+    const reviews = this.props.Review.Reviews.list || []
+    return this.state.seeall ? reviews : reviews.slice(0, 3)
+  }
+
+  state = {seeall: false}
+
   async componentWillMount() {
-    this.actions.ShopsItem_ShopsItem({itemid: this.props.item.id})
-    this.actions.Review_Reset()
-    this.actions.Review_Search({itemid: this.props.item.id})
-    this.actions.Review_Reviews()
+    const itemid = this.itemid
+    this.actions.ShopItem_ShopItem({itemid})
+    this.actions.Review_Reviews({itemid})
   }
 
   async addToCart() {
-    this.actions.ShoppingCartItem_Add({...this.props.item, shop: this.props.shop})
+    this.actions.ShoppingCartItem_Add({...this.item, shop: this.props.shop})
     this.Actions.pop()
   }
 
+  onPressSeeAll() {
+    this.setState({seeall: !this.state.seeall})
+  }
+
+  renderImages() {
+    const item = this.item
+    const {image, detailimage} = item
+    const images = Array.from(new Set([image, detailimage].concat(item.images).filter(o => o)))
+    return images.length ? <View big-size><Content horizontal big-size>
+      {images.map((img,i) => <View big-size fullW key={i}><Image source={{uri: img}}/></View>)}
+    </Content></View> : null
+  }
   render() {
-    const item = this.props.ShopItem.ShopItem
-    const shop = this.props.shop
+    const {item, shop} = this
     const {
       id, image, name, priceS, totalrate, totalreviews, description
     } = itemHelper(item)
     return <Container>
       <Header back='back'/>
       <Content>
-        <ScrollView>
-          <View style={style.container}>
-            <View horizontal>
-              <View mb mr style={style.image_container}><Image style={style.image} source={{uri: image}}/></View>
-              <View flex1 style={style.info}>
-                <Text bold>{name}</Text>
-                <Text bold big theme>{priceS}</Text>
-              </View>
-            </View>
-            <View horizontal flex1 space-between style={style.statistic}>
-              <Rating rating={totalrate} itemid={id}/>
-              <Text theme small>({totalreviews}) Reviews</Text>
+        {/* <ShopSummary item={shop}/> */}
+        <View full sp>
+          <View horizontal full>
+            <View mb mr small-size-square><Image source={{uri: image}}/></View>
+            <View flex1>
+              <View full><Text right bold>{name}</Text></View>
+              <View full><Text right bold big theme>{priceS}</Text></View>
             </View>
           </View>
-          <ShopSummary item={shop}/>
-          <View p style={style.voucher}>
-            <Text bold big bmb>Voucher details</Text>
-            <Text small>{description}</Text>
+          <View horizontal flex1 space-between>
+            <Rating rating={totalrate} itemid={id}/>
+            <Text theme small>({totalreviews}) Reviews</Text>
           </View>
-          <View style={style.reviews}>
-            <View horizontal space-between>
-              <Text bold big bmb>Reviews</Text>
-              <Text theme>SEE ALL</Text>
-              {this.props.Review.Reviews.list.map(ritem => <Review key={ritem.id} item={ritem}/>)}
-            </View>
+        </View>
+        {this.renderImages()}
+        <View full sp><Text small>{description}</Text></View>
+        <View full>
+          <View horizontal heading space-between>
+            <Text>Reviews</Text>
+            <Touch onPress={this.onPressSeeAll.bind(this)}><Text theme>SEE ALL</Text></Touch>
           </View>
-        </ScrollView>
+          <View full sp>
+            {this.reviews.map(ritem => <Review key={ritem.id} item={ritem}/>)}
+          </View>
+        </View>
       </Content>
       <Footer>
-        <View ml middle>
-          <Text theme big>{priceS}</Text>
-        </View>
-        <View mr center middle>
-          <Button small onPress={this.addToCart.bind(this)}>
+        <View fullW horizontal middle pr pl>
+          <Text flex1 theme big>{priceS}</Text>
+          <Button onPress={this.addToCart.bind(this)}>
             <Text>ADD TO CART</Text>
           </Button>
         </View>

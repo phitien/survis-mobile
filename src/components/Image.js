@@ -9,6 +9,7 @@ export class Image extends Component {
     if (this.props.source && this.props.source.hasOwnProperty('uri') && !this.props.source.uri) return null
     return <PlaceholderImage
       {...this.props}
+      style={{width: '100%', height: '100%'}}
       loadingStyle={{size: 'large', color: PRIMARY}}
       placeholderSource={BLANK_IMG}/>
   }

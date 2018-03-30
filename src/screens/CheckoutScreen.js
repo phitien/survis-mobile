@@ -100,13 +100,10 @@ export class CheckoutScreen extends Screen {
             <Text small>{bill_address}</Text>
           </View>
         </View>
-        <View style={style.agreement}>
-          <Touch onPress={e => this.setState({agreed: !this.state.agreed})}>
-            <View horizontal>
-              <CheckBox checked={this.state.agreed}/><Text bold small style={{marginLeft: 24}}>I agree with terms and conditions</Text>
-            </View>
-          </Touch>
-        </View>
+        <Touch onPress={e => this.setState({agreed: !this.state.agreed})}><View horizontal middle m>
+          <CheckBox checked={this.state.agreed}/>
+          <Text ml small>I agree with terms and conditions</Text>
+        </View></Touch>
       </Content>
       <Footer>
         <View flex1></View>

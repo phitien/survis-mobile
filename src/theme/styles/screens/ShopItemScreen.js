@@ -8,7 +8,7 @@ export default {
     flex: 1,
     backgroundColor: 'white'
 	},
-  image_container: {
+  image: {
     overflow: 'hidden',
 		width: size, height: size,
   },

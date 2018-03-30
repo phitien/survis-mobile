@@ -27,7 +27,7 @@ export default {
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
-  image_container: {width: size, height: size},
+  image: {width: size, height: size},
   image: {width: '100%',height: '100%'},
   control: {
     alignItems: 'flex-start',

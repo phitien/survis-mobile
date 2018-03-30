@@ -1,7 +1,6 @@
 import React from 'react'
-import {Text, Spinner, Icon, View} from 'native-base'
+import {Content, Text, Spinner, Icon, View} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
-import {ScrollView} from 'react-native'
 
 import {NewShops as style} from '../theme/styles/components'
 
@@ -16,17 +15,14 @@ export class NewShops extends Component {
   }
 
   render() {
-    return this.renderContent()
-  }
-  renderContent() {
     if (!this.items.length) return null
     return <View grey>
       <Text big bold m>New Shops</Text>
-      <ScrollView horizontal theme full>
+      <Content horizontal grey>
         {this.items.map(item => <Touch key={item.id} onPress={e => this.Actions.ShopScreen({item})}>
           <NewShop item={item}/>
         </Touch>)}
-      </ScrollView>
+      </Content>
     </View>
   }
 }

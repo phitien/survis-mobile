@@ -5,7 +5,9 @@ import {PRIMARY} from '../../../constants'
 const size = 80
 
 export default {
-  container: {
+  tabBarUnderlineStyle: {
+    backgroundColor: PRIMARY,
+		height: 1, marginBottom: -1,
   },
   input: {
 		height: 32,

@@ -34,9 +34,7 @@ export class Categorys extends Component {
       {blocks.map((b, i) => <View key={i} horizontal middle bpl bpr space-between>
         {b.map((item, j) => <Touch key={item.id} onPress={this.onPress.bind(this, item)}>
           <View center middle style={{height: style.height}}>
-            <View smb style={style.image_container}>
-              <Image source={{uri: item.image}} style={style.image}/>
-            </View>
+            <View tiny-size-rounded smb><Image source={{uri: item.image}}/></View>
             <Text bold small>{substr(item.name, 7)}</Text>
           </View>
         </Touch>)}

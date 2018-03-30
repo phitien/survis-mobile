@@ -12,7 +12,7 @@ const History = props => {
     id, image, name, description, priceS, orderdate
   } = itemHelper(props.item)
   return <View horizontal mt mr ml white>
-    <View mr style={style.image_container}><Image style={style.image} source={{uri: image}}/></View>
+    <View normal-size-square mr><Image source={{uri: image}}/></View>
     <View flex1 style={style.info}>
       <View><Text bold>{name}</Text></View>
       <View><Text small>{description}</Text></View>

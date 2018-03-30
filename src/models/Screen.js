@@ -5,11 +5,10 @@ export const acts = {
 }
 export const Screen = {
   id: '',
+  params: {},
 }
 export default {
   loading: false, error: false,
   acts,
   Screen,
-  redirect: '',
-  params: {},
 }

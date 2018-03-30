@@ -14,15 +14,15 @@ const ShopSummary = props => {
   const {
     id, image, name, address, totalrate, totalreviews, latitude, longitude
   } = itemHelper(item)
-  return <View p grey style={style.container}>
-  	<View horizontal>
-      <View mb mr style={style.image_container}><Image resizeMode='stretch' style={style.image} source={{uri: image}}/></View>
-  	  <View flex1 style={style.info}>
-  		  <Text bold mb>{name}</Text>
-  	    <Text small>{address}</Text>
+  return <View sp full grey style={style.container}>
+  	<View horizontal full>
+      <View smb mr small-size-square><Image source={{uri: image}}/></View>
+  	  <View flex1>
+  		  <View full><Text bold smb>{name}</Text></View>
+  	    <View full><Text small>{address}</Text></View>
   	  </View>
   	</View>
-  	<View horizontal space-between style={style.statistic}>
+  	<View horizontal space-between full>
   	  <Rating totalrate={totalrate} shopid={id}/>
   	  <Text theme small onPress={props.openReview}>({totalreviews}) Reviews</Text>
   	  <Touch onPress={e => openOnMap(latitude, longitude)}><View horizontal>

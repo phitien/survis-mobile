@@ -7,8 +7,8 @@ export default {
 	},
   tabBarUnderlineStyle: {
     backgroundColor: PRIMARY,
+		height: 1, marginBottom: -1,
   },
-  activeTextColor: PRIMARY,
   heading: {
     fontSize: 14, fontWeight: 'bold',
     marginTop: 10

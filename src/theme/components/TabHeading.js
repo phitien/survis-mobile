@@ -1,35 +1,25 @@
 export default (variables) => {
-  const platform = variables.platform
+  const {PRIMARY, GREY, platform} = variables
 
-  const tabHeadingTheme = {
+  return {
     flexDirection: 'row',
-    backgroundColor: '#FFF',
-    flex: 1,
+    backgroundColor: 'white',
+    flex: 1, padding: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    '.scrollable': {
-      paddingHorizontal: 20,
-      flex: platform === 'android' ? 0 : 1,
-      minWidth: platform === 'android' ? undefined : 60
-    },
     'NativeBase.Text': {
-      color: variables.topTabBarTextColor,
-      marginHorizontal: 7
+      color: GREY,
     },
     'NativeBase.Icon': {
-      color: variables.topTabBarTextColor,
-      fontSize: platform === 'ios' ? 26 : undefined
+      color: GREY,
     },
     '.active': {
       'NativeBase.Text': {
-        color: variables.topTabBarActiveTextColor,
-        fontWeight: '600'
+        color: PRIMARY,
       },
       'NativeBase.Icon': {
-        color: variables.topTabBarActiveTextColor
+        color: PRIMARY,
       }
     }
   }
-
-  return tabHeadingTheme
 }

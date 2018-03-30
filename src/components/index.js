@@ -1,3 +1,5 @@
+import {connectStyle} from 'native-base'
+
 export {Component} from './Component'
 export {Button} from './Button'
 export {Categorys} from './Categorys'

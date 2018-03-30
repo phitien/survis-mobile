@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {Container, View, Content, Text} from 'native-base'
-import {ScrollView} from 'react-native'
 import {TouchableOpacity as Touch} from 'react-native'
 
 import {PrizesScreen as style} from '../theme/styles/screens'
@@ -40,15 +39,13 @@ export class PrizesScreen extends Screen {
     return <Container>
       <Header/>
       <Content>
-        <ScrollView>
-          {this.renderError()}
-          <View heading><Text>Lucky Draw</Text></View>
-          <View m>
-            <Text bold>Congratulation!!</Text>
-            <Text small italic>You have won a chance to win Lucky Draw. Please pick a prize.</Text>
-          </View>
-          {this.renderPrizes()}
-        </ScrollView>
+        {this.renderError()}
+        <View heading><Text>Lucky Draw</Text></View>
+        <View m>
+          <Text bold>Congratulation!!</Text>
+          <Text small italic>You have won a chance to win Lucky Draw. Please pick a prize.</Text>
+        </View>
+        {this.renderPrizes()}
       </Content>
       <Footer>
         <View flex1></View>

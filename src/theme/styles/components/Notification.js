@@ -8,9 +8,6 @@ const oddBgColor = 'white'
 
 export default {
 	evenBgColor, oddBgColor,
-	container: {},
 	even: {backgroundColor: evenBgColor,},
 	odd: {backgroundColor: oddBgColor,},
-	image_container: {width: size, height: size},
-  image: {width: '100%', height: '100%'},
 }

@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
-import {Container, View, Content, Spinner, Text} from 'native-base'
+import {Container, View, Content, Spinner, Text, DeckSwiper} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
-import {ScrollView} from 'react-native'
 
 import {ShopScreen as style} from '../theme/styles/screens'
 
@@ -18,12 +17,8 @@ export class ShopScreen extends Screen {
   componentWillMount() {
     const shopid = this.props.item.id
     this.actions.Shop_Shop({shopid})
-    this.actions.ShopItem_Reset()
-    this.actions.ShopItem_Search({shopid})
-    this.actions.ShopItem_ShopItems()
-    this.actions.Review_Reset()
-    this.actions.Review_Search({shopid})
-    this.actions.Review_Reviews()
+    this.actions.ShopItem_ShopItems({shopid})
+    this.actions.Review_Reviews({shopid})
   }
 
   renderReviews() {
@@ -38,27 +33,32 @@ export class ShopScreen extends Screen {
     </Touch>))
   }
   renderShopItems() {
-    const item = this.props.Shop.Shop
-    const items = this.items
-    return <View>
-      <View style={style.image_container}><Image style={style.image} source={{uri: item.image}}/></View>
-      {items.map((sitem,i) => <Touch key={sitem.id} onPress={e => this.Actions.ShopItemScreen({item: sitem, shop: item})}>
-        <ShopItem item={sitem} index={i} odd={i%2}/>
-      </Touch>)}
-    </View>
+    const shop = this.props.Shop.Shop
+    return this.items.map((item,i) => <Touch key={item.id} onPress={e => this.Actions.ShopItemScreen({item, shop})}>
+      <ShopItem item={item} index={i}/>
+    </Touch>)
+  }
+  renderImages() {
+    const shop = this.props.Shop.Shop || {}, {image, promotion_image} = shop
+    const images = Array.from(new Set([promotion_image].concat(shop.images).filter(o => o)))
+    return images.length ? <View big-size><Content horizontal big-size>
+      {images.map((img,i) => <View big-size fullW key={i}><Image source={{uri: img}}/></View>)}
+    </Content></View> : null
   }
   renderContent() {
     const item = this.props.Shop.Shop
-    return <ScrollView containerStyle={style.container}>
+    return <Content>
       <ShopSummary openReview={e => this.setState({showReview: true})} item={item}/>
+      {this.renderImages()}
       {this.state.showReview ? this.renderReviews() : this.renderShopItems()}
-    </ScrollView>
+    </Content>
   }
   render() {
     return <Container>
       <Header back='back'/>
       <Content>
-        {this.loading ? this.renderLoading() : this.renderContent()}
+        {this.loading ? this.renderLoading() : null}
+        {this.renderContent()}
       </Content>
       <Footer/>
     </Container>

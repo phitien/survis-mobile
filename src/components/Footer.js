@@ -14,7 +14,7 @@ export class Footer extends Component {
         this.Actions.UserScreen()
       }
       else {
-        this.actions.Screen_Load({id: 'UserScreen'})
+        this.actions.Screen_Save({id: 'UserScreen'})
         this.Actions.LoginScreen()
       }
     }
@@ -26,7 +26,7 @@ export class Footer extends Component {
         this.Actions.reset('NotificationsScreen')
       }
       else {
-        this.actions.Screen_Load({id: 'NotificationsScreen'})
+        this.actions.Screen_Save({id: 'NotificationsScreen'})
         this.Actions.LoginScreen()
       }
     }

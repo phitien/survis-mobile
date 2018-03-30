@@ -11,8 +11,4 @@ export default {
 		position: 'absolute', top: 2, right: 16, padding: 6,
 		borderBottomLeftRadius: 10, borderBottomRightRadius: 10,
 	},
-	image_container: {
-		width, height,
-	},
-  image: {width: '100%', height: '100%'},
 }

@@ -1,6 +1,5 @@
-import {PRIMARY, GREY} from '../../constants'
-
 export default (variables) => {
+  const {PRIMARY, GREY, platformStyle, platform} = variables
   const textTheme = {
     fontSize: 14,
     fontFamily: variables.fontFamily,
@@ -12,7 +11,7 @@ export default (variables) => {
     '.white': {color: 'white'},
     '.tiny': {fontSize: 9,},
     '.small': {fontSize: 11},
-    '.normal': {fontSize: 13},
+    '.normal-size': {fontSize: 13},
     '.big': {fontSize: 16},
     '.extra': {fontSize: 20},
     '.note': {color: '#a7a7a7',fontSize: variables.noteFontSize},

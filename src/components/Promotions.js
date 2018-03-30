@@ -17,11 +17,6 @@ export class Promotions extends Component {
   async componentDidMount() {
     this.locationUpdate(this.actions.Promotion_Promotions)
   }
-  render() {
-    return <View style={style.container}>
-      {this.renderContent()}
-    </View>
-  }
   renderContent() {
     if (!this.items.length) return null
     return <Swiper autoplayTimeout={AUTOPLAY_TIMEOUT} autoplay showsPagination={false} loop>
@@ -29,5 +24,10 @@ export class Promotions extends Component {
         <Promotion item={item}/>
       </Touch>)}
     </Swiper>
+  }
+  render() {
+    return <View big-size>
+      {this.renderContent()}
+    </View>
   }
 }

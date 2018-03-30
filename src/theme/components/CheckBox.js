@@ -1,34 +1,11 @@
-export default (variables) => {
-  const checkBoxTheme = {
-    '.checked': {
-      'NativeBase.Icon': {
-        color: variables.checkboxTickColor
-      },
-      'NativeBase.IconNB': {
-        color: variables.checkboxTickColor
-      }
-    },
-    'NativeBase.Icon': {
-      color: 'transparent',
-      lineHeight: variables.CheckboxIconSize,
-      marginTop: variables.CheckboxIconMarginTop,
-      fontSize: variables.CheckboxFontSize
-    },
-    'NativeBase.IconNB': {
-      color: 'transparent',
-      lineHeight: variables.CheckboxIconSize,
-      marginTop: variables.CheckboxIconMarginTop,
-      fontSize: variables.CheckboxFontSize
-    },
-    borderRadius: variables.CheckboxRadius,
-    overflow: 'hidden',
-    width: variables.checkboxSize,
-    height: variables.checkboxSize,
-    borderWidth: variables.CheckboxBorderWidth,
-    paddingLeft: variables.CheckboxPaddingLeft - 1,
-    paddingBottom: variables.CheckboxPaddingBottom,
-    left: 10
-  }
 
-  return checkBoxTheme
+export default (variables) => {
+	const {PRIMARY, GREY, platformStyle, platform} = variables
+	return {
+		height: 20, width: 20, paddingLeft: 4, overflow: 'hidden',
+		borderWidth: 1, borderColor: GREY,
+		backgroundColor: 'white',
+		'.radio': {borderRadius: 10},
+		'.checked': {backgroundColor: GREY},
+  }
 }

@@ -1,6 +1,4 @@
 export default (variables) => {
-  const platform = variables.platform
-
   const theme = {
     'NativeBase.Item': {
       '.fixedLabel': {

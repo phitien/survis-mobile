@@ -1,6 +1,7 @@
 import {MAX_PAGE} from '../constants'
 import {AsyncStorage} from 'react-native'
 import {APPNAME} from '../constants'
+import {log} from '../utils'
 
 export async function persitUser(User) {
   await AsyncStorage.setItem(`${APPNAME}:User`, JSON.stringify(User))
@@ -24,19 +25,19 @@ export function stateToProps(name, state, action) {
       return {...state, error: action.payload, loading: false}
     }
     case `${name}_Save`: {
-      const data = state[name] = {...state[name], ...action.payload || {}}
-      try {eval(`persit${name}(data)`)} catch(e) {}
+      state[name] = {...state[name], ...action.payload || {}}
+      try {eval(`persit${name}(state[name])`)} catch(e) {}
       return {...state, loading: false}
     }
     case `${name}_Unload`: {
-      const data = state[name] = {}
-      try {eval(`persit${name}(data)`)} catch(e) {}
+      state[name] = {}
+      try {eval(`persit${name}(state[name])`)} catch(e) {}
       return {...state, loading: false}
     }
     case `${name}_${name}_Pending`: {return {...state, loading: true}}
     case `${name}_${name}_Success`: {
-      const data = state[name] = {...state[name], ...action.payload || {}}
-      try {eval(`persit${name}(data)`)} catch(e) {}
+      state[name] = {...state[name], ...action.payload || {}}
+      try {eval(`persit${name}(state[name])`)} catch(e) {}
       return {...state, loading: false}
     }
     case `${name}_${name}_Failure`: {return {...state, loading: false}}
@@ -54,8 +55,8 @@ export function stateToProps(name, state, action) {
       return {...state, loading: false}
     }
     case `${name}_SaveAll`: {
-      const data = state[`${name}s`] = {...state[`${name}s`], ...action.payload || {}}
-      try {eval(`persit${name}s(data)`)} catch(e) {}
+      state[`${name}s`] = {...state[`${name}s`], ...action.payload || {}}
+      try {eval(`persit${name}s(state['${name}s'])`)} catch(e) {}
       return {...state, loading: false}
     }
     case `${name}_Loadmore`: {

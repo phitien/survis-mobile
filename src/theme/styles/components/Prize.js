@@ -17,8 +17,7 @@ export default {
 	selected: {
 		// backgroundColor: GREY,
 	},
-	image_container: {width: width/2 - 60, height: 110,},
-	image: {width: '100%', height: '100%',},
+	image: {width: width/2 - 60, height: 110,},
   icon: {
 		position: 'absolute', top: 10, left: 10, fontSize: 24,
     color: 'green'

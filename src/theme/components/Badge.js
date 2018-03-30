@@ -1,5 +1,13 @@
 export default (variables) => {
   const badgeTheme = {
+    backgroundColor: variables.badgeBg,
+    height: 12, width: 12, borderRadius: 6,
+    alignSelf: 'center',
+    'NativeBase.Text': {
+      color: 'white',
+      fontSize: 8,
+      textAlign: 'center',
+    },
     '.primary': {
       backgroundColor: variables.btnPrimaryBg
     },
@@ -15,19 +23,6 @@ export default (variables) => {
     '.danger': {
       backgroundColor: variables.btnDangerBg
     },
-    'NativeBase.Text': {
-      color: variables.badgeColor,
-      fontSize: variables.fontSizeBase,
-      lineHeight: variables.lineHeight - 1,
-      textAlign: 'center',
-      paddingHorizontal: 3
-    },
-    backgroundColor: variables.badgeBg,
-    padding: variables.badgePadding,
-    paddingHorizontal: 6,
-    alignSelf: 'flex-start',
-    borderRadius: 13.5,
-    height: 27
   }
   return badgeTheme
 }

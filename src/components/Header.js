@@ -18,14 +18,14 @@ export class Header extends Component {
   onPressScan() {
     if (this.logged) this.Actions.QrScanScreen()
     else {
-      this.actions.Screen_Load({id: 'QrScanScreen'})
+      this.actions.Screen_Save({id: 'QrScanScreen'})
       this.Actions.LoginScreen()
     }
   }
   onPressCart() {
     if (this.logged) this.Actions.ShoppingCartScreen()
     else {
-      this.actions.Screen_Load({id: 'ShoppingCartScreen'})
+      this.actions.Screen_Save({id: 'ShoppingCartScreen'})
       this.Actions.LoginScreen()
     }
   }
@@ -48,19 +48,19 @@ export class Header extends Component {
 
   renderBack() {
     if (this.props.back)
-      return <Button transparent onPress={this.onPressBack.bind(this)}>
+      return <Button onPress={this.onPressBack.bind(this)}>
         <Icon name='ios-arrow-back'/>
       </Button>
     return <Text></Text>
   }
   renderQrScan() {
-    return <Button transparent onPress={this.onPressScan.bind(this)}>
+    return <Button onPress={this.onPressScan.bind(this)}>
       <StyleProvider style={getTheme({iconFamily: 'FontAwesome'})}><Icon name='qrcode'/></StyleProvider>
     </Button>
   }
   renderSearch() {
     return <Item>
-      <Icon transparent name='search'/>
+      <Icon name='search'/>
       <Input
         placeholder='Search'
         returnKeyType='search'
@@ -73,11 +73,11 @@ export class Header extends Component {
   }
   renderCart() {
     const cartCount = this.props.ShoppingCartItem.ShoppingCartItems.list.length
-    return <Button transparent onPress={this.onPressCart.bind(this)}>
-      {cartCount > 0 ? <Badge style={style.shoppingcart}>
-        <Text tiny red>{cartCount}</Text>
-      </Badge> : null}
+    return <Button onPress={this.onPressCart.bind(this)}>
       <Icon name='ios-cart'/>
+      {cartCount > 0 ? <Badge top-right smt>
+        <Text tiny>{cartCount}</Text>
+      </Badge> : null}
     </Button>
   }
   render() {

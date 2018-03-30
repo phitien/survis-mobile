@@ -20,7 +20,7 @@ export const ShopItem = {
   images: [],
 }
 export const ShopItems = {
-  list: [], filter: {q: '', catid: '', page: 0, pagesize: 20},
+  list: [], filter: {q: '', catid: '', shopid: '', page: 0, pagesize: 20},
 }
 export default {
   loading: false, error: false,

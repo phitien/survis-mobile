@@ -16,15 +16,15 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loading" translatesAutoresizingMaskIntoConstraints="NO" id="A0I-v1-q8i">
-                    <rect key="frame" x="215" y="378.5" width="50" height="50"/>
+                    <rect key="frame" x="215" y="381" width="50" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="7Rc-ih-wts"/>
                         <constraint firstAttribute="width" constant="50" id="Gs4-tO-dg0"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Serve you right!!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oh0-ol-R4x">
-                    <rect key="frame" x="181" y="428.5" width="119.5" height="19.5"/>
-                    <fontDescription key="fontDescription" type="italicSystem" pointSize="16"/>
+                    <rect key="frame" x="186.5" y="431" width="107" height="17"/>
+                    <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
                     <color key="textColor" red="0.97647058819999999" green="0.68235294120000001" blue="0.094117647060000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>

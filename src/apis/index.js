@@ -1,14 +1,13 @@
 import * as models from '../models'
 import {apiCall} from '../utils'
-import {query, url} from '../utils'
+import {query, url, log} from '../utils'
 import {appstore} from '../store'
-import axios from 'axios'
 import querystring from 'querystring'
 
 function apiGetGenerator(name, act, uri, method, filter, type) {
   return function(queryParams, postParams, headers) {
-    const store = appstore()
-    if (filter && !queryParams) queryParams = store.getState()[name].filter
+    const store = appstore(), state = store.getState()[name], actState = state[act] || {}
+    if (filter) queryParams = {...actState.filter, ...queryParams}
     if (method == 'post' && type == 'form') {
       return apiCall.post(url(uri, query(queryParams)), querystring.stringify(postParams), {headers: {
         ...apiCall.defaults.headers,

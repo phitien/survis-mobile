@@ -3,14 +3,13 @@ const width = Dimensions.get('window').width
 import {PRIMARY, GREY} from '../../constants'
 
 export default (variables) => {
-	const platformStyle = variables.platformStyle
-	const platform = variables.platform
+	const {platformStyle, platform} = variables
 
-	const headerTheme = {
-		backgroundColor: variables.toolbarDefaultBg,
+	return {
+		backgroundColor: PRIMARY,
 		flexDirection: 'row',
 		justifyContent: 'center',
-		marginTop: 20,
+		paddingTop: 20, //marginTop: 20,
 		'NativeBase.Button': {
 			justifyContent: 'center', alignItems: 'center',
 			alignSelf: 'center',

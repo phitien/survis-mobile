@@ -1,10 +1,8 @@
 export default (variables) => {
-  const spinnerTheme = {
+  return {
     height: 40,
     '.small':{
       height: 40
     }
   }
-
-  return spinnerTheme
 }

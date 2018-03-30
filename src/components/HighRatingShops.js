@@ -26,7 +26,7 @@ export class HighRatingShops extends Component {
   }
   render() {
     if (!this.items.length) return null
-    return <View style={style.container}>
+    return <View big-size>
       {this.renderContent()}
     </View>
   }

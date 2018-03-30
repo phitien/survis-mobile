@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Tabs, Tab, Item, Input, Text, View, Icon, CheckBox} from 'native-base'
 import {StyleSheet} from 'react-native'
+import {TouchableOpacity as Touch} from 'react-native'
 
 import {LoginScreen as style} from '../theme/styles/screens'
 
@@ -10,6 +11,7 @@ import {Component as Screen} from '../components'
 
 export class LoginScreen extends Screen {
   state = {
+    agreed: false,
     usr_email: null,
     usr_password: null,
   }
@@ -39,7 +41,10 @@ export class LoginScreen extends Screen {
 
   async componentDidUpdate() {
     if (this.logged) {
-      if (this.props.Screen.redirect) this.Actions[this.props.Screen.redirect](this.props.Screen.params)
+      if (this.props.Screen.Screen.id) {
+        this.actions.Screen_Save({id: '', params: {}})
+        .then(e => this.Actions[this.props.Screen.Screen.id](this.props.Screen.Screen.params))
+      }
       else this.Actions.HomeScreen()
     }
   }
@@ -61,8 +66,7 @@ export class LoginScreen extends Screen {
   }
 
   renderLogin() {
-    return <View>
-      <Text label>Email</Text>
+    return <View mt pt>
       <Item login error={this.error}>
         <Input value={this.state.usr_email}
           ref={e => this.logEmailInput = e}
@@ -71,7 +75,6 @@ export class LoginScreen extends Screen {
           onSubmitEditing={e => this.isEmailValid}
           returnKeyType='next'/>
       </Item>
-      <Text label>Password</Text>
       <Item login error={this.error}>
         <Input value={this.state.usr_password}
           ref={e => this.logPwdInput = e}
@@ -81,7 +84,7 @@ export class LoginScreen extends Screen {
           returnKeyType='go'/>
       </Item>
       {this.renderError()}
-      <Button loading={this.props.User.loading} onPress={this.onPressLogin.bind(this)} full small style={style.button}>
+      <Button loading={this.props.User.loading} onPress={this.onPressLogin.bind(this)} full style={style.button}>
         <Text bold>LOG IN</Text>
       </Button>
       <View horizontal style={style.forget_password}>
@@ -91,9 +94,8 @@ export class LoginScreen extends Screen {
   }
 
   renderRegister() {
-    return <View>
+    return <View mt pt>
       {this.renderError()}
-      <Text label>Email</Text>
       <Item login error={this.error}>
         <Input value={this.state.usr_email}
           ref={e => this.regEmailInput = e}
@@ -102,7 +104,6 @@ export class LoginScreen extends Screen {
           onSubmitEditing={e => this.isEmailValid}
           returnKeyType='next'/>
       </Item>
-      <Text label>Password</Text>
       <Item login error={this.error}>
         <Input value={this.state.usr_password}
           ref={e => this.regPwdInput = e}
@@ -111,12 +112,12 @@ export class LoginScreen extends Screen {
           onSubmitEditing={this.onPressRegister.bind(this)}
           returnKeyType='go'/>
       </Item>
-      <View horizontal style={style.agree}>
-        <CheckBox style={style.checkbox}/>
-        <Text small>I agree with terms and conditions</Text>
-      </View>
+      <Touch onPress={e => this.setState({agreed: !this.state.agreed})}><View horizontal middle m>
+        <CheckBox checked={this.state.agreed}/>
+        <Text ml small>I agree with terms and conditions</Text>
+      </View></Touch>
       {this.renderError()}
-      <Button loading={this.props.User.loading} onPress={this.onPressRegister.bind(this)} full small style={style.button}>
+      <Button full smt loading={this.props.User.loading} onPress={this.onPressRegister.bind(this)}>
         <Text bold>REGISTER</Text>
       </Button>
     </View>
@@ -125,7 +126,7 @@ export class LoginScreen extends Screen {
   render() {
     return <LightBox>
       <View flex1 bml bmr>
-        <Tabs tabBarUnderlineStyle={style.tabBarUnderlineStyle} activeTextColor={style.activeTextColor}>
+        <Tabs tabBarUnderlineStyle={style.tabBarUnderlineStyle}>
           <Tab heading='Login'>
             {this.renderLogin()}
           </Tab>

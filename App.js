@@ -4,7 +4,7 @@ import {Provider} from 'react-redux'
 import {View, StyleProvider, Spinner} from 'native-base'
 import OneSignal from 'react-native-onesignal'
 
-import {getTheme} from './src/theme'
+import theme from './src/theme'
 import AppStyle from './src/theme/styles/App'
 import {Routes} from './src/routes'
 import {PRIMARY} from './src/constants'
@@ -26,7 +26,7 @@ export default class App extends Component {
   }
 
   render() {
-    return <StyleProvider style={getTheme()}>
+    return <StyleProvider style={theme}>
       {!this.state.store ? <View style={AppStyle.container}><Spinner color={PRIMARY} style={AppStyle.spinner}/></View> :
       <Provider store={this.state.store}>
         <Routes store={this.state.store}/>

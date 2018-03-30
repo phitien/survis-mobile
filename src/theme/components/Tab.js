@@ -1,8 +1,5 @@
 export default (variables) => {
-  const tabTheme = {
+  return {
     flex: 1,
-    backgroundColor: '#FFF'
   }
-
-  return tabTheme
 }

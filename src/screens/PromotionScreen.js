@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {Container, View, Content, Spinner, Text} from 'native-base'
 
 import {Header, Footer, ShopSummary, ShopItem} from '../containers'
-import {ScrollView, TouchableOpacity as Touch} from 'react-native'
+import {TouchableOpacity as Touch} from 'react-native'
 
 import {PromotionScreen as style} from '../theme/styles/screens'
 
@@ -18,20 +18,21 @@ export class PromotionScreen extends Screen {
   renderContent() {
     const item = this.props.Promotion.Promotion || {},
       items = [].concat(item.items).filter(o => o)
-    return <ScrollView containerStyle={style.container}>
-      <Promotion item={item}/>
+    return <Content>
       <ShopSummary item={item.shop_info}/>
-      <View p><Text small>{item.description}</Text></View>
-      {items.map(sitem => <Touch key={sitem.id} onPress={e => this.Actions.ShopItemScreen({item: sitem, shop: item})}>
-        <ShopItem item={sitem}/>
+      <Promotion item={item}/>
+      <View p full><Text small>{item.description}</Text></View>
+      {items.map((sitem,i) => <Touch key={sitem.id} onPress={e => this.Actions.ShopItemScreen({item: sitem, shop: item})}>
+        <ShopItem item={sitem} index={i}/>
       </Touch>)}
-    </ScrollView>
+    </Content>
   }
   render() {
     return <Container>
       <Header back='back'/>
       <Content>
-        {this.props.Promotion.loading ? this.renderLoading() : this.renderContent()}
+        {this.props.Promotion.loading ? this.renderLoading() : null}
+        {this.renderContent()}
       </Content>
       <Footer/>
     </Container>

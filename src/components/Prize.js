@@ -11,12 +11,12 @@ export class Prize extends Component {
     const {item} = this.props
     const selected = this.props.Prize.Prizes.list.find(o => o.selected) == item
     return <View style={[style.container, selected ? style.selected : {}]}>
-      <View style={style.image_container}><Image style={style.image} source={{uri: item.image}}/></View>
+      <View style={style.image}><Image source={{uri: item.image}}/></View>
       {selected ? <Icon style={style.icon} name='ios-arrow-dropdown-circle'/> : null}
       <View mt><Text>{item.name}</Text></View>
       <View mt><Text small>{item.description}</Text></View>
       <View horizontal center middle mt>
-        <View mr><Image style={style.sponsor_image} source={{uri: item.sponsor_image}}/></View>
+        <View mr style={style.sponsor_image}><Image source={{uri: item.sponsor_image}}/></View>
         <Text bold small theme>{item.sponsor_name}</Text>
       </View>
     </View>

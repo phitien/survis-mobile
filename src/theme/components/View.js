@@ -1,6 +1,5 @@
-import {PRIMARY, GREY} from '../../constants'
-
 export default (variables) => {
+  const {PRIMARY, GREY, platformStyle, platform} = variables
   return {
     '.grey': {backgroundColor: GREY},
     '.theme': {backgroundColor: PRIMARY},

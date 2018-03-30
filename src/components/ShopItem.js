@@ -6,25 +6,21 @@ import {ShopItem as style} from '../theme/styles/components'
 import {itemHelper, substr} from '../utils'
 
 import {Image} from './Image'
+import {Component} from './Component'
 
-const ShopItem = props => {
-  const item = props.item
-  const odd = props.odd
-  const {
-    image, name, description, priceS
-  } = itemHelper(item)
-  return (
-    <View horizontal mt ml mb white style={[style.container, odd ? style.odd : style.even]}>
-      <View mr style={style.image_container}><Image style={style.image} source={{uri: image}}/></View>
-      <View>
-        <Text bold>{name}</Text>
-        <Text small smt>{description}</Text>
-        <Text smt theme>{priceS}</Text>
+export class ShopItem extends Component {
+  render() {
+    const {item, index} = this.props
+    const {
+      image, name, description, priceS
+    } = itemHelper(item)
+    return <View horizontal mt ml mr {...{grey: index%2 != 0}}>
+      <View normal-size-square><Image source={{uri: image}}/></View>
+      <View flex1 pl pr spt spb>
+        <View full><Text bold>{name}</Text></View>
+        <View full><Text small smt>{description}</Text></View>
+        <View full><Text smt theme>{priceS}</Text></View>
       </View>
     </View>
-  )
-}
-
-export {
-  ShopItem
+  }
 }

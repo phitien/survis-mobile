@@ -16,8 +16,8 @@ export class NewShop extends Component {
     const {
       image, address, name, latitude, longitude, distance,
     } = itemHelper(item)
-    return <View ml mb style={style.container}>
-      <View style={style.image_container}><Image style={style.image} source={{uri: image}}/></View>
+    return <View ml mb big-size-square>
+      <View big-size-square><Image source={{uri: image}}/></View>
       <View bottom full>
         <View full opacity sp style={style.address}>
           <Text small white>{address}</Text>

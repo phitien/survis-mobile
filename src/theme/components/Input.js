@@ -1,5 +1,5 @@
 export default (variables) => {
-	const inputTheme = {
+	return {
 		height: 32,
 		color: variables.inputColor,
 		paddingLeft: 4,
@@ -12,5 +12,4 @@ export default (variables) => {
 		'.multiline': {height: null,},
 		'.search': {height: 20, borderRadius: 10, flex: 1}
 	}
-	return inputTheme
 }

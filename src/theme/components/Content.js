@@ -1,14 +1,11 @@
 export default (variables) => {
-  const contentTheme = {
-    flex: 1, width: '100%', height: '100%',
-    backgroundColor: 'white',
-    'NativeBase.Segment': {
-      borderWidth: 0,
-      backgroundColor: 'transparent'
-    },
-    '.center': {justifyContent: 'center'},
-    '.middle': {alignItems: 'center'},
+  const {PRIMARY, GREY, platformStyle, platform} = variables
+  return {
+    width: '100%', backgroundColor: 'white',
+    '.grey': {backgroundColor: GREY},
+    '.theme': {backgroundColor: PRIMARY},
+    '.white': {backgroundColor: 'white'},
+    '.opacity': {backgroundColor: 'rgba(0, 0, 0, 0.5)'},
+    '.transparent': {backgroundColor: 'transparent'},
   }
-
-  return contentTheme
 }
