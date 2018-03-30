@@ -20,21 +20,21 @@ export class QrScanScreen extends Screen {
   }
 
   renderScanner() {
-    return <RNCamera ref={ref => {this.camera = ref}}
+    return <View horizontal center middle fullW fullH flex1>
+      <RNCamera ref={ref => {this.camera = ref}}
         onBarCodeRead={this.onBarCodeRead.bind(this)}
         style={style.scanningFrame}
         type={RNCamera.Constants.Type.back}
         flashMode={RNCamera.Constants.FlashMode.on}
         permissionDialogTitle={'Permission to use camera'}
         permissionDialogMessage={'We need your permission to use your camera phone'}/>
+    </View>
   }
   render() {
     return <Container>
       <Header/>
-      <Content center middle>
-        {this.renderError()}
-        {this.renderScanner()}
-      </Content>
+      {this.renderError()}
+      {this.renderScanner()}
       <Footer/>
     </Container>
   }
