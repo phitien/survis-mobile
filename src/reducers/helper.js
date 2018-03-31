@@ -16,6 +16,8 @@ export async function persitShoppingCartItems(ShoppingCartItems) {
 }
 
 export function stateToProps(name, state, action) {
+  const plural = `${name}s`, prop = `${name}_${name}`, props = `${name}_${plural}`
+
   switch (action.type) {
     case `${name}_Load`: {
       const data = state[name] = {...state[name], ...action.payload || {}}
@@ -26,7 +28,7 @@ export function stateToProps(name, state, action) {
     }
     case `${name}_Save`: {
       state[name] = {...state[name], ...action.payload || {}}
-      try {eval(`persit${name}(state[name])`)} catch(e) {}
+      try {eval(`persit${name}(state['${name}'])`)} catch(e) {}
       return {...state, loading: false}
     }
     case `${name}_Unload`: {
@@ -34,16 +36,17 @@ export function stateToProps(name, state, action) {
       try {eval(`persit${name}(state[name])`)} catch(e) {}
       return {...state, loading: false}
     }
-    case `${name}_${name}_Pending`: {return {...state, loading: true}}
-    case `${name}_${name}_Success`: {
+    case `${prop}_Pending`: {return {...state, loading: true}}
+    case `${prop}_Success`: {
       state[name] = {...state[name], ...action.payload || {}}
-      try {eval(`persit${name}(state[name])`)} catch(e) {}
+      try {eval(`persit${name}(state[name])`)} catch(e) {log('api-error', e)}
       return {...state, loading: false}
     }
-    case `${name}_${name}_Failure`: {return {...state, loading: false}}
+    case `${prop}_Failure`: {return {...state, loading: false}}
 
+    //plural
     case `${name}_Select`: {
-      const item = state[`${name}s`].list.find(o => {
+      const item = state[plural].list.find(o => {
         o.selected = false
         return o.id == action.payload.id
       })
@@ -51,34 +54,36 @@ export function stateToProps(name, state, action) {
       return {...state, loading: false}
     }
     case `${name}_LoadAll`: {
-      const data = state[`${name}s`] = {...state[`${name}s`], ...action.payload || {}}
+      const data = state[plural] = {...state[plural], ...action.payload || {}}
       return {...state, loading: false}
     }
     case `${name}_SaveAll`: {
-      state[`${name}s`] = {...state[`${name}s`], ...action.payload || {}}
-      try {eval(`persit${name}s(state['${name}s'])`)} catch(e) {}
+      state[plural] = {...state[plural], ...action.payload || {}}
+      try {eval(`persit${plural}s(state['${plural}'])`)} catch(e) {}
       return {...state, loading: false}
-    }
-    case `${name}_Loadmore`: {
-      const filter = state[`${name}s`].filter, page = filter.page || 0
-      state[`${name}s`].filter = {...filter, page: page < MAX_PAGE ? page + 1 : page}
-      return {...state, loading: false}
-    }
-    case `${name}_Search`: {
-      const filter = state[`${name}s`].filter
-      state[`${name}s`].filter = {...filter, ...action.payload || {}, page: 0}
-      return {...state, loading: false}
-    }
-    case `${name}_Reset`: {
-      const filter = {...state[`${name}s`].filter, q: '', catid: '', page: 0}
-      return {...state, [`${name}s`]: {list: [], filter}, loading: false}
     }
 
-    case `${name}_${name}s_Pending`: {return {...state, loading: true}}
-    case `${name}_${name}s_Success`: {
-      state[`${name}s`].list = [].concat(state[`${name}s`].list).concat(action.payload).filter(o => o)
+    case `${props}_Loadmore`: {
+      let page = state[plural].filter.page
+      if (page < MAX_PAGE) page = page + 1
+      state[plural].filter = {...state[plural].filter, ...action.payload, page}
       return {...state, loading: false}
     }
-    case `${name}_${name}s_Failure`: {return {...state, loading: false}}
+    case `${props}_Search`: {
+      state[plural].filter = {...state[plural].filter, ...action.payload, page: 0}
+      return {...state, loading: false}
+    }
+    case `${props}_Reset`: {
+      state[plural].filter = {...state[plural].filter, ...action.payload, page: 0}
+      state[plural].list = []
+      return {...state, loading: false}
+    }
+
+    case `${props}_Pending`: {return {...state, loading: true}}
+    case `${props}_Success`: {
+      state[plural].list = [].concat(state[plural].list).concat(action.payload).filter(o => o)
+      return {...state, loading: false}
+    }
+    case `${props}_Failure`: {return {...state, loading: false}}
   }
 }

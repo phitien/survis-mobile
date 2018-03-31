@@ -7,7 +7,7 @@ import {ShopScreen as style} from '../theme/styles/screens'
 import {Header, Footer, ShopSummary, ShopItem, Review} from '../containers'
 import {Image} from '../components'
 import {itemHelper, substr} from '../utils'
-import {Component as Screen} from '../components'
+import {Screen} from '../components'
 
 export class ShopScreen extends Screen {
   state = {showReview: false}
@@ -23,7 +23,7 @@ export class ShopScreen extends Screen {
 
   renderReviews() {
     return [
-      <View horizontal flex1 heading p space-between>
+      <View horizontal flex1 heading p space-between key='reviews'>
         <Text bold>Reviews</Text>
         <Text theme onPress={e => this.setState({showReview: false})}>Back</Text>
       </View>
@@ -41,26 +41,19 @@ export class ShopScreen extends Screen {
   renderImages() {
     const shop = this.props.Shop.Shop || {}, {image, promotion_image} = shop
     const images = Array.from(new Set([promotion_image].concat(shop.images).filter(o => o)))
-    return images.length ? <View big-size><Content horizontal big-size>
+    return images.length ? <View big-size key='images'><Content horizontal big-size>
       {images.map((img,i) => <View big-size fullW key={i}><Image source={{uri: img}}/></View>)}
     </Content></View> : null
   }
-  renderContent() {
+
+  get back() {return true}
+  get content() {
     const item = this.props.Shop.Shop
-    return <Content>
-      <ShopSummary openReview={e => this.setState({showReview: true})} item={item}/>
-      {this.renderImages()}
-      {this.state.showReview ? this.renderReviews() : this.renderShopItems()}
-    </Content>
-  }
-  render() {
-    return <Container>
-      <Header back='back'/>
-      <Content>
-        {this.loading ? this.renderLoading() : null}
-        {this.renderContent()}
-      </Content>
-      <Footer/>
-    </Container>
+    return [
+      this.loading ? this.renderLoading() : null,
+      <ShopSummary openReview={e => this.setState({showReview: true})} item={item}/>,
+      ...[].concat(this.renderImages()),
+      ...[].contact(this.state.showReview ? this.renderReviews() : this.renderShopItems())
+    ]
   }
 }

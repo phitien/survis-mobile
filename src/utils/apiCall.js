@@ -13,7 +13,7 @@ const apiCall = axios.create({
     'Accept': 'application/json',
     'Content-Type': 'application/json',
     'token': '',
-    'deviceId': '',
+    'device_model': '', 'language': '', 'device_type': '', 'country': '', 'device_id': '', 'number': '',
     'longitude': 0,
     'latitude': 0
   }
@@ -27,16 +27,13 @@ apiCall
     return res
   }, error => {
 		const res = error.response || {}
-		log('api-error', res.request._method, res.request.responseURL)
-		log('api-error', error)
-		log('api-error', res.data)
+		log('api-error', res.request._method, res.request.responseURL, JSON.stringify(apiCall.defaults.headers), JSON.stringify(res.data))
     const {data, status} = res || {}
     const {code, message} = data || {}
     if (status === 401 || status === 403) {
       requestHeader('token', '')
       AsyncStorage.clear()
       Actions.replace('LoginScreen', {error: true})
-      // Actions.popTo('LoginScreen')
       return
     } else {
       return Promise.reject(error)

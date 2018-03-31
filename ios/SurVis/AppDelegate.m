@@ -33,8 +33,8 @@
    self.window.rootViewController = rootViewController;
    [self.window makeKeyAndVisible];
 
-   self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions appId:@"122c15ba-2e01-4109-9e0b-fe25de5cfeb0"];
-   self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions appId:@"122c15ba-2e01-4109-9e0b-fe25de5cfeb0" settings:@{kOSSettingsKeyAutoPrompt: @false}];
+   self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions appId:@"ec589436-0771-461a-a7d9-4a9be77399d1"];
+   self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions appId:@"ec589436-0771-461a-a7d9-4a9be77399d1" settings:@{kOSSettingsKeyAutoPrompt: @false}];
 
    [Fabric with:@[[Crashlytics class]]];
 

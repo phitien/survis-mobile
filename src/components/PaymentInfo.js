@@ -117,7 +117,7 @@ export class PaymentInfo extends Component {
           {!this.state.showInfo ? <Button transparent theme onPress={e => this.setState({showInfo: true, showAddress: false})}>
             <Icon name='md-create'/>
           </Button> : null}
-          {ucc_num ? <Button transparent theme onPress={e => this.onClearCreditCard()}>
+          {ucc_num ? <Button transparent theme ml onPress={e => this.onClearCreditCard()}>
             <Icon name='ios-trash'/>
           </Button> : null}
         </View>

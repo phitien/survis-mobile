@@ -34,19 +34,26 @@ export class Footer extends Component {
   openScreen(screen) {
     let currentScene = this.Actions.currentScene.toString()
     if (currentScene !== screen) {
-      this.actions.Category_Reset()
-      this.actions.Shop_SearchShops_Reset()
+      // this.actions.Category_Reset()
+      // this.actions.Shop_SearchShops_Reset()
+      this.log('asd', Object.keys(this.props.actions).join())
       this.Actions.reset(screen)
+      // try {
+      //   this.Actions.popTo(screen)
+      // }
+      // catch(e) {
+      //   this.Actions.reset(screen)
+      // }
     }
   }
 
   getIconStyle = (n) => ({color: this.Actions.currentScene.toString() === n && iconColorActive || iconColor})
   renderTab(screen, icon, text, badge, onPress) {
     if (!onPress) onPress = this.openScreen.bind(this, screen)
-	   if (badge) return <Button key={screen} vertical badge onPress={onPress}>
-  	  <Badge><Text>{badge}</Text></Badge>
-  	  <Icon name={icon} size={iconSize} style={this.getIconStyle(screen)}/>
+	   if (badge) return <Button key={screen} vertical onPress={onPress}>
+  	  <Icon name={icon} style={this.getIconStyle(screen)}/>
   	  <Text footer>{text}</Text>
+      <Badge top-right style={{top: 0, right: '50%', marginRight: -12}}><Text>{badge}</Text></Badge>
   	</Button>
   	return <Button key={screen} vertical onPress={onPress}>
   	  <Icon name={icon} size={iconSize} style={this.getIconStyle(screen)}/>

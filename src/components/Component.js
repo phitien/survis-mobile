@@ -47,10 +47,10 @@ export class Component extends RAComponent {
   }
 
   renderError() {
-    return this.error ? <View center><Text red small center>{this.error}</Text></View> : null
+    return this.error ? <View center key='error'><Text red small center>{this.error}</Text></View> : null
   }
   renderLoading() {
-    return <View center style={SpinnerStyle.container}>
+    return <View center key='loading' style={SpinnerStyle.container}>
       <Spinner color={PRIMARY} style={SpinnerStyle.spinner}/>
     </View>
   }

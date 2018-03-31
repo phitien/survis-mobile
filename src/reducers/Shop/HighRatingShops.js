@@ -1,27 +1,32 @@
 import {MAX_PAGE} from '../../constants'
 
 export default function(state, action) {
+  const name = 'Shop', plural = 'HighRatingShops', props = `${name}_${plural}`
   switch (action.type) {
-    case 'Shop_HighRatingShops_Loadmore': {
-      let page = state.filter.page
+    case `${props}_Loadmore`: {
+      let page = state[plural].filter.page
       if (page < MAX_PAGE) page = page + 1
-      return {...state, HighRatingShops: {...state.HighRatingShops, filter: {...state.HighRatingShops.filter, ...action.payload, page}}, loading: false}
+      state[plural].filter = {...state[plural].filter, ...action.payload, page}
+      return {...state, loading: false}
     }
-    case 'Shop_HighRatingShops_Search': {
-      return {...state, HighRatingShops: {list: [], filter: {...state.HighRatingShops.filter, ...action.payload, page: 0}}, loading: false}
+    case `${props}_Search`: {
+      state[plural].filter = {...state[plural].filter, ...action.payload, page: 0}
+      return {...state, loading: false}
     }
-    case 'Shop_HighRatingShops_Reset': {
-      return {...state, HighRatingShops: {...state.HighRatingShops, list: [], filter: {...state.HighRatingShops.filter, ...action.payload, page: 0}}, loading: false}
+    case `${props}_Reset`: {
+      state[plural].filter = {...state[plural].filter, ...action.payload, page: 0}
+      state[plural].list = []
+      return {...state, loading: false}
     }
 
-    case 'Shop_HighRatingShops_Pending': {
+    case `${props}_Pending`: {
       return {...state, loading: true}
     }
-    case 'Shop_HighRatingShops_Success': {
-      const list = [].concat(action.payload).filter(o => o)
-      return {...state, HighRatingShops: {...state.HighRatingShops, list}, loading: false}
+    case `${props}_Success`: {
+      state[plural].list = [].concat(state[plural].list).concat(action.payload).filter(o => o)
+      return {...state, loading: false}
     }
-    case 'Shop_HighRatingShops_Failure': {
+    case `${props}_Failure`: {
       return {...state, loading: false}
     }
   }

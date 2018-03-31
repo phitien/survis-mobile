@@ -2,7 +2,7 @@ import {BASEURL} from '../constants'
 
 export const acts = {
   Error: 'Error', LoadAll: 'LoadAll', SaveAll: 'SaveAll', Loadmore: 'Loadmore', Load: 'Load', Save: 'Save', Unload: 'Unload', Reset: 'Reset', Search: 'Search', Select: 'Select',
-  Notifications: `api|get|true|body|${BASEURL}?type=notification`,
+  Notifications: `api|get|true|body|${BASEURL}?type=notification&cmd=get`,
 }
 export const Notification = {
   id: -1,

@@ -5,9 +5,9 @@ import {TouchableOpacity as Touch} from 'react-native'
 
 import {LoginScreen as style} from '../theme/styles/screens'
 
-import {validateEmail, persitUser} from '../utils'
+import {validateEmail, requestHeader} from '../utils'
 import {LightBox, Button} from '../components'
-import {Component as Screen} from '../components'
+import {Screen} from '../components'
 
 export class LoginScreen extends Screen {
   state = {
@@ -39,20 +39,21 @@ export class LoginScreen extends Screen {
     return true
   }
 
-  async componentDidUpdate() {
+  onAfterLogin() {
     if (this.logged) {
       if (this.props.Screen.Screen.id) {
+        requestHeader('token', this.User.token)
+        this.Actions[this.props.Screen.Screen.id](this.props.Screen.Screen.params)
         this.actions.Screen_Save({id: '', params: {}})
-        .then(e => this.Actions[this.props.Screen.Screen.id](this.props.Screen.Screen.params))
       }
       else this.Actions.HomeScreen()
     }
   }
-
   onPressLogin() {
     if (this.isEmailValid && this.isPasswordValid) {
       const {usr_email, usr_password} = this.state
       this.actions.User_Login({usr_email, usr_password})
+      .then(e => this.onAfterLogin(e))
     }
   }
   onPressRegister() {
@@ -67,7 +68,7 @@ export class LoginScreen extends Screen {
 
   renderLogin() {
     return <View mt pt>
-      <Item login error={this.error}>
+      <Item login error={this.error ? true : false}>
         <Input value={this.state.usr_email}
           ref={e => this.logEmailInput = e}
           onChangeText={e => this.setState({usr_email: e, typing: true, next: this.logPwdInput})}
@@ -75,7 +76,7 @@ export class LoginScreen extends Screen {
           onSubmitEditing={e => this.isEmailValid}
           returnKeyType='next'/>
       </Item>
-      <Item login error={this.error}>
+      <Item login error={this.error ? true : false}>
         <Input value={this.state.usr_password}
           ref={e => this.logPwdInput = e}
           onChangeText={e => this.setState({usr_password: e, typing: true, next: null})}
@@ -96,7 +97,7 @@ export class LoginScreen extends Screen {
   renderRegister() {
     return <View mt pt>
       {this.renderError()}
-      <Item login error={this.error}>
+      <Item login error={this.error ? true : false}>
         <Input value={this.state.usr_email}
           ref={e => this.regEmailInput = e}
           onChangeText={e => this.setState({usr_email: e, typing: true, next: this.regPwdInput})}
@@ -104,7 +105,7 @@ export class LoginScreen extends Screen {
           onSubmitEditing={e => this.isEmailValid}
           returnKeyType='next'/>
       </Item>
-      <Item login error={this.error}>
+      <Item login error={this.error ? true : false}>
         <Input value={this.state.usr_password}
           ref={e => this.regPwdInput = e}
           onChangeText={e => this.setState({usr_password: e, typing: true, next: null})}

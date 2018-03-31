@@ -8,33 +8,25 @@ import {PromotionScreen as style} from '../theme/styles/screens'
 
 import {itemHelper, substr} from '../utils'
 import {Image, Promotion} from '../components'
-import {Component as Screen} from '../components'
+import {Screen} from '../components'
 
 export class PromotionScreen extends Screen {
-  componentDidMount() {
+  async omponentDidMount() {
     this.actions.Promotion_Promotion({prm_id: this.props.item.id})
   }
 
-  renderContent() {
+  get back() {return true}
+  get content() {
     const item = this.props.Promotion.Promotion || {},
       items = [].concat(item.items).filter(o => o)
-    return <Content>
-      <ShopSummary item={item.shop_info}/>
-      <Promotion item={item}/>
-      <View p full><Text small>{item.description}</Text></View>
-      {items.map((sitem,i) => <Touch key={sitem.id} onPress={e => this.Actions.ShopItemScreen({item: sitem, shop: item})}>
+    return [
+      this.props.Promotion.loading ? this.renderLoading() : null,
+      <ShopSummary item={item.shop_info} key='shop_summary'/>,
+      <Promotion item={item} key='promotion'/>,
+      <View p full key='description'><Text small>{item.description}</Text></View>,
+      ...items.map((sitem,i) => <Touch key={sitem.id} onPress={e => this.Actions.ShopItemScreen({item: sitem, shop: item})}>
         <ShopItem item={sitem} index={i}/>
-      </Touch>)}
-    </Content>
-  }
-  render() {
-    return <Container>
-      <Header back='back'/>
-      <Content>
-        {this.props.Promotion.loading ? this.renderLoading() : null}
-        {this.renderContent()}
-      </Content>
-      <Footer/>
-    </Container>
+      </Touch>)
+    ]
   }
 }

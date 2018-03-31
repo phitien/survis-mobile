@@ -1,5 +1,5 @@
 export default (variables) => {
-	const {PRIMARY, platformStyle, platform} = variables
+	const {PRIMARY, GREY, platformStyle, platform} = variables
 	return {
 		backgroundColor: PRIMARY,
 		borderRadius: 3,
@@ -16,11 +16,11 @@ export default (variables) => {
 			textAlign: 'center',
 		},
 		'NativeBase.Icon': {
-			color: variables.inverseTextColor,
+			color: 'white',
 			fontSize: 20,
 		},
 		'NativeBase.IconNB': {
-			color: variables.inverseTextColor,
+			color: 'white',
 			fontSize: 20,
 		},
 		'.iconLeft': {
@@ -33,7 +33,7 @@ export default (variables) => {
 			'NativeBase.IconNB': {marginLeft: 0, marginRight: 16,},
 			'NativeBase.Icon': {marginLeft: 0, marginRight: 16,},
 		},
-		'.disabled': {backgroundColor: variables.btnDisabledBg,},
+		'.disabled': {backgroundColor: GREY,},
 		'.transparent': {
 			backgroundColor: 'transparent',
 			'.theme': {

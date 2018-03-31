@@ -8,6 +8,8 @@ export default (variables) => {
     '.transparent': {backgroundColor: 'transparent'},
     '.horizontal':{display: 'flex', flexDirection: 'row'},
     '.middle': {display: 'flex', alignItems: 'center'},
+    '.middle-start': {display: 'flex', alignItems: 'center', justifyContent: 'flex-start'},
+    '.middle-end': {display: 'flex', alignItems: 'center', justifyContent: 'flex-end'},
     '.center':{display: 'flex', justifyContent: 'center'},
     '.space-between':{display: 'flex', justifyContent: 'space-between'},
     '.space-around':{display: 'flex', justifyContent: 'space-around'},

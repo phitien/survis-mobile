@@ -63,7 +63,7 @@ export default function(state = initialState, action) {
     }
     case `${name}_Logout_Failure`: {
       persitUser({})
-      return {...state, ...action.payload, [name]: {}, loading: false}
+      return {...state, [name]: {}, error: false, loading: false}
     }
   }
   return state

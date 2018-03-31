@@ -23,20 +23,18 @@ export class Header extends Component {
     }
   }
   onPressCart() {
-    if (this.logged) this.Actions.ShoppingCartScreen()
-    else {
-      this.actions.Screen_Save({id: 'ShoppingCartScreen'})
-      this.Actions.LoginScreen()
-    }
+    this.Actions.ShoppingCartScreen()
   }
   onPressBack() {
     this.setState({q: ''})
-    this.actions.Shop_SearchShops_Reset()
-    this.actions.Category_Reset()
-    this.actions.Category_Categorys()
-    .then(e => this.Actions.pop())
+    this.Actions.pop()
+    // this.actions.Shop_SearchShops_Reset()
+    // this.actions.Category_Reset()
+    // this.actions.Category_Categorys()
+    // .then(e => this.Actions.pop())
   }
   onSearchOk() {
+    this.actions.Shop_SearchShops_Reset()
     this.actions.Shop_SearchShops_Search({q: this.state.q, page: 0})
     let currentScene = this.Actions.currentScene.toString()
     if (currentScene !== 'SearchScreen') this.Actions.SearchScreen()
@@ -75,7 +73,7 @@ export class Header extends Component {
     const cartCount = this.props.ShoppingCartItem.ShoppingCartItems.list.length
     return <Button onPress={this.onPressCart.bind(this)}>
       <Icon name='ios-cart'/>
-      {cartCount > 0 ? <Badge top-right smt>
+      {cartCount > 0 ? <Badge top-right style={{top: 0, right: '50%', marginRight: -6}}>
         <Text tiny>{cartCount}</Text>
       </Badge> : null}
     </Button>

@@ -5,7 +5,7 @@ import {RNCamera} from 'react-native-camera'
 import {QrScanScreen as style} from '../theme/styles/screens'
 
 import {Header, Footer} from '../containers'
-import {Component as Screen} from '../components'
+import {Screen} from '../components'
 
 export class QrScanScreen extends Screen {
   get error() {return this.state.error || this.props.Prize.error}
@@ -20,7 +20,7 @@ export class QrScanScreen extends Screen {
   }
 
   renderScanner() {
-    return <View horizontal center middle fullW fullH flex1>
+    return <View horizontal center middle fullW fullH flex1 key='main'>
       <RNCamera ref={ref => {this.camera = ref}}
         onBarCodeRead={this.onBarCodeRead.bind(this)}
         style={style.scanningFrame}
@@ -30,12 +30,10 @@ export class QrScanScreen extends Screen {
         permissionDialogMessage={'We need your permission to use your camera phone'}/>
     </View>
   }
-  render() {
-    return <Container>
-      <Header/>
-      {this.renderError()}
-      {this.renderScanner()}
-      <Footer/>
-    </Container>
+  get content() {
+    return [
+      this.renderError(),
+      this.renderScanner()
+    ]
   }
 }

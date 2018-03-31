@@ -6,7 +6,8 @@ import InfiniteScroll from 'react-native-infinite-scroll'
 import {PromotionsScreen as style} from '../theme/styles/screens'
 
 import {Header, Footer, Categorys, Promotions} from '../containers'
-import {Component as Screen, Promotion} from '../components'
+import {Promotion} from '../components'
+import {Screen} from '../components'
 
 export class PromotionsScreen extends Screen {
   get items() {return this.props.Promotion.Promotions.list || []}
@@ -28,14 +29,10 @@ export class PromotionsScreen extends Screen {
   renderPromotions() {
     return <List renderRow={item => this.renderPromotion(item)} dataArray={this.items} canLoadMore={true}/>
   }
-  render() {
-    return <Container>
-      <Header/>
-      <InfiniteScroll horizontal={false} distanceFromEnd={10} onLoadMoreAsync={this.loadmore.bind(this)}>
-        <Text heading>Promotions</Text>
-        {this.renderPromotions()}
-      </InfiniteScroll>
-      <Footer/>
-    </Container>
+  renderContent() {
+    return <InfiniteScroll horizontal={false} distanceFromEnd={10} onLoadMoreAsync={this.loadmore.bind(this)}>
+      <Text heading>Promotions</Text>
+      {this.renderPromotions()}
+    </InfiniteScroll>
   }
 }

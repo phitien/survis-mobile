@@ -8,7 +8,7 @@ import {ShopItemScreen as style} from '../theme/styles/screens'
 
 import {Image, Rating} from '../components'
 import {itemHelper, substr} from '../utils'
-import {Component as Screen} from '../components'
+import {Screen} from '../components'
 
 export class ShopItemScreen extends Screen {
   get itemid() {return this.props.item.id}
@@ -40,52 +40,50 @@ export class ShopItemScreen extends Screen {
     const item = this.item
     const {image, detailimage} = item
     const images = Array.from(new Set([image, detailimage].concat(item.images).filter(o => o)))
-    return images.length ? <View big-size><Content horizontal big-size>
+    return images.length ? <View big-size key='images'><Content horizontal big-size>
       {images.map((img,i) => <View big-size fullW key={i}><Image source={{uri: img}}/></View>)}
     </Content></View> : null
   }
-  render() {
+  get back() {return true}
+  get content() {
     const {item, shop} = this
     const {
       id, image, name, priceS, totalrate, totalreviews, description
     } = itemHelper(item)
-    return <Container>
-      <Header back='back'/>
-      <Content>
-        {/* <ShopSummary item={shop}/> */}
+    return [
+      // <ShopSummary item={shop} key='shop_summary'/>,
+      <View full sp key='statistic'>
+        <View horizontal full>
+          <View mb mr small-size-square><Image source={{uri: image}}/></View>
+          <View flex1>
+            <View full><Text right bold>{name}</Text></View>
+            <View full><Text right bold big theme>{priceS}</Text></View>
+          </View>
+        </View>
+        <View horizontal flex1 space-between>
+          <Rating rating={totalrate} itemid={id}/>
+          <Text theme small>({totalreviews}) Reviews</Text>
+        </View>
+      </View>,
+      this.renderImages(),
+      <View full sp key='description'><Text small>{description}</Text></View>,
+      <View full key='reviews'>
+        <View horizontal heading space-between>
+          <Text>Reviews</Text>
+          <Touch onPress={this.onPressSeeAll.bind(this)}><Text theme>SEE ALL</Text></Touch>
+        </View>
         <View full sp>
-          <View horizontal full>
-            <View mb mr small-size-square><Image source={{uri: image}}/></View>
-            <View flex1>
-              <View full><Text right bold>{name}</Text></View>
-              <View full><Text right bold big theme>{priceS}</Text></View>
-            </View>
-          </View>
-          <View horizontal flex1 space-between>
-            <Rating rating={totalrate} itemid={id}/>
-            <Text theme small>({totalreviews}) Reviews</Text>
-          </View>
+          {this.reviews.map(ritem => <Review key={ritem.id} item={ritem}/>)}
         </View>
-        {this.renderImages()}
-        <View full sp><Text small>{description}</Text></View>
-        <View full>
-          <View horizontal heading space-between>
-            <Text>Reviews</Text>
-            <Touch onPress={this.onPressSeeAll.bind(this)}><Text theme>SEE ALL</Text></Touch>
-          </View>
-          <View full sp>
-            {this.reviews.map(ritem => <Review key={ritem.id} item={ritem}/>)}
-          </View>
-        </View>
-      </Content>
-      <Footer>
-        <View fullW horizontal middle pr pl>
-          <Text flex1 theme big>{priceS}</Text>
-          <Button onPress={this.addToCart.bind(this)}>
-            <Text>ADD TO CART</Text>
-          </Button>
-        </View>
-      </Footer>
-    </Container>
+      </View>
+    ]
+  }
+  get footer() {
+    return <View fullW horizontal pr pl middle-end>
+      <Text flex1 theme big>{priceS}</Text>
+      <Button onPress={this.addToCart.bind(this)}>
+        <Text>ADD TO CART</Text>
+      </Button>
+    </View>
   }
 }
