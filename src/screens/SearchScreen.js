@@ -13,12 +13,13 @@ export class SearchScreen extends Screen {
   get items() {return this.props.Shop.SearchShops.list || []}
 
   async componentDidMount() {
-    this.locationUpdate(this.actions.Shop_SearchShops)
+    await this.locationUpdate()
+    this.actions.Shop_SearchShops()
   }
   loadmore() {
     if (!this.props.Shop.loading) {
       this.actions.Shop_SearchShops_Loadmore()
-      .then(e => this.locationUpdate(this.actions.Shop_SearchShops))
+      this.actions.Shop_SearchShops()
     }
   }
 

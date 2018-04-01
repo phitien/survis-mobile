@@ -15,12 +15,12 @@ import {Component} from './Component'
 export class Promotions extends Component {
   get items() {return this.props.Promotion.Promotions.list || []}
   async componentDidMount() {
-    this.locationUpdate(this.actions.Promotion_Promotions)
+    this.actions.Promotion_Promotions()
   }
   renderContent() {
     if (!this.items.length) return null
     return <Swiper autoplayTimeout={AUTOPLAY_TIMEOUT} autoplay showsPagination={false} loop>
-      {this.items.map(item => <Touch key={item.id} onPress={e => this.Actions.PromotionScreen({item})}>
+      {this.items.map((item,i) => <Touch key={`${i}-${item.id}`} onPress={e => this.Actions.PromotionScreen({item})}>
         <Promotion item={item}/>
       </Touch>)}
     </Swiper>

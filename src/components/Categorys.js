@@ -32,7 +32,7 @@ export class Categorys extends Component {
     }
     return <Swiper showsPagination={false} loop>
       {blocks.map((b, i) => <View key={i} horizontal middle bpl bpr space-between>
-        {b.map((item, j) => <Touch key={item.id} onPress={this.onPress.bind(this, item)}>
+        {b.map((item, j) => <Touch key={`${i}-${j}-${item.id}`} onPress={this.onPress.bind(this, item)}>
           <View center middle style={{height: style.height}}>
             <View tiny-size-rounded smb><Image source={{uri: item.image}}/></View>
             <Text bold small>{substr(item.name, 7)}</Text>

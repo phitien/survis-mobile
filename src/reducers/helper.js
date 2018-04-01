@@ -15,7 +15,7 @@ export async function persitShoppingCartItems(ShoppingCartItems) {
   await AsyncStorage.setItem(`${APPNAME}:ShoppingCartItems`, JSON.stringify(ShoppingCartItems))
 }
 
-export function stateToProps(name, state, action) {
+export function stateToProps(name, state, action, loadmore) {
   const plural = `${name}s`, prop = `${name}_${name}`, props = `${name}_${plural}`
 
   switch (action.type) {
@@ -81,7 +81,12 @@ export function stateToProps(name, state, action) {
 
     case `${props}_Pending`: {return {...state, loading: true}}
     case `${props}_Success`: {
-      state[plural].list = [].concat(state[plural].list).concat(action.payload).filter(o => o)
+      state[plural].list = [].concat(loadmore ? state[plural].list : null).concat(action.payload)
+        .filter(o => o)
+        .reduce((rs, o) => {
+          if (!rs.find(c => c.id == o.id)) rs.push(o)
+          return rs
+        }, [])
       return {...state, loading: false}
     }
     case `${props}_Failure`: {return {...state, loading: false}}

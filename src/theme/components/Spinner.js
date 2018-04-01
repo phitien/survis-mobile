@@ -1,8 +1,7 @@
 export default (variables) => {
   return {
-    height: 40,
-    '.small':{
-      height: 40
-    }
+    height: 32,
+    '.small':{height: 24},
+    '.large': {height: 40}
   }
 }

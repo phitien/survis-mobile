@@ -19,7 +19,7 @@ export class NewShops extends Component {
     return <View grey>
       <Text big bold m>New Shops</Text>
       <Content horizontal grey>
-        {this.items.map(item => <Touch key={item.id} onPress={e => this.Actions.ShopScreen({item})}>
+        {this.items.map((item,i) => <Touch key={`${i}-${item.id}`} onPress={e => this.Actions.ShopScreen({item})}>
           <NewShop item={item}/>
         </Touch>)}
       </Content>

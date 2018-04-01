@@ -12,9 +12,7 @@ const SpinnerStyle = StyleSheet.create({
     flex: 1, width: '100%', height: '100%',
     display: 'flex', alignItems: 'center', justifyContent: 'center'
   },
-  spinner: {
-
-  }
+  size: 0
 })
 
 export class Component extends RAComponent {
@@ -29,8 +27,7 @@ export class Component extends RAComponent {
   get log() {return log}
 
   locationUpdate(ok, ko) {
-    navigator
-      .geolocation
+    navigator.geolocation
       .getCurrentPosition(position => {
         const {latitude, longitude} = position.coords || {}
         requestHeaders({latitude, longitude})
@@ -41,8 +38,7 @@ export class Component extends RAComponent {
         if (ko) {try{ko()}catch(e){this.log('locationUpdate', e)}}
       }, {
         enableHighAccuracy: true,
-        timeout: 20000,
-        maximumAge: 1000
+        timeout: 2000
       })
   }
 
@@ -51,7 +47,7 @@ export class Component extends RAComponent {
   }
   renderLoading() {
     return <View center key='loading' style={SpinnerStyle.container}>
-      <Spinner color={PRIMARY} style={SpinnerStyle.spinner}/>
+      <Spinner color={PRIMARY} small/>
     </View>
   }
 }

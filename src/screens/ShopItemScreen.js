@@ -79,6 +79,10 @@ export class ShopItemScreen extends Screen {
     ]
   }
   get footer() {
+    const {item, shop} = this
+    const {
+      priceS
+    } = itemHelper(item)
     return <View fullW horizontal pr pl middle-end>
       <Text flex1 theme big>{priceS}</Text>
       <Button onPress={this.addToCart.bind(this)}>

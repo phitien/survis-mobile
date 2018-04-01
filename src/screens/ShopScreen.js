@@ -28,13 +28,13 @@ export class ShopScreen extends Screen {
         <Text theme onPress={e => this.setState({showReview: false})}>Back</Text>
       </View>
     ]
-    .concat(this.props.Review.Reviews.list.map((item,i) => <Touch key={item.id}>
+    .concat(this.props.Review.Reviews.list.map((item,i) => <Touch key={`${i}-${item.id}`}>
       <Review item={item} index={i}/>
     </Touch>))
   }
   renderShopItems() {
     const shop = this.props.Shop.Shop
-    return this.items.map((item,i) => <Touch key={item.id} onPress={e => this.Actions.ShopItemScreen({item, shop})}>
+    return this.items.map((item,i) => <Touch key={`${i}-${item.id}`} onPress={e => this.Actions.ShopItemScreen({item, shop})}>
       <ShopItem item={item} index={i}/>
     </Touch>)
   }
@@ -42,7 +42,7 @@ export class ShopScreen extends Screen {
     const shop = this.props.Shop.Shop || {}, {image, promotion_image} = shop
     const images = Array.from(new Set([promotion_image].concat(shop.images).filter(o => o)))
     return images.length ? <View big-size key='images'><Content horizontal big-size>
-      {images.map((img,i) => <View big-size fullW key={i}><Image source={{uri: img}}/></View>)}
+      {images.map((img,i) => <View big-size fullW key={`${i}-${img}`}><Image source={{uri: img}}/></View>)}
     </Content></View> : null
   }
 
@@ -51,9 +51,9 @@ export class ShopScreen extends Screen {
     const item = this.props.Shop.Shop
     return [
       this.loading ? this.renderLoading() : null,
-      <ShopSummary openReview={e => this.setState({showReview: true})} item={item}/>,
+      <ShopSummary openReview={e => this.setState({showReview: true})} item={item} key='shop_summary'/>,
       ...[].concat(this.renderImages()),
-      ...[].contact(this.state.showReview ? this.renderReviews() : this.renderShopItems())
+      ...[].concat(this.state.showReview ? this.renderReviews() : this.renderShopItems())
     ]
   }
 }

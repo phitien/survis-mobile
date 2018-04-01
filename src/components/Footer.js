@@ -11,7 +11,7 @@ export class Footer extends Component {
     let currentScene = this.Actions.currentScene.toString()
     if (currentScene !== 'UserScreen') {
       if (this.logged) {
-        this.Actions.UserScreen()
+        this.Actions.reset('UserScreen')
       }
       else {
         this.actions.Screen_Save({id: 'UserScreen'})
@@ -36,14 +36,8 @@ export class Footer extends Component {
     if (currentScene !== screen) {
       // this.actions.Category_Reset()
       // this.actions.Shop_SearchShops_Reset()
-      this.log('asd', Object.keys(this.props.actions).join())
       this.Actions.reset(screen)
-      // try {
-      //   this.Actions.popTo(screen)
-      // }
-      // catch(e) {
-      //   this.Actions.reset(screen)
-      // }
+      // this.Actions.popTo(screen)
     }
   }
 

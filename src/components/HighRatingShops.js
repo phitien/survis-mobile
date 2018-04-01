@@ -14,12 +14,12 @@ export class HighRatingShops extends Component {
   get items() {return this.props.Shop.HighRatingShops.list || []}
 
   async componentDidMount() {
-    this.locationUpdate(this.actions.Shop_HighRatingShops)
+    this.actions.Shop_HighRatingShops()
   }
 
   renderContent() {
     return <Swiper autoplayTimeout={AUTOPLAY_TIMEOUT} autoplay showsPagination={false} loop>
-		    {this.items.map(item => <Touch key={item.id} onPress={e => this.Actions.ShopScreen({item})}>
+		    {this.items.map((item,i) => <Touch key={`${i}-${item.id}`} onPress={e => this.Actions.ShopScreen({item})}>
           <HighRatingShop item={item}/>
         </Touch>)}
 		</Swiper>
