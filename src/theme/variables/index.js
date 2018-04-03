@@ -1,6 +1,6 @@
 import color from 'color'
 import {Platform, Dimensions, PixelRatio} from 'react-native'
-import {PRIMARY, ERROR, GREY} from '../../constants'
+import {PRIMARY, RED, GREY} from '../../constants'
 
 const deviceHeight = height = Dimensions.get('window').height
 const deviceWidth = width = Dimensions.get('window').width
@@ -9,7 +9,7 @@ const platform = Platform.OS
 export {default as basic} from './basic'
 
 export default {
-  PRIMARY, ERROR, GREY,
+  PRIMARY, RED, GREY,
   Platform, Dimensions, PixelRatio,
   width, height,
   deviceWidth, deviceHeight,
@@ -180,7 +180,7 @@ export default {
   // InputGroup
   inputFontSize: 12,
   inputBorderColor: PRIMARY,
-  inputSuccessBorderColor: ERROR,
+  inputSuccessBorderColor: RED,
   inputErrorBorderColor: GREY,
 
   get inputColor() {

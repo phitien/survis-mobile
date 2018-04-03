@@ -20,7 +20,7 @@ export class PrizesScreen extends Screen {
     if (!this.props.Prize.loading) {
       this.actions.Prizes_Submit({prz_id: this.items.find(o => o.selected).id})
       .then(res => {
-        if (!this.props.Prize.error) this.Actions.HomeScreen()
+        if (!this.props.Prize.error) this.open('HomeScreen')
       })
     }
   }

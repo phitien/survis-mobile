@@ -16,28 +16,28 @@ export class Header extends Component {
   }
 
   onPressScan() {
-    if (this.logged) this.Actions.QrScanScreen()
+    if (this.logged) this.open('QrScanScreen')
     else {
       this.actions.Screen_Save({id: 'QrScanScreen'})
-      this.Actions.LoginScreen()
+      this.open('LoginScreen')
     }
   }
   onPressCart() {
-    this.Actions.ShoppingCartScreen()
+    this.open('ShoppingCartScreen')
   }
   onPressBack() {
     this.setState({q: ''})
     this.Actions.pop()
-    // this.actions.Shop_SearchShops_Reset()
-    // this.actions.Category_Reset()
+    this.actions.Shop_SearchShops_Reset()
+    this.actions.Shop_SearchShops_Search({q: '', page: 0})
     // this.actions.Category_Categorys()
     // .then(e => this.Actions.pop())
   }
   onSearchOk() {
     this.actions.Shop_SearchShops_Reset()
     this.actions.Shop_SearchShops_Search({q: this.state.q, page: 0})
-    let currentScene = this.Actions.currentScene.toString()
-    if (currentScene !== 'SearchScreen') this.Actions.SearchScreen()
+    let currentScreen = this.currentScreen
+    if (currentScreen !== 'SearchScreen') this.open('SearchScreen')
     else this.actions.Shop_SearchShops()
   }
   onChangeText(q) {

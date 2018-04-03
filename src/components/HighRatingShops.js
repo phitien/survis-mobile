@@ -19,7 +19,7 @@ export class HighRatingShops extends Component {
 
   renderContent() {
     return <Swiper autoplayTimeout={AUTOPLAY_TIMEOUT} autoplay showsPagination={false} loop>
-		    {this.items.map((item,i) => <Touch key={`${i}-${item.id}`} onPress={e => this.Actions.ShopScreen({item})}>
+		    {this.items.map((item,i) => <Touch key={`${i}-${item.id}`} onPress={e => this.open('ShopScreen', {item})}>
           <HighRatingShop item={item}/>
         </Touch>)}
 		</Swiper>

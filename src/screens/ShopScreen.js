@@ -34,7 +34,7 @@ export class ShopScreen extends Screen {
   }
   renderShopItems() {
     const shop = this.props.Shop.Shop
-    return this.items.map((item,i) => <Touch key={`${i}-${item.id}`} onPress={e => this.Actions.ShopItemScreen({item, shop})}>
+    return this.items.map((item,i) => <Touch key={`${i}-${item.id}`} onPress={e => this.open('ShopItemScreen', {item, shop})}>
       <ShopItem item={item} index={i}/>
     </Touch>)
   }

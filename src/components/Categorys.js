@@ -12,14 +12,15 @@ import {Component} from './Component'
 export class Categorys extends Component {
   get items() {return this.props.Category.Categorys.list || []}
   async componentDidMount() {
-    this.locationUpdate(this.actions.Category_Categorys)
+    if (!this.props.Category.Categorys.loaded) this.locationUpdate(this.actions.Category_Categorys)
   }
 
   onPress(item) {
-    this.actions.Category_Search({catid: item.id})
+    this.actions.Shop_SearchShops_Reset()
     this.actions.Shop_SearchShops_Search({catid: item.id, page: 0})
-    let currentScene = this.Actions.currentScene.toString()
-    if (currentScene !== 'SearchScreen') this.Actions.SearchScreen()
+    // this.actions.Category_Search({catid: item.id})
+    let currentScreen = this.currentScreen
+    if (currentScreen !== 'SearchScreen') this.open('SearchScreen')
     else this.actions.Shop_SearchShops()
   }
 

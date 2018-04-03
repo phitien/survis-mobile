@@ -24,7 +24,7 @@ export class PromotionScreen extends Screen {
       <ShopSummary item={item.shop_info} key='shop_summary'/>,
       <Promotion item={item} key='promotion'/>,
       <View p full key='description'><Text small>{item.description}</Text></View>,
-      ...items.map((sitem,i) => <Touch key={sitem.id} onPress={e => this.Actions.ShopItemScreen({item: sitem, shop: item})}>
+      ...items.map((sitem,i) => <Touch key={sitem.id} onPress={e => this.open('ShopItemScreen', {item: sitem, shop: item})}>
         <ShopItem item={sitem} index={i}/>
       </Touch>)
     ]

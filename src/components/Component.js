@@ -20,6 +20,8 @@ export class Component extends RAComponent {
 
   get api() {return api}
   get Actions() {return Actions}
+  get currentScreen() {return this.Actions.currentScene.toString()}
+  get open() {return (screen, params) => this.Actions[screen] ? this.Actions[screen](params): false}
   get actions() {return this.props.actions}
   get User() {return this.props.User && this.props.User.User || {}}
   get logged() {return this.User.token}
@@ -43,7 +45,7 @@ export class Component extends RAComponent {
   }
 
   renderError() {
-    return this.error ? <View center key='error'><Text red small center>{this.error}</Text></View> : null
+    return this.error ? <View center error key='error'><Text>{this.error}</Text></View> : null
   }
   renderLoading() {
     return <View center key='loading' style={SpinnerStyle.container}>

@@ -1,11 +1,11 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {StyleSheet, Animated, Dimensions, Button} from 'react-native'
 import {Icon, View, Content} from 'native-base'
-import {Actions } from 'react-native-router-flux'
 
 const AnimatedView = Animated.View
 
 import {LightBox as style} from '../theme/styles/components'
+import {Component} from './Component'
 
 export class LightBox extends Component {
   state = {
@@ -22,7 +22,7 @@ export class LightBox extends Component {
       duration: 100,
       toValue: 0,
     }).start(e => {
-      Actions.pop()
+      this.Actions.pop()
       if (this.props.onClose) this.props.onClose()
     })
   }

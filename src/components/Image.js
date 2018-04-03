@@ -1,7 +1,8 @@
-import React, {Component} from 'react'
+import React from 'react'
 import PlaceholderImage from 'react-native-image-placeholder'
 
 import {PRIMARY, BLANK_IMG} from '../constants'
+import {Component} from './Component'
 
 export class Image extends Component {
   render() {

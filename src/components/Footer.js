@@ -8,32 +8,32 @@ import {Component} from './Component'
 
 export class Footer extends Component {
   onPressUser() {
-    let currentScene = this.Actions.currentScene.toString()
-    if (currentScene !== 'UserScreen') {
+    let currentScreen = this.currentScreen
+    if (currentScreen !== 'UserScreen') {
       if (this.logged) {
         this.Actions.reset('UserScreen')
       }
       else {
         this.actions.Screen_Save({id: 'UserScreen'})
-        this.Actions.LoginScreen()
+        this.open('LoginScreen')
       }
     }
   }
   onPressNotification() {
-    let currentScene = this.Actions.currentScene.toString()
-    if (currentScene !== 'NotificationsScreen') {
+    let currentScreen = this.currentScreen
+    if (currentScreen !== 'NotificationsScreen') {
       if (this.logged) {
         this.Actions.reset('NotificationsScreen')
       }
       else {
         this.actions.Screen_Save({id: 'NotificationsScreen'})
-        this.Actions.LoginScreen()
+        this.open('LoginScreen')
       }
     }
   }
   openScreen(screen) {
-    let currentScene = this.Actions.currentScene.toString()
-    if (currentScene !== screen) {
+    let currentScreen = this.currentScreen
+    if (currentScreen !== screen) {
       // this.actions.Category_Reset()
       // this.actions.Shop_SearchShops_Reset()
       this.Actions.reset(screen)
@@ -41,7 +41,7 @@ export class Footer extends Component {
     }
   }
 
-  getIconStyle = (n) => ({color: this.Actions.currentScene.toString() === n && iconColorActive || iconColor})
+  getIconStyle = (n) => ({color: this.currentScreen === n && iconColorActive || iconColor})
   renderTab(screen, icon, text, badge, onPress) {
     if (!onPress) onPress = this.openScreen.bind(this, screen)
 	   if (badge) return <Button key={screen} vertical onPress={onPress}>

@@ -1,5 +1,5 @@
 export default (variables) => {
-  const {PRIMARY, GREY, platformStyle, platform} = variables
+  const {PRIMARY, GREY, RED, platformStyle, platform} = variables
   return {
     '.grey': {backgroundColor: GREY},
     '.theme': {backgroundColor: PRIMARY},
@@ -18,6 +18,14 @@ export default (variables) => {
     '.border':{borderWidth: 1, borderColor: GREY},
     '.trim': {overflow: 'hidden'},
     '.actions': {display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%'},
+    '.error': {
+      margin: 10,
+      'NativeBase.Text': {
+        textAlign: 'center',
+        fontSize: 11,
+        color: RED
+      }
+    },
     '.heading': {
       padding: 10,backgroundColor: GREY,
       'NativeBase.Text': {

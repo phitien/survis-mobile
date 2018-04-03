@@ -15,7 +15,7 @@ export class QrScanScreen extends Screen {
   onBarCodeRead(data) {
     if (!this.props.Prize.loading) this.actions.Prizes_Scan({qrcode: data})
     .then(res => {
-      if (!this.props.Prize.error) this.Actions.PrizesScreen()
+      if (!this.props.Prize.error) this.open('PrizesScreen')
     })
   }
 

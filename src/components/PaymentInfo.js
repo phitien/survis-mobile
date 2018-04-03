@@ -47,6 +47,7 @@ export class PaymentInfo extends Component {
   async onSave(info) {
     this.validate()
     if (!this.state.error) {
+      this.log('asd', 'save')
       this.actions.PaymentInfo_Save(info)
     }
   }
@@ -116,9 +117,6 @@ export class PaymentInfo extends Component {
         <View horizontal>
           {!this.state.showInfo ? <Button transparent theme onPress={e => this.setState({showInfo: true, showAddress: false})}>
             <Icon name='md-create'/>
-          </Button> : null}
-          {ucc_num ? <Button transparent theme ml onPress={e => this.onClearCreditCard()}>
-            <Icon name='ios-trash'/>
           </Button> : null}
         </View>
       </View>

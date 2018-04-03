@@ -24,7 +24,7 @@ export class UserScreen extends Screen {
   }
   async onLogout() {
     requestHeader('token', '')
-    this.Actions.HomeScreen()
+    this.open('HomeScreen')
     this.actions.User_Logout()
   }
 

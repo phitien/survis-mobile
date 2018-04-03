@@ -26,7 +26,7 @@ export class HomeScreen extends Screen {
   }
 
   renderShop(item) {
-    return <Touch key={item.id} onPress={e => this.Actions.ShopScreen({item})}>
+    return <Touch key={item.id} onPress={e => this.open('ShopScreen', {item})}>
       <Shop item={item}/>
     </Touch>
   }

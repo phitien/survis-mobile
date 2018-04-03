@@ -33,7 +33,7 @@ apiCall
     if (status === 401 || status === 403) {
       requestHeader('token', '')
       AsyncStorage.clear()
-      Actions.replace('LoginScreen', {error: true})
+      Actions.reset('LoginScreen')
       return
     } else {
       return Promise.reject(error)

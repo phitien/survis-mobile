@@ -73,7 +73,7 @@ export class ShoppingCartScreen extends Screen {
         <Text grey italic>Total</Text>
         <Text theme big>${this.total.toFixed(2)}</Text>
       </View>
-      <Button onPress={this.Actions.CheckoutScreen} disabled={!this.items.length || !this.total}>
+      <Button onPress={e => this.open('CheckoutScreen')} disabled={!this.items.length || !this.total}>
         <Text>CHECK OUT</Text>
       </Button>
     </View>

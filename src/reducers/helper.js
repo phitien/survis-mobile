@@ -8,6 +8,7 @@ export async function persitUser(User) {
 }
 
 export async function persitPaymentInfo(PaymentInfo) {
+  log('asd', JSON.stringify(PaymentInfo))
   await AsyncStorage.setItem(`${APPNAME}:PaymentInfo`, JSON.stringify(PaymentInfo))
 }
 
@@ -28,7 +29,7 @@ export function stateToProps(name, state, action, loadmore) {
     }
     case `${name}_Save`: {
       state[name] = {...state[name], ...action.payload || {}}
-      try {eval(`persit${name}(state['${name}'])`)} catch(e) {}
+      try {eval(`persit${name}(state[name])`)} catch(e) {}
       return {...state, loading: false}
     }
     case `${name}_Unload`: {
@@ -87,6 +88,7 @@ export function stateToProps(name, state, action, loadmore) {
           if (!rs.find(c => c.id == o.id)) rs.push(o)
           return rs
         }, [])
+      state[plural].loaded = true
       return {...state, loading: false}
     }
     case `${props}_Failure`: {return {...state, loading: false}}

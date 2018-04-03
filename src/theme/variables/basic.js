@@ -1,6 +1,6 @@
 import {Platform, Dimensions, PixelRatio} from 'react-native'
 const deviceWidth = width = Dimensions.get('window').width
-import {PRIMARY, ERROR, GREY} from '../../constants'
+import {PRIMARY, RED, GREY} from '../../constants'
 
 export default {
   '.p': {padding: 10},

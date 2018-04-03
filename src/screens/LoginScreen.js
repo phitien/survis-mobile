@@ -46,7 +46,7 @@ export class LoginScreen extends Screen {
         this.Actions[this.props.Screen.Screen.id](this.props.Screen.Screen.params)
         this.actions.Screen_Save({id: '', params: {}})
       }
-      else this.Actions.HomeScreen()
+      else this.open('HomeScreen')
     }
   }
   onPressLogin() {

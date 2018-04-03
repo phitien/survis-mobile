@@ -5,7 +5,7 @@ export function openExternal(url) {
     if (supported) {
       Linking.openURL(url)
     } else {
-      Alert.alert('ERROR', 'Unable to open: ' + url, [{text: 'OK'}])
+      Alert.alert('Error', 'Unable to open: ' + url, [{text: 'OK'}])
     }
   })
 }

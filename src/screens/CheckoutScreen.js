@@ -33,13 +33,19 @@ export class CheckoutScreen extends Screen {
     const {PaymentInfo} = this.props.PaymentInfo || {}
     const {ucc_num, ucc_name, ucc_expire, ucc_cvc} = PaymentInfo
     if (!ucc_num || !ucc_name || !ucc_expire || !ucc_cvc)
-      return this.setState({error: 'No payment information. Please update in your profile.'})
-    this.setState({error: false})
+      return this.setState({
+        missing_payment_info: true,
+        error: 'No payment information. Please update in your profile.'
+      })
+    this.setState({
+      error: false,
+      missing_payment_info: false,
+    })
   }
   onPressPaynow() {
     if (!this.logged) {
       this.actions.Screen_Save({id: 'CheckoutScreen', params: this.state})
-      return this.Actions.LoginScreen()
+      return this.open('LoginScreen')
     }
     if (!this.props.ShoppingCartItem.loading) {
       const items = this.items
@@ -51,8 +57,8 @@ export class CheckoutScreen extends Screen {
       .then(res => {
         this.setState({error: this.props.ShoppingCartItem.error})
         if (!this.state.error) {
-          if (this.props.ShoppingCartItem.prizecheck) this.Actions.PrizesScreen()
-          else this.Actions.HomeScreen()
+          if (this.props.ShoppingCartItem.prizecheck) this.open('PrizesScreen')
+          else this.open('HomeScreen')
         }
       })
     }
@@ -60,8 +66,9 @@ export class CheckoutScreen extends Screen {
 
   get back() {return true}
   get footer() {
-    return <View middle-end flex1>
-      <Button small loading={this.props.ShoppingCartItem.loading} onPress={this.onPressPaynow.bind(this)} disabled={this.disabled}>
+    return <View fullW horizontal pr pl middle-end>
+      {this.state.missing_payment_info ? <Button mr onPress={e => this.open('UserScreen')}><Text>Profile</Text></Button> : null}
+      <Button loading={this.props.ShoppingCartItem.loading} onPress={this.onPressPaynow.bind(this)} disabled={this.disabled}>
         <Text>PAY NOW</Text>
       </Button>
     </View>
@@ -78,15 +85,15 @@ export class CheckoutScreen extends Screen {
       {this.renderError()}
       <View p white><Text bold>CART</Text></View>
       <View p grey>
-        <View horizontal style={{...style.row, backgroundColor: style.oddBgColor}}>
+        <View horizontal p white>
           <Text small flex4>Total</Text>
           <Text small flex1 center></Text>
           <Text theme small flex2 right>${this.total.toFixed(2)}</Text>
         </View>
         {items.map((item, i) => {
           const {id, image, name, qty, price} = itemHelper(item)
-          return <View key={id} horizontal pt pl pr style={{...style.row, backgroundColor: i % 2 == 0 ? style.evenBgColor : style.oddBgColor}}>
-            <Text small flex4 style={{flex: 4}}>{name}</Text>
+          return <View key={id} horizontal p {...{grey:i%2!=0}}>
+            <Text small flex4>{name}</Text>
             <Text small flex1 center>{qty}</Text>
             <Text theme small flex2 right>${(qty*price).toFixed(2)}</Text>
           </View>

@@ -22,7 +22,7 @@ export class PromotionsScreen extends Screen {
   }
 
   renderPromotion(item) {
-    return <Touch key={item.id} onPress={e => this.Actions.PromotionScreen({item})}>
+    return <Touch key={item.id} onPress={e => this.open('PromotionScreen', {item})}>
       <Promotion item={item}/>
     </Touch>
   }

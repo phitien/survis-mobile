@@ -20,7 +20,7 @@ export class Promotions extends Component {
   renderContent() {
     if (!this.items.length) return null
     return <Swiper autoplayTimeout={AUTOPLAY_TIMEOUT} autoplay showsPagination={false} loop>
-      {this.items.map((item,i) => <Touch key={`${i}-${item.id}`} onPress={e => this.Actions.PromotionScreen({item})}>
+      {this.items.map((item,i) => <Touch key={`${i}-${item.id}`} onPress={e => this.open('PromotionScreen', {item})}>
         <Promotion item={item}/>
       </Touch>)}
     </Swiper>
