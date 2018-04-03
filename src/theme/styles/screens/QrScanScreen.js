@@ -6,7 +6,8 @@ export default {
 	},
 	scanningFrame: {
 		width: width - 2*24,
-		height: width - 2*24
+		height: width - 2*24,
+		margin: 24,
 	},
 	buttonContainer: {
 		display: 'flex',

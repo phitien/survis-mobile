@@ -10,13 +10,13 @@ import {Screen, NewShop, Shop} from '../components'
 
 export class HomeScreen extends Screen {
   async componentDidMount() {
+    this.loadUser(e => {
+      this.loadPaymentInfo()
+      this.loadShoppingCartItems()
+      this.loadNotifications()
+    })
     this.loadDevice()
-    this.loadUser()
-    this.loadPaymentInfo()
-    this.loadShoppingCartItems()
-    this.loadNotifications()
-    await this.locationUpdate()
-    this.actions.Shop_Shops()
+    await this.locationUpdate(this.actions.Shop_Shops)
   }
   loadmore() {
     if (!this.props.Shop.loading) {

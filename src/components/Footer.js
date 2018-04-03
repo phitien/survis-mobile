@@ -55,11 +55,12 @@ export class Footer extends Component {
   	</Button>
   }
   renderDefault() {
+    const notifications = [].concat(this.props.Notification.Notifications.list).filter(o => o)
     return [
       this.renderTab('HomeScreen', 'home', 'Home', false),
       this.renderTab('PromotionsScreen', 'flower', 'Hot', false),
       this.renderTab('SearchScreen', 'ios-pin-outline', 'Nearby', false),
-      this.renderTab('NotificationsScreen', 'ios-notifications', 'Msg', this.logged && this.props.Notification.Notifications.list.length, this.onPressNotification.bind(this)),
+      this.renderTab('NotificationsScreen', 'ios-notifications', 'Msg', this.logged && notifications.filter(o => o.is_read == 0).length, this.onPressNotification.bind(this)),
       this.renderTab('UserScreen', 'md-person', 'Me', false, this.onPressUser.bind(this))
     ]
   }

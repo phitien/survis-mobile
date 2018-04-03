@@ -12,7 +12,7 @@ export class Screen extends Component {
   get footer() {return this.props.footer}
   get back() {return false}
 
-  async loadDevice() {
+  async loadDevice(cb) {
     const device_model = DeviceInfo.getDeviceId()
     requestHeader('device_model', device_model)
     const language = DeviceInfo.getDeviceLocale()
@@ -26,21 +26,21 @@ export class Screen extends Component {
     requestHeader('device_id', device_id)
     const number = DeviceInfo.getPhoneNumber()
     requestHeader('number', number)
-    this.actions.Device_Load({device_model, language, device_type, country, device_id, number})
+    this.actions.Device_Load({device_model, language, device_type, country, device_id, number}).then(cb)
   }
-  async loadUser() {
+  async loadUser(cb) {
     const User = JSON.parse(await getUser()) || {token: ''}
     requestHeader('token', User.token)
-    this.actions.User_Load(User)
+    this.actions.User_Load(User).then(cb)
   }
-  async loadPaymentInfo() {
-    if (this.logged) this.actions.PaymentInfo_Load(JSON.parse(await getPaymentInfo()))
+  async loadPaymentInfo(cb) {
+    if (this.logged) this.actions.PaymentInfo_Load(JSON.parse(await getPaymentInfo())).then(cb)
   }
-  async loadShoppingCartItems() {
-    this.actions.ShoppingCartItem_LoadAll(JSON.parse(await getShoppingCartItems()))
+  async loadShoppingCartItems(cb) {
+    this.actions.ShoppingCartItem_LoadAll(JSON.parse(await getShoppingCartItems())).then(cb)
   }
-  async loadNotifications() {
-    if (this.logged) this.actions.Notification_Notifications()
+  async loadNotifications(cb) {
+    if (this.logged) this.actions.Notification_Notifications().then(cb)
   }
   renderHeader() {
     return <Header navigation={this.props.navigation} back={this.back}>

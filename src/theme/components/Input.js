@@ -10,6 +10,6 @@ export default (variables) => {
     //placeholderTextColor: '#7e7e7e',
 		'.transparent': {},
 		'.multiline': {height: null,},
-		'.search': {height: 20, borderRadius: 10, flex: 1}
+		'.search': {height: 20, borderRadius: 10, flex: 1, borderWidth: 0, borderColor: 'transparent'}
 	}
 }

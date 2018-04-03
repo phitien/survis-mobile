@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Container, View, Content, Text} from 'native-base'
-
+import {TouchableOpacity as Touch} from 'react-native'
 import {NotificationsScreen as style} from '../theme/styles/screens'
 
 import {Header, Footer, Notification} from '../containers'
@@ -18,10 +18,18 @@ export class NotificationsScreen extends Screen {
     }
   }
 
+  onPressItem(item, i) {
+    if (item.is_read == 0) {
+      this.actions.Notification_Read({id: item.id})
+    }
+  }
+
   get content() {
     return [
       <View heading key='heading'><Text>Notifications</Text></View>,
-      ...this.items.map((item,i) => <Notification index={i} item={item} key={`${i}-${item.id}`}/>)
+      ...this.items.map((item,i) => <Touch key={`${i}-${item.id}`} onPress={this.onPressItem.bind(this, item, i)}>
+        <Notification item={item} index={i}/>
+      </Touch>)
     ]
   }
 }
