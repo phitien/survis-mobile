@@ -10,14 +10,19 @@ import {Screen} from '../components'
 export class QrScanScreen extends Screen {
   get error() {return this.state.error || this.props.Prize.error}
 
-  async componentWillMount() {
-  }
-  onBarCodeRead(data) {
-    this.log('asd', data)
-    if (!this.props.Prize.loading) this.actions.Prize_Scan({qrcode: data})
-    .then(res => {
-      if (!this.props.Prize.error) this.open('PrizesScreen')
-    })
+  onBarCodeRead(code) {
+    let data = null
+    try {data = JSON.parse(code.data)} catch(e) {}
+    if (data && data.code && data.name) {
+      this.setState({error: false})
+      if (!this.props.Prize.loading) this.actions.Prize_Scan(data)
+      .then(res => {
+        if (!this.props.Prize.error) {
+          this.open('PrizesScreen')
+        }
+      })
+    }
+    else this.setState({error: 'Wrong qr code'})
   }
 
   renderScanner() {
