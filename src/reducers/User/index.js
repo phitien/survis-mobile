@@ -39,7 +39,6 @@ export default function(state = initialState, action) {
       return {...state, error: false, ...action.payload, loading: false}
     }
     case `${name}_Register_Failure`: {
-      log('dsa', action.payload)
       return {...state, ...action.payload, loading: false}
     }
 
