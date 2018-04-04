@@ -13,6 +13,7 @@ export class QrScanScreen extends Screen {
   async componentWillMount() {
   }
   onBarCodeRead(data) {
+    this.log('asd', data)
     if (!this.props.Prize.loading) this.actions.Prize_Scan({qrcode: data})
     .then(res => {
       if (!this.props.Prize.error) this.open('PrizesScreen')

@@ -27,17 +27,15 @@ apiCall
     return res
   }, error => {
 		const res = error.response || {}
-		log('api-error', res.request._method, res.request.responseURL, JSON.stringify(apiCall.defaults.headers), JSON.stringify(res.data))
     const {data, status} = res || {}
     const {code, message} = data || {}
+    log('api-error', code, message, res.request._method, res.request.responseURL, JSON.stringify(data))
     if (status === 401 || status === 403) {
       requestHeader('token', '')
       AsyncStorage.clear()
       Actions.reset('LoginScreen')
-      return
-    } else {
-      return Promise.reject(error)
     }
+    return Promise.reject(res)
   })
 export function requestHeaders(headers) {
   Object

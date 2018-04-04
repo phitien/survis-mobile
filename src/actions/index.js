@@ -25,12 +25,9 @@ function apiActionGenerator(name, act, uri, method, filter, type) {
           dispatch({type: `${n}_Success`, payload: res.data.results, response: res})
           return res
         })
-        .catch(e => {
-          dispatch({
-            type: `${n}_Failure`, error: e,
-            payload: e.response.data.results || e.response.data
-          })
-          return e.response
+        .catch(res => {
+          dispatch({type: `${n}_Failure`, payload: res.data.results, response: res})
+          return res
         })
     }
   }

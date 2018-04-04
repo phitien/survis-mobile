@@ -16,7 +16,8 @@ export class LoginScreen extends Screen {
     usr_password: null,
   }
 
-  get error() {return !this.state.typing && this.props.User.error}
+  get error() {return this.props.User.error}
+  get message() {return this.props.User.message}
   get isEmailValid() {
     this.setState({typing: false})
     const {usr_email, usr_password} = this.state
@@ -57,9 +58,15 @@ export class LoginScreen extends Screen {
     }
   }
   onPressRegister() {
-    if (this.isEmailValid && this.isPasswordValid) {
-      const {usr_email, usr_password} = this.state
-      this.actions.User_Register({usr_email, usr_password})
+    if (this.message) {
+      this.actions.User_Clear()
+      this.Actions.pop()
+    }
+    else {
+      if (this.isEmailValid && this.isPasswordValid) {
+        const {usr_email, usr_password} = this.state
+        this.actions.User_Register({usr_email, usr_password})
+      }
     }
   }
   onPressForgetPassword() {
@@ -96,11 +103,13 @@ export class LoginScreen extends Screen {
 
   renderRegister() {
     return <View mt pt>
-      {this.renderError()}
       <Item login error={this.error ? true : false}>
         <Input value={this.state.usr_email}
           ref={e => this.regEmailInput = e}
-          onChangeText={e => this.setState({usr_email: e, typing: true, next: this.regPwdInput})}
+          onChangeText={e => {
+            this.setState({usr_email: e, typing: true, next: this.regPwdInput})
+            // this.isEmailValid
+          }}
           autoCapitalize='none' autoCorrect={false} placeholder='Email'
           onSubmitEditing={e => this.isEmailValid}
           returnKeyType='next'/>
@@ -108,18 +117,22 @@ export class LoginScreen extends Screen {
       <Item login error={this.error ? true : false}>
         <Input value={this.state.usr_password}
           ref={e => this.regPwdInput = e}
-          onChangeText={e => this.setState({usr_password: e, typing: true, next: null})}
+          onChangeText={e => {
+            this.setState({usr_password: e, typing: true, next: null})
+            // this.isPasswordValid
+          }}
           autoCapitalize='none' secureTextEntry={true} placeholder='Password'
           onSubmitEditing={this.onPressRegister.bind(this)}
           returnKeyType='go'/>
       </Item>
       <Touch onPress={e => this.setState({agreed: !this.state.agreed})}><View horizontal middle m>
-        <CheckBox checked={this.state.agreed}/>
+        <CheckBox checked={this.state.agreed} onPress={e => this.setState({agreed: !this.state.agreed})}/>
         <Text ml small>I agree with terms and conditions</Text>
       </View></Touch>
       {this.renderError()}
-      <Button full smt loading={this.props.User.loading} onPress={this.onPressRegister.bind(this)}>
-        <Text bold>REGISTER</Text>
+      {this.renderMessage()}
+      <Button full smt disabled={!this.state.agreed} loading={this.props.User.loading} onPress={this.onPressRegister.bind(this)}>
+        <Text bold>{this.message ? 'OK' : 'REGISTER'}</Text>
       </Button>
     </View>
   }

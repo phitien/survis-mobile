@@ -1,6 +1,7 @@
 import * as models from '../../models'
 import {stateToProps} from '../helper'
 import {persitUser} from '../helper'
+import {log} from '../../utils'
 
 const initialState = models.User || {}
 
@@ -31,13 +32,14 @@ export default function(state = initialState, action) {
       return {...state, ...action.payload, loading: false}
     }
 
-    case `${name}_Resgister_Pending`: {
+    case `${name}_Register_Pending`: {
       return {...state, loading: true}
     }
-    case `${name}_Resgister_Success`: {
+    case `${name}_Register_Success`: {
       return {...state, error: false, ...action.payload, loading: false}
     }
-    case `${name}_Resgister_Failure`: {
+    case `${name}_Register_Failure`: {
+      log('dsa', action.payload)
       return {...state, ...action.payload, loading: false}
     }
 

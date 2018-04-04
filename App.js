@@ -7,13 +7,13 @@ import OneSignal from 'react-native-onesignal'
 import theme from './src/theme'
 import AppStyle from './src/theme/styles/App'
 import {Routes} from './src/routes'
+import {actions} from './src/actions'
 import {PRIMARY} from './src/constants'
 import {appstore} from './src/store'
 
 export default class App extends Component {
-  state = {
-    store: null
-  }
+  state = {store: null}
+  actions = actions
 
   async componentWillMount() {
     this.state.store = appstore()
@@ -29,18 +29,13 @@ export default class App extends Component {
     OneSignal.removeEventListener('ids', this.onIds)
   }
 
-  onReceived(notification) {
-    store.dispatch({type: 'Notification_Notifications'})
+  onReceived = notification => {
+    this.actions.Notification_Notifications()
+    // this.state.store.dispatch({type: 'Notification_Notifications'})
   }
-
-  onOpened(openResult) {
-  }
-
-  onRegistered(notifData) {
-  }
-
-  onIds(device) {
-  }
+  onOpened = openResult => {}
+  onRegistered = notifData => {}
+  onIds = device => {}
 
   render() {
     return <StyleProvider style={theme}>
