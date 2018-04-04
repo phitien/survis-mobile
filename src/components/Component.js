@@ -26,6 +26,7 @@ export class Component extends RAComponent {
   get User() {return this.props.User && this.props.User.User || {}}
   get logged() {return this.User.token}
   get error() {return this.state.error}
+  get message() {return this.state.message}
   get log() {return log}
 
   locationUpdate(ok, ko) {
@@ -46,6 +47,9 @@ export class Component extends RAComponent {
 
   renderError() {
     return this.error ? <View center error key='error'><Text>{this.error}</Text></View> : null
+  }
+  renderMessage() {
+    return this.message ? <View center message key='message'><Text>{this.message}</Text></View> : null
   }
   renderLoading() {
     return <View center key='loading' style={SpinnerStyle.container}>

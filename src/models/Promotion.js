@@ -1,7 +1,7 @@
 import {BASEURL} from '../constants'
 
 export const acts = {
-  Error: 'Error', LoadAll: 'LoadAll', SaveAll: 'SaveAll', Loadmore: 'Loadmore', Load: 'Load', Save: 'Save', Unload: 'Unload', Reset: 'Reset', Search: 'Search', Select: 'Select',
+  Error: 'Error', LoadAll: 'LoadAll', SaveAll: 'SaveAll', Loadmore: 'Loadmore', Load: 'Load', Clear: 'Clear', Save: 'Save', Unload: 'Unload', Reset: 'Reset', Search: 'Search', Select: 'Select',
   Promotions: `api|get|true|body|${BASEURL}?type=promotions`,
   Promotion: `api|get|true|body|${BASEURL}?type=promotiondetail`,
 }

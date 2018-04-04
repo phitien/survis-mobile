@@ -1,7 +1,7 @@
 import {BASEURL} from '../constants'
 
 export const acts = {
-  Error: 'Error', LoadAll: 'LoadAll', SaveAll: 'SaveAll', Loadmore: 'Loadmore', Load: 'Load', Save: 'Save', Unload: 'Unload', Reset: 'Reset', Search: 'Search', Select: 'Select',
+  Error: 'Error', LoadAll: 'LoadAll', SaveAll: 'SaveAll', Loadmore: 'Loadmore', Load: 'Load', Clear: 'Clear', Save: 'Save', Unload: 'Unload', Reset: 'Reset', Search: 'Search', Select: 'Select',
   Prizes: `api|get|true|body|${BASEURL}?type=prize`,
   Submit: `api|post|true|form|${BASEURL}?type=prizepick`,
   Scan: `api|post|true|form|${BASEURL}?type=scan`,

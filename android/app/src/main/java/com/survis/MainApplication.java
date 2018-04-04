@@ -3,12 +3,10 @@ package com.survis;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.learnium.RNDeviceInfo.RNDeviceInfo;
-import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
-import org.reactnative.camera.RNCameraPackage;
-import com.BV.LinearGradient.LinearGradientPackage;
-import io.xogus.reactnative.versioncheck.RNVersionCheckPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
+import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
+import org.reactnative.camera.RNCameraPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -29,12 +27,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNDeviceInfo(),
+            new VectorIconsPackage(),
             new ReactNativeOneSignalPackage(),
-            new RNCameraPackage(),
-            new LinearGradientPackage(),
-            new RNVersionCheckPackage(),
-            new VectorIconsPackage()
+            new RNDeviceInfo(),
+            new RNCameraPackage()
       );
     }
 

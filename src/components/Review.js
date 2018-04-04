@@ -1,18 +1,18 @@
 import React from 'react'
 import {Text, Spinner, Icon, View} from 'native-base'
-import {TouchableOpacity as Touch} from 'react-native'
 
 import {Review as style} from '../theme/styles/components'
 
 const Review = props => {
-  const item = props.item || {}
-  const {comment, created_date} = item
-  return <Touch onPress={props.onPress}>
-    <View horizontal center middle transparent style={style.container}>
-      <Text small>{comment}</Text>
-      <Text small>{created_date}</Text>
+  const {item, index} = props
+  const {comment, created_date, lname, fname} = item || {}
+  return <View full sp {...{white:index%2==0}}>
+    <View horizontal middle full>
+      <Text theme>{[fname, lname].filter(o => o).join(' ')}</Text>
+      <Text ml flex1>{comment}</Text>
     </View>
-  </Touch>
+    <Text grey small>{created_date}</Text>
+  </View>
 }
 
 export {

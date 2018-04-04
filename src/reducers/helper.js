@@ -8,7 +8,6 @@ export async function persitUser(User) {
 }
 
 export async function persitPaymentInfo(PaymentInfo) {
-  log('asd', JSON.stringify(PaymentInfo))
   await AsyncStorage.setItem(`${APPNAME}:PaymentInfo`, JSON.stringify(PaymentInfo))
 }
 
@@ -22,6 +21,11 @@ export function stateToProps(name, state, action, loadmore) {
   switch (action.type) {
     case `${name}_Load`: {
       const data = state[name] = {...state[name], ...action.payload || {}}
+      return {...state, loading: false}
+    }
+    case `${name}_Clear`: {
+      state.message = false
+      state.error = false
       return {...state, loading: false}
     }
     case `${name}_Error`: {

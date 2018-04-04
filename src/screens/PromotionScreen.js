@@ -7,11 +7,12 @@ import {TouchableOpacity as Touch} from 'react-native'
 import {PromotionScreen as style} from '../theme/styles/screens'
 
 import {itemHelper, substr} from '../utils'
-import {Image, Promotion} from '../components'
+import {Image, Promotion, Reviews} from '../components'
 import {Screen} from '../components'
 
 export class PromotionScreen extends Screen {
-  async omponentDidMount() {
+  state = {showReview: false}
+  async componentDidMount() {
     this.actions.Promotion_Promotion({prm_id: this.props.item.id})
   }
 
@@ -20,8 +21,8 @@ export class PromotionScreen extends Screen {
     const item = this.props.Promotion.Promotion || {},
       items = [].concat(item.items).filter(o => o)
     return [
-      this.props.Promotion.loading ? this.renderLoading() : null,
-      <ShopSummary item={item.shop_info} key='shop_summary'/>,
+      // this.props.Promotion.loading ? this.renderLoading() : null,
+      <ShopSummary item={item.shop_info} key='shop_summary' onPressReview={e => this.setState({showReview: !this.state.showReview})}/>,
       <Promotion item={item} key='promotion'/>,
       <View p full key='description'><Text small>{item.description}</Text></View>,
       ...items.map((sitem,i) => <Touch key={sitem.id} onPress={e => this.open('ShopItemScreen', {item: sitem, shop: item})}>
