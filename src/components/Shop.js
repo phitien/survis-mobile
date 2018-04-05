@@ -12,12 +12,21 @@ import {Rating} from './Rating'
 import {Component} from './Component'
 
 export class Shop extends Component {
+  state = {totalrate: this.item.totalrate || 0}
+  get item() {return this.props.item || {}}
+
+  onRate(rating) {
+    if (this.logged) {
+      this.actions.Shop_Rate({id: this.item.id, type: 'shop', rate: rating})
+      .then(res => this.setState({totalrate: res.data.results.totalrate}))
+    }
+  }
+
   render() {
-    const item = this.props.item
     const {
       id, isfeatured, promotion_image, name, address, image, highlight, distance,
       latitude, longitude, totalrate, totalreviews
-    } = itemHelper(item)
+    } = itemHelper(this.item)
   	if (isfeatured) {
   		return <View mt ml mr white>
         <View normal-size><Image source={{uri: promotion_image}}/></View>
@@ -41,7 +50,7 @@ export class Shop extends Component {
           </View>
         </View></Touch>
         <View horizontal space-between style={style.statistic}>
-          <Rating totalrate={totalrate} shopid={id}/>
+          <Rating totalrate={this.state.totalrate} shopid={id} onRate={this.onRate.bind(this)}/>
           <Text small>({totalreviews}) Reviews</Text>
         </View>
       </View>

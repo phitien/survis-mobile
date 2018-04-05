@@ -12,8 +12,15 @@ import {Reviews} from '../containers'
 import {Component} from './Component'
 
 export class ShopSummary extends Component {
-  state = {showReview: false}
+  state = {showReview: false, totalrate: this.item.totalrate || 0}
   get item() {return this.props.item || {}}
+
+  onRate(rating) {
+    if (this.logged) {
+      this.actions.Shop_Rate({id: this.item.id, type: 'shop', rate: rating})
+      .then(res => this.setState({totalrate: res.data.results.totalrate}))
+    }
+  }
 
   renderReviews() {
     if (!this.state.showReview) return null
@@ -32,7 +39,7 @@ export class ShopSummary extends Component {
     	  </View>
     	</View>
     	<View horizontal sp space-between full>
-    	  <Rating totalrate={totalrate} shopid={id}/>
+    	  <Rating totalrate={this.state.totalrate} shopid={id}/>
     	  <Text theme small onPress={e => {
           this.setState({showReview: !this.state.showReview})
           if (this.props.openPressReview) this.props.openPressReview(e)

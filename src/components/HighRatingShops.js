@@ -7,7 +7,7 @@ import {HighRatingShops as style} from '../theme/styles/components'
 
 import {AUTOPLAY_TIMEOUT} from '../constants'
 
-import {HighRatingShop} from './HighRatingShop'
+import {HighRatingShop} from '../containers'
 import {Component} from './Component'
 
 export class HighRatingShops extends Component {

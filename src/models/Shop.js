@@ -4,12 +4,15 @@ export const acts = {
   Error: 'Error', LoadAll: 'LoadAll', SaveAll: 'SaveAll', Loadmore: 'Loadmore', Load: 'Load', Clear: 'Clear', Save: 'Save', Unload: 'Unload', Reset: 'Reset', Search: 'Search', Select: 'Select',
   Shop: `api|get|true|body|${BASEURL}?type=shopdetail`,
   Shops: `api|get|true|body|${BASEURL}?type=nearbyshops`,
+  Rate: `api|post|true|form|${BASEURL}?type=rating&cmd=set`,
   NewShops: `api|get|true|body|${BASEURL}?type=newshops`,
   NewShops_Loadmore: 'NewShops_Loadmore', NewShops_Reset: 'NewShops_Reset', NewShops_Search: 'NewShops_Search',
   HighRatingShops: `api|get|true|body|${BASEURL}?type=highratingshops`,
   HighRatingShops_Loadmore: 'HighRatingShops_Loadmore', HighRatingShops_Reset: 'HighRatingShops_Reset', HighRatingShops_Search: 'HighRatingShops_Search',
+  HighRatingShops_Rate: `api|post|true|form|${BASEURL}?type=rating&cmd=set`,
   SearchShops: `api|get|true|body|${BASEURL}?type=nearbyshops`,
   SearchShops_Loadmore: 'SearchShops_Loadmore', SearchShops_Reset: 'SearchShops_Reset', SearchShops_Search: 'SearchShops_Search',
+
 }
 export const Shop = {
   id: -1,

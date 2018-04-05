@@ -1,9 +1,10 @@
 import {Platform, Dimensions, PixelRatio} from 'react-native'
 const width = Dimensions.get('window').width
-import {PRIMARY} from '../../../constants'
+import {PRIMARY, GREY} from '../../../constants'
 
 export default {
-	starColor: PRIMARY,
+	fullStarColor: PRIMARY,
+	starColor: GREY,
   maxStars: 5,
   starSize: 12,
 }

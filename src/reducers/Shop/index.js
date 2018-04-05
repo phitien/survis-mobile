@@ -17,5 +17,14 @@ export default function(state = initialState, action) {
   if (rs) return rs
   rs = NewShops(state, action)
   if (rs) return rs
+  switch (action.type) {
+    case `${name}_Rate_Success`: {
+      if (action.payload) {
+        const found = state[plural].list.find(o => o.id == action.payload.id)
+        if (found) found.totalrate = action.payload.totalrate
+      }
+      return {...state}
+    }
+  }
   return state
 }

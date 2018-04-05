@@ -29,5 +29,13 @@ export default function(state, action) {
     case `${props}_Failure`: {
       return {...state, loading: false}
     }
+
+    case `${props}_Rate_Success`: {
+      if (action.payload) {
+        const found = state[plural].list.find(o => o.id == action.payload.id)
+        if (found) found.totalrate = action.payload.totalrate
+      }
+      return {...state}
+    }
   }
 }

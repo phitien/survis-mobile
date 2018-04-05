@@ -18,6 +18,12 @@ export class HomeScreen extends Screen {
     this.loadDevice()
     await this.locationUpdate(this.actions.Shop_Shops)
   }
+  refresh() {
+    if (!this.props.Shop.loading) {
+      this.actions.Shop_Reset()
+      this.actions.Shop_Shops()
+    }
+  }
   loadmore() {
     if (!this.props.Shop.loading) {
       this.actions.Shop_Loadmore()
@@ -35,10 +41,10 @@ export class HomeScreen extends Screen {
   }
   get content() {
     return <InfiniteScroll horizontal={false} distanceFromEnd={10} onLoadMoreAsync={this.loadmore.bind(this)}>
-      <Categorys/>
-      <Promotions/>
-      <NewShops/>
-      <HighRatingShops/>
+      <Categorys ref={e => this.categorys = e}/>
+      <Promotions ref={e => this.promotions = e}/>
+      <NewShops ref={e => this.newshops = e}/>
+      <HighRatingShops ref={e => this.highratingshops = e}/>
       {this.renderShops()}
     </InfiniteScroll>
   }

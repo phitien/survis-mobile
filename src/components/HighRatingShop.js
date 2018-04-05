@@ -10,11 +10,20 @@ import {Rating} from './Rating'
 import {Component} from './Component'
 
 export class HighRatingShop extends Component {
+  state = {totalrate: this.item.totalrate || 0}
+  get item() {return this.props.item || {}}
+
+  onRate(rating) {
+    if (this.logged) {
+      this.actions.Shop_HighRatingShops_Rate({id: this.item.id, type: 'shop', rate: rating})
+      .then(res => this.setState({totalrate: res.data.results.totalrate}))
+    }
+  }
+
   render() {
-    const item = this.props.item
     const {
-      id, image, name, totalrate, totalreviews, latitude, longitude
-    } = itemHelper(item)
+      id, image, name, totalreviews, latitude, longitude
+    } = itemHelper(this.item)
   	return <View big-size>
       <View big-size><Image source={{uri: image}}/></View>
       <View bottom opacity sp full>
@@ -22,7 +31,7 @@ export class HighRatingShop extends Component {
           <Text white big>{name}</Text>
         </View>
         <View horizontal full space-between>
-          <Rating totalrate={totalrate} shopid={id}/>
+          <Rating totalrate={this.state.totalrate} shopid={id} onRate={this.onRate.bind(this)}/>
           <Text ml white small>({totalreviews}) Reviews</Text>
           <View horizontal>
             <Icon theme small name='ios-send'/>
