@@ -12,7 +12,7 @@ import {Screen} from '../components'
 
 export class UserScreen extends Screen {
 
-  async componentWillMount() {
+  async componentDidMount() {
 		this.actions.User_User()
   }
   async onSaveMe(user) {
@@ -27,15 +27,14 @@ export class UserScreen extends Screen {
     this.open('HomeScreen')
     this.actions.User_Logout()
   }
+  refresh() {
+    this.refreshing = true
+    // this.tabHistory.refresh()
+    // this.tabLoyality.refresh()
+  }
 
   get account() {return [this.User.usr_fname, this.User.usr_lname].join(' ') || ''}
   get email() {return this.User.usr_email}
-
-  renderMe() {
-    return <User User={this.User}
-			onSave={this.onSaveMe.bind(this)}
-			onSavePassword={this.onSavePassword.bind(this)}/>
-  }
 
   get content() {
     const user = this.User
@@ -56,10 +55,13 @@ export class UserScreen extends Screen {
         </View>
       </View>,
       <Tabs tabBarUnderlineStyle={style.tabBarUnderlineStyle} locked={true} key='detail'>
-        <Tab heading='Me'>{this.renderMe()}</Tab>
-        <Tab heading='Payment'><PaymentInfo/></Tab>
-        <Tab heading='History'><Historys/></Tab>
-        <Tab heading='Loyality'><Loyaltys/></Tab>
+        <Tab heading='Me'><User ref={e => this.tabMe = e} User={this.User}
+    			onSave={this.onSaveMe.bind(this)}
+    			onSavePassword={this.onSavePassword.bind(this)}
+        /></Tab>
+        <Tab heading='Payment'><PaymentInfo ref={e => this.tabPayment = e}/></Tab>
+        <Tab heading='History'><Historys ref={e => this.tabHistory = e}/></Tab>
+        <Tab heading='Loyality'><Loyaltys ref={e => this.tabLoyality = e}/></Tab>
       </Tabs>
     ]
   }

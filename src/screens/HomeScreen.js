@@ -33,7 +33,7 @@ export class HomeScreen extends Screen {
   renderShops() {
     return <List renderRow={item => this.renderShop(item)} dataArray={this.props.Shop.Shops.list} canLoadMore={true}/>
   }
-  renderContent() {
+  get content() {
     return <InfiniteScroll horizontal={false} distanceFromEnd={10} onLoadMoreAsync={this.loadmore.bind(this)}>
       <Categorys/>
       <Promotions/>

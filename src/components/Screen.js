@@ -1,4 +1,5 @@
 import React from 'react'
+import {RefreshControl} from 'react-native'
 import {Container, Content} from 'native-base'
 import DeviceInfo from 'react-native-device-info'
 
@@ -11,6 +12,10 @@ export class Screen extends Component {
   get content() {return this.props.content}
   get footer() {return this.props.footer}
   get back() {return false}
+  get refreshControl() {return <RefreshControl
+    refreshing={this.refreshing}
+    onRefresh={this.refresh.bind(this)}
+  />}
 
   async loadDevice(cb) {
     const device_model = DeviceInfo.getDeviceId()
@@ -48,7 +53,7 @@ export class Screen extends Component {
     </Header>
   }
   renderContent() {
-    return <Content>
+    return <Content refreshControl={this.refreshControl}>
       {[].concat(this.content).filter(o => o)}
     </Content>
   }

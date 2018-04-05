@@ -18,6 +18,8 @@ export class Loyaltys extends Component {
   }
   render() {
     if (this.props.Loyalty.loading) return this.renderLoading()
-    return <View>{this.items.map((item,i) => <Loyalty key={`${i}-${item.id}`} item={item}/>)}</View>
+    return <View>{this.items.map((item,i) => <Touch key={`${i}-${item.id}`} onPress={e => this.open('ShopScreen', {item})}>
+      <Loyalty item={item} index={i}/>
+    </Touch>)}</View>
   }
 }

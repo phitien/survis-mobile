@@ -21,7 +21,7 @@ export class ShopItemScreen extends Screen {
 
   state = {seeall: false}
 
-  async componentWillMount() {
+  async componentDidMount() {
     const itemid = this.itemid
     this.actions.ShopItem_ShopItem({itemid})
     this.actions.Review_Reviews({itemid})

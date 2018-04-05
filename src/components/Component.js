@@ -28,6 +28,16 @@ export class Component extends RAComponent {
   get error() {return this.state.error}
   get message() {return this.state.message}
   get log() {return log}
+  get refreshing() {return this.state.refreshing || false}
+  set refreshing(v) {
+    if (v) {
+      this.setState({refreshing: v})
+      setTimeout(e => this.setState({refreshing: false}), 2000)
+    }
+    else this.setState({refreshing: v})
+  }
+
+  refresh() {this.refreshing = true}
 
   locationUpdate(ok, ko) {
     navigator.geolocation

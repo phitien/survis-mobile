@@ -14,7 +14,7 @@ export class ShopScreen extends Screen {
   get items() {return this.props.ShopItem.ShopItems.list || []}
   get loading() {return this.props.Shop.loading || this.props.ShopItem.loading}
 
-  async componentWillMount() {
+  async componentDidMount() {
     const shopid = this.props.item.id
     this.actions.Shop_Shop({shopid})
     this.actions.ShopItem_ShopItems({shopid})
