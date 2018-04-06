@@ -1,7 +1,6 @@
 import {BASEURL} from '../constants'
 
 export const acts = {
-  Error: 'Error', LoadAll: 'LoadAll', SaveAll: 'SaveAll', Loadmore: 'Loadmore', Load: 'Load', Clear: 'Clear', Save: 'Save', Unload: 'Unload', Reset: 'Reset', Search: 'Search', Select: 'Select',
   Add: 'Add', Remove: 'Remove', Clear: 'Clear', Increase: 'Increase', Decrease: 'Decrease',
   Checkout: `api|post|true|body|${BASEURL}?type=placeorder`,
 }
@@ -24,7 +23,7 @@ export const ShoppingCartItems = {
   list: [], filter: {page: 0, pagesize: 20},
 }
 export default {
-  loading: false, error: false,
+  loading: false, error: false, persistent: true, loadmore: false,
   acts,
   ShoppingCartItem,
   ShoppingCartItems,

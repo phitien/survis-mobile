@@ -1,12 +1,4 @@
-import * as models from '../../models'
-import {stateToProps} from '../helper'
-
-const initialState = models.Prize || {}
-
-export default function(state = initialState, action) {
-  const name = 'Prize'
-  let rs = stateToProps(name, state, action)
-  if (rs) return rs
+export default function(name, state, action, initialState) {
   switch (action.type) {
     case `${name}_Submit_Pending`: {return {...state, loading: true}}
     case `${name}_Submit_Success`: {return {...state, ...action.payload, error: false, loading: false}}
@@ -15,5 +7,4 @@ export default function(state = initialState, action) {
     case `${name}_Scan_Success`: {return {...state, ...action.payload, error: false, loading: false}}
     case `${name}_Scan_Failure`: {return {...state, ...action.payload, loading: false}}
   }
-  return state
 }

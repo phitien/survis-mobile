@@ -1,7 +1,6 @@
 import {BASEURL} from '../constants'
 
 export const acts = {
-  Error: 'Error', LoadAll: 'LoadAll', SaveAll: 'SaveAll', Loadmore: 'Loadmore', Load: 'Load', Clear: 'Clear', Save: 'Save', Unload: 'Unload', Reset: 'Reset', Search: 'Search', Select: 'Select',
   Loyaltys: `api|get|true|body|${BASEURL}?type=loyalty`,
 }
 export const Loyalty = {
@@ -21,7 +20,7 @@ export const Loyaltys = {
   list: [], filter: {page: 0, pagesize: 20},
 }
 export default {
-  loading: false, error: false,
+  loading: false, error: false, persistent: false, loadmore: true,
   acts,
   Loyalty,
   Loyaltys,

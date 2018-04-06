@@ -1,7 +1,6 @@
 import {BASEURL} from '../constants'
 
 export const acts = {
-  Error: 'Error', LoadAll: 'LoadAll', SaveAll: 'SaveAll', Loadmore: 'Loadmore', Load: 'Load', Clear: 'Clear', Save: 'Save', Unload: 'Unload', Reset: 'Reset', Search: 'Search', Select: 'Select',
 }
 export const PaymentInfo = {
   id: -1,
@@ -13,7 +12,7 @@ export const PaymentInfo = {
   bill_address: '',
 }
 export default {
-  loading: false, error: false,
+  loading: false, error: false, persistent: true, loadmore: false,
   acts,
   PaymentInfo,
 }

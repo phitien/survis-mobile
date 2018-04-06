@@ -1,16 +1,24 @@
-export {default as Category} from './Category'
-export {default as Device} from './Device'
-export {default as History} from './History'
-export {default as Location} from './Location'
-export {default as Loyalty} from './Loyalty'
-export {default as Notification} from './Notification'
-export {default as PaymentInfo} from './PaymentInfo'
-export {default as PaymentMethod} from './PaymentMethod'
-export {default as Prize} from './Prize'
-export {default as Promotion} from './Promotion'
-export {default as Review} from './Review'
-export {default as Screen} from './Screen'
-export {default as Shop} from './Shop'
-export {default as ShopItem} from './ShopItem'
-export {default as ShoppingCartItem} from './ShoppingCartItem'
-export {default as User} from './User'
+import * as models from '../models'
+import {log} from '../utils'
+import {stateToProps} from './helper'
+
+import * as custom from './custom'
+
+function reducerGenerator(name) {
+  const initialState = models[name] || {}
+  const loadmore = initialState
+  return function(state = initialState, action) {
+    let rs = stateToProps(name, state, action, loadmore)
+    if (rs) return rs
+    if (custom[name]) rs = custom[name](name, state, action, initialState)
+    if (rs) return rs
+    return state
+  }
+}
+
+const all = {}
+Object.keys(models).map(name => {
+  const model = models[name] || {}
+  all[name] = reducerGenerator(name)
+})
+export default all

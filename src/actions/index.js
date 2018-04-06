@@ -33,9 +33,18 @@ function apiActionGenerator(name, act, uri, method, filter, type) {
   }
 }
 
+const basicActions = {
+  Error: 'Error',
+  Load: 'Load',
+  Clear: 'Clear', Save: 'Save', Unload: 'Unload',
+  LoadAll: 'LoadAll',
+  SaveAll: 'SaveAll',
+  Loadmore: 'Loadmore',
+  Reset: 'Reset', Search: 'Search', Select: 'Select',
+}
 const actions = {}
 Object.keys(models).map(name => {
-  const model = models[name] || {}, acts = model.acts || {}
+  const model = models[name] || {}, acts = {...basicActions, ...model.acts || {}}
   Object.keys(acts).map(act => {
     const value = acts[act]
     if (value.indexOf('api') == 0) {

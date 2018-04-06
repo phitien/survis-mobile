@@ -1,14 +1,6 @@
-import * as models from '../../models'
-import {stateToProps} from '../helper'
 import {persitUser} from '../helper'
-import {log} from '../../utils'
 
-const initialState = models.User || {}
-
-export default function(state = initialState, action) {
-  const name = 'User'
-  let rs = stateToProps(name, state, action)
-  if (rs) return rs
+export default function(name, state, action, initialState) {
   switch (action.type) {
 		case `${name}_ChangePassword_Pending`: {
       return {...state, loading: true}
@@ -67,5 +59,4 @@ export default function(state = initialState, action) {
       return {...state, [name]: {}, error: false, loading: false}
     }
   }
-  return state
 }

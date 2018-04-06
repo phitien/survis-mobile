@@ -1,7 +1,6 @@
 import {BASEURL} from '../constants'
 
 export const acts = {
-  Error: 'Error', LoadAll: 'LoadAll', SaveAll: 'SaveAll', Loadmore: 'Loadmore', Load: 'Load', Clear: 'Clear', Save: 'Save', Unload: 'Unload', Reset: 'Reset', Search: 'Search', Select: 'Select',
   Reviews: `api|get|true|body|${BASEURL}?type=reviews&cmd=get`,
   Add: `api|post|true|form|${BASEURL}?type=reviews&cmd=set`,
 }
@@ -18,7 +17,7 @@ export const Reviews = {
   list: [], filter: {page: 0, pagesize: 20},
 }
 export default {
-  loading: false, error: false,
+  loading: false, error: false, persistent: false, loadmore: false,
   acts,
   Review,
   Reviews,

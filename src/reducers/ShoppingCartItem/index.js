@@ -1,13 +1,6 @@
-import * as models from '../../models'
-import {stateToProps} from '../helper'
 import {persitShoppingCartItems} from '../helper'
 
-const initialState = models.ShoppingCartItem || {}
-
-export default function(state = initialState, action) {
-  const name = 'ShoppingCartItem'
-  let rs = stateToProps(name, state, action)
-  if (rs) return rs
+export default function(name, state, action, initialState) {
   switch (action.type) {
     case `${name}_Add`: {
       const item = state[`${name}s`].list.find(item => item.id == action.payload.id)

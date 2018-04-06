@@ -1,7 +1,6 @@
 import {BASEURL} from '../constants'
 
 export const acts = {
-  Error: 'Error', LoadAll: 'LoadAll', SaveAll: 'SaveAll', Loadmore: 'Loadmore', Load: 'Load', Clear: 'Clear', Save: 'Save', Unload: 'Unload', Reset: 'Reset', Search: 'Search', Select: 'Select',
   Shop: `api|get|true|body|${BASEURL}?type=shopdetail`,
   Shops: `api|get|true|body|${BASEURL}?type=nearbyshops`,
   Rate: `api|post|true|form|${BASEURL}?type=rating&cmd=set`,
@@ -47,7 +46,7 @@ export const SearchShops = {
   list: [], filter: {q: '', catid: '', page: 0, pagesize: 20},
 }
 export default {
-  loading: false, error: false,
+  loading: false, error: false, persistent: false, loadmore: true,
   acts,
   Shop,
   Shops,

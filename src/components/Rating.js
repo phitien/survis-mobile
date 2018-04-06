@@ -10,10 +10,10 @@ export class Rating extends Component {
     return (
       <StarRating
     		disabled={false}
-    		maxStars={style.maxStars}
-    		starSize={style.starSize}
+    		maxStars={parseFloat(style.maxStars)}
+    		starSize={parseFloat(style.starSize)}
         fullStarColor={style.fullStarColor}
-        rating={this.props.totalrate}
+        rating={parseFloat(this.props.totalrate)}
         selectedStar={this.props.onRate}
       />
     )

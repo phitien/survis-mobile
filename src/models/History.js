@@ -1,7 +1,6 @@
 import {BASEURL} from '../constants'
 
 export const acts = {
-  Error: 'Error', LoadAll: 'LoadAll', SaveAll: 'SaveAll', Loadmore: 'Loadmore', Load: 'Load', Clear: 'Clear', Save: 'Save', Unload: 'Unload', Reset: 'Reset', Search: 'Search', Select: 'Select',
   Historys: `api|get|true|body|${BASEURL}?type=history`,
 }
 export const History = {
@@ -19,7 +18,7 @@ export const Historys = {
   list: [], filter: {page: 0, pagesize: 20},
 }
 export default {
-  loading: false, error: false,
+  loading: false, error: false, persistent: false, loadmore: true,
   acts,
   History,
   Historys,
