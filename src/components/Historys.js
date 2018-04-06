@@ -1,6 +1,7 @@
 import React from 'react'
 import {Text, Spinner, Icon, View, Content} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
+import InfiniteScroll from 'react-native-infinite-scroll'
 
 import {Historys as style} from '../theme/styles/components'
 
@@ -16,10 +17,28 @@ export class Historys extends Component {
   async componentDidMount() {
     if (this.logged) this.actions.History_Historys()
   }
+  get refreshing() {return this.state.refreshing || this.props.History.loading || false}
+  refresh() {
+    if (!this.props.History.loading) {
+      this.actions.History_Reset()
+      this.actions.History_Historys()
+    }
+  }
+  loadmore() {
+    if (!this.props.History.loading) {
+      this.actions.History_Loadmore()
+      this.actions.History_Historys()
+    }
+  }
+
   render() {
-    if (this.props.History.loading) return this.renderLoading()
-    return <View>{this.items.map((item,i) => <Touch key={`${i}-${item.id}`} onPress={e => this.open('ShopItemScreen', {item: item.item, shop: item.shop})}>
-      <History item={item} index={i}/>
-    </Touch>)}</View>
+    // if (this.props.History.loading) return this.renderLoading()
+    return <InfiniteScroll key='main' horizontal={false} distanceFromEnd={10} style={{flex:1}}
+        // refreshControl={this.refreshControl}
+        onLoadMoreAsync={this.loadmore.bind(this)}>
+        {this.items.map((item,i) => <Touch key={`${i}-${item.id}`} onPress={e => this.open('ShopItemScreen', {item: item.item, shop: item.shop})}>
+        <History item={item} index={i}/>
+      </Touch>)}
+    </InfiniteScroll>
   }
 }

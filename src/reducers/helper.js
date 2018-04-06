@@ -8,12 +8,13 @@ export function stateToProps(name, state, action, loadmore) {
   switch (action.type) {
     case `${name}_Load`: {
       const data = state[name] = {...state[name], ...action.payload || {}}
-      return {...state, loading: false}
+      return state
     }
     case `${name}_Clear`: {
       state.message = false
       state.error = false
-      return {...state, loading: false}
+      state.loading = false
+      return state
     }
     case `${name}_Error`: {
       return {...state, error: action.payload, loading: false}
@@ -21,18 +22,19 @@ export function stateToProps(name, state, action, loadmore) {
     case `${name}_Save`: {
       state[name] = {...state[name], ...action.payload || {}}
       if (persit[`persit${name}`]) persit[`persit${name}`](state[name])
-      return {...state, loading: false}
+      return state
     }
     case `${name}_Unload`: {
       state[name] = {}
       if (persit[`persit${name}`]) persit[`persit${name}`](state[name])
-      return {...state, loading: false}
+      return state
     }
     case `${prop}_Pending`: {return {...state, loading: true}}
     case `${prop}_Success`: {
       state[name] = {...state[name], ...action.payload || {}}
       if (persit[`persit${name}`]) persit[`persit${name}`](state[name])
-      return {...state, loading: false}
+      state.loading = false
+      return state
     }
     case `${prop}_Failure`: {return {...state, loading: false}}
 
@@ -43,27 +45,26 @@ export function stateToProps(name, state, action, loadmore) {
         return o.id == action.payload.id
       })
       if (item) item.selected = true
-      return {...state, loading: false}
+      return state
     }
     case `${name}_LoadAll`: {
       const data = state[subname] = {...state[subname], ...action.payload || {}}
-      return {...state, loading: false}
+      return state
     }
     case `${name}_SaveAll`: {
       state[subname] = {...state[subname], ...action.payload || {}}
       if (persit[`persit${subname}`]) persit[`persit${subname}`](state[subname])
-      return {...state, loading: false}
+      return state
     }
 
     case `${name}_Loadmore`: {
       let page = state[subname].filter.page
-      if (page < MAX_PAGE) page = page + 1
-      state[subname].filter = {...state[subname].filter, ...action.payload, page}
-      return {...state, loading: false}
+      state[subname].filter.page = page < MAX_PAGE ? page + 1 : page
+      return state
     }
     case `${name}_Search`: {
       state[subname].filter = {...state[subname].filter, ...action.payload, page: 0}
-      return {...state, loading: false}
+      return state
     }
     case `${name}_Reset`: {
       state.error = false
@@ -71,7 +72,7 @@ export function stateToProps(name, state, action, loadmore) {
       state[subname].filter = {...state[subname].filter, ...action.payload, page: 0}
       state[subname].list = []
       state[subname].loaded = false
-      return {...state, loading: false}
+      return state
     }
 
     case `${props}_Pending`: {return {...state, loading: true}}

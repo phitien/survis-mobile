@@ -2,6 +2,7 @@ import React, {Component as RAComponent} from 'react'
 import {Actions} from 'react-native-router-flux'
 import {View, Spinner, Text} from 'native-base'
 import {StyleSheet} from 'react-native'
+import {RefreshControl} from 'react-native'
 
 import {PRIMARY} from '../constants'
 import {apis} from '../apis'
@@ -28,6 +29,10 @@ export class Component extends RAComponent {
   get error() {return this.state.error}
   get message() {return this.state.message}
   get log() {return log}
+  get refreshControl() {return <RefreshControl
+    refreshing={this.refreshing}
+    onRefresh={this.refresh.bind(this)}
+  />}
   get refreshing() {return this.state.refreshing || false}
   set refreshing(v) {
     if (v) {
