@@ -69,7 +69,7 @@ export function stateToProps(name, state, action, loadmore) {
     case `${name}_Reset`: {
       state.error = false
       state.message = false
-      state[subname].filter = {...state[subname].filter, ...action.payload, page: 0}
+      state[subname].filter.page = 0
       state[subname].list = []
       state[subname].loaded = false
       return state

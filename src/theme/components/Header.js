@@ -1,5 +1,5 @@
 import {Platform, Dimensions, PixelRatio} from 'react-native'
-const width = Dimensions.get('window').width
+const {height, width} = Dimensions.get('window')
 import {PRIMARY, GREY} from '../../constants'
 
 export default (variables) => {
@@ -9,7 +9,8 @@ export default (variables) => {
 		backgroundColor: PRIMARY,
 		flexDirection: 'row',
 		justifyContent: 'center',
-		paddingTop: 20, //marginTop: 20,
+		paddingTop: height == 812 ? 36 : 20,
+		// marginTop: 20,
 		'NativeBase.Button': {
 			justifyContent: 'center', alignItems: 'center',
 			alignSelf: 'center',

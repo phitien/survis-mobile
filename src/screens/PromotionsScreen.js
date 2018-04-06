@@ -14,6 +14,12 @@ export class PromotionsScreen extends Screen {
   async componentDidMount() {
     this.locationUpdate(this.actions.Promotion_Promotions)
   }
+  refresh() {
+    if (!this.props.Promotion.loading) {
+      this.actions.Promotion_Reset()
+      .then(e => this.locationUpdate(this.actions.Promotion_Promotions))
+    }
+  }
   loadmore() {
     if (!this.props.Promotion.loading) {
       this.actions.Promotion_Loadmore()
@@ -31,7 +37,7 @@ export class PromotionsScreen extends Screen {
   }
   renderContent() {
     return <InfiniteScroll horizontal={false} distanceFromEnd={10}
-      refreshControl={this.refreshControl} 
+      refreshControl={this.refreshControl}
       onLoadMoreAsync={this.loadmore.bind(this)}>
       <Text heading>Promotions</Text>
       {this.renderPromotions()}
