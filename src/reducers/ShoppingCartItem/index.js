@@ -1,4 +1,4 @@
-import {persitShoppingCartItems} from '../helper'
+import {persitShoppingCartItems} from '../persit'
 
 export default function(name, state, action, initialState) {
   switch (action.type) {

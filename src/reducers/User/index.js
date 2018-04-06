@@ -1,4 +1,4 @@
-import {persitUser} from '../helper'
+import {persitUser} from '../persit'
 
 export default function(name, state, action, initialState) {
   switch (action.type) {
