@@ -32,7 +32,9 @@ export class SearchScreen extends Screen {
     return <List renderRow={item => this.renderShop(item)} dataArray={this.items} canLoadMore={true}/>
   }
   renderContent() {
-    return <InfiniteScroll horizontal={false} distanceFromEnd={10} onLoadMoreAsync={this.loadmore.bind(this)}>
+    return <InfiniteScroll horizontal={false} distanceFromEnd={10}
+      refreshControl={this.refreshControl}
+      onLoadMoreAsync={this.loadmore.bind(this)}>
       <Categorys/>
       {this.renderShops()}
     </InfiniteScroll>

@@ -30,7 +30,9 @@ export class PromotionsScreen extends Screen {
     return <List renderRow={item => this.renderPromotion(item)} dataArray={this.items} canLoadMore={true}/>
   }
   renderContent() {
-    return <InfiniteScroll horizontal={false} distanceFromEnd={10} onLoadMoreAsync={this.loadmore.bind(this)}>
+    return <InfiniteScroll horizontal={false} distanceFromEnd={10}
+      refreshControl={this.refreshControl} 
+      onLoadMoreAsync={this.loadmore.bind(this)}>
       <Text heading>Promotions</Text>
       {this.renderPromotions()}
     </InfiniteScroll>

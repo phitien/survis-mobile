@@ -39,8 +39,10 @@ export class HomeScreen extends Screen {
   renderShops() {
     return <List renderRow={item => this.renderShop(item)} dataArray={this.props.Shop.Shops.list} canLoadMore={true}/>
   }
-  get content() {
-    return <InfiniteScroll key='main' horizontal={false} distanceFromEnd={10} onLoadMoreAsync={this.loadmore.bind(this)}>
+  renderContent() {
+    return <InfiniteScroll key='main' horizontal={false} distanceFromEnd={10}
+      refreshControl={this.refreshControl}
+      onLoadMoreAsync={this.loadmore.bind(this)}>
       <Categorys ref={e => this.categorys = e}/>
       <Promotions ref={e => this.promotions = e}/>
       <NewShops ref={e => this.newshops = e}/>
