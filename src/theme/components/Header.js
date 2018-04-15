@@ -14,25 +14,13 @@ export default (variables) => {
 		'NativeBase.Button': {
 			justifyContent: 'center', alignItems: 'center',
 			alignSelf: 'center',
-			padding: 6,
+			paddingTop: 4,
+			paddingBottom: 4,
+			paddingLeft: 10,
+			paddingRight: 10,
 			'NativeBase.Icon': {
 				color: 'white',
-			},
-		},
-		'NativeBase.Item': {
-			alignSelf: 'center',
-			flex: 1, height: 24, borderRadius: 12,
-			backgroundColor: 'white',
-			'NativeBase.Icon': {
-				color: PRIMARY,
-				fontSize: 18,
-				paddingRight: 0,
-				paddingLeft: 8,
-			},
-			'NativeBase.Input': {
-				alignSelf: 'center',
-				height: 24,
-				fontSize: 12,
+				fontSize: 22,
 			},
 		},
 	}

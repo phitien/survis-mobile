@@ -9,7 +9,7 @@ export default (variables) => {
     justifyContent: 'center',
     'NativeBase.Text': {
       color: 'black',
-      fontSize: 16,
+      fontSize: 14,
     },
     'NativeBase.Icon': {
       color: 'black',
@@ -17,7 +17,8 @@ export default (variables) => {
     '.active': {
       'NativeBase.Text': {
         color: PRIMARY,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontSize: 16,
       },
       'NativeBase.Icon': {
         color: PRIMARY,

@@ -57,9 +57,10 @@ export class Header extends Component {
     </Button>
   }
   renderSearch() {
-    return <Item>
+    return <Item search>
       <Icon name='search'/>
-      <Input search
+      <Input
+        transparent
         placeholder='Search'
         returnKeyType='search'
         autoCorrect={false}
