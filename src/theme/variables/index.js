@@ -1,6 +1,6 @@
 import color from 'color'
 import {Platform, Dimensions, PixelRatio} from 'react-native'
-import {PRIMARY, RED, GREY} from '../../constants'
+import {PRIMARY, RED, GREY, LIGHTGREY} from '../../constants'
 
 const deviceHeight = height = Dimensions.get('window').height
 const deviceWidth = width = Dimensions.get('window').width
@@ -9,7 +9,7 @@ const platform = Platform.OS
 export {default as basic} from './basic'
 
 export default {
-  PRIMARY, RED, GREY,
+  PRIMARY, RED, GREY, LIGHTGREY,
   Platform, Dimensions, PixelRatio,
   width, height,
   deviceWidth, deviceHeight,

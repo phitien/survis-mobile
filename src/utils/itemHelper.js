@@ -28,7 +28,7 @@ export const itemHelper = (item) => {
     orderdate: item.orderdate || '',
     isfeatured: parseInt(item.isfeatured) && parseInt(item.isfeatured) > 0,
     promotion_image: item.promotion_image || '',
-    distance: `${(parseFloat(item.distance) || 0).toFixed(2)}km`,
+    distance: `${(parseFloat(item.distance) || 0).toFixed(1)}km`,
     cardnum: item.num || '',
     shop_info: item.shop_info || {},
     qty: parseInt(item.qty) || 1,

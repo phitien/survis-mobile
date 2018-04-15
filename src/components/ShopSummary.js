@@ -44,7 +44,7 @@ export class ShopSummary extends Component {
           this.setState({showReview: !this.state.showReview})
           if (this.props.openPressReview) this.props.openPressReview(e)
         }}>({totalreviews}) Reviews</Text>
-    	  <Touch onPress={e => openOnMap(latitude, longitude)}><View horizontal>
+    	  <Touch onPress={e => openOnMap(latitude, longitude, name)}><View horizontal>
     		  <Icon theme small name='ios-send'/>
     	    <Text theme small>Get direction</Text>
     	  </View></Touch>

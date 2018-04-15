@@ -1,7 +1,7 @@
 export default (variables) => {
-  const {PRIMARY, GREY, RED, platformStyle, platform} = variables
+  const {PRIMARY, GREY, RED, LIGHTGREY, platformStyle, platform} = variables
   return {
-    '.grey': {backgroundColor: GREY},
+    '.grey': {backgroundColor: LIGHTGREY},
     '.theme': {backgroundColor: PRIMARY},
     '.white': {backgroundColor: 'white'},
     '.opacity': {backgroundColor: 'rgba(0, 0, 0, 0.5)'},
@@ -27,7 +27,7 @@ export default (variables) => {
       }
     },
     '.heading': {
-      padding: 10,backgroundColor: GREY,
+      padding: 10, backgroundColor: LIGHTGREY,
       'NativeBase.Text': {
         fontSize: 16, fontWeight: 'bold'
       }

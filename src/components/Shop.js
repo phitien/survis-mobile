@@ -41,17 +41,24 @@ export class Shop extends Component {
       <View flex1 smt pl pr spb>
         <View full><Text bold>{name}</Text></View>
         <View full><Text small>{address}</Text></View>
-        <View full><Text theme>{highlight}</Text></View>
-        <Touch onPress={e => openOnMap(latitude, longitude)}><View horizontal space-between full>
+        <Touch onPress={e => openOnMap(latitude, longitude, name)}><View horizontal full>
           <Text small>{distance}</Text>
-          <View horizontal>
+          <View horizontal ml>
             <Icon theme small name='ios-send'/>
             <Text small theme>Get direction</Text>
           </View>
         </View></Touch>
+        <View full smt smb><Text theme bold>{highlight}</Text></View>
         <View horizontal space-between style={style.statistic}>
-          <Rating totalrate={this.state.totalrate} shopid={id} onRate={this.onRate.bind(this)}/>
-          <Text small>({totalreviews}) Reviews</Text>
+          <Rating totalrate={this.state.totalrate} shopid={id} onRate={this.onRate.bind(this)}
+            fullStarColor='black' emptyStarColor='black'
+          />
+          <View horizontal>
+            <Text small grey>(</Text>
+            <Text small theme>{totalreviews}</Text>
+            <Text small grey>)</Text>
+            <Text small grey sml>Reviews</Text>
+          </View>
         </View>
       </View>
     </View>

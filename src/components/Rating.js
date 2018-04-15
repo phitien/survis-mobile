@@ -12,7 +12,8 @@ export class Rating extends Component {
     		disabled={false}
     		maxStars={parseFloat(style.maxStars)}
     		starSize={parseFloat(style.starSize)}
-        fullStarColor={style.fullStarColor}
+        emptyStarColor={this.props.emptyStarColor || style.fullStarColor}
+        fullStarColor={this.props.fullStarColor || style.fullStarColor}
         rating={parseFloat(this.props.totalrate)}
         selectedStar={this.props.onRate}
       />

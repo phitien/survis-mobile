@@ -8,14 +8,16 @@ export default (variables) => {
     alignItems: 'center',
     justifyContent: 'center',
     'NativeBase.Text': {
-      color: GREY,
+      color: 'black',
+      fontSize: 16,
     },
     'NativeBase.Icon': {
-      color: GREY,
+      color: 'black',
     },
     '.active': {
       'NativeBase.Text': {
         color: PRIMARY,
+        fontWeight: 'bold'
       },
       'NativeBase.Icon': {
         color: PRIMARY,

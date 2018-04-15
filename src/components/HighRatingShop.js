@@ -35,7 +35,7 @@ export class HighRatingShop extends Component {
           <Text ml white small>({totalreviews}) Reviews</Text>
           <View horizontal>
             <Icon theme small name='ios-send'/>
-            <Text white small theme onPress={e => openOnMap(latitude, longitude)}>Get direction</Text>
+            <Text white small theme onPress={e => openOnMap(latitude, longitude, name)}>Get direction</Text>
           </View>
         </View>
       </View>

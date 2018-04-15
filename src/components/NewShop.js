@@ -24,7 +24,7 @@ export class NewShop extends Component {
         </View>
         <View full white sp>
           <Text center small bold>{name}</Text>
-          <Touch onPress={e => openOnMap(latitude, longitude)}>
+          <Touch onPress={e => openOnMap(latitude, longitude, name)}>
             <View horizontal center middle smt>
               <Icon theme small name='ios-pin'/>
               <Text small sml>{distance}</Text>

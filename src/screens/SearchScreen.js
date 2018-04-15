@@ -16,6 +16,12 @@ export class SearchScreen extends Screen {
     await this.locationUpdate()
     this.actions.Shop_SearchShops()
   }
+  refresh() {
+    if (!this.props.Shop.loading) {
+      this.actions.Shop_SearchShops_Reset()
+      .then(e => this.locationUpdate(this.actions.Shop_SearchShops))
+    }
+  }
   loadmore() {
     if (!this.props.Shop.loading) {
       this.actions.Shop_SearchShops_Loadmore()

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Tabs, Tab, Item, Input, Text, View, Icon, CheckBox} from 'native-base'
-import {StyleSheet} from 'react-native'
+import {Alert} from 'react-native'
 import {TouchableOpacity as Touch} from 'react-native'
 
 import {LoginScreen as style} from '../theme/styles/screens'
@@ -16,40 +16,30 @@ export class LoginScreen extends Screen {
     usr_password: null,
   }
 
-  get error() {return this.props.User.error}
+  get error() {return this.props.User.error || this.state.error}
   get message() {return this.props.User.message}
   get isEmailValid() {
     this.setState({typing: false})
     const {usr_email, usr_password} = this.state
     if (!this.state.usr_email || !validateEmail(this.state.usr_email)) {
-      this.actions.User_Error('Email is invalid')
+      this.setState({error: 'Email is invalid'}, e => Alert.alert('Error', this.error))
       return
     }
-    this.actions.User_Error(false)
+    this.setState({error: false})
     if (this.state.next) this.state.next.wrappedInstance.focus()
     return true
   }
   get isPasswordValid() {
     this.setState({typing: false})
     if (!this.state.usr_password) {
-      this.actions.User_Error('Password is invalid')
+      this.setState({error: 'Password is invalid. Password should not be empty'}, e => Alert.alert('Error', this.error))
       return
     }
-    this.actions.User_Error(false)
+    this.setState({error: false})
     if (this.state.next) this.state.next.wrappedInstance.focus()
     return true
   }
 
-  onAfterLogin() {
-    if (this.logged) {
-      if (this.props.Screen.Screen.id) {
-        requestHeader('token', this.User.token)
-        this.Actions[this.props.Screen.Screen.id](this.props.Screen.Screen.params)
-        this.actions.Screen_Save({id: '', params: {}})
-      }
-      else this.open('HomeScreen')
-    }
-  }
   onPressLogin() {
     if (this.isEmailValid && this.isPasswordValid) {
       const {usr_email, usr_password} = this.state
@@ -57,16 +47,34 @@ export class LoginScreen extends Screen {
       .then(e => this.onAfterLogin(e))
     }
   }
-  onPressRegister() {
-    if (this.message) {
-      this.actions.User_Clear()
-      this.Actions.pop()
+  onAfterLogin(res) {
+    if (!this.error) {
+      if (this.props.Screen.Screen.id) {
+        requestHeader('token', this.User.token)
+        this.Actions[this.props.Screen.Screen.id](this.props.Screen.Screen.params)
+        this.actions.Screen_Save({id: '', params: {}})
+      }
+      else this.open('HomeScreen')
     }
     else {
-      if (this.isEmailValid && this.isPasswordValid) {
-        const {usr_email, usr_password} = this.state
-        this.actions.User_Register({usr_email, usr_password})
-      }
+      Alert.alert('Error', this.error)
+    }
+  }
+  onPressRegister() {
+    if (this.isEmailValid && this.isPasswordValid) {
+      const {usr_email, usr_password} = this.state
+      this.actions.User_Register({usr_email, usr_password})
+      .then(e => this.onAfterRegister(e))
+    }
+  }
+  onAfterRegister() {
+    if (this.error) Alert.alert('Error', this.error)
+    else if (this.message) {
+      Alert.alert('Message', this.message, [{text: 'OK', onPress: () => {
+        this.actions.User_Clear()
+        this.tabs.goToPage(0)
+        // this.Actions.pop()
+      }}], {cancelable: false})
     }
   }
   onPressForgetPassword() {
@@ -91,12 +99,11 @@ export class LoginScreen extends Screen {
           onSubmitEditing={this.onPressLogin.bind(this)}
           returnKeyType='go'/>
       </Item>
-      {this.renderError()}
-      <Button loading={this.props.User.loading} onPress={this.onPressLogin.bind(this)} full style={style.button}>
+      <Button full bmt loading={this.props.User.loading} onPress={this.onPressLogin.bind(this)}>
         <Text bold>LOG IN</Text>
       </Button>
-      <View horizontal style={style.forget_password}>
-        <Text onPress={this.onPressForgetPassword.bind(this)} small style={style.forget_password_text}>Forgot Password</Text>
+      <View horizontal full mt>
+        {/* <Text full small theme right onPress={this.onPressForgetPassword.bind(this)}>Forgot Password</Text> */}
       </View>
     </View>
   }
@@ -129,8 +136,6 @@ export class LoginScreen extends Screen {
         <CheckBox checked={this.state.agreed} onPress={e => this.setState({agreed: !this.state.agreed})}/>
         <Text ml small>I agree with terms and conditions</Text>
       </View></Touch>
-      {this.renderError()}
-      {this.renderMessage()}
       <Button full smt disabled={!this.state.agreed} loading={this.props.User.loading} onPress={this.onPressRegister.bind(this)}>
         <Text bold>{this.message ? 'OK' : 'REGISTER'}</Text>
       </Button>
@@ -139,8 +144,10 @@ export class LoginScreen extends Screen {
 
   render() {
     return <LightBox>
-      <View flex1 bml bmr>
-        <Tabs tabBarUnderlineStyle={style.tabBarUnderlineStyle}>
+      <View flex1 bml bmr bmt bpt>
+        <Tabs ref={e => this.tabs = e}
+          // initialPage={0} page={0}
+          tabBarUnderlineStyle={style.tabBarUnderlineStyle}>
           <Tab heading='Login'>
             {this.renderLogin()}
           </Tab>
