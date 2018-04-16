@@ -22,10 +22,6 @@ export class ShopSummary extends Component {
     }
   }
 
-  renderReviews() {
-    if (!this.state.showReview) return null
-    return <Reviews shopid={this.item.id}/>
-  }
   render() {
     const {
       id, image, name, address, totalrate, totalreviews, latitude, longitude
@@ -40,16 +36,15 @@ export class ShopSummary extends Component {
     	</View>
     	<View horizontal sp space-between full>
     	  <Rating totalrate={this.state.totalrate} shopid={id}/>
-    	  <Text theme small onPress={e => {
+        <Text theme small onPress={e => {
           this.setState({showReview: !this.state.showReview})
           if (this.props.openPressReview) this.props.openPressReview(e)
-        }}>({totalreviews}) Reviews</Text>
+        }}>{`(${totalreviews}) Reviews`}</Text>
     	  <Touch onPress={e => openOnMap(latitude, longitude, name)}><View horizontal>
     		  <Icon theme small name='ios-send'/>
     	    <Text theme small>Get direction</Text>
     	  </View></Touch>
     	</View>
-      {this.renderReviews()}
     </View>
   }
 }

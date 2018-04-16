@@ -1,5 +1,5 @@
 export default (variables) => {
-	const {PRIMARY, GREY, platformStyle, platform} = variables
+	const {PRIMARY, GREY, LIGHTGREY, LIGHTDARK, platformStyle, platform} = variables
 	return {
 		backgroundColor: PRIMARY,
 		borderRadius: 3,
@@ -7,6 +7,12 @@ export default (variables) => {
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'center',
+		'.grey': {
+			backgroundColor: LIGHTGREY,
+			'NativeBase.Text': {color: LIGHTDARK,},
+			'NativeBase.IconNB': {color: LIGHTDARK,},
+			'NativeBase.Icon': {color: LIGHTDARK,},
+		},
 		'NativeBase.Text': {
 			marginLeft: 0,
 			marginRight: 0,

@@ -26,6 +26,8 @@ export function getTheme (variables) {
     'NativeBase.ButtonNB': require('./components/Button').default(variables),
     'NativeBase.Input': require('./components/Input').default(variables),
     'NativeBase.InputNB': require('./components/Input').default(variables),
+    'NativeBase.Textarea': require('./components/Textarea').default(variables),
+    'NativeBase.TextareaNB': require('./components/Textarea').default(variables),
     'NativeBase.Text': require('./components/Text').default(variables),
     'NativeBase.TextNB': require('./components/Text').default(variables),
     'NativeBase.View': require('./components/View').default(variables),

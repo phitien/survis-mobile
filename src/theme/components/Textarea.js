@@ -1,14 +1,13 @@
 export default (variables) => {
-  const {PRIMARY, GREY, DARK, LIGHTDARK, platformStyle, platform} = variables
+  const {PRIMARY, GREY, platformStyle, platform} = variables
   const textTheme = {
     fontSize: 14,
     fontFamily: variables.fontFamily,
     color: '#000',
     flexWrap: 'wrap',
     backgroundColor: 'transparent',
-    '.dark': {color: DARK},
-    '.lightdark': {color: LIGHTDARK},
-    '.grey': {color: 'rgb(161,161,161)'},
+    '.bordered': {borderWidth: 1, borderColor: GREY},
+    '.grey': {color: GREY},
     '.theme': {color: PRIMARY},
     '.white': {color: 'white'},
     '.tiny': {fontSize: 10,},
@@ -25,12 +24,6 @@ export default (variables) => {
     '.left': {textAlign: 'left'},
     '.right': {textAlign: 'right'},
     '.italic': {fontStyle: 'italic'},
-    '.underline': {
-      textDecorationLine: 'underline',
-      textDecorationStyle: 'solid',
-      textDecorationColor: '#557ffb',
-      color: '#557ffb'
-    },
   }
   return textTheme
 }
