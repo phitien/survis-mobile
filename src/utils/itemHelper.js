@@ -8,6 +8,8 @@ export const itemHelper = (item) => {
     description: item.description || '',
     priceS: parseFloat(item.price) ? `$${parseFloat(item.price).toFixed(2)}` : '',
     price: parseFloat(item.price),
+    mpriceS: parseFloat(item.market_price) ? `$${parseFloat(item.market_price).toFixed(2)}` : '',
+    mprice: parseFloat(item.market_price),
     spentamount: parseFloat(item.spentamount) ? `$${parseFloat(item.spentamount).toFixed(2)}` : '',
     numberoforders: item.numberoforders || 0,
     latestorderdate: item.latestorderdate ? new Date(item.latestorderdate).toLocaleDateString() : '',

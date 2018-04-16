@@ -25,6 +25,11 @@ export default (variables) => {
     '.left': {textAlign: 'left'},
     '.right': {textAlign: 'right'},
     '.italic': {fontStyle: 'italic'},
+    '.line-through': {
+      textDecorationLine: 'line-through',
+      textDecorationStyle: 'solid',
+      textDecorationColor: '#557ffb',
+    },
     '.underline': {
       textDecorationLine: 'underline',
       textDecorationStyle: 'solid',

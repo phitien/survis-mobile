@@ -87,7 +87,7 @@ export class ShopItemScreen extends Screen {
   get content() {
     const {item, shop} = this
     const {
-      id, image, name, priceS, totalrate, totalreviews, description
+      id, image, name, priceS, mpriceS, totalrate, totalreviews, description
     } = itemHelper(item)
     return [
       // <ShopSummary item={shop} key='shop_summary'/>,
@@ -96,7 +96,10 @@ export class ShopItemScreen extends Screen {
           <View mb mr small-size-square><Image source={{uri: image}}/></View>
           <View flex1>
             <View full><Text right bold>{name}</Text></View>
-            <View full><Text right bold big theme>{priceS}</Text></View>
+            <View full horizontal middle-end>
+              <Text right grey big line-through mr>{mpriceS}</Text>
+              <Text right bold big theme>{priceS}</Text>
+            </View>
           </View>
         </View>
         <View horizontal flex1 space-between>
