@@ -15,13 +15,6 @@ export class Shop extends Component {
   state = {totalrate: this.item.totalrate || 0}
   get item() {return this.props.item || {}}
 
-  onRate(rating) {
-    if (this.logged) {
-      this.actions.Shop_Rate({id: this.item.id, type: 'shop', rate: rating})
-      .then(res => this.setState({totalrate: res.data.results.totalrate}))
-    }
-  }
-
   render() {
     const {
       id, isfeatured, promotion_image, name, address, image, highlight, distance,
@@ -50,9 +43,7 @@ export class Shop extends Component {
         </View></Touch>
         <View full smt smb><Text theme bold>{highlight}</Text></View>
         <View horizontal space-between style={style.statistic}>
-          <Rating totalrate={this.state.totalrate} shopid={id} onRate={this.onRate.bind(this)}
-            fullStarColor='black' emptyStarColor='black'
-          />
+          <Rating rating={this.state.totalrate} fullStarColor='black' emptyStarColor='black'/>
           <View horizontal>
             <Text small grey>(</Text>
             <Text small theme>{totalreviews}</Text>

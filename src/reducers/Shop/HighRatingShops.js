@@ -30,12 +30,5 @@ export default function(name, state, action, initialState) {
       return {...state, loading: false}
     }
 
-    case `${props}_Rate_Success`: {
-      if (action.payload) {
-        const found = state[subname].list.find(o => o.id == action.payload.id)
-        if (found) found.totalrate = action.payload.totalrate
-      }
-      return {...state}
-    }
   }
 }

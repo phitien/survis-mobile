@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Container, View, Content, Spinner, Text, DeckSwiper} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
+import {Alert} from 'react-native'
 
 import {ShopScreen as style} from '../theme/styles/screens'
 import {Header, Footer, ShopSummary, ShopItem, Reviews} from '../containers'
@@ -15,9 +16,34 @@ export class ShopScreen extends Screen {
   get loading() {return this.props.Shop.loading || this.props.ShopItem.loading}
 
   async componentDidMount() {
-    const shopid = this.props.item.id
-    this.actions.Shop_Shop({shopid})
-    this.actions.ShopItem_ShopItems({shopid})
+    this.actions.Shop_Shop({shopid: this.props.item.id})
+    this.actions.ShopItem_ShopItems({shopid: this.props.item.id})
+  }
+
+  onPressSubmitReview({rating, comment}) {
+    if (this.logged) {
+      if (rating == 0 && !comment) {
+         Alert.alert('Error', 'Please rate us or leave some comment.')
+      }
+      else {
+        const showThankYouFn = e => Alert.alert('Message', 'Thank you for your review.', [{text: 'OK', onPress: () => {
+          this.setState({showReview: false})
+          this.actions.Shop_Shop({shopid: this.props.item.id})
+        }}], {cancelable: false})
+        const commentFn = e => {
+          if (comment) this.actions.Shop_Review({shopid: this.shop.id, comment})
+            .then(e => showThankYouFn())
+          else showThankYouFn()
+        }
+        if (rating != 0) this.actions.Shop_Rate({id: this.shop.id, sourcetype: 'shop', rate: rating})
+          .then(e => commentFn())
+        else commentFn()
+      }
+    }
+    else {
+      this.actions.Screen_Save({id: 'ShopScreen', params: {item: this.props.item}})
+      this.open('LoginScreen')
+    }
   }
 
   renderShopItems() {
@@ -37,7 +63,12 @@ export class ShopScreen extends Screen {
   }
   renderReviews() {
     if (!this.state.showReview) return null
-    return <Reviews key='reviews' shopid={this.shop.id} onPressBack={e => this.setState({showReview: false})}/>
+    return <Reviews key='reviews' shopid={this.shop.id}
+      ref={e => this.reviews = e}
+      loading={this.props.Shop.loading}
+      onPressBack={e => this.setState({showReview: false})}
+      onPressSubmit={this.onPressSubmitReview.bind(this)}
+    />
   }
 
   get back() {return true}

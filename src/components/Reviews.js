@@ -1,5 +1,5 @@
 import React from 'react'
-import {Text, Spinner, Icon, View, Button, Input, Textarea} from 'native-base'
+import {Text, Spinner, Icon, View, Input, Textarea} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
 import Swiper from 'react-native-swiper'
 
@@ -11,10 +11,11 @@ import {itemHelper, substr} from '../utils'
 import {Image} from './Image'
 import {Review} from './Review'
 import {Rating} from './Rating'
+import {Button} from './Button'
 import {Component} from './Component'
 
 export class Reviews extends Component {
-  state = {comment: '', typing: false, error: false, showPostReview: false}
+  state = {comment: '', typing: false, error: false, showPostReview: false, rating: 0}
   get items() {return this.props.Review.Reviews.list || []}
   get error() {return this.state.error || this.props.Review.error}
   get message() {return this.state.message || this.props.Review.message}
@@ -38,14 +39,13 @@ export class Reviews extends Component {
     if (this.props.onPressBack) this.props.onPressBack()
   }
   onPressSubmit() {
-    if (this.props.shopid) this.actions.Review_Add({shopid: this.props.shopid, comment: this.state.comment})
-    else if (this.props.itemid) this.actions.Review_Add({itemid: this.props.itemid, comment: this.state.comment})
+    if (this.props.onPressSubmit) this.props.onPressSubmit({rating: this.state.rating, comment: this.state.comment})
   }
 
   renderPostReview() {
     return <View center m>
       <View full horizontal center middle mb>
-        <Rating starSize={24}/>
+        <Rating rating={this.state.rating} starSize={24} onRate={e => this.setState({rating: e})}/>
         <Text ml flex1>Rate Us</Text>
       </View>
       <Textarea flex1 p rowSpan={5} bordered placeholder='Please leave your comment here'
@@ -57,7 +57,7 @@ export class Reviews extends Component {
       />
       <View horizontal middle-end mt mb>
         <Button mr grey onPress={e => this.setState({showPostReview: false})}><Text>Cancel</Text></Button>
-        <Button onPress={e => this.setState({showPostReview: true})}><Text>Submit</Text></Button>
+        <Button onPress={this.onPressSubmit.bind(this)} loading={this.props.loading}><Text>Submit</Text></Button>
       </View>
     </View>
   }
