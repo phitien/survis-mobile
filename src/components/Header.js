@@ -11,6 +11,8 @@ import {Component} from './Component'
 export class Header extends Component {
   state = {q: this.props.Shop.SearchShops.filter.q}
 
+  get current() {return this.props.Category.Categorys.filter.current}
+
   async componentDidMount() {
     this.state.q = this.props.Shop.SearchShops.filter.q
   }
@@ -30,8 +32,9 @@ export class Header extends Component {
     this.Actions.pop()
     this.actions.Shop_SearchShops_Reset()
     this.actions.Shop_SearchShops_Search({q: '', page: 0})
-    // this.actions.Category_Categorys()
-    // .then(e => this.Actions.pop())
+    if (this.current) {
+      this.actions.Category_Search({catid: this.current.parent && this.current.parent.id || null, current: this.current.parent})
+    }
   }
   onSearchOk() {
     this.actions.Shop_SearchShops_Reset()

@@ -6,6 +6,7 @@ export default (variables) => {
     color: '#000',
     flexWrap: 'wrap',
     backgroundColor: 'transparent',
+    '.nowrap': {flexWrap: 'nowrap'},
     '.dark': {color: DARK},
     '.lightdark': {color: LIGHTDARK},
     '.grey': {color: 'rgb(161,161,161)'},

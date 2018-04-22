@@ -8,9 +8,10 @@ function reducerGenerator(name) {
   const initialState = models[name] || {}
   const loadmore = initialState
   return function(state = initialState, action) {
-    let rs = stateToProps(name, state, action, loadmore)
-    if (rs) return rs
+    let rs
     if (custom[name]) rs = custom[name](name, state, action, initialState)
+    if (rs) return rs
+    rs = stateToProps(name, state, action, loadmore)
     if (rs) return rs
     return state
   }

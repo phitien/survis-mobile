@@ -6,6 +6,7 @@ const blockNumItem = 5, height = 72, size = 32
 
 export default {
 	height,
+	width: width/blockNumItem,
 	size,
 	blockNumItem,
 }

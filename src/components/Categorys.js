@@ -8,21 +8,29 @@ import {substr} from '../utils'
 import {Image} from './Image'
 import {Component} from './Component'
 
-const {height} = style
+const {height, width} = style
 
 export class Categorys extends Component {
-  get items() {return this.props.Category.Categorys.list || []}
+  get current() {return this.props.Category.Categorys.filter.current}
+  get items() {return [].concat(this.current ? this.current.children : this.props.Category.Categorys.list).filter(o => o)}
   async componentDidMount() {
     if (!this.props.Category.Categorys.loaded) this.locationUpdate(this.actions.Category_Categorys)
   }
 
   onPress(item) {
-    this.actions.Shop_SearchShops_Reset()
-    this.actions.Shop_SearchShops_Search({catid: item.id, page: 0})
-    // this.actions.Category_Search({catid: item.id})
-    let currentScreen = this.currentScreen
-    if (currentScreen !== 'SearchScreen') this.open('SearchScreen')
-    else this.actions.Shop_SearchShops()
+    const refresh = e => {
+      this.actions.Shop_SearchShops_Reset()
+      this.actions.Shop_SearchShops_Search({catid: item.id, page: 0})
+      let currentScreen = this.currentScreen
+      if (currentScreen !== 'SearchScreen') this.open('SearchScreen')
+      else this.actions.Shop_SearchShops()
+    }
+    this.actions.Category_Search({catid: item.id, current: item})
+    .then(e => {
+      if (!item.loaded) refresh()
+      this.actions.Category_Categorys({catid: item.id})
+      .then(refresh)
+    })
   }
 
   renderContent() {
@@ -32,18 +40,19 @@ export class Categorys extends Component {
     while (cats.length) {
       blocks.push(cats.splice(0, blockNumItem))
     }
-    return blocks.map((b, i) => <View key={i} full horizontal middle bpl bpr space-between>
+    return blocks.map((b, i) => <View key={i} full horizontal middle bpl bpr center>
       {b.map((item, j) => <Touch key={`${i}-${j}-${item.id}`} onPress={this.onPress.bind(this, item)}>
-        <View center middle style={{height}}>
-          <View tiny-size-rounded smb><Image bgColor='white' source={{uri: item.image}}/></View>
-          <Text bold small>{substr(item.name, 7)}</Text>
+        <View center middle style={{height, minWidth: width, overflow: 'hidden'}}>
+          <View tiny-size-rounded smb grey><Image bgColor='white' source={{uri: item.image}}/></View>
+          <Text bold small nowrap>{item.name}</Text>
         </View>
       </Touch>)}
     </View>)
   }
   render() {
-    return <View white full style={{height}}>
-      {this.props.Category.loading ? this.renderLoading() : this.renderContent()}
+    if (this.props.Category.loading) return <View white center full style={{minHeight: height}}>{this.renderLoading()}</View>
+    return <View white center full style={{minHeight: height}}>
+      {this.renderContent()}
     </View>
   }
 }
