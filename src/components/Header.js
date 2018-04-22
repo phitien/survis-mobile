@@ -28,13 +28,19 @@ export class Header extends Component {
     this.open('ShoppingCartScreen')
   }
   onPressBack() {
-    this.setState({q: ''})
-    this.Actions.pop()
-    this.actions.Shop_SearchShops_Reset()
-    this.actions.Shop_SearchShops_Search({q: '', page: 0})
-    if (this.current) {
-      this.actions.Category_Search({catid: this.current.parent && this.current.parent.id || null, current: this.current.parent})
+    const back = catid => {
+      this.setState({q: ''})
+      this.actions.Shop_SearchShops_Reset()
+      this.actions.Shop_SearchShops_Search({q: '', page: 0})
+      let currentScreen = this.currentScreen
+      if (!catid || currentScreen !== 'SearchScreen') this.Actions.pop()
+      else this.actions.Shop_SearchShops()
+        .then(e => this.open('SearchScreen'))
     }
+    let current =  this.current.parent,
+      catid = current && current.id || null
+    this.actions.Category_Search({catid, current})
+    .then(e => back(catid))
   }
   onSearchOk() {
     this.actions.Shop_SearchShops_Reset()

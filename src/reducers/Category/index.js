@@ -6,8 +6,8 @@ export default function(name, state, action, initialState) {
       return {...state, loading: true}
     }
     case `${props}_Success`: {
-      let filter = state[subname].filter
-      if (!filter.current) {
+      let filter = state[subname].filter, {current} = filter
+      if (!current) {
         state[subname].list = [].concat(loadmore ? state[subname].list : null).concat(action.payload)
           .filter(o => o)
           .reduce((rs, o) => {
@@ -16,12 +16,9 @@ export default function(name, state, action, initialState) {
           }, [])
       }
       else {
-        const found = state[subname].list.find(o => o.id == filter.current.id)
-        if (found) {
-          found.children = [].concat(action.payload).filter(o => o)
-          found.children.map(o => o.parent = found)
-          found.loaded = true
-        }
+        current.children = [].concat(action.payload).filter(o => o)
+        current.children.map(o => o.parent = current)
+        current.loaded = true
       }
       return {...state, loading: false, loaded: true}
     }

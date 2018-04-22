@@ -11,7 +11,7 @@ import {Screen} from '../components'
 
 export class SearchScreen extends Screen {
   get items() {return this.props.Shop.SearchShops.list || []}
-  get back() {return this.props.Category.Categorys.filter.current ? true : false}
+  get back() {return this.props.Category.Categorys.filter.catid ? true : false}
 
   async componentDidMount() {
     await this.locationUpdate()

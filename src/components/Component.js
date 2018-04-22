@@ -23,6 +23,7 @@ export class Component extends RAComponent {
   get Actions() {return Actions}
   get currentScreen() {return this.Actions.currentScene.toString()}
   get open() {return (screen, params) => this.Actions[screen] ? this.Actions[screen](params): false}
+  get push() {return (screen, params) => this.Actions.push(screen, params)}
   get actions() {return this.props.actions}
   get User() {return this.props.User && this.props.User.User || {}}
   get logged() {return this.User.token}
