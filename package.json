@@ -39,6 +39,7 @@
     "react-native-camera": "^1.0.3",
     "react-native-datepicker": "^1.6.0",
     "react-native-device-info": "^0.21.4",
+    "react-native-fbsdk": "^0.7.0",
     "react-native-image-placeholder": "^1.0.14",
     "react-native-infinite-scroll": "^1.0.6",
     "react-native-loading-placeholder": "0.0.5",

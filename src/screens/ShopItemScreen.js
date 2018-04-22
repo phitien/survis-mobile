@@ -3,7 +3,7 @@ import {Container, View, Content, Button, Text} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
 import {Alert} from 'react-native'
 
-import {Header, Footer, ShopSummary, Reviews} from '../containers'
+import {Header, Footer, ShopSummary, Reviews, SameShopItems} from '../containers'
 
 import {ShopItemScreen as style} from '../theme/styles/screens'
 
@@ -39,11 +39,11 @@ export class ShopItemScreen extends Screen {
           this.actions.ShopItem_ShopItem({itemid: this.itemid})
         }}], {cancelable: false})
         const commentFn = e => {
-          if (comment) this.actions.ShopItem_Review({itemid: this.shop.id, comment})
+          if (comment) this.actions.ShopItem_Review({itemid: this.itemid, comment})
             .then(e => showThankYouFn())
           else showThankYouFn()
         }
-        if (rating != 0) this.actions.ShopItem_Rate({id: this.shop.id, rate: rating})
+        if (rating != 0) this.actions.ShopItem_Rate({id: this.itemid, rate: rating})
           .then(e => commentFn())
         else commentFn()
       }
@@ -72,7 +72,7 @@ export class ShopItemScreen extends Screen {
     </Content></View> : null
   }
   renderSameShopItems() {
-    return null
+    return <SameShopItems key='sameshopitems'/>
   }
   renderDescription() {
     if (this.state.showReview) return null

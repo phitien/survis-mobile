@@ -21,6 +21,8 @@ export const User = {
   usr_password: '',
   usr_avatar: '',
   usr_created_date: '',
+  usr_name: '',
+  usr_facebook: '',
 }
 export default {
   loading: false, error: false, persistent: true, loadmore: false,

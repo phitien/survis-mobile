@@ -59,5 +59,8 @@ export default (variables) => {
 			height: 60,
 			'NativeBase.Text': {fontSize: 22},
 		},
+		'.facebook': {
+			backgroundColor: '#4266b2'
+		}
 	}
 }

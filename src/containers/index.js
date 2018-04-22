@@ -51,6 +51,8 @@ import {Promotion as CMPPromotion} from '../components'
 import {Promotions as CMPPromotions} from '../components'
 import {Review as CMPReview} from '../components'
 import {Reviews as CMPReviews} from '../components'
+import {SameShopItem as CMPSameShopItem} from '../components'
+import {SameShopItems as CMPSameShopItems} from '../components'
 import {Shop as CMPShop} from '../components'
 import {ShopItem as CMPShopItem} from '../components'
 import {ShopSummary as CMPShopSummary} from '../components'
@@ -74,6 +76,8 @@ export const Promotion = connect(mapStateToProps, mapDispatchToProps)(CMPPromoti
 export const Promotions = connect(mapStateToProps, mapDispatchToProps)(CMPPromotions)
 export const Review = connect(mapStateToProps, mapDispatchToProps)(CMPReview)
 export const Reviews = connect(mapStateToProps, mapDispatchToProps)(CMPReviews)
+export const SameShopItem = connect(mapStateToProps, mapDispatchToProps)(CMPSameShopItem)
+export const SameShopItems = connect(mapStateToProps, mapDispatchToProps)(CMPSameShopItems)
 export const Shop = connect(mapStateToProps, mapDispatchToProps)(CMPShop)
 export const ShopItem = connect(mapStateToProps, mapDispatchToProps)(CMPShopItem)
 export const ShopSummary = connect(mapStateToProps, mapDispatchToProps)(CMPShopSummary)

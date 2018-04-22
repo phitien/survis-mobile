@@ -34,8 +34,6 @@ export class Footer extends Component {
   openScreen(screen) {
     let currentScreen = this.currentScreen
     if (currentScreen !== screen) {
-      // this.actions.Category_Reset()
-      // this.actions.Shop_SearchShops_Reset()
       this.Actions.reset(screen)
       // this.Actions.popTo(screen)
     }
@@ -57,10 +55,10 @@ export class Footer extends Component {
   renderDefault() {
     const notifications = [].concat(this.props.Notification.Notifications.list).filter(o => o)
     return [
-      this.renderTab('HomeScreen', 'home', 'Home', false),
+      this.renderTab('HomeScreen', 'md-home', 'Home', false),
       this.renderTab('PromotionsScreen', 'flower', 'Hot', false),
-      this.renderTab('SearchScreen', 'ios-pin-outline', 'Nearby', false),
-      this.renderTab('NotificationsScreen', 'ios-notifications', 'Msg', this.logged && notifications.filter(o => o.is_read == 0).length, this.onPressNotification.bind(this)),
+      this.renderTab('SearchScreen', 'md-pin', 'Nearby', false),
+      this.renderTab('NotificationsScreen', 'md-notifications', 'Msg', this.logged && notifications.filter(o => o.is_read == 0).length, this.onPressNotification.bind(this)),
       this.renderTab('UserScreen', 'md-person', 'Me', false, this.onPressUser.bind(this))
     ]
   }

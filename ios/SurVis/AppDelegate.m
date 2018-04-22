@@ -8,7 +8,7 @@
  */
 
  #import "AppDelegate.h"
-
+ #import <FBSDKCoreKit/FBSDKCoreKit.h>
  #import <React/RCTBundleURLProvider.h>
  #import <React/RCTRootView.h>
 
@@ -35,10 +35,26 @@
 
    self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions appId:@"ec589436-0771-461a-a7d9-4a9be77399d1"];
    self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions appId:@"ec589436-0771-461a-a7d9-4a9be77399d1" settings:@{kOSSettingsKeyAutoPrompt: @false}];
+   
+   [[FBSDKApplicationDelegate sharedInstance] application:application
+                            didFinishLaunchingWithOptions:launchOptions];
 
    [Fabric with:@[[Crashlytics class]]];
 
    return YES;
  }
+   
+ - (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+  
+  BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                                openURL:url
+                                                      sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
+                                                             annotation:options[UIApplicationOpenURLOptionsAnnotationKey]
+                  ];
+  // Add any custom logic here.
+  return handled;
+}
 
  @end

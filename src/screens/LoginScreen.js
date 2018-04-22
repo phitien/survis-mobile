@@ -2,7 +2,10 @@ import React, {Component} from 'react'
 import {Tabs, Tab, Item, Input, Text, View, Icon, CheckBox} from 'native-base'
 import {Alert} from 'react-native'
 import {TouchableOpacity as Touch} from 'react-native'
+import {StyleProvider} from 'native-base'
+import FBSDK, {LoginManager, LoginButton, AccessToken, GraphRequest, GraphRequestManager} from 'react-native-fbsdk'
 
+import {getTheme} from '../theme'
 import {LoginScreen as style} from '../theme/styles/screens'
 
 import {validateEmail, requestHeader} from '../utils'
@@ -77,6 +80,41 @@ export class LoginScreen extends Screen {
       }}], {cancelable: false})
     }
   }
+  onPressRegisterFB() {
+    const showError = e => {
+      alert('Login fail with error: ' + e.toString())
+    }
+    const getInfo = e => {
+      AccessToken.getCurrentAccessToken().then(
+        data => {
+          const token = data.accessToken
+          if (token) {
+            const infoRequest = new GraphRequest(
+              '/me?fields=email,name,picture',
+              null,
+              (err, result) => {
+                if (err) showError(err)
+                else {
+                  const usr_email = result.email, usr_name = result.name, usr_avatar = result.picture.data.url,
+                    usr_facebook = result.id
+                  this.actions.User_Login({usr_email, usr_name, usr_avatar, usr_facebook, token})
+                  .then(e => this.onAfterLogin(e))
+                }
+              }
+            )
+            // Start the graph request.
+            new GraphRequestManager().addRequest(infoRequest).start();
+          }
+          else showError('Access denied')
+        }
+      )
+    }
+    const logIn = e => LoginManager.logInWithReadPermissions(['public_profile']).then(
+      res => !res.isCancelled ? getInfo() : false,
+      showError
+    )
+    logIn()
+  }
   onPressForgetPassword() {
     //TODO
   }
@@ -99,7 +137,7 @@ export class LoginScreen extends Screen {
           onSubmitEditing={this.onPressLogin.bind(this)}
           returnKeyType='go'/>
       </Item>
-      <Button full bmt loading={this.props.User.loading} onPress={this.onPressLogin.bind(this)}>
+      <Button full bmt disabled={this.props.User.loading} onPress={this.onPressLogin.bind(this)}>
         <Text bold>LOG IN</Text>
       </Button>
       <View horizontal full mt>
@@ -136,7 +174,7 @@ export class LoginScreen extends Screen {
         <CheckBox checked={this.state.agreed} onPress={e => this.setState({agreed: !this.state.agreed})}/>
         <Text ml small>I agree with terms and conditions</Text>
       </View></Touch>
-      <Button full smt disabled={!this.state.agreed} loading={this.props.User.loading} onPress={this.onPressRegister.bind(this)}>
+      <Button full smt disabled={!this.state.agreed || this.props.User.loading} onPress={this.onPressRegister.bind(this)}>
         <Text bold>{this.message ? 'OK' : 'REGISTER'}</Text>
       </Button>
     </View>
@@ -146,7 +184,6 @@ export class LoginScreen extends Screen {
     return <LightBox>
       <View flex1 bml bmr bmt bpt>
         <Tabs ref={e => this.tabs = e}
-          // initialPage={0} page={0}
           tabBarUnderlineStyle={style.tabBarUnderlineStyle}>
           <Tab heading='Login'>
             {this.renderLogin()}
@@ -155,6 +192,10 @@ export class LoginScreen extends Screen {
             {this.renderRegister()}
           </Tab>
         </Tabs>
+        <Button full smt horizontal facebook disabled={this.props.User.loading} onPress={this.onPressRegisterFB.bind(this)}>
+          <StyleProvider style={getTheme({iconFamily: 'MaterialCommunityIcons'})}><Icon white name='facebook'/></StyleProvider>
+          <Text bold>Sign in with facebook</Text>
+        </Button>
       </View>
     </LightBox>
   }

@@ -16,11 +16,12 @@ import {Component} from './Component'
 export class User extends Component {
   state = {
     usr_mobile: this.User.usr_mobile || '',
+    usr_name: this.User.usr_name || '',
     usr_fname: this.User.usr_fname || '',
     usr_lname: this.User.usr_lname || '',
-    usr_birthday: this.User.usr_birthday || '',
+    usr_birthday: this.User.usr_birthday ? new Date(this.User.usr_birthday).toLocaleDateString() : '',
     usr_email: this.User.usr_email || '',
-		fullname: [(this.User.usr_fname||  '').trim(), (this.User.usr_lname || '').trim()].filter(o => o).join(' '),
+		fullname: [(this.User.usr_fname||  '').trim(), (this.User.usr_lname || '').trim()].filter(o => o).join(' ') || this.User.usr_name || '',
     usr_password: '',
     error: false,
     showInfo: false,
@@ -120,14 +121,14 @@ export class User extends Component {
     const {usr_email, usr_mobile, usr_birthday} = this.state
     return <View>
       {this.renderError()}
-      <View horizontal grey mt ml mr p>
-        <View>
-          {this.state.fullname ? <Text bold>{this.state.fullname}</Text> : null}
-					<Text small>{usr_email}</Text>
-          {usr_mobile ? <Text small>{usr_mobile}</Text> : null}
-          {usr_birthday ? <Text small>{usr_birthday}</Text> : null}
-        </View>
-        <View horizontal>
+      <View grey mt ml mr p>
+        <View horizontal center space-between>
+          <View>
+            {this.state.fullname ? <Text bold>{this.state.fullname}</Text> : null}
+  					<Text small>{usr_email}</Text>
+            {usr_mobile ? <Text small>{usr_mobile}</Text> : null}
+            {usr_birthday ? <Text small>{usr_birthday}</Text> : null}
+          </View>
           {!this.state.showInfo ? <Button transparent theme onPress={e => this.setState({showInfo: true, showPassword: false})}>
             <Icon name='md-create'/>
           </Button> : null}

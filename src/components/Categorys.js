@@ -5,9 +5,10 @@ import Swiper from 'react-native-swiper'
 
 import {Categorys as style} from '../theme/styles/components'
 import {substr} from '../utils'
-import {PRIMARY, GREY} from '../constants'
 import {Image} from './Image'
 import {Component} from './Component'
+
+const {height} = style
 
 export class Categorys extends Component {
   get items() {return this.props.Category.Categorys.list || []}
@@ -31,19 +32,17 @@ export class Categorys extends Component {
     while (cats.length) {
       blocks.push(cats.splice(0, blockNumItem))
     }
-    return <Swiper showsPagination={false} loop>
-      {blocks.map((b, i) => <View key={i} horizontal middle bpl bpr space-between>
-        {b.map((item, j) => <Touch key={`${i}-${j}-${item.id}`} onPress={this.onPress.bind(this, item)}>
-          <View center middle style={{height: style.height}}>
-            <View tiny-size-rounded smb><Image source={{uri: item.image}}/></View>
-            <Text bold small>{substr(item.name, 7)}</Text>
-          </View>
-        </Touch>)}
-      </View>)}
-    </Swiper>
+    return blocks.map((b, i) => <View key={i} full horizontal middle bpl bpr space-between>
+      {b.map((item, j) => <Touch key={`${i}-${j}-${item.id}`} onPress={this.onPress.bind(this, item)}>
+        <View center middle style={{height}}>
+          <View tiny-size-rounded smb><Image bgColor='white' source={{uri: item.image}}/></View>
+          <Text bold small>{substr(item.name, 7)}</Text>
+        </View>
+      </Touch>)}
+    </View>)
   }
   render() {
-    return <View white style={{height: style.height}}>
+    return <View white full style={{height}}>
       {this.props.Category.loading ? this.renderLoading() : this.renderContent()}
     </View>
   }
