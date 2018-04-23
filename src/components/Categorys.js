@@ -28,7 +28,7 @@ export class Categorys extends Component {
     this.actions.Category_Search({catid: item.id, current: item})
     .then(e => {
       if (!item.loaded) refresh()
-      this.actions.Category_Categorys({catid: item.id, current: item})
+      else this.actions.Category_Categorys({catid: item.id, current: item})
       .then(refresh)
     })
   }

@@ -34,8 +34,8 @@ export class Footer extends Component {
   openScreen(screen) {
     let currentScreen = this.currentScreen
     if (currentScreen !== screen) {
-      this.Actions.reset(screen)
-      // this.Actions.popTo(screen)
+      this.actions.Category_Search({catid: null, current: null})
+      .then(e => this.Actions.reset(screen))
     }
   }
 
