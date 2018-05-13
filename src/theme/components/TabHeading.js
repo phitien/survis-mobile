@@ -17,8 +17,6 @@ export default (variables) => {
     '.active': {
       'NativeBase.Text': {
         color: PRIMARY,
-        fontWeight: 'bold',
-        fontSize: 16,
       },
       'NativeBase.Icon': {
         color: PRIMARY,

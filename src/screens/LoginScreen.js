@@ -98,7 +98,10 @@ export class LoginScreen extends Screen {
                   const usr_email = result.email, usr_name = result.name, usr_avatar = result.picture.data.url,
                     usr_facebook = result.id
                   this.actions.User_Login({usr_email, usr_name, usr_avatar, usr_facebook, token})
-                  .then(e => this.onAfterLogin(e))
+                  .then(e => {
+                    console.log(e)
+                    this.onAfterLogin(e)
+                  })
                 }
               }
             )

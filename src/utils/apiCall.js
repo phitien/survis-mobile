@@ -1,6 +1,5 @@
 import axios from 'axios'
 import {Actions} from 'react-native-router-flux'
-import {MessageBarManager} from 'react-native-message-bar'
 import {AsyncStorage} from 'react-native'
 
 import {log} from './log'

@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Container, View, Content, Spinner} from 'native-base'
 import {RNCamera} from 'react-native-camera'
+import {Alert} from 'react-native'
 
 import {QrScanScreen as style} from '../theme/styles/screens'
 
@@ -8,21 +9,26 @@ import {Header, Footer} from '../containers'
 import {Screen} from '../components'
 
 export class QrScanScreen extends Screen {
-  get error() {return this.state.error || this.props.Prize.error}
-
+  showError = error => Alert.alert('Error', error, [{text: 'OK', onPress: e => {
+    this.actions.Prize_Clear()
+    .then(e => this.setState({loading: false}))
+  }}], {cancelable: false})
   onBarCodeRead(code) {
+    if (this.state.loading) return
+    this.setState({loading: true})
     let data = null
     try {data = JSON.parse(code.data)} catch(e) {}
     if (data && data.code && data.name) {
-      this.setState({error: false})
-      if (!this.props.Prize.loading) this.actions.Prize_Scan(data)
+      this.actions.Prize_Scan(data)
       .then(res => {
         if (!this.props.Prize.error) {
-          this.open('PrizesScreen')
+          this.actions.Prize_Clear()
+          .then(e => this.open('PrizesScreen'))
         }
+        else this.showError(this.props.Prize.error)
       })
     }
-    else this.setState({error: 'Wrong qr code'})
+    else this.showError('Wrong qr code')
   }
 
   renderScanner() {
@@ -35,9 +41,6 @@ export class QrScanScreen extends Screen {
       permissionDialogMessage={'We need your permission to use your camera phone'}/>
   }
   get content() {
-    return [
-      this.renderError(),
-      this.renderScanner()
-    ]
+    return this.renderScanner()
   }
 }

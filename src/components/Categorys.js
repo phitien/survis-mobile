@@ -1,7 +1,6 @@
 import React from 'react'
-import {Text, Icon, View} from 'native-base'
+import {Text, Icon, View, Content} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
-import Swiper from 'react-native-swiper'
 
 import {Categorys as style} from '../theme/styles/components'
 import {substr} from '../utils'
@@ -34,27 +33,20 @@ export class Categorys extends Component {
   }
 
   renderContent() {
-    let cats = [].concat(this.items),
-      blocks = [],
-      blockNumItem = style.blockNumItem
-    while (cats.length) {
-      blocks.push(cats.splice(0, blockNumItem))
-    }
-    return blocks.map((b, i) => <View key={i} full horizontal middle bpl bpr center>
-      {b.map((item, j) => <Touch key={`${i}-${j}-${item.id}`} onPress={this.onPress.bind(this, item)}>
-        <View center middle pr pl style={{height}}>
-          <View tiny-size-rounded smb grey><Image bgColor='white' source={{uri: item.image}}/></View>
-          <Text bold small nowrap>{item.name}</Text>
-        </View>
-      </Touch>)}
-    </View>)
+    let cats = [].concat(this.items)
+    return cats.map((item, j) => <Touch key={j} onPress={this.onPress.bind(this, item)}>
+      <View center middle pr style={{height}}>
+        <View tiny-size-rounded smb grey><Image bgColor='white' source={{uri: item.image}}/></View>
+        <Text bold small nowrap>{item.name}</Text>
+      </View>
+    </Touch>)
   }
   render() {
-    if (this.props.Category.loading) return <View white center full style={{minHeight: height}}>{this.renderLoading()}</View>
+    if (this.props.Category.loading) return <View white center full style={{height}}>{this.renderLoading()}</View>
     let cats = [].concat(this.items)
     if (!cats.length) return null
-    return <View white center full style={{minHeight: height}}>
-      {this.renderContent()}
-    </View>
+    return <Content horizontal grey style={{height}}>
+      <View horizontal middle bpl bpr center style={{height}}>{this.renderContent()}</View>
+    </Content>
   }
 }

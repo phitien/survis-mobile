@@ -6,7 +6,7 @@ import * as custom from './custom'
 
 function reducerGenerator(name) {
   const initialState = models[name] || {}
-  const loadmore = initialState
+  const {loadmore} = initialState
   return function(state = initialState, action) {
     let rs
     if (custom[name]) rs = custom[name](name, state, action, initialState)

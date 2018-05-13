@@ -1,5 +1,7 @@
 # # react-native upgrade
-react-native link
+react-native install react-native-fbsdk
+react-native link react-native-fbsdk
+react-native link 
 # npm i react@16.3.0 react-native@0.54.4 react-redux@5.0.6 redux-thunk@2.2.0
 
 # npm i -s react-native-device-info

@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Container, View, Content, Text} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
+import {Alert} from 'react-native'
 
 import {PrizesScreen as style} from '../theme/styles/screens'
 
@@ -12,26 +13,28 @@ export class PrizesScreen extends Screen {
   get items() {return this.props.Prize.Prizes.list || []}
   get error() {return this.state.error || this.props.Prize.error || null}
   get message() {return this.props.Prize.message || null}
-  get selected() {return this.items.find(o => o.selected)}
+  get selected() {return this.state.selected}
+  set selected(v) {this.setState({selected: v})}
   get isSelected() {return this.selected}
 
   async componentDidMount() {
     this.actions.Prize_Prizes()
   }
 
+  showMessage = (title, message, callback) => Alert.alert(title, message, [{text: 'OK', onPress: e => {
+    this.actions.Prize_Clear().then(callback)
+  }}], {cancelable: false})
   onPressSubmit() {
-    if (this.message) {
-      this.actions.Prize_Clear()
-      this.open('HomeScreen')
-    }
-    else if (!this.props.Prize.loading) {
-      this.actions.Prize_Submit({prz_id: this.selected.id})
-    }
+    this.actions.Prize_Submit({prz_id: this.selected.id})
+    .then(res => {
+      const error = this.error
+      this.showMessage(error ? 'Error' : 'Message', error || this.message, e => error ? false : this.open('HomeScreen'))
+    })
   }
 
   renderRow(row, i) {
     return <View key={i} horizontal full style={style.row}>
-      {row.map((item,j) => <Touch key={`${j}-${item.id}`} onPress={e => this.actions.Prize_Select(item)}><Prize item={item} index={j}/></Touch>)}
+      {row.map((item,j) => <Touch key={`${j}-${item.id}`} onPress={e => this.selected = item}><Prize selected={this.selected == item} item={item} index={j}/></Touch>)}
     </View>
   }
   renderPrizes() {
@@ -41,7 +44,6 @@ export class PrizesScreen extends Screen {
   }
   get content() {
     return [
-      this.renderError(),
       <View heading key='heading'><Text>Lucky Draw</Text></View>,
       <View m key='main'>
         <Text bold>Congratulation!</Text>
@@ -52,10 +54,8 @@ export class PrizesScreen extends Screen {
   }
   get footer() {
     return <View fullW horizontal pr pl middle-end>
-      {this.message ? <Text flex1>{this.message}</Text> : null}
       <Button small
         disabled={!this.isSelected}
-        loading={this.props.Prize.loading}
         onPress={this.onPressSubmit.bind(this)}>
         <Text>{this.message ? 'Close' : 'Submit'}</Text>
       </Button>

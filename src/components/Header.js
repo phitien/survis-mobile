@@ -37,7 +37,7 @@ export class Header extends Component {
       else this.actions.Shop_SearchShops()
         .then(e => this.open('SearchScreen'))
     }
-    let current =  this.current.parent,
+    let current =  this.current && this.current.parent || null,
       catid = current && current.id || null
     this.actions.Category_Search({catid, current})
     .then(e => back(catid))

@@ -1,7 +1,7 @@
 import {BASEURL} from '../constants'
 
 export const acts = {
-  Prizes: `api|get|true|body|${BASEURL}?type=prize`,
+  Prizes: `api|get|true|form|${BASEURL}?type=prize`,
   Submit: `api|post|true|form|${BASEURL}?type=prizepick`,
   Scan: `api|post|true|form|${BASEURL}?type=scan`,
 }

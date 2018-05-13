@@ -7,9 +7,10 @@ import {Image} from './Image'
 import {Component} from './Component'
 
 export class Prize extends Component {
+  get selected() {return this.props.selected}
   render() {
     const {item} = this.props
-    const selected = this.props.Prize.Prizes.list.find(o => o.selected) == item
+    const selected = this.selected
     return <View style={[style.container, selected ? style.selected : {}]}>
       <View style={style.image}><Image source={{uri: item.image}}/></View>
       {selected ? <Icon style={style.icon} name='ios-arrow-dropdown-circle'/> : null}

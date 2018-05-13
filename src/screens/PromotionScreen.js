@@ -12,13 +12,15 @@ import {Screen} from '../components'
 
 export class PromotionScreen extends Screen {
   state = {showReview: false}
+  get item() {return this.props.Promotion.Promotion || {}}
   async componentDidMount() {
     this.actions.Promotion_Promotion({prm_id: this.props.item.id})
+    .then(e => this.refresh())
   }
 
   get back() {return true}
   get content() {
-    const item = this.props.Promotion.Promotion || {},
+    const item = this.item,
       items = [].concat(item.items).filter(o => o)
     return [
       // this.props.Promotion.loading ? this.renderLoading() : null,
