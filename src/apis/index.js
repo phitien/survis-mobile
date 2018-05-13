@@ -7,7 +7,6 @@ import querystring from 'querystring'
 function apiGetGenerator(name, act, uri, method, filter, type) {
   return function(queryParams, postParams, headers) {
     const store = appstore(), state = store.getState()[name], actState = state[act] || {}
-    console.log(uri, postParams)
     if (filter) queryParams = {...actState.filter, ...queryParams}
     if (method == 'post' && type == 'form') {
       return apiCall.post(url(uri, query(queryParams)), querystring.stringify(postParams), {headers: {
