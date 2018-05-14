@@ -44,7 +44,7 @@ export class UserScreen extends Screen {
         <View horizontal>
           <View small-size-rounded><Image source={source}/></View>
           <View smt ml full>
-            <Text small bold full>{this.account || 'Not set'}</Text>
+            <Text small bold full>{this.account ? `Hello: ${this.account}` : 'Not set'}</Text>
             <Text small italic full>{this.email || 'Not set'}</Text>
           </View>
         </View>
