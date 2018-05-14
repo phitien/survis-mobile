@@ -10,7 +10,7 @@ export const Loyalty = {
   name: '',
   address: '',
   numberofvisits: 0,
-  numberoforders: 0,
+  visits: 0,
   spentamount: 0,
   latestvisit: '',
   latestorderdate: '',

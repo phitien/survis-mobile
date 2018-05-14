@@ -35,7 +35,7 @@ export class Categorys extends Component {
   renderContent() {
     let cats = [].concat(this.items)
     return cats.map((item, j) => <Touch key={j} onPress={this.onPress.bind(this, item)}>
-      <View center middle pr style={{height}}>
+      <View center middle bpr={j != cats.length} style={{height}}>
         <View tiny-size-rounded smb grey><Image bgColor='white' source={{uri: item.image}}/></View>
         <Text bold small nowrap>{item.name}</Text>
       </View>
@@ -45,8 +45,8 @@ export class Categorys extends Component {
     if (this.props.Category.loading) return <View white center full style={{height}}>{this.renderLoading()}</View>
     let cats = [].concat(this.items)
     if (!cats.length) return null
-    return <Content horizontal grey style={{height}}>
-      <View horizontal middle bpl bpr center style={{height}}>{this.renderContent()}</View>
+    return <Content horizontal grey full style={{height}}>
+      <View horizontal middle bpl bpr center minW style={{height}}>{this.renderContent()}</View>
     </Content>
   }
 }

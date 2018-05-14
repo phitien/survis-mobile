@@ -42,6 +42,7 @@ export default {
   '.flex6': {display: 'flex', flex: 6},
   '.full': {width: '100%'},
   '.fullW': {width},
+  '.minW': {minWidth: width},
   '.fullh': {height: '100%'},
   '.half': {width: '50%'},
   '.bordered': {borderWidth: 1, borderColor: GREY},
