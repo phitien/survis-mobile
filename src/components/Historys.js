@@ -32,10 +32,10 @@ export class Historys extends Component {
   }
 
   render() {
-    // if (this.props.History.loading) return this.renderLoading()
     return <InfiniteScroll key='main' horizontal={false} distanceFromEnd={10} style={{flex:1}}
         // refreshControl={this.refreshControl}
         onLoadMoreAsync={this.loadmore.bind(this)}>
+        {this.props.History.loading ? <View key='loading' tiny-size>{this.renderLoading()}</View> : null}
         {this.items.map((item,i) => <Touch key={`${i}-${item.id}`} onPress={e => this.open('ShopItemScreen', {item: item.item, shop: item.shop})}>
         <History item={item} index={i}/>
       </Touch>)}

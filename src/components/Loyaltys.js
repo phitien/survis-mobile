@@ -31,10 +31,10 @@ export class Loyaltys extends Component {
     }
   }
   render() {
-    // if (this.props.Loyalty.loading) return this.renderLoading()
     return <InfiniteScroll key='main' horizontal={false} distanceFromEnd={10} style={{flex:1}}
       // refreshControl={this.refreshControl}
       onLoadMoreAsync={this.loadmore.bind(this)}>
+      {this.props.Loyalty.loading ? <View key='loading' tiny-size>{this.renderLoading()}</View> : null}
       {this.items.map((item,i) => <Touch key={`${i}-${item.id}`} onPress={e => this.open('ShopScreen', {item})}>
         <Loyalty item={item} index={i}/>
       </Touch>)}
