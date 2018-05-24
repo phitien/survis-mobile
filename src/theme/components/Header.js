@@ -9,8 +9,7 @@ export default (variables) => {
 		backgroundColor: PRIMARY,
 		flexDirection: 'row',
 		justifyContent: 'center',
-		paddingTop: height == 812 ? 36 : 20,
-		// marginTop: 20,
+		paddingTop: platform == 'ios' ? (height == 812 ? 36 : 20) : 6,
 		'NativeBase.Button': {
 			justifyContent: 'center', alignItems: 'center',
 			alignSelf: 'center',

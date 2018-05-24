@@ -22,10 +22,14 @@ function apiActionGenerator(name, act, uri, method, filter, type) {
         apicall = method == 'post' ? api(payload, params, ...args) : api(params, payload, ...args)
       return apicall
         .then(res => {
+          // if (!res || !res.data) log('myapiAction', name, act, uri)
+          // else
           dispatch({type: `${n}_Success`, payload: res.data.results, response: res})
           return res
         })
         .catch(res => {
+          // if (!res || !res.data) log('myapiAction-error', name, act, uri, typeof res)
+          // else
           dispatch({type: `${n}_Failure`, payload: res.data.results, response: res})
           return res
         })

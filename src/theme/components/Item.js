@@ -33,21 +33,17 @@ export default (variables) => {
 			fontSize: 13,
 		},
 		'.search': {
-			alignSelf: 'center',
 			flex: 1, height: 28, borderRadius: 14,
 			backgroundColor: 'white',
 			borderColor: 'transparent',
+			marginTop: 5, marginBottom: 5,
 			'NativeBase.Icon': {
 				color: PRIMARY,
-				fontSize: 20,
-				lineHeight: 28,
 				paddingRight: 4,
 				paddingLeft: 8,
 			},
 			'NativeBase.Input': {
-				alignSelf: 'center',
-				height: 28,
-				lineHeight: 28,
+				height: 28, paddingTop: 0, paddingBottom: 0,
 				borderRadius: 14, flex: 1,
 				borderWidth: 0, borderColor: 'transparent',
 				borderBottomWidth: 0, borderBottomColor: 'transparent'

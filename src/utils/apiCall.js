@@ -22,19 +22,19 @@ apiCall
   .interceptors
   .response
   .use((res, req) => {
-    log('api', res.request._method, res.request.responseURL)
+    log('myapi', res.request._method, res.request.responseURL)
     return res
   }, error => {
 		const res = error.response || {}
     const {data, status} = res || {}
-    const {code, message} = data || {}
-    log('api-error', code, message, res.request._method, res.request.responseURL, JSON.stringify(data))
+    const {code, message, results} = data || {}
+    log('myapi-error', code, message, res.request._method, res.request.responseURL, data)
     if (status === 401 || status === 403) {
       requestHeader('token', '')
       AsyncStorage.clear()
       Actions.reset('LoginScreen')
     }
-    return Promise.reject(res)
+    return Promise.reject({data: {...data, code, message, results}, status})
   })
 export function requestHeaders(headers) {
   Object

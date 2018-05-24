@@ -36,7 +36,7 @@
     "npm": "^5.7.1",
     "react": "^16.0.0-alpha.12",
     "react-native": "^0.54.4",
-    "react-native-camera": "^1.0.3",
+    "react-native-camera": "^1.1.4",
     "react-native-datepicker": "^1.6.0",
     "react-native-device-info": "^0.21.4",
     "react-native-fbsdk": "^0.7.0",
