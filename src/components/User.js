@@ -5,7 +5,7 @@ import DatePicker from 'react-native-datepicker'
 
 import {User as style} from '../theme/styles/components'
 
-import {itemHelper, substr, cardnum, cardexpire} from '../utils'
+import {itemHelper, substr, cardnum, cardexpire, date} from '../utils'
 
 import {Button} from './Button'
 import {Image} from './Image'
@@ -19,7 +19,7 @@ export class User extends Component {
     usr_name: this.User.usr_name || '',
     usr_fname: this.User.usr_fname || '',
     usr_lname: this.User.usr_lname || '',
-    usr_birthday: this.User.usr_birthday ? new Date(this.User.usr_birthday).toLocaleDateString() : '',
+    usr_birthday: this.User.usr_birthday ? date(this.User.usr_birthday).toLocaleDateString() : '',
     usr_email: this.User.usr_email || '',
 		fullname: [(this.User.usr_fname||  '').trim(), (this.User.usr_lname || '').trim()].filter(o => o).join(' ') || this.User.usr_name || '',
     usr_password: '',

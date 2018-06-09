@@ -42,7 +42,7 @@ import {History as CMPHistory} from '../components'
 import {Historys as CMPHistorys} from '../components'
 import {Loyalty as CMPLoyalty} from '../components'
 import {Loyaltys as CMPLoyaltys} from '../components'
-import {Lucky as CMPLucky} from '../components'
+import {Luckys as CMPLuckys} from '../components'
 import {NewShop as CMNewShop} from '../components'
 import {NewShops as CMNewShops} from '../components'
 import {Notification as CMPNotification} from '../components'
@@ -69,7 +69,7 @@ export const History = connect(mapStateToProps, mapDispatchToProps)(CMPHistory)
 export const Historys = connect(mapStateToProps, mapDispatchToProps)(CMPHistorys)
 export const Loyalty = connect(mapStateToProps, mapDispatchToProps)(CMPLoyalty)
 export const Loyaltys = connect(mapStateToProps, mapDispatchToProps)(CMPLoyaltys)
-export const Lucky = connect(mapStateToProps, mapDispatchToProps)(CMPLucky)
+export const Luckys = connect(mapStateToProps, mapDispatchToProps)(CMPLuckys)
 export const NewShop = connect(mapStateToProps, mapDispatchToProps)(CMNewShop)
 export const NewShops = connect(mapStateToProps, mapDispatchToProps)(CMNewShops)
 export const Notification = connect(mapStateToProps, mapDispatchToProps)(CMPNotification)

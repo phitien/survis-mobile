@@ -6,7 +6,7 @@ import {UserScreen as style} from '../theme/styles/screens'
 
 import {PERSON_IMG} from '../constants'
 import {requestHeader} from '../utils'
-import {Header, Footer, Historys, Loyaltys, Lucky, User} from '../containers'
+import {Header, Footer, Historys, Loyaltys, Luckys, User} from '../containers'
 import {Image, Button} from '../components'
 import {Screen} from '../components'
 
@@ -59,7 +59,7 @@ export class UserScreen extends Screen {
     			onSave={this.onSaveMe.bind(this)}
     			onSavePassword={this.onSavePassword.bind(this)}
         /></Tab>
-        <Tab heading='Lucky'><Lucky ref={e => this.tabLucky = e}/></Tab>
+        <Tab heading='Lucky'><Luckys ref={e => this.tabLuckys = e}/></Tab>
         <Tab heading='History'><Historys ref={e => this.tabHistory = e}/></Tab>
         <Tab heading='Loyality'><Loyaltys ref={e => this.tabLoyality = e}/></Tab>
       </Tabs>

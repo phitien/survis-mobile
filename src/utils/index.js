@@ -1,3 +1,4 @@
+export {date} from './date'
 export {getDistance} from './getDistance'
 export {getPaymentInfo} from './getPaymentInfo'
 export {getShoppingCartItems} from './getShoppingCartItems'

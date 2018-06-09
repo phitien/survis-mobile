@@ -3,7 +3,7 @@ import {Text, Spinner, Icon, View, Content} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
 import InfiniteScroll from 'react-native-infinite-scroll'
 
-import {Loyaltys as style} from '../theme/styles/components'
+import {Luckys as style} from '../theme/styles/components'
 
 import {AUTOPLAY_TIMEOUT} from '../constants'
 import {itemHelper, substr} from '../utils'
@@ -11,7 +11,7 @@ import {itemHelper, substr} from '../utils'
 import {Image} from './Image'
 import {Component} from './Component'
 
-export class Lucky extends Component {
+export class Luckys extends Component {
   get items() {return this.props.Lucky.Luckys.list || []}
   async componentDidMount() {
     if (this.logged) this.actions.Lucky_Luckys()
@@ -31,17 +31,19 @@ export class Lucky extends Component {
   }
   renderItem(item,i) {
     const {
-      id, image, name, address, visits, points, orders, latestorderdate, spentamount
+      id, image, name, description, pickdate, sponsor_image, sponsor_name, drawdate, status
     } = itemHelper(item)
     return <View horizontal mt mr ml white>
       <View normal-size-square mr><Image source={{uri: image}}/></View>
       <View flex1>
-        <View full><Text bold>{name}</Text></View>
-        <View full><Text small><Icon theme small name='ios-send'/> {address}</Text></View>
-        <View full><Text small>Orders: {orders}</Text></View>
-        <View full><Text small>Visits: {visits}</Text></View>
-        <View full><Text small>Points: {points}</Text></View>
-        <View full><Text small>Last order: {latestorderdate}</Text></View>
+        <View full><Text bold>{drawdate ? status == 'winner' ? 'You won: ' : 'You lost: ' : 'Comming: '}</Text><Text bold theme>{name}</Text></View>
+        <View full><Text>{description}</Text></View>
+        <View full horizontal middle>
+          <Text small>Sponsor: {sponsor_name}</Text>
+          <View ml style={style.sponsor_image}><Image source={{uri: sponsor_image}}/></View>
+        </View>
+        <View full><Text small italic grey>Placed: {pickdate}</Text></View>
+        {drawdate ? <View small italic><Text small>Draw date: {drawdate}</Text></View> : null}
       </View>
     </View>
   }
@@ -50,7 +52,7 @@ export class Lucky extends Component {
       // refreshControl={this.refreshControl}
       onLoadMoreAsync={this.loadmore.bind(this)}>
       {this.props.Lucky.loading ? <View key='loading' tiny-size>{this.renderLoading()}</View> : null}
-      {this.items.map((item,i) => <Touch key={`${i}-${item.id}`} onPress={e => this.open('ShopScreen', {item})}>
+      {this.items.map((item,i) => <Touch key={`${i}-${item.id}`}>
         {this.renderItem(item,i)}
       </Touch>)}
     </InfiniteScroll>

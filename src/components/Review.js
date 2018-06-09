@@ -2,6 +2,7 @@ import React from 'react'
 import {Text, Spinner, Icon, View} from 'native-base'
 
 import {Review as style} from '../theme/styles/components'
+import {date} from '../utils'
 
 const Review = props => {
   const {item, index} = props
@@ -11,7 +12,7 @@ const Review = props => {
       <Text theme>{[fname, lname].filter(o => o).join(' ')}</Text>
       <Text ml flex1>{comment}</Text>
     </View>
-    <Text grey small>{new Date(created_date).toLocaleDateString()}</Text>
+    <Text grey small>{date(created_date).toLocaleDateString()}</Text>
   </View>
 }
 

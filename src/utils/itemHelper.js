@@ -1,3 +1,4 @@
+import {date} from './date'
 import {getDistance} from './getDistance'
 
 export const itemHelper = (item) => {
@@ -14,7 +15,7 @@ export const itemHelper = (item) => {
     orders: item.orders || 0,
     points: parseInt(item.points || 0),
     spentamount: parseFloat(item.spentamount) ? `$${parseFloat(item.spentamount).toFixed(2)}` : '',
-    latestorderdate: item.latestorderdate ? new Date(item.latestorderdate).toLocaleDateString() : '',
+    latestorderdate: item.latestorderdate ? date(item.latestorderdate).toLocaleDateString() : '',
     image: item.image || '',
     totalrate: parseFloat(item.totalrate) || 0,
     totalreviews: parseInt(item.totalreviews) || 0,
@@ -29,13 +30,18 @@ export const itemHelper = (item) => {
     address: item.address || '',
     items: [].concat(item.items).filter(o => o),
     images: [].concat(item.images).filter(o => o),
-    orderdate: item.orderdate ? new Date(item.orderdate).toLocaleDateString() : '',
+    orderdate: item.orderdate ? date(item.orderdate).toLocaleDateString() : '',
     isfeatured: parseInt(item.isfeatured) && parseInt(item.isfeatured) > 0,
     promotion_image: item.promotion_image || '',
     distance: `${(parseFloat(item.distance) || 0).toFixed(1)}km`,
     cardnum: item.num || '',
     shop_info: item.shop_info || {},
     qty: parseInt(item.qty) || 1,
+    pickdate: item.pickdate ? date(item.pickdate).toLocaleDateString() : '',
+    drawdate: item.drawdate ? date(item.drawdate).toLocaleDateString() : '',
+    sponsor_image: item.sponsor_image || '',
+    sponsor_name: item.sponsor_name || '',
+    status: item.status || '',
   }
 }
 export const last4 = (s) => {
