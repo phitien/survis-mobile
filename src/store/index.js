@@ -5,7 +5,7 @@ import {persistStore, autoRehydrate} from 'redux-persist'
 
 import {headerMiddleware} from '../middlewares'
 import {reducers} from '../reducers'
-import {APPNAME} from '../constants'
+import * as constants from '../constants'
 import * as models from '../models'
 
 let store = null
@@ -14,7 +14,7 @@ export function appstore() {
   if (!store) {
     const middleware = applyMiddleware(thunk, headerMiddleware)
     const enhancer = compose(middleware, autoRehydrate())
-    store = createStore(reducers, models, enhancer)
+    store = createStore(reducers, {...models}, enhancer)
   }
   return store
 }

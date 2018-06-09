@@ -2,20 +2,30 @@ import * as models from '../models'
 import {apiCall} from '../utils'
 import {query, url, log} from '../utils'
 import {appstore} from '../store'
-import querystring from 'querystring'
+import qs from 'querystring'
 
 function apiGetGenerator(name, act, uri, method, filter, type) {
   return function(queryParams, postParams, headers) {
     const store = appstore(), state = store.getState()[name], actState = state[act] || {}
+    const args = []
+    const options = apiCall.defaults
+    options.headers = {...options.headers, ...headers}
     if (filter) queryParams = {...actState.filter, ...queryParams}
-    if (method == 'post' && type == 'form') {
-      return apiCall.post(url(uri, query(queryParams)), querystring.stringify(postParams), {headers: {
-        ...apiCall.defaults.headers,
-        'Accept': 'application/json',
-        'Content-Type': 'application/x-www-form-urlencoded',
-      }})
+    if (method == 'get') {
+      queryParams = {...queryParams, ...postParams}
+      args.push(url(uri, query(queryParams)))
     }
-    return apiCall[method](url(uri, query(queryParams)), postParams)
+    else {//other methods post put delete
+      args.push(url(uri, query(queryParams)))
+      if (type == 'form') {
+        method = 'post'
+        args.push(qs.stringify(postParams))
+        options.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
+      }
+      else args.push(postParams)
+      args.push(options)
+    }
+    return apiCall[method](...args)
   }
 }
 

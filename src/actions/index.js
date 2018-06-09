@@ -20,16 +20,14 @@ function apiActionGenerator(name, act, uri, method, filter, type) {
       dispatch({type: `${n}_Pending`})
       let api = apis[`${n}`],
         apicall = method == 'post' ? api(payload, params, ...args) : api(params, payload, ...args)
+      console.log('myapi-action', name, act, uri)
       return apicall
         .then(res => {
-          // if (!res || !res.data) log('myapiAction', name, act, uri)
-          // else
           dispatch({type: `${n}_Success`, payload: res.data.results, response: res})
           return res
         })
         .catch(res => {
-          // if (!res || !res.data) log('myapiAction-error', name, act, uri, typeof res)
-          // else
+          console.log('myapi-action-error', res)
           dispatch({type: `${n}_Failure`, payload: res.data.results, response: res})
           return res
         })

@@ -1,56 +1,19 @@
 import React, {Component} from 'react'
 import {Tabs, Tab, Item, Input, Text, View, Icon, CheckBox} from 'native-base'
 import {Alert} from 'react-native'
-import {TouchableOpacity as Touch} from 'react-native'
-import {StyleProvider} from 'native-base'
 import FBSDK, {LoginManager, LoginButton, AccessToken, GraphRequest, GraphRequestManager} from 'react-native-fbsdk'
 
-import {getTheme} from '../theme'
 import {LoginScreen as style} from '../theme/styles/screens'
 
-import {validateEmail, requestHeader} from '../utils'
-import {LightBox, Button} from '../components'
+import {requestHeader} from '../utils'
+import {SignInForm, SignUpForm} from '../containers'
 import {Screen} from '../components'
 
 export class LoginScreen extends Screen {
-  state = {
-    agreed: false,
-    usr_email: null,
-    usr_password: null,
-  }
-
   get error() {return this.props.User.error || this.state.error}
   get message() {return this.props.User.message}
-  get isEmailValid() {
-    this.setState({typing: false})
-    const {usr_email, usr_password} = this.state
-    if (!this.state.usr_email || !validateEmail(this.state.usr_email)) {
-      this.setState({error: 'Email is invalid'}, e => Alert.alert('Error', this.error))
-      return
-    }
-    this.setState({error: false})
-    if (this.state.next) this.state.next.wrappedInstance.focus()
-    return true
-  }
-  get isPasswordValid() {
-    this.setState({typing: false})
-    if (!this.state.usr_password) {
-      this.setState({error: 'Password is invalid. Password should not be empty'}, e => Alert.alert('Error', this.error))
-      return
-    }
-    this.setState({error: false})
-    if (this.state.next) this.state.next.wrappedInstance.focus()
-    return true
-  }
 
-  onPressLogin() {
-    if (this.isEmailValid && this.isPasswordValid) {
-      const {usr_email, usr_password} = this.state
-      this.actions.User_Login({usr_email, usr_password})
-      .then(e => this.onAfterLogin(e))
-    }
-  }
-  onAfterLogin(res) {
+  onAfterSignIn(res) {
     if (!this.error) {
       if (this.props.Screen.Screen.id) {
         requestHeader('token', this.User.token)
@@ -63,24 +26,17 @@ export class LoginScreen extends Screen {
       Alert.alert('Error', this.error)
     }
   }
-  onPressRegister() {
-    if (this.isEmailValid && this.isPasswordValid) {
-      const {usr_email, usr_password} = this.state
-      this.actions.User_Register({usr_email, usr_password})
-      .then(e => this.onAfterRegister(e))
-    }
-  }
-  onAfterRegister() {
+  onAfterSignUp() {
     if (this.error) Alert.alert('Error', this.error)
     else if (this.message) {
       Alert.alert('Message', this.message, [{text: 'OK', onPress: () => {
         this.actions.User_Clear()
         this.tabs.goToPage(0)
-        // this.Actions.pop()
       }}], {cancelable: false})
     }
   }
-  onPressRegisterFB() {
+
+  onFacebookSignIn() {
     const showError = e => {
       alert('Login fail with error: ' + e.toString())
     }
@@ -98,10 +54,7 @@ export class LoginScreen extends Screen {
                   const usr_email = result.email, usr_name = result.name, usr_avatar = result.picture.data.url,
                     usr_facebook = result.id
                   this.actions.User_Login({usr_email, usr_name, usr_avatar, usr_facebook, token})
-                  .then(e => {
-                    console.log(e)
-                    this.onAfterLogin(e)
-                  })
+                  .then(e => this.onAfterSignIn(e))
                 }
               }
             )
@@ -123,83 +76,30 @@ export class LoginScreen extends Screen {
   }
 
   renderLogin() {
-    return <View mt pt>
-      <Item login error={this.error ? true : false}>
-        <Input value={this.state.usr_email}
-          ref={e => this.logEmailInput = e}
-          onChangeText={e => this.setState({usr_email: e, typing: true, next: this.logPwdInput})}
-          autoCapitalize='none' autoCorrect={false} placeholder='Email'
-          onSubmitEditing={e => this.isEmailValid}
-          returnKeyType='next'/>
-      </Item>
-      <Item login error={this.error ? true : false}>
-        <Input value={this.state.usr_password}
-          ref={e => this.logPwdInput = e}
-          onChangeText={e => this.setState({usr_password: e, typing: true, next: null})}
-          autoCapitalize='none' secureTextEntry={true} placeholder='Password'
-          onSubmitEditing={this.onPressLogin.bind(this)}
-          returnKeyType='go'/>
-      </Item>
-      <Button full bmt disabled={this.props.User.loading} onPress={this.onPressLogin.bind(this)}>
-        <Text bold>LOG IN</Text>
-      </Button>
-      <View horizontal full mt>
-        {/* <Text full small theme right onPress={this.onPressForgetPassword.bind(this)}>Forgot Password</Text> */}
-      </View>
-    </View>
+    return <SignInForm
+      onAfterSignIn={this.onAfterSignIn.bind(this)}
+      onFacebookSignIn={this.onFacebookSignIn.bind(this)}
+    />
   }
 
   renderRegister() {
-    return <View mt pt>
-      <Item login error={this.error ? true : false}>
-        <Input value={this.state.usr_email}
-          ref={e => this.regEmailInput = e}
-          onChangeText={e => {
-            this.setState({usr_email: e, typing: true, next: this.regPwdInput})
-            // this.isEmailValid
-          }}
-          autoCapitalize='none' autoCorrect={false} placeholder='Email'
-          onSubmitEditing={e => this.isEmailValid}
-          returnKeyType='next'/>
-      </Item>
-      <Item login error={this.error ? true : false}>
-        <Input value={this.state.usr_password}
-          ref={e => this.regPwdInput = e}
-          onChangeText={e => {
-            this.setState({usr_password: e, typing: true, next: null})
-            // this.isPasswordValid
-          }}
-          autoCapitalize='none' secureTextEntry={true} placeholder='Password'
-          onSubmitEditing={this.onPressRegister.bind(this)}
-          returnKeyType='go'/>
-      </Item>
-      <Touch onPress={e => this.setState({agreed: !this.state.agreed})}><View horizontal middle m>
-        <CheckBox checked={this.state.agreed} onPress={e => this.setState({agreed: !this.state.agreed})}/>
-        <Text ml small>I agree with terms and conditions</Text>
-      </View></Touch>
-      <Button full smt disabled={!this.state.agreed || this.props.User.loading} onPress={this.onPressRegister.bind(this)}>
-        <Text bold>{this.message ? 'OK' : 'REGISTER'}</Text>
-      </Button>
-    </View>
+    return <SignUpForm
+      onAfterSignUp={this.onAfterSignUp.bind(this)}
+      onFacebookSignIn={this.onFacebookSignIn.bind(this)}
+    />
   }
 
-  render() {
-    return <LightBox>
-      <View flex1 bml bmr bmt bpt>
-        <Tabs ref={e => this.tabs = e}
-          tabBarUnderlineStyle={style.tabBarUnderlineStyle}>
-          <Tab heading='Login'>
-            {this.renderLogin()}
-          </Tab>
-          <Tab heading='Register'>
-            {this.renderRegister()}
-          </Tab>
-        </Tabs>
-        <Button full smt horizontal facebook disabled={this.props.User.loading} onPress={this.onPressRegisterFB.bind(this)}>
-          <StyleProvider style={getTheme({iconFamily: 'MaterialCommunityIcons'})}><Icon white name='facebook'/></StyleProvider>
-          <Text bold>Sign in with facebook</Text>
-        </Button>
-      </View>
-    </LightBox>
+  renderContent() {
+    return <View flex1>
+      <Tabs ref={e => this.tabs = e}
+        tabBarUnderlineStyle={style.tabBarUnderlineStyle}>
+        <Tab heading='Login'>
+          {this.renderLogin()}
+        </Tab>
+        <Tab heading='Register'>
+          {this.renderRegister()}
+        </Tab>
+      </Tabs>
+    </View>
   }
 }

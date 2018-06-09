@@ -23,7 +23,7 @@ export class Shop extends Component {
   	if (isfeatured) {
   		return <View mt ml mr white>
         <View normal-size><Image source={{uri: promotion_image}}/></View>
-        <View bottom opacity sp full>
+        <View bottom bg-opacity sp full>
           <View full><Text white bold>{name}</Text></View>
           <View full><Text small white>{address}</Text></View>
         </View>

@@ -1,41 +1,53 @@
 import axios from 'axios'
 import {Actions} from 'react-native-router-flux'
 import {AsyncStorage} from 'react-native'
+import {Platform, Dimensions} from 'react-native'
 
 import {log} from './log'
+
+const platform = Platform.OS
+
+const oheaders = {
+  'Accept': 'application/json',
+  'Content-Type': 'application/json',
+  'token': '',
+  'device_model': '', 'language': '', 'device_type': '', 'country': '', 'device_id': '', 'number': '',
+  'longitude': 0,
+  'latitude': 0,
+  platform
+}
 
 const apiCall = axios.create({
   timeout: 60000,
   maxRedirects: 10,
   maxContentLength: 50 * 1000 * 1000,
-  headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-    'token': '',
-    'device_model': '', 'language': '', 'device_type': '', 'country': '', 'device_id': '', 'number': '',
-    'longitude': 0,
-    'latitude': 0
-  }
+  headers: oheaders
 })
 
+const success = (res, req) => {
+  console.log('survis-api', res.request._method, res.request.responseURL)
+  const {data, status} = res || {}
+  const {code, message, results} = data || {}
+  return {data: {...data, code, message, results}, status: 200}
+}
+
+const failure = err => {
+  const res = err.response || {}
+  const {data, status} = res || {}
+  const {code, message, results} = data || {}
+  console.log('survis-api-error', err)
+  if (status === 401 || status === 403) {
+    requestHeader('token', '')
+    AsyncStorage.clear()
+    Actions.reset('LoginScreen')
+  }
+  return Promise.reject({data: {...data, code, message, results}, status})
+}
 apiCall
   .interceptors
   .response
-  .use((res, req) => {
-    log('myapi', res.request._method, res.request.responseURL)
-    return res
-  }, error => {
-		const res = error.response || {}
-    const {data, status} = res || {}
-    const {code, message, results} = data || {}
-    log('myapi-error', code, message, res.request._method, res.request.responseURL, data)
-    if (status === 401 || status === 403) {
-      requestHeader('token', '')
-      AsyncStorage.clear()
-      Actions.reset('LoginScreen')
-    }
-    return Promise.reject({data: {...data, code, message, results}, status})
-  })
+  .use(success, failure)
+
 export function requestHeaders(headers) {
   Object
     .keys(headers || {})
@@ -55,5 +67,7 @@ export function apicall(headers) {
   return apiCall
 }
 export {
+  success,
+  failure,
   apiCall
 }

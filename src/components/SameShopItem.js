@@ -19,7 +19,7 @@ export class SameShopItem extends Component {
     return <View ml mb normal-size-square>
       <View normal-size-square><Image source={{uri: image}}/></View>
       <View bottom full>
-        <View full opacity sp>
+        <View full bg-opacity sp>
           <Text center small white bold>{name}</Text>
           <View full center horizontal>
             <Text smt small grey line-through mr>{mpriceS}</Text>

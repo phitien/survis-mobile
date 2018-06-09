@@ -9,6 +9,7 @@ export default (variables) => {
     borderBottomWidth: 1,
     borderBottomColor: GREY,
     backgroundColor: 'transparent',
+    height: 44,
   }
 
   return tabContainerTheme

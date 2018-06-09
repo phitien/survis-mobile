@@ -22,7 +22,7 @@ export class Promotion extends Component {
       <View style={{...style.toptext, backgroundColor: toptext_bgcolor}}>
         {words.map(t => <Text key={t} style={wordStyle}>{t}</Text>)}
       </View>
-      <View bottom mb sp opacity>
+      <View bottom mb sp bg-opacity>
         <View full><Text white extra>{bigtitle}</Text></View>
         <View full><Text white small>{smalltitle}</Text></View>
       </View>

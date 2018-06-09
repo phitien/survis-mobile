@@ -19,7 +19,7 @@ export class HighRatingShop extends Component {
     } = itemHelper(this.item)
   	return <View big-size>
       <View big-size><Image source={{uri: image}}/></View>
-      <View bottom opacity sp full>
+      <View bottom bg-opacity sp full>
         <View full smb>
           <Text white big>{name}</Text>
         </View>

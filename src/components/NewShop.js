@@ -19,7 +19,7 @@ export class NewShop extends Component {
     return <View ml mb big-size-square>
       <View big-size-square><Image source={{uri: image}}/></View>
       <View bottom full>
-        <View full opacity sp style={style.address}>
+        <View full bg-opacity sp style={style.address}>
           <Text small white>{address}</Text>
         </View>
         <View full white sp>

@@ -5,7 +5,7 @@ export default (variables) => {
     '.grey': {backgroundColor: LIGHTGREY},
     '.theme': {backgroundColor: PRIMARY},
     '.white': {backgroundColor: 'white'},
-    '.opacity': {backgroundColor: 'rgba(0, 0, 0, 0.5)'},
+    '.bg-opacity': {backgroundColor: 'rgba(0, 0, 0, 0.5)'},
     '.transparent': {backgroundColor: 'transparent'},
   }
 }

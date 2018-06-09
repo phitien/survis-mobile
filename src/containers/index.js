@@ -42,10 +42,10 @@ import {History as CMPHistory} from '../components'
 import {Historys as CMPHistorys} from '../components'
 import {Loyalty as CMPLoyalty} from '../components'
 import {Loyaltys as CMPLoyaltys} from '../components'
+import {Lucky as CMPLucky} from '../components'
 import {NewShop as CMNewShop} from '../components'
 import {NewShops as CMNewShops} from '../components'
 import {Notification as CMPNotification} from '../components'
-import {PaymentInfo as CMPPaymentInfo} from '../components'
 import {Prize as CMPPrize} from '../components'
 import {Promotion as CMPPromotion} from '../components'
 import {Promotions as CMPPromotions} from '../components'
@@ -56,6 +56,8 @@ import {SameShopItems as CMPSameShopItems} from '../components'
 import {Shop as CMPShop} from '../components'
 import {ShopItem as CMPShopItem} from '../components'
 import {ShopSummary as CMPShopSummary} from '../components'
+import {SignInForm as CMPSignInForm} from '../components'
+import {SignUpForm as CMPSignUpForm} from '../components'
 import {User as CMPUser} from '../components'
 
 export const Categorys = connect(mapStateToProps, mapDispatchToProps)(CMPCategorys)
@@ -67,10 +69,10 @@ export const History = connect(mapStateToProps, mapDispatchToProps)(CMPHistory)
 export const Historys = connect(mapStateToProps, mapDispatchToProps)(CMPHistorys)
 export const Loyalty = connect(mapStateToProps, mapDispatchToProps)(CMPLoyalty)
 export const Loyaltys = connect(mapStateToProps, mapDispatchToProps)(CMPLoyaltys)
+export const Lucky = connect(mapStateToProps, mapDispatchToProps)(CMPLucky)
 export const NewShop = connect(mapStateToProps, mapDispatchToProps)(CMNewShop)
 export const NewShops = connect(mapStateToProps, mapDispatchToProps)(CMNewShops)
 export const Notification = connect(mapStateToProps, mapDispatchToProps)(CMPNotification)
-export const PaymentInfo = connect(mapStateToProps, mapDispatchToProps)(CMPPaymentInfo)
 export const Prize = connect(mapStateToProps, mapDispatchToProps)(CMPPrize)
 export const Promotion = connect(mapStateToProps, mapDispatchToProps)(CMPPromotion)
 export const Promotions = connect(mapStateToProps, mapDispatchToProps)(CMPPromotions)
@@ -81,4 +83,6 @@ export const SameShopItems = connect(mapStateToProps, mapDispatchToProps)(CMPSam
 export const Shop = connect(mapStateToProps, mapDispatchToProps)(CMPShop)
 export const ShopItem = connect(mapStateToProps, mapDispatchToProps)(CMPShopItem)
 export const ShopSummary = connect(mapStateToProps, mapDispatchToProps)(CMPShopSummary)
+export const SignInForm = connect(mapStateToProps, mapDispatchToProps)(CMPSignInForm)
+export const SignUpForm = connect(mapStateToProps, mapDispatchToProps)(CMPSignUpForm)
 export const User = connect(mapStateToProps, mapDispatchToProps)(CMPUser)
