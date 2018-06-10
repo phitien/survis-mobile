@@ -7,6 +7,7 @@ import {Core} from './Core'
 import {Spinner} from './Spinner'
 
 export class Component extends Core {
+  get klass() {return 'Component'}
   renderError() {
     return this.error ? <View center error key='error'><Text>{this.error}</Text></View> : null
   }

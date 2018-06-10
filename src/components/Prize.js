@@ -7,6 +7,7 @@ import {Image} from './Image'
 import {Component} from './Component'
 
 export class Prize extends Component {
+  get klass() {return 'Prize'}
   get selected() {return this.props.selected}
   render() {
     const {item} = this.props

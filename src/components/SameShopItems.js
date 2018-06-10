@@ -8,6 +8,7 @@ import {SameShopItem} from './SameShopItem'
 import {Component} from './Component'
 
 export class SameShopItems extends Component {
+  get klass() {return 'SameShopItems'}
   get items() {return this.props.ShopItem.ShopItems.list || []}
 
   render() {

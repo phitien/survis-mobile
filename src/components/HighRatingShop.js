@@ -9,6 +9,7 @@ import {Component} from './Component'
 
 export class HighRatingShop extends Component {
   state = {totalrate: this.item.totalrate || 0}
+  get klass() {return 'HighRatingShop'}
   get item() {return this.props.item || {}}
 
   render() {

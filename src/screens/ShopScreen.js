@@ -9,6 +9,7 @@ import {Screen} from '../components'
 
 export class ShopScreen extends Screen {
   state = {showReview: false}
+  get klass() {return 'ShopScreen'}
   get shop() {return this.props.Shop.Shop}
   get items() {return this.props.ShopItem.ShopItems.list || []}
   get loading() {return this.props.Shop.loading || this.props.ShopItem.loading}

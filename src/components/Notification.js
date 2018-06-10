@@ -7,6 +7,7 @@ import {Image} from './Image'
 import {Component} from './Component'
 
 export class Notification extends Component {
+  get klass() {return 'Notification'}
   render() {
     const item = this.props.item, index = props.index
     const {id, image, title, message, date, is_read} = item || {}

@@ -9,6 +9,7 @@ import {Component} from './Component'
 const {height, width} = style
 
 export class Categorys extends Component {
+  get klass() {return 'Categorys'}
   get current() {return this.props.Category.Categorys.filter.current}
   get items() {return [].concat(this.current ? this.current.children : this.props.Category.Categorys.list).filter(o => o)}
   async componentDidMount() {

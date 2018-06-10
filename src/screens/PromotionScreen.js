@@ -12,6 +12,7 @@ import {Screen} from '../components'
 
 export class PromotionScreen extends Screen {
   state = {showReview: false}
+  get klass() {return 'PromotionScreen'}
   get item() {return this.props.Promotion.Promotion || {}}
   async componentDidMount() {
     this.actions.Promotion_Promotion({prm_id: this.props.item.id})

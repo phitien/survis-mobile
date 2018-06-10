@@ -33,6 +33,7 @@ export class User extends Component {
     showBillAddress: false,
     error: false,
   }
+  get klass() {return 'User'}
   get PaymentInfo() {return this.props.PaymentInfo.PaymentInfo || {}}
 	get usr_fname() {
 		return this.state.usr_fname = this.state.fullname.split(' ').shift()

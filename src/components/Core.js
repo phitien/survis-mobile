@@ -5,14 +5,20 @@ import {Alert} from 'react-native'
 import {apis} from '../apis'
 import * as utils from '../utils'
 import {getTheme} from '../theme'
+import * as styles from '../theme/styles/components'
 
 const {requestHeaders, log} = utils
 
 export class Core extends RAComponent {
   state = {error: false, message: false}
 
+  get klass() {return 'Core'}
   get getTheme() {return getTheme}
-  get cmpStyle() {}
+  get styles() {return styles}
+  get cmpStyle() {
+    if (this.klass) return this.styles[this.klass] || {}
+    return {}
+  }
 
   get api() {return api}
   get Actions() {return Actions}

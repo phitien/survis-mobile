@@ -11,6 +11,7 @@ import {Component} from './Component'
 
 export class Shop extends Component {
   state = {totalrate: this.item.totalrate || 0}
+  get klass() {return 'Shop'}
   get item() {return this.props.item || {}}
 
   render() {

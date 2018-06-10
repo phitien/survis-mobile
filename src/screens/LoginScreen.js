@@ -8,6 +8,7 @@ import {SignInForm, SignUpForm} from '../containers'
 import {Screen} from '../components'
 
 export class LoginScreen extends Screen {
+  get klass() {return 'LoginScreen'}
   get error() {return this.props.User.error || this.state.error}
   get message() {return this.props.User.message}
 

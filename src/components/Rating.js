@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import {Rating as style} from '../theme/styles/components'
 
 export class Rating extends Component {
+  get klass() {return 'Rating'}
   render() {
     return (
       <StarRating

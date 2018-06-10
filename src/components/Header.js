@@ -9,6 +9,7 @@ import {Component} from './Component'
 export class Header extends Component {
   state = {q: this.props.Shop.SearchShops.filter.q}
 
+  get klass() {return 'Header'}
   get current() {return this.props.Category.Categorys.filter.current}
 
   async componentDidMount() {

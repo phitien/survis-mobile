@@ -8,6 +8,7 @@ import {NewShop} from './NewShop'
 import {Component} from './Component'
 
 export class NewShops extends Component {
+  get klass() {return 'NewShops'}
   get items() {return this.props.Shop.NewShops.list || []}
 
   async componentDidMount() {

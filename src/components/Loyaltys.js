@@ -13,6 +13,7 @@ import {Loyalty} from './Loyalty'
 import {Component} from './Component'
 
 export class Loyaltys extends Component {
+  get klass() {return 'Loyaltys'}
   get items() {return this.props.Loyalty.Loyaltys.list || []}
   async componentDidMount() {
     if (this.logged) this.actions.Loyalty_Loyaltys()

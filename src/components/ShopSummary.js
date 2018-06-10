@@ -11,6 +11,7 @@ import {Component} from './Component'
 
 export class ShopSummary extends Component {
   state = {showReview: false}
+  get klass() {return 'ShopSummary'}
   get item() {return this.props.item || {}}
 
   render() {

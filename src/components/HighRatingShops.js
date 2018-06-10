@@ -11,6 +11,7 @@ import {HighRatingShop} from '../containers'
 import {Component} from './Component'
 
 export class HighRatingShops extends Component {
+  get klass() {return 'HighRatingShops'}
   get items() {return this.props.Shop.HighRatingShops.list || []}
 
   async componentDidMount() {

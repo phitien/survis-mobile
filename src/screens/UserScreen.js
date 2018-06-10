@@ -11,6 +11,7 @@ import {Image, Button} from '../components'
 import {Screen} from '../components'
 
 export class UserScreen extends Screen {
+  get klass() {return 'UserScreen'}
 
   async componentDidMount() {
 		this.actions.User_User()

@@ -10,6 +10,7 @@ import {NewShop, Shop} from '../components'
 import {Screen} from '../components'
 
 export class SearchScreen extends Screen {
+  get klass() {return 'SearchScreen'}
   get items() {return [].concat(this.props.Shop.SearchShops.list).filter(o => o)}
   get back() {return this.props.Category.Categorys.filter.catid ? true : false}
 

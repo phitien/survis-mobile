@@ -9,6 +9,7 @@ import {Button} from '../components'
 import {Screen} from '../components'
 
 export class PrizesScreen extends Screen {
+  get klass() {return 'PrizesScreen'}
   get items() {return this.props.Prize.Prizes.list || []}
   get error() {return this.state.error || this.props.Prize.error || null}
   get message() {return this.props.Prize.message || null}

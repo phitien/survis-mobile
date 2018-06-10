@@ -10,6 +10,7 @@ import {Promotion} from '../components'
 import {Screen} from '../components'
 
 export class PromotionsScreen extends Screen {
+  get klass() {return 'PromotionScreen'}
   get items() {return this.props.Promotion.Promotions.list || []}
   async componentDidMount() {
     this.locationUpdate(this.actions.Promotion_Promotions)

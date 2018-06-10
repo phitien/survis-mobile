@@ -11,6 +11,7 @@ import {Image} from './Image'
 import {Component} from './Component'
 
 export class Luckys extends Component {
+  get klass() {return 'Luckys'}
   get items() {return this.props.Lucky.Luckys.list || []}
   async componentDidMount() {
     if (this.logged) this.actions.Lucky_Luckys()

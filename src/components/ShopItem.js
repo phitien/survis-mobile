@@ -7,6 +7,7 @@ import {Image} from './Image'
 import {Component} from './Component'
 
 export class ShopItem extends Component {
+  get klass() {return 'ShopItem'}
   render() {
     const {item, index} = this.props
     const {

@@ -12,6 +12,7 @@ import {History} from './History'
 import {Component} from './Component'
 
 export class Historys extends Component {
+  get klass() {return 'Historys'}
   get items() {return this.props.History.Historys.list || []}
   async componentDidMount() {
     if (this.logged) this.actions.History_Historys()

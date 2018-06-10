@@ -7,6 +7,7 @@ import {Image} from './Image'
 import {Component} from './Component'
 
 export class History extends Component {
+  get klass() {return 'History'}
   render() {
     const {
       id, image, name, description, priceS, orderdate

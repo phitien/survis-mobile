@@ -9,6 +9,8 @@ import {Header, Footer, Categorys, Promotions, NewShops, HighRatingShops} from '
 import {Screen, NewShop, Shop} from '../components'
 
 export class HomeScreen extends Screen {
+  get klass() {return 'HomeScreen'}
+
   async componentDidMount() {
     this.loadUser(e => {
       this.loadPaymentInfo()

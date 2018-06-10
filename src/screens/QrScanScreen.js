@@ -8,6 +8,7 @@ import {Header, Footer} from '../containers'
 import {Screen} from '../components'
 
 export class QrScanScreen extends Screen {
+  get klass() {return 'QrScanScreen'}
   showError = error => this.alert('Error', error, [{text: 'OK', onPress: e => {
     this.actions.Prize_Clear()
     .then(e => this.setState({loading: false}))

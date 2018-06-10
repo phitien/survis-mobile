@@ -5,6 +5,7 @@ import {PRIMARY, LIGHTGREY, BLANK_IMG} from '../constants'
 import {Component} from './Component'
 
 export class Image extends Component {
+  get klass() {return 'Image'}
   render() {
     if (!this.props.source) return null
     if (this.props.source && this.props.source.hasOwnProperty('uri') && !this.props.source.uri) return null

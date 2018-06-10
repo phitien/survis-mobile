@@ -7,6 +7,7 @@ import {Header, Footer, Notification} from '../containers'
 import {Screen} from '../components'
 
 export class NotificationsScreen extends Screen {
+  get klass() {return 'NotificationsScreen'}
   get items() {return this.props.Notification.Notifications.list || []}
   async componentDidMount() {
     this.actions.Notification_Notifications()

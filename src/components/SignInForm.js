@@ -11,6 +11,7 @@ export class SignInForm extends Component {
     usr_email: null,
     usr_password: null,
   }
+  get klass() {return 'SignInForm'}
   get error() {return this.props.User.error || this.state.error}
   get isEmailValid() {
     this.setState({typing: false})

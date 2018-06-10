@@ -8,6 +8,7 @@ import {Component} from './Component'
 
 export class SignUpForm extends Component {
   state = {usr_email: '', usr_password: '', usr_name: '', usr_mobile: ''}
+  get klass() {return 'SignUpForm'}
   get error() {return this.props.User.error || this.state.error}
   get isEmailValid() {
     this.setState({typing: false})

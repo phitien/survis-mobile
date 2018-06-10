@@ -7,6 +7,7 @@ const {iconSize, iconColorActive, iconColor} = style
 import {Component} from './Component'
 
 export class Footer extends Component {
+  get klass() {return 'Footer'}
   onPressUser() {
     let currentScreen = this.currentScreen
     if (currentScreen !== 'UserScreen') {

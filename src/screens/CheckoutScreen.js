@@ -11,6 +11,7 @@ import {Screen} from '../components'
 
 export class CheckoutScreen extends Screen {
   state = {agreed: this.props.agreed || this.props.navigation.state.params.agreed}
+  get klass() {return 'CheckoutScreen'}
   get items() {return this.props.ShoppingCartItem.ShoppingCartItems.list || []}
   get total() {return this.items.reduce((rs, item) => {
     const {qty, price} = this.utils.itemHelper(item)

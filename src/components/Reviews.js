@@ -15,6 +15,7 @@ import {Component} from './Component'
 
 export class Reviews extends Component {
   state = {comment: '', typing: false, error: false, showPostReview: false, rating: 0}
+  get klass() {return 'Reviews'}
   get items() {return this.props.Review.Reviews.list || []}
   get error() {return this.state.error || this.props.Review.error}
   get message() {return this.state.message || this.props.Review.message}

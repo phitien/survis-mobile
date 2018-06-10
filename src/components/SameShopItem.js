@@ -9,6 +9,7 @@ import {Rating} from './Rating'
 import {Component} from './Component'
 
 export class SameShopItem extends Component {
+  get klass() {return 'SameShopItem'}
   render() {
     const item = this.props.item
     const {

@@ -12,6 +12,7 @@ import {Promotion} from './Promotion'
 import {Component} from './Component'
 
 export class Promotions extends Component {
+  get klass() {return 'Promotions'}
   get items() {return this.props.Promotion.Promotions.list || []}
   async componentDidMount() {
     this.actions.Promotion_Promotions()

@@ -7,6 +7,7 @@ import {Image} from './Image'
 import {Component} from './Component'
 
 export class Loyalty extends Component {
+  get klass() {return 'Loyalty'}
   render() {
     const {
       id, image, name, address, visits, points, orders, latestorderdate, spentamount

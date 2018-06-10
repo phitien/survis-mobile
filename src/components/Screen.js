@@ -2,10 +2,13 @@ import React from 'react'
 import {Container, Content} from 'native-base'
 import DeviceInfo from 'react-native-device-info'
 
+import * as styles from '../theme/styles/screens'
 import {Header, Footer} from '../containers'
 import {Component} from './Component'
 
 export class Screen extends Component {
+  get klass() {return 'Screen'}
+  get styles() {return styles}
   get header() {return this.props.header}
   get content() {return this.props.content}
   get footer() {return this.props.footer}

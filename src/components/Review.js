@@ -6,6 +6,7 @@ import {Review as style} from '../theme/styles/components'
 import {Component} from './Component'
 
 export class Review extends Component {
+  get klass() {return 'Review'}
   render() {
     const {item, index} = this.props
     const {comment, created_date, lname, fname} = this.utils.itemHelper(item)

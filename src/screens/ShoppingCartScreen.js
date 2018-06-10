@@ -12,6 +12,7 @@ import {Screen} from '../components'
 const {col0W, col1W} = style
 
 export class ShoppingCartScreen extends Screen {
+  get klass() {return 'ShoppingCartScreen'}
   get items() {return this.props.ShoppingCartItem.ShoppingCartItems.list || []}
   get total() {return this.items.reduce((rs, item) => {
     const {qty, price} = this.utils.itemHelper(item)
