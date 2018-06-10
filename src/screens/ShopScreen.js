@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {Container, View, Content, Text, DeckSwiper} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
 
-import {ShopScreen as style} from '../theme/styles/screens'
 import {Header, Footer, ShopSummary, ShopItem, Reviews} from '../containers'
 import {Image} from '../components'
 import {Screen} from '../components'

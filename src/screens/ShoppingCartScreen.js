@@ -2,14 +2,10 @@ import React, {Component} from 'react'
 import {Container, View, Content, Spinner, Text, Icon} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
 
-import {ShoppingCartScreen as style} from '../theme/styles/screens'
-
 import {itemHelper} from '../utils'
 import {Header, Footer} from '../containers'
 import {Button, Image} from '../components'
 import {Screen} from '../components'
-
-const {col0W, col1W} = style
 
 export class ShoppingCartScreen extends Screen {
   get klass() {return 'ShoppingCartScreen'}

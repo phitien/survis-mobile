@@ -1,7 +1,6 @@
 import React from 'react'
 import {Actions} from 'react-native-router-flux'
 import {View, Text} from 'native-base'
-import {StyleSheet} from 'react-native'
 
 import {Core} from './Core'
 import {Spinner} from './Spinner'

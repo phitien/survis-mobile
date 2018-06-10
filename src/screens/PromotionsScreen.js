@@ -3,8 +3,6 @@ import {Container, View, Text, List} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
 import InfiniteScroll from 'react-native-infinite-scroll'
 
-import {PromotionsScreen as style} from '../theme/styles/screens'
-
 import {Header, Footer, Categorys, Promotions} from '../containers'
 import {Promotion} from '../components'
 import {Screen} from '../components'

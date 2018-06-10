@@ -2,8 +2,6 @@ import React from 'react'
 import {Content, Text, Spinner, Icon, View} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
 
-import {NewShops as style} from '../theme/styles/components'
-
 import {NewShop} from './NewShop'
 import {Component} from './Component'
 

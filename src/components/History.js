@@ -1,8 +1,6 @@
 import React from 'react'
 import {Text, Spinner, Icon, View} from 'native-base'
 
-import {History as style} from '../theme/styles/components'
-
 import {Image} from './Image'
 import {Component} from './Component'
 
@@ -14,7 +12,7 @@ export class History extends Component {
     } = this.utils.itemHelper(this.props.item)
     return <View horizontal mt mr ml white>
       <View normal-size-square mr><Image source={{uri: image}}/></View>
-      <View flex1 style={style.info}>
+      <View flex1 style={this.cmpStyle.info}>
         <View><Text bold>{name}</Text></View>
         <View><Text small>{description}</Text></View>
         <View><Text bold theme>{priceS}</Text></View>

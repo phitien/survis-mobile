@@ -2,8 +2,6 @@ import React from 'react'
 import {Container, Header as NBHeader, Item, Input, Icon, Button, Text, Badge} from 'native-base'
 import {StyleProvider} from 'native-base'
 
-import {Header as style} from '../theme/styles/components'
-
 import {Component} from './Component'
 
 export class Header extends Component {

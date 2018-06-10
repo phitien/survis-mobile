@@ -4,8 +4,6 @@ import {TouchableOpacity as Touch} from 'react-native'
 
 import {Header, Footer, ShopSummary, Reviews, SameShopItems} from '../containers'
 
-import {ShopItemScreen as style} from '../theme/styles/screens'
-
 import {Image, Rating} from '../components'
 import {Screen} from '../components'
 

@@ -3,8 +3,6 @@ import {View, Item, Input, Text, Icon} from 'native-base'
 import RadioForm from 'react-native-simple-radio-button'
 import DatePicker from 'react-native-datepicker'
 
-import {User as style} from '../theme/styles/components'
-
 import {Button} from './Button'
 import {Image} from './Image'
 import {Rating} from './Rating'
@@ -109,7 +107,7 @@ export class User extends Component {
         <Input value={this.utils.cardnum(ucc_num, false)} placeholder='Card number (****-****-****-****)'
           onChangeText={e => this.onChange('ucc_num', e)}/>
       </Item>
-      <RadioForm style={style.checkbox} radio_props={this.props.PaymentMethod.PaymentMethods.list}
+      <RadioForm style={this.cmpStyle.checkbox} radio_props={this.props.PaymentMethod.PaymentMethods.list}
         initial={0} formHorizontal={true} labelHorizontal={true} buttonSize={6}
         onPress={e => this.onChange('ucc_type', e)}/>
       <View horizontal mt mb>
@@ -183,7 +181,7 @@ export class User extends Component {
 				</View>
 				<View flex1>
 					<Text label>Date of birth</Text>
-		      <DatePicker customStyles={style.datepicker} date={usr_birthday} mode='date' placeholder='Birthday'
+		      <DatePicker customStyles={this.cmpStyle.datepicker} date={usr_birthday} mode='date' placeholder='Birthday'
 		        format='YYYY-MM-DD' minDate='1900-01-01'
 		        confirmBtnText='Ok' cancelBtnText='Cancel'
 		        onDateChange={e => this.onChange('usr_birthday', e)}/>

@@ -1,8 +1,6 @@
 import React from 'react'
 import {Text, Spinner, Icon, View} from 'native-base'
 
-import {Prize as style} from '../theme/styles/components'
-
 import {Image} from './Image'
 import {Component} from './Component'
 
@@ -12,13 +10,14 @@ export class Prize extends Component {
   render() {
     const {item} = this.props
     const selected = this.selected
-    return <View style={[style.container, selected ? style.selected : {}]}>
-      <View style={style.image}><Image source={{uri: item.image}}/></View>
-      {selected ? <Icon style={style.icon} name='ios-arrow-dropdown-circle'/> : null}
+    const {cmpStyle} = this
+    return <View style={[cmpStyle.container, selected ? cmpStyle.selected : {}]}>
+      <View style={cmpStyle.image}><Image source={{uri: item.image}}/></View>
+      {selected ? <Icon style={cmpStyle.icon} name='ios-arrow-dropdown-circle'/> : null}
       <View mt><Text>{item.name}</Text></View>
       <View mt><Text small>{item.description}</Text></View>
       <View horizontal center middle mt>
-        <View mr style={style.sponsor_image}><Image source={{uri: item.sponsor_image}}/></View>
+        <View mr style={cmpStyle.sponsor_image}><Image source={{uri: item.sponsor_image}}/></View>
         <Text bold small theme>{item.sponsor_name}</Text>
       </View>
     </View>

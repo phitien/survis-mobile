@@ -3,8 +3,6 @@ import {Text, Spinner, Icon, View} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
 import {Platform, Dimensions, PixelRatio} from 'react-native'
 
-import {Shop as style} from '../theme/styles/components'
-
 import {Image} from './Image'
 import {Rating} from './Rating'
 import {Component} from './Component'
@@ -41,7 +39,7 @@ export class Shop extends Component {
           </View>
         </View></Touch>
         <View full smt smb><Text theme bold>{highlight}</Text></View>
-        <View horizontal space-between style={style.statistic}>
+        <View horizontal space-between style={this.cmpStyle.statistic}>
           <Rating rating={this.state.totalrate} fullStarColor='black' emptyStarColor='black'/>
           <View horizontal>
             <Text small grey>(</Text>

@@ -3,8 +3,6 @@ import {Text, Spinner, Icon, View, Content} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
 import InfiniteScroll from 'react-native-infinite-scroll'
 
-import {Historys as style} from '../theme/styles/components'
-
 import {AUTOPLAY_TIMEOUT} from '../constants'
 
 import {Image} from './Image'

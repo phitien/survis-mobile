@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 import {Tabs, Tab, Item, Input, Text, View, Icon, CheckBox} from 'native-base'
 import FBSDK, {LoginManager, LoginButton, AccessToken, GraphRequest, GraphRequestManager} from 'react-native-fbsdk'
 
-import {LoginScreen as style} from '../theme/styles/screens'
-
 import {SignInForm, SignUpForm} from '../containers'
 import {Screen} from '../components'
 
@@ -90,7 +88,7 @@ export class LoginScreen extends Screen {
 
   get content() {
     return <Tabs ref={e => this.tabs = e}
-      tabBarUnderlineStyle={style.tabBarUnderlineStyle}>
+      tabBarUnderlineStyle={this.cmpStyle.tabBarUnderlineStyle}>
       <Tab heading='Login'>
         {this.renderLogin()}
       </Tab>

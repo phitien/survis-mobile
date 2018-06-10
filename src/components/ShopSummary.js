@@ -2,8 +2,6 @@ import React from 'react'
 import {Text, Spinner, Icon, View} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
 
-import {ShopSummary as style} from '../theme/styles/components'
-
 import {Image} from './Image'
 import {Rating} from './Rating'
 import {Reviews} from '../containers'

@@ -2,8 +2,6 @@ import React from 'react'
 import {Text, Spinner, Icon, View} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
 
-import {NewShop as style} from '../theme/styles/components'
-
 import {Image} from './Image'
 import {Rating} from './Rating'
 import {Component} from './Component'
@@ -18,7 +16,7 @@ export class NewShop extends Component {
     return <View ml mb big-size-square>
       <View big-size-square><Image source={{uri: image}}/></View>
       <View bottom full>
-        <View full bg-opacity sp style={style.address}>
+        <View full bg-opacity sp style={this.cmpStyle.address}>
           <Text small white>{address}</Text>
         </View>
         <View full white sp>

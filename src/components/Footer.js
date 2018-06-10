@@ -1,9 +1,6 @@
 import React from 'react'
 import {Container, Header, Footer as NBFooter, FooterTab, Button, Text, View, Icon, Badge} from 'native-base'
 
-import {Footer as style} from '../theme/styles/components'
-const {iconSize, iconColorActive, iconColor} = style
-
 import {Component} from './Component'
 
 export class Footer extends Component {
@@ -40,7 +37,7 @@ export class Footer extends Component {
     }
   }
 
-  getIconStyle = (n) => ({color: this.currentScreen === n && iconColorActive || iconColor})
+  getIconStyle = (n) => ({color: this.currentScreen === n && this.cmpStyle.iconColorActive || this.cmpStyle.iconColor})
   renderTab(screen, icon, text, badge, onPress) {
     if (!onPress) onPress = this.openScreen.bind(this, screen)
 	   if (badge) return <Button key={screen} vertical onPress={onPress}>
@@ -49,7 +46,7 @@ export class Footer extends Component {
       <Badge top-right style={{top: 0, right: '50%', marginRight: -12}}><Text>{badge}</Text></Badge>
   	</Button>
   	return <Button key={screen} vertical onPress={onPress}>
-  	  <Icon name={icon} size={iconSize} style={this.getIconStyle(screen)}/>
+  	  <Icon name={icon} size={this.cmpStyle.iconSize} style={this.getIconStyle(screen)}/>
   	  <Text footer>{text}</Text>
   	</Button>
   }
@@ -64,7 +61,7 @@ export class Footer extends Component {
     ]
   }
   render() {
-    return <NBFooter style={style.container}>
+    return <NBFooter style={this.cmpStyle.container}>
       <FooterTab>
         {this.props.children ? this.props.children : this.renderDefault()}
       </FooterTab>

@@ -1,8 +1,6 @@
 import React from 'react'
 import {Text, Spinner, Icon, View} from 'native-base'
 
-import {Review as style} from '../theme/styles/components'
-
 import {Component} from './Component'
 
 export class Review extends Component {

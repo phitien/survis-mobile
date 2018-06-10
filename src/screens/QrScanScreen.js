@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 import {Container, View, Content} from 'native-base'
 import {RNCamera} from 'react-native-camera'
 
-import {QrScanScreen as style} from '../theme/styles/screens'
-
 import {Header, Footer} from '../containers'
 import {Screen} from '../components'
 
@@ -34,7 +32,7 @@ export class QrScanScreen extends Screen {
   renderScanner() {
     return <RNCamera key='main' ref={ref => {this.camera = ref}}
       onBarCodeRead={this.onBarCodeRead.bind(this)}
-      style={style.scanningFrame}
+      style={this.cmpStyle.scanningFrame}
       type={RNCamera.Constants.Type.back}
       flashMode={RNCamera.Constants.FlashMode.on}
       permissionDialogTitle={'Permission to use camera'}

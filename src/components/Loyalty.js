@@ -1,7 +1,6 @@
 import React from 'react'
 import {Text, Spinner, Icon, View} from 'native-base'
 
-import {Loyalty as style} from '../theme/styles/components'
 import {itemHelper, substr} from '../utils'
 import {Image} from './Image'
 import {Component} from './Component'

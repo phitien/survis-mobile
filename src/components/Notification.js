@@ -1,8 +1,6 @@
 import React from 'react'
 import {Text, Spinner, Icon, View} from 'native-base'
 
-import {Notification as style} from '../theme/styles/components'
-
 import {Image} from './Image'
 import {Component} from './Component'
 

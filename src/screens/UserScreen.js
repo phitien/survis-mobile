@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 import {Container, View, Content, Text, Tabs, Tab, Icon} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
 
-import {UserScreen as style} from '../theme/styles/screens'
-
 import {PERSON_IMG} from '../constants'
 import {requestHeader} from '../utils'
 import {Header, Footer, Historys, Loyaltys, Luckys, User} from '../containers'
@@ -55,7 +53,7 @@ export class UserScreen extends Screen {
           </Touch>
         </View>
       </View>,
-      <Tabs tabBarUnderlineStyle={style.tabBarUnderlineStyle} locked={true} key='detail'>
+      <Tabs tabBarUnderlineStyle={this.cmpStyle.tabBarUnderlineStyle} locked={true} key='detail'>
         <Tab heading='Me'><User ref={e => this.tabMe = e} User={this.User}
     			onSave={this.onSaveMe.bind(this)}
     			onSavePassword={this.onSavePassword.bind(this)}

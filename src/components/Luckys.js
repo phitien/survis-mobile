@@ -3,8 +3,6 @@ import {Text, Spinner, Icon, View, Content} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
 import InfiniteScroll from 'react-native-infinite-scroll'
 
-import {Luckys as style} from '../theme/styles/components'
-
 import {AUTOPLAY_TIMEOUT} from '../constants'
 
 import {Image} from './Image'
@@ -40,7 +38,7 @@ export class Luckys extends Component {
         <View full><Text>{description}</Text></View>
         <View full horizontal middle>
           <Text small>Sponsor: {sponsor_name}</Text>
-          <View ml style={style.sponsor_image}><Image source={{uri: sponsor_image}}/></View>
+          <View ml style={this.cmpStyle.sponsor_image}><Image source={{uri: sponsor_image}}/></View>
         </View>
         <View full><Text small italic grey>Placed: {pickdate}</Text></View>
         {drawdate ? <View small italic><Text small>Draw date: {drawdate}</Text></View> : null}

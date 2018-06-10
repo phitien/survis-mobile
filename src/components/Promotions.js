@@ -3,8 +3,6 @@ import {Text, Spinner, Icon, View} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
 import Swiper from 'react-native-swiper'
 
-import {Promotions as style} from '../theme/styles/components'
-
 import {AUTOPLAY_TIMEOUT} from '../constants'
 
 import {Image} from './Image'

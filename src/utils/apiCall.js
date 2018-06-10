@@ -25,7 +25,7 @@ const apiCall = axios.create({
 })
 
 const success = (res, req) => {
-  console.log('survis-api', res.request._method, res.request.responseURL)
+  log('survis-api', res.request._method, res.request.responseURL)
   const {data, status} = res || {}
   const {code, message, results} = data || {}
   return {data: {...data, code, message, results}, status: 200}
@@ -35,7 +35,7 @@ const failure = err => {
   const res = err.response || {}
   const {data, status} = res || {}
   const {code, message, results} = data || {}
-  console.log('survis-api-error', err)
+  log('survis-api-error', err)
   if (status === 401 || status === 403) {
     requestHeader('token', '')
     AsyncStorage.clear()

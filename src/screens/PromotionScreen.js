@@ -4,8 +4,6 @@ import {Container, View, Content, Text} from 'native-base'
 import {Header, Footer, ShopSummary, ShopItem} from '../containers'
 import {TouchableOpacity as Touch} from 'react-native'
 
-import {PromotionScreen as style} from '../theme/styles/screens'
-
 import {itemHelper, substr} from '../utils'
 import {Image, Promotion, Reviews} from '../components'
 import {Screen} from '../components'

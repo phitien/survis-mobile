@@ -1,8 +1,6 @@
 import React from 'react'
 import {Text, Spinner, Icon, View} from 'native-base'
 
-import {Promotion as style} from '../theme/styles/components'
-
 import {Image} from './Image'
 import {Component} from './Component'
 
@@ -18,7 +16,7 @@ export class Promotion extends Component {
   	const words = toptext.split(' ')
   	return <View big-size mb>
       <View big-size><Image source={{uri: image}}/></View>
-      <View style={{...style.toptext, backgroundColor: toptext_bgcolor}}>
+      <View style={[this.cmpStyle.toptext, {backgroundColor: toptext_bgcolor}]}>
         {words.map(t => <Text key={t} style={wordStyle}>{t}</Text>)}
       </View>
       <View bottom mb sp bg-opacity>

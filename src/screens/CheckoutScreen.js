@@ -3,8 +3,6 @@ import {Container, View, Content, Text, Icon, CheckBox, Toast} from 'native-base
 import {TouchableOpacity as Touch} from 'react-native'
 import {ActionConst} from 'react-native-router-flux'
 
-import {CheckoutScreen as style} from '../theme/styles/screens'
-
 import {Header, Footer} from '../containers'
 import {Button} from '../components'
 import {Screen} from '../components'

@@ -2,11 +2,8 @@ import React from 'react'
 import {Text, Icon, View, Content} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
 
-import {Categorys as style} from '../theme/styles/components'
 import {Image} from './Image'
 import {Component} from './Component'
-
-const {height, width} = style
 
 export class Categorys extends Component {
   get klass() {return 'Categorys'}
@@ -33,7 +30,7 @@ export class Categorys extends Component {
   }
 
   renderContent() {
-    let cats = [].concat(this.items)
+    const cats = [].concat(this.items), {height} = this.cmpStyle
     return cats.map((item, j) => <Touch key={j} onPress={this.onPress.bind(this, item)}>
       <View center middle bpr={j != cats.length} style={{height}}>
         <View tiny-size-rounded smb grey><Image bgColor='white' source={{uri: item.image}}/></View>
@@ -42,6 +39,7 @@ export class Categorys extends Component {
     </Touch>)
   }
   render() {
+    const {height} = this.cmpStyle
     if (this.props.Category.loading) return <View white center full style={{height}}>{this.renderLoading()}</View>
     let cats = [].concat(this.items)
     if (!cats.length) return null

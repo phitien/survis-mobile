@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {Container, View, Content, Text} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
-import {NotificationsScreen as style} from '../theme/styles/screens'
 
 import {Header, Footer, Notification} from '../containers'
 import {Screen} from '../components'

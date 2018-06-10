@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 import {Container, View, Content, Text} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
 
-import {PrizesScreen as style} from '../theme/styles/screens'
-
 import {Header, Footer, Prize} from '../containers'
 import {Button} from '../components'
 import {Screen} from '../components'
@@ -33,7 +31,7 @@ export class PrizesScreen extends Screen {
   }
 
   renderRow(row, i) {
-    return <View key={i} horizontal full style={style.row}>
+    return <View key={i} horizontal full style={this.cmpStyle.row}>
       {row.map((item,j) => <Touch key={`${j}-${item.id}`} onPress={e => this.selected = item}><Prize selected={this.selected == item} item={item} index={j}/></Touch>)}
     </View>
   }
