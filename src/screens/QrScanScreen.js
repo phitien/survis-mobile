@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
-import {Container, View, Content, Spinner} from 'native-base'
+import {Container, View, Content} from 'native-base'
 import {RNCamera} from 'react-native-camera'
-import {Alert} from 'react-native'
 
 import {QrScanScreen as style} from '../theme/styles/screens'
 
@@ -9,7 +8,7 @@ import {Header, Footer} from '../containers'
 import {Screen} from '../components'
 
 export class QrScanScreen extends Screen {
-  showError = error => Alert.alert('Error', error, [{text: 'OK', onPress: e => {
+  showError = error => this.alert('Error', error, [{text: 'OK', onPress: e => {
     this.actions.Prize_Clear()
     .then(e => this.setState({loading: false}))
   }}], {cancelable: false})

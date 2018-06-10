@@ -1,12 +1,10 @@
 import React, {Component} from 'react'
-import {Container, View, Content, Spinner, Text, DeckSwiper} from 'native-base'
+import {Container, View, Content, Text, DeckSwiper} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
-import {Alert} from 'react-native'
 
 import {ShopScreen as style} from '../theme/styles/screens'
 import {Header, Footer, ShopSummary, ShopItem, Reviews} from '../containers'
 import {Image} from '../components'
-import {itemHelper, substr} from '../utils'
 import {Screen} from '../components'
 
 export class ShopScreen extends Screen {
@@ -23,10 +21,10 @@ export class ShopScreen extends Screen {
   onPressSubmitReview({rating, comment}) {
     if (this.logged) {
       if (rating == 0 && !comment) {
-         Alert.alert('Error', 'Please rate us or leave some comment.')
+         this.alert('Error', 'Please rate us or leave some comment.')
       }
       else {
-        const showThankYouFn = e => Alert.alert('Message', 'Thank you for your review.', [{text: 'OK', onPress: () => {
+        const showThankYouFn = e => this.alert('Message', 'Thank you for your review.', [{text: 'OK', onPress: () => {
           this.setState({showReview: false})
           this.actions.Shop_Shop({shopid: this.props.item.id})
         }}], {cancelable: false})

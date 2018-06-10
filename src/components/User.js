@@ -5,8 +5,6 @@ import DatePicker from 'react-native-datepicker'
 
 import {User as style} from '../theme/styles/components'
 
-import {itemHelper, substr, cardnum, cardexpire, date} from '../utils'
-
 import {Button} from './Button'
 import {Image} from './Image'
 import {Rating} from './Rating'
@@ -19,7 +17,7 @@ export class User extends Component {
     usr_name: this.User.usr_name || '',
     usr_fname: this.User.usr_fname || '',
     usr_lname: this.User.usr_lname || '',
-    usr_birthday: this.User.usr_birthday ? date(this.User.usr_birthday).toLocaleDateString() : '',
+    usr_birthday: this.User.usr_birthday ? this.utils.date(this.User.usr_birthday).toLocaleDateString() : '',
     usr_email: this.User.usr_email || '',
 		fullname: [(this.User.usr_fname||  '').trim(), (this.User.usr_lname || '').trim()].filter(o => o).join(' ') || this.User.usr_name || '',
     usr_password: '',
@@ -76,8 +74,8 @@ export class User extends Component {
     const {ucc_num, ucc_name, ucc_expire, ucc_type, ucc_cvc} = this.state
     if (ucc_name || ucc_num || ucc_expire || ucc_cvc) {
       if (!ucc_name) return this.setState({error: 'Credit card name is empty'})
-      if (cardnum(ucc_num).length != 16) return this.setState({error: 'Credit card number is invalid'})
-      if (!ucc_expire || cardexpire(ucc_expire).length != 5) return this.setState({error: 'Credit card expire is invalid'})
+      if (this.utils.cardnum(ucc_num).length != 16) return this.setState({error: 'Credit card number is invalid'})
+      if (!ucc_expire || this.utils.cardexpire(ucc_expire).length != 5) return this.setState({error: 'Credit card expire is invalid'})
       if (!ucc_cvc || ucc_cvc.length != 3) return this.setState({error: 'Credit card CVC is invalid'})
     }
     this.setState({error: false, showInfo: false, showBillAddress: false})
@@ -107,7 +105,7 @@ export class User extends Component {
           onChangeText={e => this.onChange('ucc_name', e)}/>
       </Item>
       <Item>
-        <Input value={cardnum(ucc_num, false)} placeholder='Card number (****-****-****-****)'
+        <Input value={this.utils.cardnum(ucc_num, false)} placeholder='Card number (****-****-****-****)'
           onChangeText={e => this.onChange('ucc_num', e)}/>
       </Item>
       <RadioForm style={style.checkbox} radio_props={this.props.PaymentMethod.PaymentMethods.list}
@@ -116,7 +114,7 @@ export class User extends Component {
       <View horizontal mt mb>
           <View flex2>
             <Item>
-              <Input value={cardexpire(ucc_expire)} placeholder='Card expire (MM/YY)'
+              <Input value={this.utils.cardexpire(ucc_expire)} placeholder='Card expire (MM/YY)'
                 onChangeText={e => this.onChange('ucc_expire', e)}/>
             </Item>
           </View>
@@ -166,9 +164,8 @@ export class User extends Component {
     </View>
   }
   renderInfo() {
-    const {usr_mobile, usr_birthday, usr_email} = this.state
+    const {usr_id, token, usr_mobile, usr_birthday, usr_email} = this.state
     return <View m p>
-      <Text label>Name</Text>
       <Item>
         <Input value={this.state.fullname} placeholder='Fullname'
            onChangeText={e => this.onChangeName(e)}
@@ -242,7 +239,7 @@ export class User extends Component {
       <View horizontal grey mt ml mr p>
         <View horizontal flex1>
           <Icon name='card'/>
-          <Text bold ml>{ucc_num ? cardnum(ucc_num) : 'Not set'}</Text>
+          <Text bold ml>{ucc_num ? this.utils.cardnum(ucc_num) : 'Not set'}</Text>
         </View>
         <View horizontal>
           {!this.state.showPaymentInfo ? <Button transparent theme onPress={e => this.showSegment('showPaymentInfo')}>

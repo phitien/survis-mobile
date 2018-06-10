@@ -42,6 +42,8 @@ export const itemHelper = (item) => {
     sponsor_image: item.sponsor_image || '',
     sponsor_name: item.sponsor_name || '',
     status: item.status || '',
+    comment: item.status || '',
+    created_date: item.drawdate ? date(item.created_date).toLocaleDateString() : '',
   }
 }
 export const last4 = (s) => {

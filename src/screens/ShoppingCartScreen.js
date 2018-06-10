@@ -14,7 +14,7 @@ const {col0W, col1W} = style
 export class ShoppingCartScreen extends Screen {
   get items() {return this.props.ShoppingCartItem.ShoppingCartItems.list || []}
   get total() {return this.items.reduce((rs, item) => {
-    const {qty, price} = itemHelper(item)
+    const {qty, price} = this.utils.itemHelper(item)
     rs += qty*price
     return rs
   }, 0)}
@@ -31,7 +31,7 @@ export class ShoppingCartScreen extends Screen {
 
   renderList() {
     return this.items.map((item, i) => {
-      const {id, image, name, qty, price, priceS} = itemHelper(item)
+      const {id, image, name, qty, price, priceS} = this.utils.itemHelper(item)
       const shop = item.shop
       return <View horizontal start p key={id}>
         <View horizontal flex1>

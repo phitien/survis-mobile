@@ -3,7 +3,6 @@ import {Text, Icon, View, Content} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
 
 import {Categorys as style} from '../theme/styles/components'
-import {substr} from '../utils'
 import {Image} from './Image'
 import {Component} from './Component'
 

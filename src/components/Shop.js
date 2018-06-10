@@ -5,8 +5,6 @@ import {Platform, Dimensions, PixelRatio} from 'react-native'
 
 import {Shop as style} from '../theme/styles/components'
 
-import {itemHelper, substr, openOnMap} from '../utils'
-
 import {Image} from './Image'
 import {Rating} from './Rating'
 import {Component} from './Component'
@@ -19,7 +17,7 @@ export class Shop extends Component {
     const {
       id, isfeatured, promotion_image, name, address, image, highlight, distance,
       latitude, longitude, totalrate, totalreviews
-    } = itemHelper(this.item)
+    } = this.utils.itemHelper(this.item)
   	if (isfeatured) {
   		return <View mt ml mr white>
         <View normal-size><Image source={{uri: promotion_image}}/></View>
@@ -34,7 +32,7 @@ export class Shop extends Component {
       <View flex1 smt pl pr spb>
         <View full><Text bold>{name}</Text></View>
         <View full><Text small>{address}</Text></View>
-        <Touch onPress={e => openOnMap(latitude, longitude, name)}><View horizontal full>
+        <Touch onPress={e => this.utils.openOnMap(latitude, longitude, name)}><View horizontal full>
           <Text small>{distance}</Text>
           <View horizontal ml>
             <Icon theme small name='ios-send'/>

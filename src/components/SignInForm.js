@@ -1,10 +1,7 @@
 import React from 'react'
-import {Alert} from 'react-native'
 import {Tabs, Tab, Item, Input, Text, View, Icon, CheckBox} from 'native-base'
 import {StyleProvider} from 'native-base'
 
-import {getTheme} from '../theme'
-import {validateEmail, requestHeader} from '../utils'
 import {Button} from './Button'
 import {Component} from './Component'
 
@@ -18,8 +15,8 @@ export class SignInForm extends Component {
   get isEmailValid() {
     this.setState({typing: false})
     const {usr_email, usr_password} = this.state
-    if (!this.state.usr_email || !validateEmail(this.state.usr_email)) {
-      this.setState({error: 'Email is invalid'}, e => Alert.alert('Error', this.error))
+    if (!this.state.usr_email || !this.utils.validateEmail(this.state.usr_email)) {
+      this.setState({error: 'Email is invalid'}, e => this.alert('Error', this.error))
       return
     }
     this.setState({error: false})
@@ -29,7 +26,7 @@ export class SignInForm extends Component {
   get isPasswordValid() {
     this.setState({typing: false})
     if (!this.state.usr_password) {
-      this.setState({error: 'Password is invalid. Password should not be empty'}, e => Alert.alert('Error', this.error))
+      this.setState({error: 'Password is invalid. Password should not be empty'}, e => this.alert('Error', this.error))
       return
     }
     this.setState({error: false})
@@ -65,7 +62,7 @@ export class SignInForm extends Component {
         <Text bold>LOG IN</Text>
       </Button>
       <Button full smt horizontal facebook disabled={this.props.User.loading} onPress={this.props.onFacebookSignIn ? this.props.onFacebookSignIn.bind(this) : null}>
-        <StyleProvider style={getTheme({iconFamily: 'MaterialCommunityIcons'})}><Icon white name='facebook'/></StyleProvider>
+        <StyleProvider style={this.getTheme({iconFamily: 'MaterialCommunityIcons'})}><Icon white name='facebook'/></StyleProvider>
         <Text bold>Log in with facebook</Text>
       </Button>
       <View horizontal full mt>

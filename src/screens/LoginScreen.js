@@ -1,11 +1,9 @@
 import React, {Component} from 'react'
 import {Tabs, Tab, Item, Input, Text, View, Icon, CheckBox} from 'native-base'
-import {Alert} from 'react-native'
 import FBSDK, {LoginManager, LoginButton, AccessToken, GraphRequest, GraphRequestManager} from 'react-native-fbsdk'
 
 import {LoginScreen as style} from '../theme/styles/screens'
 
-import {requestHeader} from '../utils'
 import {SignInForm, SignUpForm} from '../containers'
 import {Screen} from '../components'
 
@@ -16,20 +14,20 @@ export class LoginScreen extends Screen {
   onAfterSignIn(res) {
     if (!this.error) {
       if (this.props.Screen.Screen.id) {
-        requestHeader('token', this.User.token)
+        this.utils.requestHeader('token', this.User.token)
         this.Actions[this.props.Screen.Screen.id](this.props.Screen.Screen.params)
         this.actions.Screen_Save({id: '', params: {}})
       }
       else this.open('HomeScreen')
     }
     else {
-      Alert.alert('Error', this.error)
+      this.alert('Error', this.error)
     }
   }
   onAfterSignUp() {
-    if (this.error) Alert.alert('Error', this.error)
+    if (this.error) this.alert('Error', this.error)
     else if (this.message) {
-      Alert.alert('Message', this.message, [{text: 'OK', onPress: () => {
+      this.alert('Message', this.message, [{text: 'OK', onPress: () => {
         this.actions.User_Clear()
         this.tabs.goToPage(0)
       }}], {cancelable: false})
@@ -89,17 +87,15 @@ export class LoginScreen extends Screen {
     />
   }
 
-  renderContent() {
-    return <View flex1>
-      <Tabs ref={e => this.tabs = e}
-        tabBarUnderlineStyle={style.tabBarUnderlineStyle}>
-        <Tab heading='Login'>
-          {this.renderLogin()}
-        </Tab>
-        <Tab heading='Register'>
-          {this.renderRegister()}
-        </Tab>
-      </Tabs>
-    </View>
+  get content() {
+    return <Tabs ref={e => this.tabs = e}
+      tabBarUnderlineStyle={style.tabBarUnderlineStyle}>
+      <Tab heading='Login'>
+        {this.renderLogin()}
+      </Tab>
+      <Tab heading='Register'>
+        {this.renderRegister()}
+      </Tab>
+    </Tabs>
   }
 }

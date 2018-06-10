@@ -4,8 +4,6 @@ import {StyleProvider} from 'native-base'
 
 import {Header as style} from '../theme/styles/components'
 
-import {getTheme} from '../theme'
-
 import {Component} from './Component'
 
 export class Header extends Component {
@@ -62,7 +60,7 @@ export class Header extends Component {
   }
   renderQrScan() {
     return <Button onPress={this.onPressScan.bind(this)}>
-      <StyleProvider style={getTheme({iconFamily: 'FontAwesome'})}><Icon name='qrcode'/></StyleProvider>
+      <StyleProvider style={this.getTheme({iconFamily: 'FontAwesome'})}><Icon name='qrcode'/></StyleProvider>
     </Button>
   }
   renderSearch() {

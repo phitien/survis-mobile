@@ -1,7 +1,7 @@
 import {connectStyle} from 'native-base'
 
-export {Component} from './Component'
 export {Button} from './Button'
+export {Component} from './Component'
 export {Categorys} from './Categorys'
 export {Footer} from './Footer'
 export {Header} from './Header'
@@ -30,4 +30,6 @@ export {ShopItem} from './ShopItem'
 export {ShopSummary} from './ShopSummary'
 export {SignInForm} from './SignInForm'
 export {SignUpForm} from './SignUpForm'
+export {Spinner} from './Spinner'
 export {User} from './User'
+/**New**/

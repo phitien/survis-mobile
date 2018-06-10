@@ -6,7 +6,6 @@ import Swiper from 'react-native-swiper'
 import {Reviews as style} from '../theme/styles/components'
 
 import {AUTOPLAY_TIMEOUT} from '../constants'
-import {itemHelper, substr} from '../utils'
 
 import {Image} from './Image'
 import {Review} from './Review'

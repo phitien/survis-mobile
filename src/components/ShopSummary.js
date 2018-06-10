@@ -4,8 +4,6 @@ import {TouchableOpacity as Touch} from 'react-native'
 
 import {ShopSummary as style} from '../theme/styles/components'
 
-import {itemHelper, substr, openOnMap} from '../utils'
-
 import {Image} from './Image'
 import {Rating} from './Rating'
 import {Reviews} from '../containers'
@@ -18,7 +16,7 @@ export class ShopSummary extends Component {
   render() {
     const {
       id, image, name, address, totalrate, totalreviews, latitude, longitude
-    } = itemHelper(this.item)
+    } = this.utils.itemHelper(this.item)
     return <View full grey>
     	<View horizontal sp full>
         <View smb mr small-size-square><Image source={{uri: image}}/></View>
@@ -33,7 +31,7 @@ export class ShopSummary extends Component {
           this.setState({showReview: !this.state.showReview})
           if (this.props.openPressReview) this.props.openPressReview(e)
         }}>{`(${totalreviews}) Reviews`}</Text>
-    	  <Touch onPress={e => openOnMap(latitude, longitude, name)}><View horizontal>
+    	  <Touch onPress={e => this.utils.openOnMap(latitude, longitude, name)}><View horizontal>
     		  <Icon theme small name='ios-send'/>
     	    <Text theme small>Get direction</Text>
     	  </View></Touch>

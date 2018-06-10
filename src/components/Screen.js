@@ -2,7 +2,6 @@ import React from 'react'
 import {Container, Content} from 'native-base'
 import DeviceInfo from 'react-native-device-info'
 
-import {getUser, getPaymentInfo, getShoppingCartItems, requestHeader} from '../utils'
 import {Header, Footer} from '../containers'
 import {Component} from './Component'
 
@@ -14,30 +13,30 @@ export class Screen extends Component {
 
   async loadDevice(cb) {
     const device_model = DeviceInfo.getDeviceId()
-    requestHeader('device_model', device_model)
+    this.utils.requestHeader('device_model', device_model)
     const language = DeviceInfo.getDeviceLocale()
-    requestHeader('language', language)
+    this.utils.requestHeader('language', language)
     const brand = DeviceInfo.getBrand()
     const device_type = brand == 'Apple' ? 0 : 1
-    requestHeader('device_type', device_type)
+    this.utils.requestHeader('device_type', device_type)
     const country = DeviceInfo.getDeviceCountry()
-    requestHeader('country', country)
+    this.utils.requestHeader('country', country)
     const device_id = DeviceInfo.getUniqueID()
-    requestHeader('device_id', device_id)
+    this.utils.requestHeader('device_id', device_id)
     const number = DeviceInfo.getPhoneNumber()
-    requestHeader('number', number)
+    this.utils.requestHeader('number', number)
     this.actions.Device_Load({device_model, language, device_type, country, device_id, number}).then(cb)
   }
   async loadUser(cb) {
-    const User = JSON.parse(await getUser()) || {token: ''}
-    requestHeader('token', User.token)
+    const User = JSON.parse(await this.utils.getUser()) || {token: ''}
+    this.utils.requestHeader('token', User.token)
     this.actions.User_Load(User).then(cb)
   }
   async loadPaymentInfo(cb) {
-    if (this.logged) this.actions.PaymentInfo_Load(JSON.parse(await getPaymentInfo())).then(cb)
+    if (this.logged) this.actions.PaymentInfo_Load(JSON.parse(await this.utils.getPaymentInfo())).then(cb)
   }
   async loadShoppingCartItems(cb) {
-    this.actions.ShoppingCartItem_LoadAll(JSON.parse(await getShoppingCartItems())).then(cb)
+    this.actions.ShoppingCartItem_LoadAll(JSON.parse(await this.utils.getShoppingCartItems())).then(cb)
   }
   async loadNotifications(cb) {
     if (this.logged) this.actions.Notification_Notifications().then(cb)

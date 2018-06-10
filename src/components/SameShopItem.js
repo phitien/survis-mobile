@@ -4,8 +4,6 @@ import {TouchableOpacity as Touch} from 'react-native'
 
 import {SameShopItem as style} from '../theme/styles/components'
 
-import {itemHelper, substr, openOnMap} from '../utils'
-
 import {Image} from './Image'
 import {Rating} from './Rating'
 import {Component} from './Component'
@@ -15,7 +13,7 @@ export class SameShopItem extends Component {
     const item = this.props.item
     const {
       image, name, priceS, mpriceS
-    } = itemHelper(item)
+    } = this.utils.itemHelper(item)
     return <View ml mb normal-size-square>
       <View normal-size-square><Image source={{uri: image}}/></View>
       <View bottom full>

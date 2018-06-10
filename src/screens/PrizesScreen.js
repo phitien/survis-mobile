@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {Container, View, Content, Text} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
-import {Alert} from 'react-native'
 
 import {PrizesScreen as style} from '../theme/styles/screens'
 
@@ -21,7 +20,7 @@ export class PrizesScreen extends Screen {
     this.actions.Prize_Prizes()
   }
 
-  showMessage = (title, message, callback) => Alert.alert(title, message, [{text: 'OK', onPress: e => {
+  showMessage = (title, message, callback) => this.alert(title, message, [{text: 'OK', onPress: e => {
     this.actions.Prize_Clear().then(callback)
   }}], {cancelable: false})
   onPressSubmit() {

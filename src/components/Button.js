@@ -1,8 +1,11 @@
 import React from 'react'
-import {Text, Button as NBButton, Spinner} from 'native-base'
-import {PRIMARY} from '../constants'
+import {Button as NBButton} from 'native-base'
+import {Spinner} from './Spinner'
+import {Component} from './Component'
 
-export const Button = props => {
-  if (props.loading) return <Spinner color={PRIMARY}/>
-  return <NBButton {...props}/>
+export class Button extends Component {
+  render() {
+    if (this.props.loading) return <Spinner/>
+    return <NBButton {...this.props}/>
+  }
 }

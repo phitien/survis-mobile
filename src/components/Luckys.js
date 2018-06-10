@@ -6,7 +6,6 @@ import InfiniteScroll from 'react-native-infinite-scroll'
 import {Luckys as style} from '../theme/styles/components'
 
 import {AUTOPLAY_TIMEOUT} from '../constants'
-import {itemHelper, substr} from '../utils'
 
 import {Image} from './Image'
 import {Component} from './Component'
@@ -32,7 +31,7 @@ export class Luckys extends Component {
   renderItem(item,i) {
     const {
       id, image, name, description, pickdate, sponsor_image, sponsor_name, drawdate, status
-    } = itemHelper(item)
+    } = this.utils.itemHelper(item)
     return <View horizontal mt mr ml white>
       <View normal-size-square mr><Image source={{uri: image}}/></View>
       <View flex1>

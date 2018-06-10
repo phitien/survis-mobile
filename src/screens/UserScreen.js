@@ -23,7 +23,7 @@ export class UserScreen extends Screen {
     await this.actions.User_ChangePassword({usr_password: password})
   }
   async onLogout() {
-    requestHeader('token', '')
+    this.utils.requestHeader('token', '')
     this.open('HomeScreen')
     this.actions.User_Logout()
   }

@@ -3,8 +3,6 @@ import {Text, Spinner, Icon, View} from 'native-base'
 
 import {Promotion as style} from '../theme/styles/components'
 
-import {itemHelper, substr} from '../utils'
-
 import {Image} from './Image'
 import {Component} from './Component'
 
@@ -14,7 +12,7 @@ export class Promotion extends Component {
     const {
       id, image, bigtitle, smalltitle, toptext,
       toptext_bgcolor, toptext_color, toptext_fontsize,
-    } = itemHelper(item)
+    } = this.utils.itemHelper(item)
     const wordStyle = {backgroundColor: toptext_bgcolor, color: toptext_color, fontSize: toptext_fontsize,}
   	const words = toptext.split(' ')
   	return <View big-size mb>

@@ -1,14 +1,12 @@
 import React, {Component} from 'react'
 import {Container, View, Content, Button, Text} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
-import {Alert} from 'react-native'
 
 import {Header, Footer, ShopSummary, Reviews, SameShopItems} from '../containers'
 
 import {ShopItemScreen as style} from '../theme/styles/screens'
 
 import {Image, Rating} from '../components'
-import {itemHelper, substr} from '../utils'
 import {Screen} from '../components'
 
 export class ShopItemScreen extends Screen {
@@ -31,10 +29,10 @@ export class ShopItemScreen extends Screen {
   onPressSubmitReview({rating, comment}) {
     if (this.logged) {
       if (rating == 0 && !comment) {
-         Alert.alert('Error', 'Please rate us or leave some comment.')
+         this.alert('Error', 'Please rate us or leave some comment.')
       }
       else {
-        const showThankYouFn = e => Alert.alert('Message', 'Thank you for your review.', [{text: 'OK', onPress: () => {
+        const showThankYouFn = e => this.alert('Message', 'Thank you for your review.', [{text: 'OK', onPress: () => {
           this.setState({showReview: false})
           this.actions.ShopItem_ShopItem({itemid: this.itemid})
         }}], {cancelable: false})
@@ -79,7 +77,7 @@ export class ShopItemScreen extends Screen {
     const {item, shop} = this
     const {
       description
-    } = itemHelper(item)
+    } = this.utils.itemHelper(item)
     return <View full sp key='description'><Text small>{description}</Text></View>
   }
 
@@ -88,7 +86,7 @@ export class ShopItemScreen extends Screen {
     const {item, shop} = this
     const {
       id, image, name, priceS, mpriceS, totalrate, totalreviews, description
-    } = itemHelper(item)
+    } = this.utils.itemHelper(item)
     return [
       // <ShopSummary item={shop} key='shop_summary'/>,
       <View full grey sp key='statistic'>
@@ -119,7 +117,7 @@ export class ShopItemScreen extends Screen {
     const {item, shop} = this
     const {
       priceS
-    } = itemHelper(item)
+    } = this.utils.itemHelper(item)
     return <View fullW horizontal pr pl middle-end>
       <Text flex1 theme big>{priceS}</Text>
       <Button onPress={this.addToCart.bind(this)}>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Container, View, Content, Spinner, Text} from 'native-base'
+import {Container, View, Content, Text} from 'native-base'
 
 import {Header, Footer, ShopSummary, ShopItem} from '../containers'
 import {TouchableOpacity as Touch} from 'react-native'

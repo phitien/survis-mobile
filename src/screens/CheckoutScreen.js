@@ -1,11 +1,10 @@
 import React, {Component} from 'react'
-import {Container, View, Content, Spinner, Text, Icon, CheckBox, Toast} from 'native-base'
+import {Container, View, Content, Text, Icon, CheckBox, Toast} from 'native-base'
 import {TouchableOpacity as Touch} from 'react-native'
 import {ActionConst} from 'react-native-router-flux'
 
 import {CheckoutScreen as style} from '../theme/styles/screens'
 
-import {itemHelper, cardnum} from '../utils'
 import {Header, Footer} from '../containers'
 import {Button} from '../components'
 import {Screen} from '../components'
@@ -14,7 +13,7 @@ export class CheckoutScreen extends Screen {
   state = {agreed: this.props.agreed || this.props.navigation.state.params.agreed}
   get items() {return this.props.ShoppingCartItem.ShoppingCartItems.list || []}
   get total() {return this.items.reduce((rs, item) => {
-    const {qty, price} = itemHelper(item)
+    const {qty, price} = this.utils.itemHelper(item)
     rs += qty*price
     return rs
   }, 0)}
@@ -91,7 +90,7 @@ export class CheckoutScreen extends Screen {
           <Text theme small flex2 right>${this.total.toFixed(2)}</Text>
         </View>
         {items.map((item, i) => {
-          const {id, image, name, qty, price} = itemHelper(item)
+          const {id, image, name, qty, price} = this.utils.itemHelper(item)
           return <View key={id} horizontal p {...{grey:i%2!=0}}>
             <Text small flex4>{name}</Text>
             <Text small flex1 center>{qty}</Text>
@@ -111,7 +110,7 @@ export class CheckoutScreen extends Screen {
       <View p white><Text bold>PAYMENT INFO</Text></View>
       <View p grey>
         <View horizontal>
-          <Icon theme name='card'/><Text bold>{cardnum(ucc_num)}</Text>
+          <Icon theme name='card'/><Text bold>{this.utils.cardnum(ucc_num)}</Text>
         </View>
         <Text small>{bill_address}</Text>
       </View>

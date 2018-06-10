@@ -6,7 +6,6 @@ import InfiniteScroll from 'react-native-infinite-scroll'
 import {Historys as style} from '../theme/styles/components'
 
 import {AUTOPLAY_TIMEOUT} from '../constants'
-import {itemHelper, substr} from '../utils'
 
 import {Image} from './Image'
 import {History} from './History'
