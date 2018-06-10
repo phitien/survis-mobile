@@ -1,15 +1,16 @@
 import React, {Component} from 'react'
 import {AsyncStorage} from 'react-native'
 import {Provider} from 'react-redux'
-import {View, StyleProvider, Spinner} from 'native-base'
+import {View, StyleProvider} from 'native-base'
 import OneSignal from 'react-native-onesignal'
 
 import theme from './src/theme'
-import AppStyle from './src/theme/styles/App'
+import appStyle from './src/styles/App'
 import {Routes} from './src/routes'
 import {actions} from './src/actions'
 import {PRIMARY} from './src/constants'
 import {appstore} from './src/store'
+import {Spinner} from './src/components'
 
 export default class App extends Component {
   state = {store: null}
@@ -39,7 +40,7 @@ export default class App extends Component {
 
   render() {
     return <StyleProvider style={theme}>
-      {!this.state.store ? <View style={AppStyle.container}><Spinner color={PRIMARY} style={AppStyle.spinner}/></View> :
+      {!this.state.store ? <View style={appStyle}><Spinner/></View> :
       <Provider store={this.state.store}>
         <Routes store={this.state.store}/>
       </Provider>}

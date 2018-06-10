@@ -1,6 +1,6 @@
 import {Platform, Dimensions, PixelRatio} from 'react-native'
 const width = Dimensions.get('window').width
-import {PRIMARY, GREY, PRIZE_ITEM_HEIGHT} from '../../../constants'
+import {PRIMARY, GREY, PRIZE_ITEM_HEIGHT} from '../../constants'
 
 const blockNumItem = 5
 const blockWidth = width/blockNumItem, blockHeight = 52, iconSize = 36

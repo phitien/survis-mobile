@@ -1,8 +1,6 @@
 import React from 'react'
 import {Scene, Router, Overlay, Stack, Lightbox} from 'react-native-router-flux'
 
-import RoutesStyle from '../theme/styles/Routes'
-
 import {
   CheckoutScreen,
   HomeScreen,

@@ -2,7 +2,7 @@ import React from 'react'
 import {Container, Content} from 'native-base'
 import DeviceInfo from 'react-native-device-info'
 
-import * as styles from '../theme/styles/screens'
+import * as styles from '../styles/screens'
 import {Header, Footer} from '../containers'
 import {Component} from './Component'
 

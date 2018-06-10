@@ -1,6 +1,6 @@
 import {Platform, Dimensions, PixelRatio} from 'react-native'
 const width = Dimensions.get('window').width
-import {GREY} from '../../../constants'
+import {GREY} from '../../constants'
 
 const height = 240
 

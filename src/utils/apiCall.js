@@ -25,23 +25,22 @@ const apiCall = axios.create({
 })
 
 const success = (res, req) => {
-  log('survis-api', res.request._method, res.request.responseURL)
-  const {data, status} = res || {}
-  const {code, message, results} = data || {}
-  return {data: {...data, code, message, results}, status: 200}
+  console.log('survis-api', res.request._method, res.request.responseURL)
+  if (!res || !res.data) return {data: {results: null}, status: 200}
+  return res
 }
 
 const failure = err => {
   const res = err.response || {}
   const {data, status} = res || {}
   const {code, message, results} = data || {}
-  log('survis-api-error', err)
+  console.log('survis-api-error', err)
   if (status === 401 || status === 403) {
     requestHeader('token', '')
     AsyncStorage.clear()
     Actions.reset('LoginScreen')
   }
-  return Promise.reject({data: {...data, code, message, results}, status})
+  return Promise.reject({data: {...data || {}, code, message, results}, status})
 }
 apiCall
   .interceptors

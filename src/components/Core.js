@@ -5,7 +5,7 @@ import {Alert} from 'react-native'
 import {apis} from '../apis'
 import * as utils from '../utils'
 import {getTheme} from '../theme'
-import * as styles from '../theme/styles/components'
+import * as styles from '../styles/components'
 
 const {requestHeaders, log} = utils
 
