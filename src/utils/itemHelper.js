@@ -16,6 +16,7 @@ export const itemHelper = (item) => {
     points: parseInt(item.points || 0),
     spentamount: parseFloat(item.spentamount) ? `$${parseFloat(item.spentamount).toFixed(2)}` : '',
     latestorderdate: item.latestorderdate ? date(item.latestorderdate).toLocaleDateString() : '',
+    date: item.date ? date(item.date).toLocaleDateString() : '',
     image: item.image || '',
     totalrate: parseFloat(item.totalrate) || 0,
     totalreviews: parseInt(item.totalreviews) || 0,
@@ -49,7 +50,10 @@ export const itemHelper = (item) => {
     email: item.usr_email || '',
     mobile: item.usr_mobile || '',
     created_date: item.usr_created_date ? date(item.usr_created_date).toLocaleDateString() : '',
-    fullname: item.usr_name || [(item.usr_fname ||  '').trim(), (item.usr_lname || '').trim()].filter(o => o).join(' ') || ''
+    fullname: item.usr_name || [(item.usr_fname ||  '').trim(), (item.usr_lname || '').trim()].filter(o => o).join(' ') || '',
+    is_read: item.is_read || 0,
+    message: item.message || '',
+    title: item.title || '',
   }
 }
 export const last4 = (s) => {

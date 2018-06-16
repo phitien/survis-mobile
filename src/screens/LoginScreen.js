@@ -11,7 +11,6 @@ export class LoginScreen extends Screen {
   get message() {return this.props.User.message}
 
   onAfterSignIn(res) {
-    console.log(res)
     if (!this.error) {
       if (this.props.Screen.Screen.id) {
         this.utils.requestHeader('token', this.User.token)
