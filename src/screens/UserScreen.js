@@ -32,19 +32,17 @@ export class UserScreen extends Screen {
     // this.tabLoyality.refresh()
   }
 
-  get account() {return [this.User.usr_fname, this.User.usr_lname].join(' ') || ''}
-  get email() {return this.User.usr_email}
-
   get content() {
     const user = this.User
     let source = user.avatar ? {uri: user.avatar} : PERSON_IMG
+    const {email, fullname} = this.utils.itemHelper(this.User)
     return [
       <View tart space-between fullW p key='info'>
         <View horizontal>
           <View small-size-rounded><Image source={source}/></View>
           <View smt ml full>
-            <Text small bold full>{this.account ? `Hello: ${this.account}` : 'Not set'}</Text>
-            <Text small italic full>{this.email || 'Not set'}</Text>
+            <Text small bold full>{`Hello: ${fullname}`}</Text>
+            <Text small italic full>{email}</Text>
           </View>
         </View>
         <View top-right>

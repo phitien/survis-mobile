@@ -4,7 +4,7 @@ export const acts = {
   Shop: `api|get|true|body|${BASEURL}?type=shopdetail`,
   Shops: `api|get|true|body|${BASEURL}?type=nearbyshops`,
   Rate: `api|post|true|form|${BASEURL}?type=rating&cmd=set&sourcetype=shop`,
-  Review: `api|post|true|form|${BASEURL}?type=reviews&cmd=set`,
+  Review: `api|post|true|form|${BASEURL}?type=reviewadd`,
   NewShops: `api|get|true|body|${BASEURL}?type=newshops`,
   NewShops_Loadmore: 'NewShops_Loadmore', NewShops_Reset: 'NewShops_Reset', NewShops_Search: 'NewShops_Search',
   HighRatingShops: `api|get|true|body|${BASEURL}?type=highratingshops`,

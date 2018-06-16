@@ -74,7 +74,7 @@ export class ShopScreen extends Screen {
     const shop = this.shop
     return [
       // this.loading ? this.renderLoading() : null,
-      <ShopSummary openPressReview={e => this.setState({showReview: !this.state.showReview})} item={shop} key='shop_summary'/>,
+      <ShopSummary onPressReview={e => this.setState({showReview: !this.state.showReview})} item={shop} key='shop_summary'/>,
       this.renderReviews(),
       this.renderImages(),
       ...[].concat(this.renderShopItems())

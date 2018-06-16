@@ -29,7 +29,7 @@ function apiActionGenerator(name, act, uri, method, filter, type) {
         .catch(res => {
           log('survis-action-error', name, act, res)
           dispatch({type: `${n}_Failure`, payload: res.data.results, response: res})
-          return Promise.reject(res)
+          return res
         })
     }
   }

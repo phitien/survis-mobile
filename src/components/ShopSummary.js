@@ -28,7 +28,7 @@ export class ShopSummary extends Component {
     	  <Rating rating={totalrate}/>
         <Text theme small onPress={e => {
           this.setState({showReview: !this.state.showReview})
-          if (this.props.openPressReview) this.props.openPressReview(e)
+          if (this.props.onPressReview) this.props.onPressReview(e)
         }}>{`(${totalreviews}) Reviews`}</Text>
     	  <Touch onPress={e => this.utils.openOnMap(latitude, longitude, name)}><View horizontal>
     		  <Icon theme small name='ios-send'/>

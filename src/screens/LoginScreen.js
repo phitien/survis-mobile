@@ -11,6 +11,7 @@ export class LoginScreen extends Screen {
   get message() {return this.props.User.message}
 
   onAfterSignIn(res) {
+    console.log(res)
     if (!this.error) {
       if (this.props.Screen.Screen.id) {
         this.utils.requestHeader('token', this.User.token)
@@ -23,7 +24,7 @@ export class LoginScreen extends Screen {
       this.alert('Error', this.error)
     }
   }
-  onAfterSignUp() {
+  onAfterSignUp(e) {
     if (this.error) this.alert('Error', this.error)
     else if (this.message) {
       this.alert('Message', this.message, [{text: 'OK', onPress: () => {
@@ -48,9 +49,12 @@ export class LoginScreen extends Screen {
               (err, result) => {
                 if (err) showError(err)
                 else {
-                  const usr_email = result.email, usr_name = result.name, usr_avatar = result.picture.data.url,
+                  const usr_email = result.email,
+                    usr_name = result.name,
+                    usr_avatar = result.picture.data.url,
                     usr_facebook = result.id
-                  this.actions.User_Login({usr_email, usr_name, usr_avatar, usr_facebook, token})
+                  const user_data = {usr_email, usr_name, usr_avatar, usr_facebook, usr_network_token: token}
+                  this.actions.User_Login(user_data)
                   .then(e => this.onAfterSignIn(e))
                 }
               }

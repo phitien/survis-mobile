@@ -16,7 +16,8 @@ export class HomeScreen extends Screen {
       this.loadNotifications()
     })
     this.loadDevice()
-    await this.locationUpdate(this.actions.Shop_Shops)
+    this.locationUpdate()
+    .finally(this.actions.Shop_Shops)
   }
   refresh() {
     if (!this.props.Shop.loading) {

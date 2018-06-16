@@ -42,8 +42,14 @@ export const itemHelper = (item) => {
     sponsor_image: item.sponsor_image || '',
     sponsor_name: item.sponsor_name || '',
     status: item.status || '',
-    comment: item.status || '',
-    created_date: item.drawdate ? date(item.created_date).toLocaleDateString() : '',
+    comment: item.comment || '',
+    fname: item.usr_fname || '',
+    lname: item.usr_lname || '',
+    avatar: item.usr_avatar || '',
+    email: item.usr_email || '',
+    mobile: item.usr_mobile || '',
+    created_date: item.usr_created_date ? date(item.usr_created_date).toLocaleDateString() : '',
+    fullname: item.usr_name || [(item.usr_fname ||  '').trim(), (item.usr_lname || '').trim()].filter(o => o).join(' ') || ''
   }
 }
 export const last4 = (s) => {

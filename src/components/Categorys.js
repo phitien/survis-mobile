@@ -10,7 +10,8 @@ export class Categorys extends Component {
   get current() {return this.props.Category.Categorys.filter.current}
   get items() {return [].concat(this.current ? this.current.children : this.props.Category.Categorys.list).filter(o => o)}
   async componentDidMount() {
-    if (!this.props.Category.Categorys.loaded) this.locationUpdate(this.actions.Category_Categorys)
+    if (!this.props.Category.Categorys.loaded) this.locationUpdate()
+    .finally(this.actions.Category_Categorys)
   }
 
   onPress(item) {

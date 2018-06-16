@@ -7,10 +7,10 @@ export class Review extends Component {
   get klass() {return 'Review'}
   render() {
     const {item, index} = this.props
-    const {comment, created_date, lname, fname} = this.utils.itemHelper(item)
+    const {comment, created_date, email, fullname} = this.utils.itemHelper(item)
     return <View full p {...{white:index%2==0}}>
       <View horizontal middle full>
-        <Text theme>{[fname, lname].filter(o => o).join(' ')}</Text>
+        <Text theme>{fullname}</Text>
         <Text ml flex1>{comment}</Text>
       </View>
       <Text grey small>{created_date}</Text>

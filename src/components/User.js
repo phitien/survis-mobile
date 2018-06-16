@@ -17,7 +17,7 @@ export class User extends Component {
     usr_lname: this.User.usr_lname || '',
     usr_birthday: this.User.usr_birthday ? this.utils.date(this.User.usr_birthday).toLocaleDateString() : '',
     usr_email: this.User.usr_email || '',
-		fullname: [(this.User.usr_fname||  '').trim(), (this.User.usr_lname || '').trim()].filter(o => o).join(' ') || this.User.usr_name || '',
+		fullname: this.User.usr_name || [(this.User.usr_fname ||  '').trim(), (this.User.usr_lname || '').trim()].filter(o => o).join(' ') || '',
     usr_password: '',
     ucc_num: this.PaymentInfo.ucc_num,
     ucc_name: this.PaymentInfo.ucc_name,

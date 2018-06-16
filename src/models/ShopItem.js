@@ -4,7 +4,7 @@ export const acts = {
   ShopItems: `api|get|true|body|${BASEURL}?type=items`,
   ShopItem: `api|get|true|body|${BASEURL}?type=itemdetail`,
   Rate: `api|post|true|form|${BASEURL}?type=rating&cmd=set&sourcetype=item`,
-  Review: `api|post|true|form|${BASEURL}?type=reviews&cmd=set`,
+  Review: `api|post|true|form|${BASEURL}?type=reviewadd`,
 }
 export const ShopItem = {
   id: -1,

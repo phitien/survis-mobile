@@ -13,13 +13,12 @@ export class SearchScreen extends Screen {
   get back() {return this.props.Category.Categorys.filter.catid ? true : false}
 
   async componentDidMount() {
-    await this.locationUpdate()
-    this.actions.Shop_SearchShops()
+    await this.locationUpdate().finally(this.actions.Shop_SearchShops)
   }
   refresh() {
     if (!this.props.Shop.loading) {
       this.actions.Shop_SearchShops_Reset()
-      .then(e => this.locationUpdate(this.actions.Shop_SearchShops))
+      .then(e => this.locationUpdate.finally(this.actions.Shop_SearchShops))
     }
   }
   loadmore() {

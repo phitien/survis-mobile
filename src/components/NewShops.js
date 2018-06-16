@@ -10,7 +10,8 @@ export class NewShops extends Component {
   get items() {return this.props.Shop.NewShops.list || []}
 
   async componentDidMount() {
-    this.locationUpdate(this.actions.Shop_NewShops)
+    this.locationUpdate()
+    .finally(this.actions.Shop_NewShops)
   }
 
   render() {

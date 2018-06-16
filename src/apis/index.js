@@ -12,8 +12,8 @@ function apiGetGenerator(name, act, uri, method, filter, type) {
     options.headers = {...options.headers, ...headers}
     if (filter) queryParams = {...actState.filter, ...queryParams}
     if (method == 'get') {
-      queryParams = {...queryParams, ...postParams}
-      args.push(url(uri, query(queryParams)))
+      console.log('apiGetGenerator', url(uri, query({...queryParams, ...postParams || {}})))
+      args.push(url(uri, query({...queryParams, ...postParams || {}})))
     }
     else {//other methods post put delete
       args.push(url(uri, query(queryParams)))

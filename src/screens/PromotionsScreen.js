@@ -11,18 +11,18 @@ export class PromotionsScreen extends Screen {
   get klass() {return 'PromotionScreen'}
   get items() {return this.props.Promotion.Promotions.list || []}
   async componentDidMount() {
-    this.locationUpdate(this.actions.Promotion_Promotions)
+    this.locationUpdate.finally(this.actions.Promotion_Promotions)
   }
   refresh() {
     if (!this.props.Promotion.loading) {
       this.actions.Promotion_Reset()
-      .then(e => this.locationUpdate(this.actions.Promotion_Promotions))
+      .then(e => this.locationUpdate().finally(this.actions.Promotion_Promotions))
     }
   }
   loadmore() {
     if (!this.props.Promotion.loading) {
       this.actions.Promotion_Loadmore()
-      .then(e => this.locationUpdate(this.actions.Promotion_Promotions))
+      .then(e => this.locationUpdate.finally(this.actions.Promotion_Promotions))
     }
   }
 

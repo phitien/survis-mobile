@@ -1,14 +1,13 @@
 import {BASEURL} from '../constants'
 
 export const acts = {
-  Reviews: `api|get|true|body|${BASEURL}?type=reviews&cmd=get`,
-  Add: `api|post|true|form|${BASEURL}?type=reviews&cmd=set`,
+  Reviews: `api|get|true|body|${BASEURL}?type=reviews`,
+  Add: `api|post|true|form|${BASEURL}?type=reviewadd`,
 }
 export const Review = {
   id: -1,
   usr_id: -1,
   comment: '',
-  created_date: '',
   status: '',
   type: '',
   source_id: -1,

@@ -2,7 +2,7 @@ import {BASEURL} from '../constants'
 
 export const acts = {
   Promotions: `api|get|true|body|${BASEURL}?type=promotions`,
-  Promotion: `api|get|true|body|${BASEURL}?type=promotiondetail`,
+  Promotion: `api|get|true|body|${BASEURL}?type=promotion`,
 }
 export const apis = {
 }

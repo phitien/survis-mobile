@@ -13,7 +13,7 @@ export class PromotionScreen extends Screen {
   get klass() {return 'PromotionScreen'}
   get item() {return this.props.Promotion.Promotion || {}}
   async componentDidMount() {
-    this.actions.Promotion_Promotion({prm_id: this.props.item.id})
+    this.actions.Promotion_Promotion({id: this.props.item.id})
     .then(e => this.refresh())
   }
 

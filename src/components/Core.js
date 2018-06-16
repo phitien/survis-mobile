@@ -48,19 +48,20 @@ export class Core extends RAComponent {
 
   refresh() {this.refreshing = true}
 
-  locationUpdate(ok, ko) {
-    navigator.geolocation
-      .getCurrentPosition(position => {
-        const {latitude, longitude} = position.coords || {}
-        requestHeaders({latitude, longitude})
+  async locationUpdate(callback) {
+    return navigator.geolocation
+      .getCurrentPosition(pos => {
+        const {latitude, longitude} = pos.coords || {}
+        this.utils.requestHeaders({latitude, longitude})
         this.actions.Location_Load({latitude, longitude})
-        if (ok) {try{ok()}catch(e){this.log('locationUpdate', e)}}
-      }, (error) => {
-        this.setState({error: error.message})
-        if (ko) {try{ko()}catch(e){this.log('locationUpdate', e)}}
+        return {latitude, longitude}
+      }, err => {
+        this.setState({error: err.message})
+        this.log('survis-location-error', err)
+        return Promise.reject(err)
       }, {
-        enableHighAccuracy: true,
-        timeout: 2000
+        enableHighAccuracy: false,
+        timeout: 100,
       })
   }
 }
